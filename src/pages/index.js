@@ -34,13 +34,11 @@ export const query = graphql`
           localFile {
             id
             childImageSharp {
-              xl: fluid(maxWidth: 640) {
-                ...GatsbyImageSharpFluid
-              }
-              l: fluid(maxWidth: 480) {
-                ...GatsbyImageSharpFluid
-              }
-              s: fluid(maxWidth: 320) {
+              fluid(
+                fit: COVER
+                maxWidth: 640
+                srcSetBreakpoints: [180, 320, 640, 1280]
+              ) {
                 ...GatsbyImageSharpFluid
               }
             }

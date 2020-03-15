@@ -2,7 +2,6 @@ import React from "react"
 import Image from "gatsby-image"
 
 export const ContentImage = ({ item }) => {
-  console.log(item)
   if (
     !item.indexBackgroundImage ||
     !item.indexBackgroundImage.localFile ||
@@ -11,18 +10,7 @@ export const ContentImage = ({ item }) => {
     return null
   }
   const data = item.indexBackgroundImage.localFile
-  const sources = [
-    data.childImageSharp.s,
-    {
-      ...data.childImageSharp.l,
-      media: `(min-width: 1024px)`,
-    },
-    {
-      ...data.childImageSharp.xl,
-      media: `(min-width: 1920px)`,
-    },
-  ]
-  return (
-    <Image width="100px" style={{ backgroundColor: "#EEE" }} fluid={sources} />
-  )
+  console.log(data)
+  const sources = [{ ...data.childImageSharp.fluid, sizes: "25vw" }]
+  return <Image fluid={sources} />
 }
