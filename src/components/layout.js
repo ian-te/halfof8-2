@@ -31,6 +31,7 @@ const Layout = ({ children }) => {
 const Main = styled.main`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 16px;
 `
 
 Layout.propTypes = {
