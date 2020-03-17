@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Item } from "../components/Item"
+import { Item } from "../components/Item/index"
 import "./index.css"
 
 const IndexPage = ({ data }) => {
@@ -12,7 +12,6 @@ const IndexPage = ({ data }) => {
       {data.contentfulMainPage.items.map(itemData => (
         <Item {...itemData} />
       ))}
-      <button onClick={() => console.log(data)}>test</button>
     </Layout>
   )
 }

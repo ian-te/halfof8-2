@@ -1,9 +1,9 @@
 import React from "react"
-import { ContentImage } from "./Image"
+import { ContentImage } from "../Image"
 import styled from "styled-components"
+import { Links } from "./Links"
 
 const ContentRenderer = ({ item }) => {
-  console.log(item)
   switch (true) {
     case typeof item.indexBackgroundImage !== "undefined":
       return <ContentImage item={item} />
@@ -19,6 +19,7 @@ export const Item = ({ name, slug, ...item }) => {
     <div>
       <ContentWrapper>
         <ContentRenderer item={item} />
+        <Links item={item} />
       </ContentWrapper>
       <Text>{name}</Text>
     </div>
@@ -31,6 +32,7 @@ const ContentWrapper = styled.div`
   min-height: 0;
   border-radius: 3px;
   height: calc((25vw - 16px) * 1.25 - 16px);
+  position: relative;
 `
 
 const Text = styled.div`
