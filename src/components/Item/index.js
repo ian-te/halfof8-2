@@ -1,30 +1,35 @@
 import React from "react"
-import { ContentImage } from "../Image"
+import { ContentRenderer } from "./ContentRenderer"
 import styled from "styled-components"
 import { Links } from "./Links"
+import { ContentAction } from "./ContentAction"
 
-const ContentRenderer = ({ item }) => {
-  switch (true) {
-    case typeof item.indexBackgroundImage !== "undefined":
-      return <ContentImage item={item} />
-    case typeof item.embedUrl !== "undefined":
-      return <iframe src={item.embedUrl} width="100%" height="100%" />
-    default:
-      return <img width="100%" src="https://placehold.it/600x800" />
-  }
-}
-
-export const Item = ({ name, slug, ...item }) => {
+export const Item = ({ name, tag, ...item }) => {
   return (
-    <div>
+    <ContentActionStyled item={item}>
       <ContentWrapper>
         <ContentRenderer item={item} />
-        <Links item={item} />
+        <Links links={item.externalLinks} />
       </ContentWrapper>
-      <Text>{name}</Text>
-    </div>
+      <Text>
+        <h4>{name}</h4>
+        <p>{tag}</p>
+      </Text>
+    </ContentActionStyled>
   )
 }
+
+const ContentActionStyled = styled(ContentAction)`
+  color: #0c0c0d;
+  text-decoration: none;
+  &:hover {
+    ${ContentWrapper} {
+    }
+    ${Links} {
+      display: flex;
+    }
+  }
+`
 
 const ContentWrapper = styled.div`
   overflow: hidden;
@@ -33,8 +38,17 @@ const ContentWrapper = styled.div`
   border-radius: 3px;
   height: calc((25vw - 16px) * 1.25 - 16px);
   position: relative;
+  background-color: black;
 `
 
 const Text = styled.div`
   padding: 12px 2px;
+  h4 {
+    font-weight: normal;
+    margin: 0;
+  }
+  p {
+    margin: 0;
+    padding: 0;
+  }
 `

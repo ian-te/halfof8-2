@@ -1,9 +1,23 @@
 import React from "react"
 import styled from "styled-components"
 
-const Link = styled.a`
+const LinkBase = ({ md, className }) => {
+  const link = md
+    .slice(1)
+    .slice(0, -1)
+    .split("](")
+  return (
+    <a href={link[1]} target="_blank" className={className}>
+      {link[0]}
+    </a>
+  )
+}
+
+const Link = styled(LinkBase)`
   height: 34px;
   background: #ffffff;
+  color: #0c0c0d;
+  text-decoration: none;
   border-radius: 34px;
   margin-top: 14px;
   flex-shrink: 1;
@@ -14,11 +28,13 @@ const Link = styled.a`
   padding: 0 14px;
 `
 
-const LinksBase = ({ item, className }) => {
+const LinksBase = ({ links, className }) => {
+  if (!links) return null
   return (
     <div className={className}>
-      <Link>Spotify</Link>
-      <Link>Apple Music</Link>
+      {links.map(md => (
+        <Link md={md}></Link>
+      ))}
     </div>
   )
 }
@@ -31,4 +47,5 @@ export const Links = styled(LinksBase)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  display: none;
 `

@@ -29,6 +29,11 @@ export const query = graphql`
         ... on ContentfulPortfolioItem {
           id
           name
+          tag
+          slug
+          externalUrl
+          externalLinks
+          isRootPage
           indexBackgroundImage {
             file {
               url
