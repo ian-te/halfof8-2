@@ -8,8 +8,10 @@ export const Item = ({ name, tag, ...item }) => {
   return (
     <ContentActionStyled item={item}>
       <ContentWrapper>
-        <ContentRenderer item={item} />
-        <Links links={item.externalLinks} />
+        <ContentInner>
+          <ContentRenderer item={item} />
+          <Links links={item.externalLinks} />
+        </ContentInner>
       </ContentWrapper>
       <Text>
         <h4>{name}</h4>
@@ -18,6 +20,14 @@ export const Item = ({ name, tag, ...item }) => {
     </ContentActionStyled>
   )
 }
+
+const ContentInner = styled.div`
+  overflow: hidden;
+  border-radius: 3px;
+  position: relative;
+  background-color: black;
+  width: 100%;
+`
 
 const ContentActionStyled = styled(ContentAction)`
   color: #0c0c0d;
@@ -32,13 +42,14 @@ const ContentActionStyled = styled(ContentAction)`
 `
 
 const ContentWrapper = styled.div`
-  overflow: hidden;
-  min-width: 0;
-  min-height: 0;
-  border-radius: 3px;
-  height: calc((25vw - 16px) * 1.25 - 16px);
-  position: relative;
-  background-color: black;
+  display: flex;
+  &:after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    padding-bottom: calc(100% / (3 / 4));
+  }
 `
 
 const Text = styled.div`

@@ -3,6 +3,8 @@ import React from "react"
 
 export const ContentAction = ({ item, children, ...props }) => {
   switch (true) {
+    case item.lightbox:
+      return children
     case !!item.externalUrl:
       return (
         <a href={`${item.externalUrl}`} target="_blank" {...props}>
