@@ -6,7 +6,7 @@ export const ContentImage = ({ item }) => {
     return null
   } else if (item.indexBackgroundImage.localFile.childImageSharp) {
     const data = item.indexBackgroundImage.localFile
-    const sources = [{ ...data.childImageSharp.fluid, sizes: "25vw" }]
+    const sources = [{ ...data.childImageSharp.fluid, sizes: "23vw" }]
     return <Image fluid={sources} />
   }
   return <img width="100%" src={item.indexBackgroundImage.file.url} />
