@@ -5,7 +5,7 @@ import { Lightbox } from "react-modal-image"
 const LightBoxWrapper = ({ item, children }) => {
   return (
     <div>
-      <Lightbox large={item.indexBackgroundImage.localFile} />
+      {/* <Lightbox large={item.indexBackgroundImage.localFile.url } /> */}
       {children}
     </div>
   )

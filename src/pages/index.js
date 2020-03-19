@@ -34,6 +34,7 @@ export const query = graphql`
           externalUrl
           externalLinks
           isRootPage
+          lightbox
           indexBackgroundImage {
             file {
               url
@@ -43,7 +44,7 @@ export const query = graphql`
                 id
                 fluid(
                   srcSetBreakpoints: [180, 320, 380, 480, 640, 1280]
-                  webpQuality: 50
+                  webpQuality: 70
                   pngQuality: 70
                   jpegQuality: 70
                   jpegProgressive: true

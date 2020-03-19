@@ -4,14 +4,21 @@ import { Arrow } from "../Icons/Arrow"
 import { Expand } from "../Icons/Expand"
 import { NewWindow } from "../Icons/NewWindow"
 
+const getIcon = item => {
+  switch (true) {
+    case !!item.lightbox:
+      return <Expand />
+    case !!item.externalUrl:
+      return <NewWindow />
+    default:
+      return <Arrow />
+  }
+}
+
 const IconBase = ({ item, className, ...props }) => {
   switch (true) {
     default:
-      return (
-        <div className={className}>
-          <Expand />
-        </div>
-      )
+      return <div className={className}>{getIcon(item)}</div>
   }
 }
 
