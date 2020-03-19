@@ -1,14 +1,28 @@
 import React from "react"
 import { ContentImage } from "./Image"
-import { Link } from "gatsby"
+import { Icon } from "./Icon"
 
 export const ContentRenderer = ({ item }) => {
   switch (true) {
-    case typeof item.indexBackgroundImage !== "undefined":
-      return <ContentImage item={item} />
-    case typeof item.embedUrl !== "undefined":
+    case !!item.indexBackgroundImage:
+      return (
+        <div>
+          <Icon item={item} />
+          <ContentImage item={item} />
+        </div>
+      )
+    case !!item.embedUrl:
       return <iframe src={item.embedUrl} width="100%" height="100%" />
     default:
-      return <img width="100%" src="https://placehold.it/600x800" />
+      return (
+        <div>
+          <Icon item={item} />
+          <img
+            width="100%"
+            src="https://placehold.it/600x800"
+            style="display: block;"
+          />
+        </div>
+      )
   }
 }

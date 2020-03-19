@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 
 const LinkBase = ({ md, className }) => {
@@ -7,7 +7,12 @@ const LinkBase = ({ md, className }) => {
     .slice(0, -1)
     .split("](")
   return (
-    <a href={link[1]} target="_blank" className={className}>
+    <a
+      href={link[1]}
+      onClick={e => e.stopPropagation()}
+      target="_blank"
+      className={className}
+    >
       {link[0]}
     </a>
   )

@@ -41,7 +41,14 @@ export const query = graphql`
             localFile {
               childImageSharp {
                 id
-                fluid(srcSetBreakpoints: [180, 320, 640, 1280]) {
+                fluid(
+                  srcSetBreakpoints: [180, 320, 640, 1280]
+                  jpegQuality: 90
+                  jpegProgressive: true
+                  pngQuality: 90
+                  quality: 90
+                  webpQuality: 95
+                ) {
                   src
                   aspectRatio
                   base64
