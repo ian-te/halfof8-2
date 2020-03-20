@@ -1,11 +1,17 @@
 import { Link } from "gatsby"
-import React from "react"
-import { Lightbox } from "react-modal-image"
+import React, { useState } from "react"
 
 const LightBoxWrapper = ({ item, children }) => {
   return (
-    <div>
-      {/* <Lightbox large={item.indexBackgroundImage.localFile.url } /> */}
+    <div
+      onClick={() =>
+        item.setModalState({
+          isOpen: true,
+          currentSlide: item.currentSlide,
+        })
+      }
+      style={{ cursor: "pointer" }}
+    >
       {children}
     </div>
   )
@@ -15,7 +21,7 @@ export const ContentAction = ({ item, children, ...props }) => {
   switch (true) {
     case !!item.lightbox:
       return (
-        <div>
+        <div {...props}>
           <LightBoxWrapper item={item}>{children}</LightBoxWrapper>
         </div>
       )
@@ -35,6 +41,6 @@ export const ContentAction = ({ item, children, ...props }) => {
         </Link>
       )
     default:
-      return <div {...props}>{children}</div>
+      return <div>{children}</div>
   }
 }

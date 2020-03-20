@@ -33,6 +33,10 @@ const Main = styled.main`
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 16px;
   padding: 16px;
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 14px;
+  }
 `
 
 Layout.propTypes = {

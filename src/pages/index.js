@@ -4,14 +4,46 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Item } from "../components/Item/index"
 import "./index.css"
+import { ImageModal, useModalState } from "../components/ImageModal"
 
 const IndexPage = ({ data }) => {
+  const [{ isOpen, currentSlide }, setModalState] = useModalState()
+  const modalImages = data.contentfulMainPage.items
+    .filter(item => !!item.lightbox)
+    .map(item => ({
+      src: item.indexBackgroundImage.file.url,
+      caption: (
+        <span>
+          <b>{item.name}</b>
+          <br />
+          {item.tag}
+        </span>
+      ),
+    }))
+
+  let slideKey = -1
+
   return (
     <Layout>
       <SEO title={data.site.siteMetadata.title} />
-      {data.contentfulMainPage.items.map(itemData => (
-        <Item {...itemData} />
-      ))}
+      <ImageModal
+        images={modalImages}
+        setModalState={setModalState}
+        isOpen={isOpen}
+        currentIndex={currentSlide}
+      />
+      {data.contentfulMainPage.items.map(itemData => {
+        if (itemData.lightbox) {
+          slideKey = slideKey + 1
+        }
+        return (
+          <Item
+            {...itemData}
+            setModalState={setModalState}
+            currentSlide={slideKey}
+          />
+        )
+      })}
     </Layout>
   )
 }
