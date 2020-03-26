@@ -1,26 +1,26 @@
-import React from "react"
-import styled from "styled-components"
-import { Arrow } from "../Icons/Arrow"
-import { Expand } from "../Icons/Expand"
-import { NewWindow } from "../Icons/NewWindow"
+import React from "react";
+import styled from "styled-components";
+import { Arrow } from "../Icons/Arrow";
+import { Expand } from "../Icons/Expand";
+import { NewWindow } from "../Icons/NewWindow";
 
 const getIcon = item => {
   switch (true) {
     case !!item.lightbox:
-      return <Expand />
+      return <Expand />;
     case !!item.externalUrl:
-      return <NewWindow />
+      return <NewWindow />;
     default:
-      return <Arrow />
+      return <Arrow />;
   }
-}
+};
 
 const IconBase = ({ item, className, ...props }) => {
   switch (true) {
     default:
-      return <div className={className}>{getIcon(item)}</div>
+      return <div className={className}>{getIcon(item)}</div>;
   }
-}
+};
 
 export const Icon = styled(IconBase)`
   position: absolute;
@@ -36,4 +36,4 @@ export const Icon = styled(IconBase)`
   justify-content: center;
   align-items: center;
   z-index: 2;
-`
+`;

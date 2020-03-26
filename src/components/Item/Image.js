@@ -9,5 +9,11 @@ export const ContentImage = ({ item }) => {
     const sources = [{ ...data.childImageSharp.fluid, sizes: "23vw" }]
     return <Image fluid={sources} />
   }
-  return <img width="100%" src={item.indexBackgroundImage.file.url} />
+  return (
+    <img
+      width="100%"
+      style={{ display: "block" }}
+      src={item.indexBackgroundImage.file.url}
+    />
+  )
 }

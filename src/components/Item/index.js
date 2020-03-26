@@ -1,9 +1,9 @@
-import React from "react"
-import { ContentRenderer } from "./ContentRenderer"
-import styled from "styled-components"
-import { Links } from "./Links"
-import { ContentAction } from "./ContentAction"
-import { Icon } from "./Icon"
+import React from "react";
+import styled from "styled-components";
+import { ContentAction } from "./ContentAction";
+import { ContentRenderer } from "./ContentRenderer";
+import { Icon } from "./Icon";
+import { Links } from "./Links";
 
 export const Item = ({ name, tag, ...item }) => {
   return (
@@ -21,8 +21,8 @@ export const Item = ({ name, tag, ...item }) => {
         </Text>
       </ContentActionStyled>
     </div>
-  )
-}
+  );
+};
 
 const ContentInner = styled.div`
   overflow: hidden;
@@ -41,7 +41,7 @@ const ContentInner = styled.div`
     z-index: 1;
     background-color: rgba(12, 12, 13, 0.6);
   }
-`
+`;
 
 const ContentActionStyled = styled(ContentAction)`
   color: #0c0c0d;
@@ -51,10 +51,11 @@ const ContentActionStyled = styled(ContentAction)`
       display: flex;
     }
   }
-`
+`;
 
-const ContentWrapper = styled.div`
+export const ContentWrapper = styled.div`
   display: flex;
+  width: 100%;
   &:after {
     content: "";
     display: inline-block;
@@ -62,7 +63,7 @@ const ContentWrapper = styled.div`
     height: 0;
     padding-bottom: calc(100% / (3 / 4));
   }
-`
+`;
 
 const Text = styled.div`
   padding: 12px 2px;
@@ -74,4 +75,4 @@ const Text = styled.div`
     margin: 0;
     padding: 0;
   }
-`
+`;

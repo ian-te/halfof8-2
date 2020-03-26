@@ -1,17 +1,20 @@
-import React from "react"
-import Helmet from "react-helmet"
-import styled from "styled-components"
-import Link from "gatsby-link"
-import { MobileShow } from "../components/MobileHide"
-import Layout from "../components/layout"
-import Sidebar from "../components/Sidebar"
-import Footer from "../components/Footer"
+import React from "react";
+import Helmet from "react-helmet";
+import styled from "styled-components";
+import Link from "gatsby-link";
+import { MobileShow } from "../components/MobileHide";
+import Layout from "../components/legacy_layout";
+import Sidebar from "../components/Sidebar";
+import Footer from "../components/Footer";
 
 const Content = styled.div`
   padding-top: 37px;
   font-size: 14px;
   line-height: 1.86;
   min-height: 1200px;
+  img {
+    max-width: 100%;
+  }
   section,
   header {
     display: flex;
@@ -65,28 +68,28 @@ const Content = styled.div`
       width: 100%;
     }
   }
-`
+`;
 
 const theme = {
   black: {
     body: "#000",
-    color: "#FFF",
+    color: "#FFF"
   },
   white: {
     body: "#FFF",
-    color: "#000",
-  },
-}
+    color: "#000"
+  }
+};
 export default function Template({ data, transition, pathContext }) {
-  const node = data.allContentfulPortfolioItem.edges[0].node
-  if (!node.body) return null
+  const node = data.allContentfulPortfolioItem.edges[0].node;
+  if (!node.body) return null;
   return (
     <div style={transition && transition.style}>
       <Layout>
         <div>
           <style
             dangerouslySetInnerHTML={{
-              __html: `body{background-color: ${node.backgroundColor}}`,
+              __html: `body{background-color: ${node.backgroundColor}}`
             }}
           />
           <Sidebar color={node.textColor} bgColor={node.backgroundColor} />
@@ -111,7 +114,7 @@ export default function Template({ data, transition, pathContext }) {
           <Content
             style={{ color: node.textColor || "#000" }}
             dangerouslySetInnerHTML={{
-              __html: node.body.childMarkdownRemark.html,
+              __html: node.body.childMarkdownRemark.html
             }}
           />
           {/*{pathContext.prev && <ButtonContainer>
@@ -143,7 +146,7 @@ export default function Template({ data, transition, pathContext }) {
         </div>
       </Layout>
     </div>
-  )
+  );
 }
 
 export const pageQuery = graphql`
@@ -168,4 +171,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
