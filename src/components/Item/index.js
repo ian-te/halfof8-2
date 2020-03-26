@@ -7,7 +7,7 @@ import { Links } from "./Links";
 
 export const Item = ({ name, tag, ...item }) => {
   return (
-    <div className="sr-item">
+    <div className="sr-item load-hidden" style={{ visibility: "hidden" }}>
       <ContentActionStyled item={item}>
         <ContentWrapper>
           <ContentInner>
