@@ -1,6 +1,14 @@
-import React from "react"
-import { ContentImage } from "./Image"
-import { Icon } from "./Icon"
+import React, { useEffect, useState } from "react";
+import { ContentImage } from "./Image";
+import { Icon } from "./Icon";
+
+const IframeAsync = ({ src, ...props }) => {
+  const [deferredSrc, setSrc] = useState(null);
+  useEffect(() => {
+    setSrc(src);
+  });
+  return deferredSrc && <iframe src={deferredSrc} {...props} />;
+};
 
 export const ContentRenderer = ({ item }) => {
   switch (true) {
@@ -10,9 +18,9 @@ export const ContentRenderer = ({ item }) => {
           <Icon item={item} />
           <ContentImage item={item} />
         </div>
-      )
+      );
     case !!item.embedUrl:
-      return <iframe src={item.embedUrl} width="100%" height="100%" />
+      return <IframeAsync src={item.embedUrl} width="100%" height="100%" />;
     default:
       return (
         <div>
@@ -23,6 +31,6 @@ export const ContentRenderer = ({ item }) => {
             style="display: block;"
           />
         </div>
-      )
+      );
   }
-}
+};
