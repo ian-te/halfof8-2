@@ -70,7 +70,7 @@ const IndexPage = ({ data }) => {
           <Intro />
           {data.contentfulMainPage.items.map(itemData => {
             slideKey = slideKey + 1;
-            return <Item {...itemData} currentSlide={0} />;
+            return <Item {...itemData} currentSlide={slideKey} />;
           })}
           <IntroWrapper>
             <footer>
