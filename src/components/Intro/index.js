@@ -16,7 +16,7 @@ export const IntroWrapper = ({ children }) => {
 export const Intro = () => {
   return (
     <IntroWrapper>
-      <Logo fill={"#000"} hoverfill={"#CCC"} />
+      <Logo fill={"#000"} width={"60%"} hoverfill={"#CCC"} />
     </IntroWrapper>
   );
 };

@@ -1,21 +1,25 @@
-import { Link } from "gatsby"
-import React, { useState } from "react"
+import { Link } from "gatsby";
+import React, { useContext } from "react";
+import { ModalContext } from "../../pages/index";
 
-const LightBoxWrapper = ({ item, children }) => {
+const LightBoxWrapper = ({ children, item }) => {
+  const { dispatch } = useContext(ModalContext);
   return (
     <div
       onClick={() =>
-        item.setModalState({
-          isOpen: true,
-          currentSlide: item.currentSlide,
+        dispatch({
+          type: "OPEN_MODAL",
+          data: {
+            slide: item.currentSlide
+          }
         })
       }
       style={{ cursor: "pointer" }}
     >
       {children}
     </div>
-  )
-}
+  );
+};
 
 export const ContentAction = ({ item, children, ...props }) => {
   switch (true) {
@@ -24,13 +28,13 @@ export const ContentAction = ({ item, children, ...props }) => {
         <div {...props}>
           <LightBoxWrapper item={item}>{children}</LightBoxWrapper>
         </div>
-      )
+      );
     case !!item.externalUrl:
       return (
         <a href={`${item.externalUrl}`} target="_blank" {...props}>
           {children}
         </a>
-      )
+      );
     case !!item.slug:
       return (
         <Link
@@ -39,8 +43,8 @@ export const ContentAction = ({ item, children, ...props }) => {
         >
           {children}
         </Link>
-      )
+      );
     default:
-      return <div>{children}</div>
+      return <div>{children}</div>;
   }
-}
+};

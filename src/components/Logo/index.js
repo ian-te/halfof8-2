@@ -1,12 +1,12 @@
-import React from "react"
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
 
-const Logo = ({ className, fill = "#000" }) => (
+const Logo = ({ className, fill = "#000", width = 150 }) => (
   <svg
     className={className}
+    viewBox="0 0 150 150"
     xmlns="http://www.w3.org/2000/svg"
-    width="150"
-    height="150"
+    width={width}
   >
     <g className="path" fill="none" fillRule="evenodd">
       <circle
@@ -79,7 +79,7 @@ const Logo = ({ className, fill = "#000" }) => (
       />
     </g>
   </svg>
-)
+);
 
 const StyledLogo = styled(Logo)`
   margin: 20px auto;
@@ -103,6 +103,6 @@ const StyledLogo = styled(Logo)`
       stroke-dashoffset: 0;
     }
   }
-`
+`;
 
-export default StyledLogo
+export default StyledLogo;

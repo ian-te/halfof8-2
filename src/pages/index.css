@@ -4,5 +4,5 @@ body {
   font-family: neue-haas-grotesk-text, sans-serif;
 }
 html.sr .load-hidden {
-  visibility: hidden;
+  /* visibility: hidden; */
 }

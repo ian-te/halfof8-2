@@ -1,20 +1,17 @@
-import React, { useState } from "react"
-import Carousel, { Modal, ModalGateway } from "react-images"
+import React, { useContext } from "react";
+import Carousel, { Modal, ModalGateway } from "react-images";
+import { ModalContext } from "../../pages/index";
 
-export const useModalState = () => {
-  const [state, setState] = useState({ isOpen: false, currentSlide: 0 })
-
-  return [state, setState]
-}
-
-export const ImageModal = ({ images, isOpen, currentIndex, setModalState }) => {
+export const ImageModal = ({ images }) => {
+  const { state, dispatch } = useContext(ModalContext);
+  const { isOpen, currentSlide } = state;
   return (
     <ModalGateway>
       {isOpen && (
-        <Modal onClose={() => setModalState({ isOpen: false })}>
-          <Carousel currentIndex={currentIndex} views={images} />
+        <Modal onClose={() => dispatch({ type: "CLOSE_MODAL" })}>
+          <Carousel currentIndex={currentSlide} views={images} />
         </Modal>
       )}
     </ModalGateway>
-  )
-}
+  );
+};

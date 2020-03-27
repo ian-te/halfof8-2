@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment, useReducer } from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
@@ -10,14 +10,43 @@ import { Intro, IntroWrapper } from "../components/Intro/index.js";
 const applyReveal = async () => {
   const reveal = await import("scrollreveal");
   const ScrollReveal = reveal.default;
-  console.log(ScrollReveal());
-  ScrollReveal().reveal(".sr-item", { interval: 200 });
+  ScrollReveal().reveal(".sr-item", { interval: 50 });
 };
+
+export const ModalContext = React.createContext();
+
+const initialState = {
+  isOpen: false,
+  currentSlide: 0
+};
+
+function reducer(state = initialState, action) {
+  console.log(state, action);
+  switch (action.type) {
+    case "OPEN_MODAL":
+      return {
+        ...state,
+        isOpen: true,
+        currentSlide: action.slide
+      };
+
+    case "CLOSE_MODAL":
+      return {
+        ...state,
+        isOpen: false
+      };
+
+    default:
+      return state;
+  }
+}
+
 const IndexPage = ({ data }) => {
-  const [{ isOpen, currentSlide }, setModalState] = useModalState();
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   useEffect(() => {
     applyReveal();
-  });
+  }, [data]);
   const modalImages = data.contentfulMainPage.items
     .filter(item => !!item.lightbox)
     .map(item => ({
@@ -34,63 +63,49 @@ const IndexPage = ({ data }) => {
   let slideKey = -1;
 
   return (
-    <Layout>
-      <SEO title={data.site.siteMetadata.title} />
-      <ImageModal
-        images={modalImages}
-        setModalState={setModalState}
-        isOpen={isOpen}
-        currentIndex={currentSlide}
-      />
-      <Intro />
-      {data.contentfulMainPage.items
-        // .filter(
-        //   itemData =>
-        //     itemData.indexBackgroundImage &&
-        //     !itemData.indexBackgroundImage.file.url.includes(".gif")
-        // )
-        .map(itemData => {
-          if (itemData.lightbox) {
+    <Fragment>
+      <ModalContext.Provider value={{ state, dispatch }}>
+        <Layout>
+          <SEO title={data.site.siteMetadata.title} />
+          <Intro />
+          {data.contentfulMainPage.items.map(itemData => {
             slideKey = slideKey + 1;
-          }
-          return (
-            <Item
-              {...itemData}
-              setModalState={setModalState}
-              currentSlide={slideKey}
-            />
-          );
-        })}
-      <IntroWrapper>
-        <footer>
-          <p>
-            8の半
-            <br />
-            &copy; 2012 – {new Date().getFullYear()},
-          </p>
-          <p>
-            Car does not move
-            <br />
-            till we are all buckled up, <br />
-            so keep in touch <br />
-            via <a href="mailto:info@halfof8.com">info@halfof8.com</a> <br />
-          </p>
-          <p>
-            Design by <a href="https://instagram.com/halfof8">Anton Sokolov</a>{" "}
-            <br />
-            Development by{" "}
-            <a href="https://github.com/yante" target="_blank">
-              Yan Te
-            </a>{" "}
-            <br />
-            Inter typeface by{" "}
-            <a href="https://rsms.me/inter/" target="_blank">
-              rsms.me
-            </a>
-          </p>
-        </footer>
-      </IntroWrapper>
-    </Layout>
+            return <Item {...itemData} currentSlide={0} />;
+          })}
+          <IntroWrapper>
+            <footer>
+              <p>
+                8の半
+                <br />
+                &copy; 2012 – {new Date().getFullYear()},
+              </p>
+              <p>
+                Car does not move
+                <br />
+                till we are all buckled up, <br />
+                so keep in touch <br />
+                via <a href="mailto:info@halfof8.com">info@halfof8.com</a>{" "}
+                <br />
+              </p>
+              <p>
+                Design by{" "}
+                <a href="https://instagram.com/halfof8">Anton Sokolov</a> <br />
+                Development by{" "}
+                <a href="https://github.com/yante" target="_blank">
+                  Yan Te
+                </a>{" "}
+                <br />
+                Inter typeface by{" "}
+                <a href="https://rsms.me/inter/" target="_blank">
+                  rsms.me
+                </a>
+              </p>
+            </footer>
+          </IntroWrapper>
+        </Layout>
+        <ImageModal images={modalImages} />
+      </ModalContext.Provider>
+    </Fragment>
   );
 };
 
