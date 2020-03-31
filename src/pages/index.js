@@ -69,7 +69,7 @@ const IndexPage = ({ data }) => {
           <SEO title={data.site.siteMetadata.title} />
           <Intro />
           {data.contentfulMainPage.items.map(itemData => {
-            slideKey = slideKey + 1;
+            if (itemData.lightbox) slideKey = slideKey + 1;
             return <Item {...itemData} currentSlide={slideKey} />;
           })}
           <IntroWrapper>
@@ -128,6 +128,11 @@ export const query = graphql`
           externalLinks
           isRootPage
           lightbox
+          fbxFile {
+            file {
+              url
+            }
+          }
           indexBackgroundImage {
             file {
               url

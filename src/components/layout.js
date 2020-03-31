@@ -30,12 +30,20 @@ const Layout = ({ children }) => {
 
 const Main = styled.main`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 16px;
   padding: 16px;
-  @media (max-width: 480px) {
+  @media (min-width: 360px) {
     grid-template-columns: repeat(2, 1fr);
-    font-size: 14px;
+  }
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(5, 1fr);
   }
   @media (min-width: 1920px) {
     grid-template-columns: repeat(6, 1fr);
