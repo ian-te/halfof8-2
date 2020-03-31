@@ -1,13 +1,20 @@
-import React from "react"
-import Image from "gatsby-image"
+import React from "react";
+import Image from "gatsby-image";
 
 export const ContentImage = ({ item }) => {
   if (!item.indexBackgroundImage || !item.indexBackgroundImage.localFile) {
-    return null
+    return null;
   } else if (item.indexBackgroundImage.localFile.childImageSharp) {
-    const data = item.indexBackgroundImage.localFile
-    const sources = [{ ...data.childImageSharp.fluid, sizes: "23vw" }]
-    return <Image fluid={sources} />
+    const data = item.indexBackgroundImage.localFile;
+    const sources = [
+      { ...data.childImageSharp.fluid, sizes: "23vw" },
+      {
+        ...data.childImageSharp.fluid,
+        media: "(max-width: 480px)",
+        sizes: "50vw"
+      }
+    ];
+    return <Image fluid={sources} />;
   }
   return (
     <img
@@ -15,5 +22,5 @@ export const ContentImage = ({ item }) => {
       style={{ display: "block" }}
       src={item.indexBackgroundImage.file.url}
     />
-  )
-}
+  );
+};

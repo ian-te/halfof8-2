@@ -27,7 +27,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         isOpen: true,
-        currentSlide: action.slide
+        currentSlide: action.data.slide
       };
 
     case "CLOSE_MODAL":

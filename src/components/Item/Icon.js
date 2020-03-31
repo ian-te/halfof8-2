@@ -36,4 +36,10 @@ export const Icon = styled(IconBase)`
   justify-content: center;
   align-items: center;
   z-index: 2;
+  @media (max-width: 480px) {
+    left: 16px;
+    top: 16px;
+    margin-left: 0;
+    margin-top: 0;
+  }
 `;

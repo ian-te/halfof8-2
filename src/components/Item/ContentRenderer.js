@@ -7,7 +7,7 @@ const IframeAsync = ({ src, ...props }) => {
   useEffect(() => {
     setSrc(src);
   });
-  return deferredSrc && <iframe src={deferredSrc} {...props} />;
+  return deferredSrc && <iframe frameborder="0" src={deferredSrc} {...props} />;
 };
 
 export const ContentRenderer = ({ item }) => {

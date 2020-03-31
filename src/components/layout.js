@@ -5,10 +5,10 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-import styled from "styled-components"
+import React from "react";
+import PropTypes from "prop-types";
+import { useStaticQuery, graphql } from "gatsby";
+import styled from "styled-components";
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -19,14 +19,14 @@ const Layout = ({ children }) => {
         }
       }
     }
-  `)
+  `);
 
   return (
     <div>
       <Main>{children}</Main>
     </div>
-  )
-}
+  );
+};
 
 const Main = styled.main`
   display: grid;
@@ -37,10 +37,13 @@ const Main = styled.main`
     grid-template-columns: repeat(2, 1fr);
     font-size: 14px;
   }
-`
+  @media (min-width: 1920px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+`;
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
+  children: PropTypes.node.isRequired
+};
 
-export default Layout
+export default Layout;
