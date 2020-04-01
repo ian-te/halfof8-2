@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { ContentImage } from "./Image";
 import { Icon } from "./Icon";
 import { ThreeRenderer } from "./ThreeRenderer";
@@ -14,7 +14,12 @@ const IframeAsync = ({ src, ...props }) => {
 export const ContentRenderer = ({ item }) => {
   switch (true) {
     case !!item.fbxFile:
-      return <ThreeRenderer model={item.fbxFile.file.url} />;
+      return (
+        <Fragment>
+          <Icon item={item} />
+          <ThreeRenderer model={item.fbxFile.file.url} />
+        </Fragment>
+      );
     case !!item.indexBackgroundImage:
       return (
         <div>
