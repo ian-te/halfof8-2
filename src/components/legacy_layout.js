@@ -13,12 +13,29 @@ const LayoutStyled = styled(Layout)`
   & > div:first-child {
     min-width: 250px;
   }
+
   @media (max-width: 580px) {
     display: block;
     & > div:first-child {
       width: 100%;
       min-width: 250px;
     }
+  }
+
+  .a {
+    text-decoration: none !important;
+  }
+
+  h2 {
+    padding-top: 0px;
+    font-weight: normal;
+    font-size: 52px !important;
+    line-height: 1.4;
+    margin: 0;
+  }
+  p {
+    padding-top: 0px;
+    line-height: 1.4;
   }
 `;
 

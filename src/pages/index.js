@@ -94,11 +94,6 @@ const IndexPage = ({ data }) => {
                 <a href="https://github.com/yante" target="_blank">
                   Yan Te
                 </a>{" "}
-                <br />
-                Inter typeface by{" "}
-                <a href="https://rsms.me/inter/" target="_blank">
-                  rsms.me
-                </a>
               </p>
             </footer>
           </IntroWrapper>
@@ -171,3 +166,5 @@ export const query = graphql`
 `;
 
 export default IndexPage;
+
+

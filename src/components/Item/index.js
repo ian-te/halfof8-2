@@ -16,8 +16,7 @@ export const Item = ({ name, tag, ...item }) => {
           </ContentInner>
         </ContentWrapper>
         <Text>
-          <h4>{name}</h4>
-          <p>{tag}</p>
+          <h4>{name} {tag}</h4>
         </Text>
       </ContentActionStyled>
     </div>
@@ -69,10 +68,12 @@ const Text = styled.div`
   padding: 12px 2px;
   h4 {
     font-weight: normal;
+    font-size: 16px !important;
     margin: 0;
   }
   p {
     margin: 0;
+    font-size: 10px !important;
     padding: 0;
   }
 `;

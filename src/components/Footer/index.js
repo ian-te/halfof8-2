@@ -8,8 +8,7 @@ const Text = () => (
     Car does not move till we are all buckled up, so keep in touch <br/>
     via <a href="mailto:info@halfof8.com">info@halfof8.com</a> <br/>
     Design by <a href="https://instagram.com/halfof8">Anton Sokolov</a> <br/>
-    Development by <a href="https://github.com/yante" target="_blank">Yan Te</a> <br/>
-    Inter typeface by <a href="https://rsms.me/inter/" target="_blank">rsms.me</a>
+    Development by <a href="https://github.com/yante" target="_blank">Yan Te</a>
   </p>
 );
 const FooterBase = ({ className, children }) => (
@@ -19,6 +18,7 @@ const FooterBase = ({ className, children }) => (
 const FooterStyled = styled(FooterBase)`
   padding: ${props => props.padding || '20px 25px 10px'};
   text-align: left;
+  a {text-decoration: none;}
   p {
     font-size: 10px;
     line-height: 1.5;
