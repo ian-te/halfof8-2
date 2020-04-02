@@ -68,10 +68,12 @@ const IndexPage = ({ data }) => {
         <Layout>
           <SEO title={data.site.siteMetadata.title} />
           <Intro />
-          {data.contentfulMainPage.items.map(itemData => {
-            if (itemData.lightbox) slideKey = slideKey + 1;
-            return <Item {...itemData} currentSlide={slideKey} />;
-          })}
+          {data.contentfulMainPage.items
+            // .filter(itemData => !!itemData.fbxFile)
+            .map(itemData => {
+              if (itemData.lightbox) slideKey = slideKey + 1;
+              return <Item {...itemData} currentSlide={slideKey} />;
+            })}
           <IntroWrapper>
             <footer>
               <p>
@@ -128,6 +130,7 @@ export const query = graphql`
               url
             }
           }
+          fbxColor
           indexBackgroundImage {
             file {
               url

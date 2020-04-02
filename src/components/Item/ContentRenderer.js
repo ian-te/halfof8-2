@@ -17,7 +17,7 @@ export const ContentRenderer = ({ item }) => {
       return (
         <Fragment>
           <Icon item={item} />
-          <ThreeRenderer model={item.fbxFile.file.url} />
+          <ThreeRenderer model={item.fbxFile.file.url} color={item.fbxColor} />
         </Fragment>
       );
     case !!item.indexBackgroundImage:

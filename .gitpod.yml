@@ -3,3 +3,8 @@ tasks:
     command: npm run start
 image:
   file: .gitpod.Dockerfile
+
+vscode:
+  extensions:
+    - esbenp.prettier-vscode@3.20.0:37/f4uBlE287wUjENFq1aA==
+    - vscodevim.vim@1.13.1:SI3AUi8tRZQWIfdXgXHbOQ==
