@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
-import { AnimationObjectGroup } from "three";
-// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import styled from "styled-components";
+import debounce from "lodash/debounce";
+
 function main(el, model, width, height, color = "0xff0040") {
   var container, controls;
   let camera, scene, renderer, light;
@@ -14,6 +15,13 @@ function main(el, model, width, height, color = "0xff0040") {
   var clock = new THREE.Clock();
 
   var mixer;
+
+  const debouncedResize = debounce(event => {
+    const aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth / 4, (window.innerWidth * 4) / 3 / 4);
+  }, 1000);
 
   function onMouseMove(event) {
     mouse.x = (event.clientX / document.documentElement.clientWidth) * 2 - 1;
@@ -35,7 +43,7 @@ function main(el, model, width, height, color = "0xff0040") {
 
     light = new THREE.PointLight(parseInt(color), 2, 300);
     light.position.set(97, 0, 123);
-    scene.add(light)
+    scene.add(light);
     // light = new THREE.DirectionalLight(0xffffff);
     // light.position.set(1000, 200, 100);
     // light.castShadow = true;
@@ -53,7 +61,11 @@ function main(el, model, width, height, color = "0xff0040") {
     loader.load(model, function(object) {
       mixer = new THREE.AnimationMixer(object);
       mainObject = object;
-      object.doubleSided = true;
+      object.traverse(function(node) {
+        if (node.material) {
+          node.material.side = THREE.DoubleSide;
+        }
+      });
       scene.add(object);
       camera.lookAt(THREE.Vector3(0, 0, 0));
     });
@@ -71,10 +83,7 @@ function main(el, model, width, height, color = "0xff0040") {
   }
 
   function onWindowResize() {
-    // camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-
-    // renderer.setSize(window.innerWidth, window.innerHeight);
+    debouncedResize();
   }
 
   function lerp(ratio, start, end) {
@@ -82,28 +91,22 @@ function main(el, model, width, height, color = "0xff0040") {
   }
   //
   function moveObject() {
-      if(mainObject) {
-
-        mainObject.rotation.y = mouse.y;
-        mainObject.rotation.z = mouse.x;
-      }
+    if (mainObject) {
+      mainObject.rotation.y = mouse.y * 0.3;
+      mainObject.rotation.z = mouse.x * 0.3;
+    }
   }
 
   function animate() {
     requestAnimationFrame(animate);
-
-    // if (mixer) mixer.update(delta);
     moveObject();
-    //   console.log(camera.position)
-
     renderer.render(scene, camera);
   }
   init();
   animate();
 }
-export const ThreeRenderer = ({ model, color }) => {
+export const ThreeRenderer = ({ model, color, className }) => {
   const el = useRef();
-  console.log('>>>color', color)
   useEffect(() => {
     main(
       el.current,
@@ -116,5 +119,22 @@ export const ThreeRenderer = ({ model, color }) => {
       el.current.innerHTML = "";
     };
   }, [model]);
-  return <div ref={el}></div>;
+  return (
+    <ThreeRendererStyled ref={el} className={className}></ThreeRendererStyled>
+  );
 };
+
+const ThreeRendererStyled = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+`;

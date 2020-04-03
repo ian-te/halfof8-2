@@ -1,10 +1,11 @@
-import React from "react"
+import React from "react";
 
-export const NewWindow = () => (
+export const NewWindow = ({ width }) => (
   <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
+    style={{ display: "block" }}
+    width={width}
+    height={width}
+    viewBox={`0 0 24 24`}
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -13,4 +14,4 @@ export const NewWindow = () => (
       fill="black"
     />
   </svg>
-)
+);

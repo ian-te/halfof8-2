@@ -9,7 +9,7 @@ const getIcon = item => {
     case !!item.lightbox:
       return <Expand />;
     case !!item.externalUrl:
-      return <NewWindow />;
+      return <NewWindow width={24} />;
     default:
       return <Arrow />;
   }
