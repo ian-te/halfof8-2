@@ -90,12 +90,9 @@ const IndexPage = ({ data }) => {
                 <br />
               </p>
               <p>
-                Design by{" "}
-                <a href="https://instagram.com/halfof8">Anton Sokolov</a> <br />
-                Development by{" "}
-                <a href="https://github.com/yante" target="_blank">
-                  Yan Te
-                </a>{" "}
+                Design by{" "}<a href="https://instagram.com/halfof8">Anton Sokolov</a><br />
+                Development by{" "}<a href="https://github.com/yante" target="_blank">Yan Te</a>{" "}<br />
+                Set in{" "}<a href="https://commercialtype.com/catalog/neue_haas_grotesk" target="_blank">Neue Haas Grotesk</a>
               </p>
             </footer>
           </IntroWrapper>
