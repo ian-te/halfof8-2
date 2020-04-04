@@ -5,7 +5,7 @@ import { ContentWrapper } from "../Item";
 
 export const IntroWrapper = ({ children }) => {
   return (
-    <div className="sr-item load-hidden">
+    <div className="sr-item load-hidden" style={{ visibility: "hidden" }}>
       <ContentWrapper>
         <Content>{children}</Content>
       </ContentWrapper>
