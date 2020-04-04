@@ -6,11 +6,13 @@ import debounce from "lodash/debounce";
 
 function main(el, model, width, height, lightsInput) {
   var container, controls;
-  let camera, scene, renderer, light;
+  let camera, scene, renderer, light, lightmain, lightsupport;
   let mainObject;
   let lights;
   let gemMaterial;
   var mouse = { x: 0, y: 0 };
+  var frustumSize = 120;
+  var aspect = window.innerWidth / window.innerHeight;
 
   let dX = 0,
     dY = 0;
@@ -39,15 +41,29 @@ function main(el, model, width, height, lightsInput) {
   function init() {
     container = el;
 
-    camera = new THREE.PerspectiveCamera(45, width / height, 1, 2000);
-    camera.position.set(97, 102, 123);
+    // camera = new THREE.PerspectiveCamera(45, width / height, 1, 2000);
+    camera = new THREE.OrthographicCamera( 0.5 * frustumSize * aspect / - 2, 0.5 * frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 1.8, 50, 1000 );
+    // var aspect = window.innerWidth / window.innerHeight;
+    // camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
+    // camera.position.set(0, 0, 0);
+    camera.position.set( -50, 100, 200 );
+    // camera.position.set(97, 102, 123);
 
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x000000);
 
     light = new THREE.HemisphereLight(0xffffff, 0x777777);
-    light.position.set(97, 72, 123);
+    light.position.set(10, 10, 10);
     scene.add(light);
+
+    lightmain = new THREE.PointLight( 0x0047FF, 1, 100 );
+    lightmain.position.set(0, 0, 0);
+    scene.add(lightmain);
+
+    lightsupport = new THREE.PointLight( 0x00FF38, 1, 100 );
+    lightsupport.position.set(20, 0, 28);
+    scene.add(lightsupport);
+
 
     lights = lights.map(color => new THREE.PointLight(parseInt(color), 2, 50));
 
@@ -56,11 +72,13 @@ function main(el, model, width, height, lightsInput) {
       light.shadow = true;
       scene.add(light);
     });
+
     gemMaterial = new THREE.MeshPhysicalMaterial({
       map: null,
       color: 0xffffff,
-      metalness: 0.2,
-      roughness: 0.96,
+      shininess: 300,
+      metalness: 0.5,
+      roughness: 1,
       side: THREE.DoubleSide
     });
 
@@ -100,8 +118,8 @@ function main(el, model, width, height, lightsInput) {
   //
   function moveObject() {
     if (mainObject) {
-      mainObject.rotation.y = mouse.y * 0.3;
-      mainObject.rotation.z = mouse.x * 0.3;
+      mainObject.rotation.y = - (mouse.x * 0.5);
+      mainObject.rotation.z = - (mouse.y * 0.2);
     }
   }
   function animateLight() {
@@ -111,7 +129,7 @@ function main(el, model, width, height, lightsInput) {
     // if (object) object.rotation.y -= 0.5 * delta;
     let counter = 0;
     let phases = [0.7, 0.5, 0.3];
-    let distanceModifier = 1.5;
+    let distanceModifier = 1;
 
     lights.forEach((light, key) => {
       light.position.x =
