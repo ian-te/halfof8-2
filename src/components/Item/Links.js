@@ -14,13 +14,21 @@ const LinkBase = ({ md, className }) => {
       target="_blank"
       className={className}
     >
-      <span>
+      <IconWrapper>
         <NewWindow width="16" />
-      </span>
+      </IconWrapper>
       <span>{link[0]}</span>
     </a>
   );
 };
+
+const IconWrapper = styled.span`
+  display: none;
+  margin-right: 16px;
+  @media (min-width: 640px) {
+    display: block;
+  }
+`;
 
 const Link = styled(LinkBase)`
   height: 34px;
@@ -29,9 +37,7 @@ const Link = styled(LinkBase)`
   text-decoration: none;
   border-radius: 34px;
   margin-top: 14px;
-  display: grid;
-  grid-template-columns: 16px auto;
-  grid-gap: 14px;
+  display: flex;
   align-items: center;
   justify-items: center;
   padding: 0 14px;

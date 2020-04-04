@@ -4,10 +4,12 @@ import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import styled from "styled-components";
 import debounce from "lodash/debounce";
 
-function main(el, model, width, height, color = "0xff0040") {
+function main(el, model, width, height, lightsInput) {
   var container, controls;
   let camera, scene, renderer, light;
   let mainObject;
+  let lights;
+  let gemMaterial;
   var mouse = { x: 0, y: 0 };
 
   let dX = 0,
@@ -15,6 +17,12 @@ function main(el, model, width, height, color = "0xff0040") {
   var clock = new THREE.Clock();
 
   var mixer;
+
+  if (!lightsInput) {
+    lights = ["0xff0040"];
+  } else {
+    lights = lightsInput;
+  }
 
   const debouncedResize = debounce(event => {
     const aspect = window.innerWidth / window.innerHeight;
@@ -41,28 +49,28 @@ function main(el, model, width, height, color = "0xff0040") {
     light.position.set(97, 72, 123);
     scene.add(light);
 
-    light = new THREE.PointLight(parseInt(color), 2, 300);
-    light.position.set(97, 0, 123);
-    scene.add(light);
-    // light = new THREE.DirectionalLight(0xffffff);
-    // light.position.set(1000, 200, 100);
-    // light.castShadow = true;
-    // light.shadow.camera.top = 180;
-    // light.shadow.camera.bottom = -100;
-    // light.shadow.camera.left = -120;
-    // light.shadow.camera.right = 120;
-    // scene.add(light);
+    lights = lights.map(color => new THREE.PointLight(parseInt(color), 2, 50));
 
-    // scene.add( new CameraHelper( light.shadow.camera ) );
+    lights.forEach(light => {
+      light.intensity = 1;
+      light.shadow = true;
+      scene.add(light);
+    });
+    gemMaterial = new THREE.MeshPhysicalMaterial({
+      map: null,
+      color: 0xffffff,
+      metalness: 0.2,
+      roughness: 0.96,
+      side: THREE.DoubleSide
+    });
 
-    // ground
-    // model
     var loader = new FBXLoader();
     loader.load(model, function(object) {
       mixer = new THREE.AnimationMixer(object);
       mainObject = object;
       object.traverse(function(node) {
         if (node.material) {
+          node.material = gemMaterial;
           node.material.side = THREE.DoubleSide;
         }
       });
@@ -96,24 +104,44 @@ function main(el, model, width, height, color = "0xff0040") {
       mainObject.rotation.z = mouse.x * 0.3;
     }
   }
+  function animateLight() {
+    var time = Date.now() * 0.0005;
+    var delta = clock.getDelta();
+
+    // if (object) object.rotation.y -= 0.5 * delta;
+    let counter = 0;
+    let phases = [0.7, 0.5, 0.3];
+    let distanceModifier = 1.5;
+
+    lights.forEach((light, key) => {
+      light.position.x =
+        Math.sin(time * phases[key % 3]) * 30 * distanceModifier;
+      light.position.y =
+        Math.cos(time * phases[(key + 1) % 3]) * 40 * distanceModifier;
+      light.position.z =
+        Math.cos(time * phases[(key + 2) % 3]) * 30 * distanceModifier;
+    });
+  }
 
   function animate() {
     requestAnimationFrame(animate);
+    animateLight();
     moveObject();
     renderer.render(scene, camera);
   }
   init();
   animate();
 }
-export const ThreeRenderer = ({ model, color, className }) => {
+export const ThreeRenderer = ({ model, lights, className }) => {
   const el = useRef();
+  console.log(">> three", lights);
   useEffect(() => {
     main(
       el.current,
       model,
       el.current.clientWidth,
       (el.current.clientWidth * 4) / 3,
-      color
+      lights
     );
     return () => {
       el.current.innerHTML = "";

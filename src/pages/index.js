@@ -131,6 +131,7 @@ export const query = graphql`
             }
           }
           fbxColor
+          lights
           indexBackgroundImage {
             file {
               url
