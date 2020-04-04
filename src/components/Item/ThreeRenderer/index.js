@@ -11,8 +11,8 @@ function main(el, model, width, height, lightsInput) {
   let lights;
   let gemMaterial;
   var mouse = { x: 0, y: 0 };
-  var frustumSize = 120;
-  var aspect = window.innerWidth / window.innerHeight;
+  var frustumSize = 130;
+
 
   let dX = 0,
     dY = 0;
@@ -26,12 +26,15 @@ function main(el, model, width, height, lightsInput) {
     lights = lightsInput;
   }
 
-  const debouncedResize = debounce(event => {
-    const aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
+//   const debouncedResize = debounce(event => {
+//     // const aspect = window.innerWidth / window.innerHeight;
+//     camera.updateProjectionMatrix();
 
-    renderer.setSize(window.innerWidth / 4, (window.innerWidth * 4) / 3 / 4);
-  }, 1000);
+//     renderer.setSize(window.innerWidth / 4, (window.innerWidth * 4) / 3 / 4);
+// }, 1000);
+
+init();
+animate();
 
   function onMouseMove(event) {
     mouse.x = (event.clientX / document.documentElement.clientWidth) * 2 - 1;
@@ -41,8 +44,12 @@ function main(el, model, width, height, lightsInput) {
   function init() {
     container = el;
 
+    const aspect = 0.75;
+    camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
+
     // camera = new THREE.PerspectiveCamera(45, width / height, 1, 2000);
-    camera = new THREE.OrthographicCamera( 0.5 * frustumSize * aspect / - 2, 0.5 * frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 1.8, 50, 1000 );
+    // camera = new THREE.OrthographicCamera( 0.5 * frustumSize * aspect / - 2, 0.5 * frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 1.8, 50, 1000 );
+    // camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
     // var aspect = window.innerWidth / window.innerHeight;
     // camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
     // camera.position.set(0, 0, 0);
@@ -64,7 +71,6 @@ function main(el, model, width, height, lightsInput) {
     lightsupport.position.set(20, 0, 28);
     scene.add(lightsupport);
 
-
     lights = lights.map(color => new THREE.PointLight(parseInt(color), 2, 50));
 
     lights.forEach(light => {
@@ -77,7 +83,7 @@ function main(el, model, width, height, lightsInput) {
       map: null,
       color: 0xffffff,
       shininess: 300,
-      metalness: 0.5,
+      metalness: 0.7,
       roughness: 1,
       side: THREE.DoubleSide
     });
@@ -97,8 +103,8 @@ function main(el, model, width, height, lightsInput) {
     });
 
     renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(width, height);
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
 
@@ -109,7 +115,9 @@ function main(el, model, width, height, lightsInput) {
   }
 
   function onWindowResize() {
-    debouncedResize();
+
+    camera.updateProjectionMatrix();
+
   }
 
   function lerp(ratio, start, end) {
@@ -147,8 +155,7 @@ function main(el, model, width, height, lightsInput) {
     moveObject();
     renderer.render(scene, camera);
   }
-  init();
-  animate();
+ 
 }
 export const ThreeRenderer = ({ model, lights, className }) => {
   const el = useRef();
