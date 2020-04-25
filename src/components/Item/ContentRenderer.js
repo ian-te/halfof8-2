@@ -2,6 +2,7 @@ import React, { useEffect, useState, Fragment } from "react";
 import { ContentImage } from "./Image";
 import { Icon } from "./Icon";
 import { ThreeRenderer } from "./ThreeRenderer";
+import { Audio } from "./Audio";
 
 const IframeAsync = ({ src, ...props }) => {
   const [deferredSrc, setSrc] = useState(null);
@@ -24,6 +25,8 @@ export const ContentRenderer = ({ item }) => {
           />
         </Fragment>
       );
+    case !!item.mp3:
+      return <Audio {...item} />;
     case !!item.indexBackgroundImage:
       return (
         <div>
@@ -40,7 +43,7 @@ export const ContentRenderer = ({ item }) => {
           <img
             width="100%"
             src="https://placehold.it/600x800"
-            style="display: block;"
+            style={{ display: "block" }}
           />
         </div>
       );

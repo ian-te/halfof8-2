@@ -6,6 +6,11 @@ import { Item } from "../components/Item/index";
 import "./index.css";
 import { ImageModal, useModalState } from "../components/ImageModal";
 import { Intro, IntroWrapper } from "../components/Intro/index.js";
+import {
+  PlayerContext,
+  reducer as playerReducer,
+  initialState as initialPlayerState
+} from "../reducers/Player";
 
 const applyReveal = async () => {
   const reveal = await import("scrollreveal");
@@ -43,6 +48,10 @@ function reducer(state = initialState, action) {
 
 const IndexPage = ({ data }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [playerState, playerDispatch] = useReducer(
+    playerReducer,
+    initialPlayerState
+  );
 
   useEffect(() => {
     applyReveal();
@@ -64,41 +73,62 @@ const IndexPage = ({ data }) => {
 
   return (
     <Fragment>
-      <ModalContext.Provider value={{ state, dispatch }}>
-        <Layout>
-          <SEO title={data.site.siteMetadata.title} />
-          <Intro />
-          {data.contentfulMainPage.items
-            // .filter(itemData => !!itemData.fbxFile)
-            .map(itemData => {
-              if (itemData.lightbox) slideKey = slideKey + 1;
-              return <Item {...itemData} currentSlide={slideKey} />;
-            })}
-          <IntroWrapper>
-            <footer>
-              <p>
-                8の半
-                <br />
-                &copy; 2012 – {new Date().getFullYear()},
-              </p>
-              <p>
-                Car does not move
-                <br />
-                till we are all buckled up, <br />
-                so keep in touch <br />
-                via <a href="mailto:info@halfof8.com">info@halfof8.com</a>{" "}
-                <br />
-              </p>
-              <p>
-                Design by{" "}<a href="https://instagram.com/halfof8">Anton Sokolov</a><br />
-                Development by{" "}<a href="https://github.com/yante" target="_blank">Yan Te</a>{" "}<br />
-                Set in{" "}<a href="https://commercialtype.com/catalog/neue_haas_grotesk" target="_blank">Neue Haas Grotesk</a>
-              </p>
-            </footer>
-          </IntroWrapper>
-        </Layout>
-        <ImageModal images={modalImages} />
-      </ModalContext.Provider>
+      <PlayerContext.Provider
+        value={{
+          state: playerState,
+          dispatch: playerDispatch
+        }}
+      >
+        <ModalContext.Provider value={{ state, dispatch }}>
+          <Layout>
+            <SEO title={data.site.siteMetadata.title} />
+            <Intro />
+            {data.contentfulMainPage.items
+              .filter(itemData => !itemData.fbxFile)
+              .map(itemData => {
+                if (itemData.lightbox) slideKey = slideKey + 1;
+                return <Item {...itemData} currentSlide={slideKey} />;
+              })}
+            <IntroWrapper>
+              <footer>
+                <p>
+                  8の半
+                  <br />
+                  &copy; 2012 – {new Date().getFullYear()},
+                </p>
+                <p>
+                  Car does not move
+                  <br />
+                  till we are all buckled up, <br />
+                  so keep in touch <br />
+                  via <a href="mailto:info@halfof8.com">
+                    info@halfof8.com
+                  </a>{" "}
+                  <br />
+                </p>
+                <p>
+                  Design by{" "}
+                  <a href="https://instagram.com/halfof8">Anton Sokolov</a>
+                  <br />
+                  Development by{" "}
+                  <a href="https://github.com/yante" target="_blank">
+                    Yan Te
+                  </a>{" "}
+                  <br />
+                  Set in{" "}
+                  <a
+                    href="https://commercialtype.com/catalog/neue_haas_grotesk"
+                    target="_blank"
+                  >
+                    Neue Haas Grotesk
+                  </a>
+                </p>
+              </footer>
+            </IntroWrapper>
+          </Layout>
+          <ImageModal images={modalImages} />
+        </ModalContext.Provider>
+      </PlayerContext.Provider>
     </Fragment>
   );
 };
@@ -156,10 +186,37 @@ export const query = graphql`
             }
           }
         }
-        ... on ContentfulWidget {
+        ... on ContentfulAudio {
           id
           name
-          embedUrl
+          mp3 {
+            file {
+              url
+            }
+          }
+          background {
+            localFile {
+              childImageSharp {
+                id
+                fluid(
+                  srcSetBreakpoints: [180, 320, 380, 480, 640, 1280]
+                  webpQuality: 90
+                  pngQuality: 80
+                  jpegQuality: 90
+                  jpegProgressive: true
+                ) {
+                  src
+                  aspectRatio
+                  base64
+                  presentationHeight
+                  presentationWidth
+                  sizes
+                  srcSet
+                  srcWebp
+                }
+              }
+            }
+          }
         }
       }
     }

@@ -16,7 +16,9 @@ export const Item = ({ name, tag, ...item }) => {
           </ContentInner>
         </ContentWrapper>
         <Text>
-          <h4>{name} {tag}</h4>
+          <h4>
+            {name} {tag}
+          </h4>
         </Text>
       </ContentActionStyled>
     </div>

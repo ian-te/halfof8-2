@@ -13,7 +13,6 @@ function main(el, model, width, height, lightsInput) {
   var mouse = { x: 0, y: 0 };
   var frustumSize = 130;
 
-
   let dX = 0,
     dY = 0;
   var clock = new THREE.Clock();
@@ -26,15 +25,15 @@ function main(el, model, width, height, lightsInput) {
     lights = lightsInput;
   }
 
-//   const debouncedResize = debounce(event => {
-//     // const aspect = window.innerWidth / window.innerHeight;
-//     camera.updateProjectionMatrix();
+  //   const debouncedResize = debounce(event => {
+  //     // const aspect = window.innerWidth / window.innerHeight;
+  //     camera.updateProjectionMatrix();
 
-//     renderer.setSize(window.innerWidth / 4, (window.innerWidth * 4) / 3 / 4);
-// }, 1000);
+  //     renderer.setSize(window.innerWidth / 4, (window.innerWidth * 4) / 3 / 4);
+  // }, 1000);
 
-init();
-animate();
+  init();
+  animate();
 
   function onMouseMove(event) {
     mouse.x = (event.clientX / document.documentElement.clientWidth) * 2 - 1;
@@ -45,7 +44,14 @@ animate();
     container = el;
 
     const aspect = 0.75;
-    camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
+    camera = new THREE.OrthographicCamera(
+      (frustumSize * aspect) / -2,
+      (frustumSize * aspect) / 2,
+      frustumSize / 2,
+      frustumSize / -2,
+      1,
+      1000
+    );
 
     // camera = new THREE.PerspectiveCamera(45, width / height, 1, 2000);
     // camera = new THREE.OrthographicCamera( 0.5 * frustumSize * aspect / - 2, 0.5 * frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 1.8, 50, 1000 );
@@ -53,7 +59,7 @@ animate();
     // var aspect = window.innerWidth / window.innerHeight;
     // camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
     // camera.position.set(0, 0, 0);
-    camera.position.set( -50, 100, 200 );
+    camera.position.set(-50, 100, 200);
     // camera.position.set(97, 102, 123);
 
     scene = new THREE.Scene();
@@ -63,11 +69,11 @@ animate();
     light.position.set(10, 10, 10);
     scene.add(light);
 
-    lightmain = new THREE.PointLight( 0x0047FF, 1, 100 );
+    lightmain = new THREE.PointLight(0x0047ff, 1, 100);
     lightmain.position.set(0, 0, 0);
     scene.add(lightmain);
 
-    lightsupport = new THREE.PointLight( 0x00FF38, 1, 100 );
+    lightsupport = new THREE.PointLight(0x00ff38, 1, 100);
     lightsupport.position.set(20, 0, 28);
     scene.add(lightsupport);
 
@@ -103,8 +109,8 @@ animate();
     });
 
     renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
 
@@ -115,9 +121,7 @@ animate();
   }
 
   function onWindowResize() {
-
     camera.updateProjectionMatrix();
-
   }
 
   function lerp(ratio, start, end) {
@@ -126,8 +130,8 @@ animate();
   //
   function moveObject() {
     if (mainObject) {
-      mainObject.rotation.y = - (mouse.x * 0.5);
-      mainObject.rotation.z = - (mouse.y * 0.2);
+      mainObject.rotation.y = -(mouse.x * 0.5);
+      mainObject.rotation.z = -(mouse.y * 0.2);
     }
   }
   function animateLight() {
@@ -155,19 +159,20 @@ animate();
     moveObject();
     renderer.render(scene, camera);
   }
- 
 }
 export const ThreeRenderer = ({ model, lights, className }) => {
   const el = useRef();
   console.log(">> three", lights);
   useEffect(() => {
-    main(
-      el.current,
-      model,
-      el.current.clientWidth,
-      (el.current.clientWidth * 4) / 3,
-      lights
-    );
+    setTimeout(function() {
+      main(
+        el.current,
+        model,
+        el.current.clientWidth,
+        (el.current.clientWidth * 4) / 3,
+        lights
+      );
+    }, 0);
     return () => {
       el.current.innerHTML = "";
     };
