@@ -26,7 +26,6 @@ const initialState = {
 };
 
 function reducer(state = initialState, action) {
-  console.log(state, action);
   switch (action.type) {
     case "OPEN_MODAL":
       return {
@@ -84,7 +83,7 @@ const IndexPage = ({ data }) => {
             <SEO title={data.site.siteMetadata.title} />
             <Intro />
             {data.contentfulMainPage.items
-              .filter(itemData => !itemData.fbxFile)
+              // .filter(itemData => !itemData.fbxFile)
               .map(itemData => {
                 if (itemData.lightbox) slideKey = slideKey + 1;
                 return <Item {...itemData} currentSlide={slideKey} />;
