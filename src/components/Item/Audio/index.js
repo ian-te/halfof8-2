@@ -29,7 +29,6 @@ export const Audio = ({ id, mp3, background }) => {
   } = useContext(PlayerContext);
 
   useEffect(() => {
-    console.log(">> using effect", isPlaying, currentItem, id);
     if (isPlaying && currentItem === id) {
       player.current.play();
     } else if (isPlaying && currentItem !== id) {

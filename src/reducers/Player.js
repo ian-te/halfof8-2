@@ -7,7 +7,6 @@ export const initialState = {
 };
 
 export function reducer(state = initialState, action) {
-  console.log(">>", state, action);
   switch (action.type) {
     case "START_PLAYBACK":
       return {
@@ -17,7 +16,6 @@ export function reducer(state = initialState, action) {
       };
 
     case "STOP_PLAYBACK":
-      console.log(">>", "stopped playback");
       return {
         ...state,
         isPlaying: false
