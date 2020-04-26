@@ -87,7 +87,13 @@ const IndexPage = ({ data }) => {
               // .filter(itemData => !itemData.fbxFile)
               .map(itemData => {
                 if (itemData.lightbox) slideKey = slideKey + 1;
-                return <Item {...itemData} currentSlide={slideKey} />;
+                return (
+                  <Item
+                    {...itemData}
+                    key={itemData.id}
+                    currentSlide={slideKey}
+                  />
+                );
               })}
             <IntroWrapper>
               <footer>

@@ -7,10 +7,11 @@ export const ContentImage = ({ item }) => {
   } else if (item.indexBackgroundImage.localFile.childImageSharp) {
     const data = item.indexBackgroundImage.localFile;
     const sources = [
-      { ...data.childImageSharp.fluid, sizes: "23vw" },
+      { ...data.childImageSharp.fluid, sizes: "23vw", key: item.id },
       {
         ...data.childImageSharp.fluid,
         media: "(max-width: 480px)",
+        key: `mobile${item.id}`,
         sizes: "50vw"
       }
     ];

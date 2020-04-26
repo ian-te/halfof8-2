@@ -1,10 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import * as THREE from "three";
-import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import styled from "styled-components";
-import debounce from "lodash/debounce";
 
-function main(el, model, width, height, lightsInput) {
+async function main(el, model, width, height, lightsInput) {
+  const THREE = await import("three");
+  const { FBXLoader } = await import("three/examples/jsm/loaders/FBXLoader");
   var container, controls;
   let camera, scene, renderer, light, lightmain, lightsupport;
   let mainObject;
@@ -164,15 +163,13 @@ export const ThreeRenderer = ({ model, lights, className }) => {
   const el = useRef();
   console.log(">> three", lights);
   useEffect(() => {
-    setTimeout(function() {
-      main(
-        el.current,
-        model,
-        el.current.clientWidth,
-        (el.current.clientWidth * 4) / 3,
-        lights
-      );
-    }, 0);
+    main(
+      el.current,
+      model,
+      el.current.clientWidth,
+      (el.current.clientWidth * 4) / 3,
+      lights
+    );
     return () => {
       el.current.innerHTML = "";
     };
