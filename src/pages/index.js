@@ -55,6 +55,7 @@ const IndexPage = ({ data }) => {
   useEffect(() => {
     applyReveal();
   }, [data]);
+
   const modalImages = data.contentfulMainPage.items
     .filter(item => !!item.lightbox)
     .map(item => ({
@@ -180,6 +181,7 @@ export const query = graphql`
                   sizes
                   srcSet
                   srcWebp
+                  srcSetWebp
                 }
               }
             }
@@ -212,6 +214,7 @@ export const query = graphql`
                   sizes
                   srcSet
                   srcWebp
+                  srcSetWebp
                 }
               }
             }
