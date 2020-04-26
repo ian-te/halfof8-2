@@ -5,7 +5,7 @@ async function main(el, model, width, height, lightsInput) {
   const THREE = await import("three");
   const { FBXLoader } = await import("three/examples/jsm/loaders/FBXLoader");
   var container, controls;
-  let camera, scene, renderer, light, lightmain, lightsupport;
+  let camera, scene, renderer, lightambient, light, lightmain, lightsupport;
   let mainObject;
   let lights;
   let gemMaterial;
@@ -64,25 +64,28 @@ async function main(el, model, width, height, lightsInput) {
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x000000);
 
-    light = new THREE.HemisphereLight(0xffffff, 0x777777);
-    light.position.set(10, 10, 10);
+    // white
+    light = new THREE.PointLight(0xFFFFFF, 1, 100);
+    light.position.set(0, 50, 0);
     scene.add(light);
 
-    lightmain = new THREE.PointLight(0x0047ff, 1, 100);
-    lightmain.position.set(0, 0, 0);
+    // blue
+    lightmain = new THREE.PointLight(0x0047ff, 3, 100);
+    lightmain.position.set(-40, 0, 60);
     scene.add(lightmain);
 
-    lightsupport = new THREE.PointLight(0x00ff38, 1, 100);
-    lightsupport.position.set(20, 0, 28);
+    // pink
+    lightsupport = new THREE.PointLight(0xFF00B8, 3, 100);
+    lightsupport.position.set(40, 0, 60);
     scene.add(lightsupport);
 
-    lights = lights.map(color => new THREE.PointLight(parseInt(color), 2, 50));
+    // lights = lights.map(color => new THREE.PointLight(parseInt(color), 2, 50));
 
-    lights.forEach(light => {
-      light.intensity = 1;
-      light.shadow = true;
-      scene.add(light);
-    });
+    // lights.forEach(light => {
+    //   light.intensity = 1;
+    //   light.shadow = true;
+    //   scene.add(light);
+    // });
 
     gemMaterial = new THREE.MeshPhysicalMaterial({
       map: null,
@@ -133,28 +136,29 @@ async function main(el, model, width, height, lightsInput) {
       mainObject.rotation.z = -(mouse.y * 0.2);
     }
   }
-  function animateLight() {
-    var time = Date.now() * 0.0005;
-    var delta = clock.getDelta();
 
-    // if (object) object.rotation.y -= 0.5 * delta;
-    let counter = 0;
-    let phases = [0.7, 0.5, 0.3];
-    let distanceModifier = 1;
+  // function animateLight() {
+  //   var time = Date.now() * 0.0005;
+  //   var delta = clock.getDelta();
 
-    lights.forEach((light, key) => {
-      light.position.x =
-        Math.sin(time * phases[key % 3]) * 30 * distanceModifier;
-      light.position.y =
-        Math.cos(time * phases[(key + 1) % 3]) * 40 * distanceModifier;
-      light.position.z =
-        Math.cos(time * phases[(key + 2) % 3]) * 30 * distanceModifier;
-    });
-  }
+  //   // if (object) object.rotation.y -= 0.5 * delta;
+  //   let counter = 0;
+  //   let phases = [0.7, 0.5, 0.3];
+  //   let distanceModifier = 1;
+
+  //   lights.forEach((light, key) => {
+  //     light.position.x =
+  //       Math.sin(time * phases[key % 3]) * 30 * distanceModifier;
+  //     light.position.y =
+  //       Math.cos(time * phases[(key + 1) % 3]) * 40 * distanceModifier;
+  //     light.position.z =
+  //       Math.cos(time * phases[(key + 2) % 3]) * 30 * distanceModifier;
+  //   });
+  // }
 
   function animate() {
     requestAnimationFrame(animate);
-    animateLight();
+    // animateLight();
     moveObject();
     renderer.render(scene, camera);
   }
@@ -162,6 +166,7 @@ async function main(el, model, width, height, lightsInput) {
 export const ThreeRenderer = ({ model, lights, className }) => {
   const el = useRef();
   console.log(">> three", lights);
+
   useEffect(() => {
     main(
       el.current,
@@ -170,6 +175,7 @@ export const ThreeRenderer = ({ model, lights, className }) => {
       (el.current.clientWidth * 4) / 3,
       lights
     );
+
     return () => {
       el.current.innerHTML = "";
     };
