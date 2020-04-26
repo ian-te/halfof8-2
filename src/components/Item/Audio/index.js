@@ -30,9 +30,9 @@ export const Audio = ({ id, mp3, background }) => {
 
   useEffect(() => {
     if (isPlaying && currentItem === id) {
-      player.current.play();
     } else if (isPlaying && currentItem !== id) {
       player.current.pause();
+      player.current.currentTime = 0;
     } else {
       player.current.pause();
     }
@@ -56,6 +56,7 @@ export const Audio = ({ id, mp3, background }) => {
       dispatch({ type: "STOP_PLAYBACK" });
     } else {
       dispatch({ type: "START_PLAYBACK", data: { currentItem: id } });
+      player.current.play();
     }
   }, [isPlaying, currentItem]);
 
@@ -65,13 +66,15 @@ export const Audio = ({ id, mp3, background }) => {
         <ContentImage item={{ indexBackgroundImage: background }} />
       </Background>
       <Wrapper>
-        <Progress>
-          <Bar
-            style={{
-              width: `${100 - (time.currentTime / time.duration) * 100}%`
-            }}
-          />
-        </Progress>
+        {isPlaying && currentItem === id && (
+          <Progress>
+            <Bar
+              style={{
+                width: `${100 - (time.currentTime / time.duration) * 100}%`
+              }}
+            />
+          </Progress>
+        )}
         <audio style={{ display: "none" }} controls ref={player}>
           <source src={mp3.file.url} type="audio/mpeg" />
         </audio>
