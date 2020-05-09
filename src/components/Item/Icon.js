@@ -42,4 +42,11 @@ export const Icon = styled(IconBase)`
     margin-left: 0;
     margin-top: 0;
   }
+
+  &:hover {
+    color: #167dff;
+    svg path {
+      fill: #167dff !important;
+    }
+  }
 `;

@@ -3,10 +3,16 @@ import styled from "styled-components";
 import { NewWindow } from "../Icons/NewWindow";
 
 const LinkBase = ({ md, className }) => {
+
+  console.log("before slice", md);
+
   const link = md
     .slice(1)
     .slice(0, -1)
     .split("](");
+  
+    console.log("after slice", link);
+
   return (
     <a
       href={link[1]}
@@ -15,7 +21,7 @@ const LinkBase = ({ md, className }) => {
       className={className}
     >
       <IconWrapper>
-        <NewWindow width="16" />
+        <NewWindow width="10" />
       </IconWrapper>
       <span>{link[0]}</span>
     </a>
@@ -24,7 +30,7 @@ const LinkBase = ({ md, className }) => {
 
 const IconWrapper = styled.span`
   display: none;
-  margin-right: 16px;
+  margin-right: 8px;
   @media (min-width: 640px) {
     display: block;
   }
@@ -32,6 +38,7 @@ const IconWrapper = styled.span`
 
 const Link = styled(LinkBase)`
   height: 34px;
+  font-size: 14px;
   background: #ffffff;
   color: #0c0c0d;
   text-decoration: none;
@@ -41,21 +48,41 @@ const Link = styled(LinkBase)`
   align-items: center;
   justify-items: center;
   padding: 0 14px;
+  
+
   &:hover {
     color: #167dff;
     svg path {
       fill: #167dff !important;
     }
   }
+
+  @keyframes fadeMe {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+}
 `;
 
 const LinksBase = ({ links, className }) => {
+
+
   if (!links) return null;
+
   return (
-    <div className={className}>
-      {links.map(md => (
-        <Link md={md}></Link>
-      ))}
+    <div className={className} >
+      {
+        links.map( md => 
+          (
+            <Link md={md}></Link>
+          )
+      )
+      }
     </div>
   );
 };
@@ -69,4 +96,6 @@ export const Links = styled(LinksBase)`
   flex-direction: column;
   align-items: flex-start;
   display: none;
+
+  
 `;

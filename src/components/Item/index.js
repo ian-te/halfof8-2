@@ -27,9 +27,9 @@ export const Item = ({ name, tag, ...item }) => {
 
 const ContentInner = styled.div`
   overflow: hidden;
-  border-radius: 3px;
+  border-radius: 4px;
   position: relative;
-  background-color: black;
+
   width: 100%;
   &:before {
     content: "";
@@ -40,7 +40,13 @@ const ContentInner = styled.div`
     left: 0;
     right: 0;
     z-index: 1;
-    background-color: rgba(12, 12, 13, 0.6);
+    ${'' /* background-color: rgba(12, 12, 13, 0.3); */}
+  }
+  &:hover {
+    box-shadow: 0px 3.34838px 2.96096px rgba(0, 42, 125, 0.0759093), 0px 8.04662px 7.11561px rgba(0, 42, 125, 0.109051), 0px 15.1511px 13.3981px rgba(0, 42, 125, 0.135), 0px 27.0269px 23.8999px rgba(0, 42, 125, 0.160949), 0px 50.5509px 44.702px rgba(0, 42, 125, 0.194091), 0px 121px 107px rgba(0, 42, 125, 0.27);    -webkit-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    transition:all 0.5s ease;
+    z-index: 999;
   }
 `;
 
@@ -67,10 +73,11 @@ export const ContentWrapper = styled.div`
 `;
 
 const Text = styled.div`
-  padding: 12px 2px;
+  padding: 8px 2px;
   h4 {
     font-weight: normal;
-    font-size: 16px !important;
+    color: grey;
+    font-size: 12px !important;
     margin: 0;
   }
   p {
