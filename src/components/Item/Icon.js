@@ -36,6 +36,12 @@ export const Icon = styled(IconBase)`
   justify-content: center;
   align-items: center;
   z-index: 2;
+
+  box-shadow: 0px 1.24527px 2.46286px rgba(0, 0, 0, 0.0562291), 0px 2.99255px 5.91859px rgba(0, 0, 0, 0.0807786), 0px 5.6347px 11.1442px rgba(0, 0, 0, 0.1), 0px 10.0513px 19.8793px rgba(0, 0, 0, 0.119221), 0px 18.7999px 37.1821px rgba(0, 0, 0, 0.143771), 0px 45px 89px rgba(0, 0, 0, 0.2);  
+
+  animation: popping 0.3s ease-in;
+  animation-fill-mode: both;
+
   @media (max-width: 480px) {
     left: 16px;
     top: 16px;
@@ -44,9 +50,27 @@ export const Icon = styled(IconBase)`
   }
 
   &:hover {
-    color: #167dff;
+    color: #0029FF;
+  
     svg path {
-      fill: #167dff !important;
+      fill: #0029FF !important;
     }
   }
+
+  @keyframes popping { 
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  }
+
+  
+
 `;

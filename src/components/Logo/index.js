@@ -10,8 +10,6 @@ const Logo = ({ className, fill = "#000", width = 150 }) => (
   >
  <path stroke={fill} fill="none" stroke-width=".5" d="M75.1 128.1c29.271 0 53-23.729 53-53s-23.729-53-53-53-53 23.729-53 53 23.728 53 53 53z"/>
   <path stroke={fill} fill="none" stroke-linecap="round" stroke-width=".5" d="M143.2 143.2L7 7M7 143.2L143.2 7"/>
-  <path stroke={fill} fill="none" stroke-linejoin="round" stroke-width=".5" d="M75.1 62.2v-.1L75 62v-.2l-.1-.1-.1-.1v-.1l-.1-.1h-.1l-.1.1h-.1l-.1.1v.1l-.1.2v.1l-.1.1v.1l-.1-.1V62l-.1-.1v-.1l-.1-.1-.1-.1-.1-.1h-.2l-.1.1v.1l-.1.2v.1l-.1.1v.2l-.1-.1v-.1l-.1-.1-.1-.1-.1-.1-.1-.1H72.3v.1l-.1.1V62.2l-.1.1v.2l-.1-.1v-.1l-.1-.1-.1-.1h-.1l-.1-.1-.1-.1h-.1l-.1.1-.1.1V62.4l-.1.2v.2l-.1-.1v-.1l-.1-.1-.1-.1h-.1"/>
-  <path stroke={fill} fill="none" stroke-width=".5" d="M70.3 70.3c1.3-1.3 3-2 4.8-2M71.1 71.1c1.1-1.1 2.5-1.7 4-1.7M71.9 71.9c.9-.9 2-1.3 3.2-1.3"/>
   <path stroke={fill} fill="none" stroke-linecap="round" stroke-width=".5" d="M58.1 116.3l17-3.7M58.1 116.3l17-78.6"/>
   <path stroke={fill} fill="none" stroke-width=".5" d="M61.5 112.9c.6.6 1.1 1.5 1.3 2.4M60.7 113.7c.5.5.8 1.1 1 1.8M59.2 111.3c1 .2 1.8.7 2.5 1.4M59.4 110.2c1.2.3 2.2.8 3.1 1.7"/>
   <path stroke={fill} fill="none" stroke-linecap="round" stroke-width=".5" d="M58.1 116.3l28.4-28.5M66.1 106.6l1.6 1.6M67.1 108.9l-1.6-1.6M68.3 17.2L51.1 44.5M81.9 133l17.2-27.2M59.7 30.9l30.9 88.5"/>

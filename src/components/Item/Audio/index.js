@@ -136,7 +136,7 @@ const Button = styled.button`
   cursor: pointer;
   &:active {
     ${Play} > path, ${Pause} > path {
-      fill: #167dff;
+      fill: #0029FF;
     }
   }
 `;
