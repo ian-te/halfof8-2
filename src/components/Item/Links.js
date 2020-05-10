@@ -38,6 +38,7 @@ const IconWrapper = styled.span`
 const Link = styled(LinkBase)`
   height: 34px;
   font-size: 14px;
+  line-height: 14px;
   background: #ffffff;
   color: #0c0c0d;
   text-decoration: none;
@@ -46,8 +47,9 @@ const Link = styled(LinkBase)`
   display: flex;
   align-items: center;
   justify-items: center;
-  padding: 0 14px;
+  padding: 0 12px;
   transform: scale(1);
+  padding-bottom: 2px;
 
   box-shadow: 0px 1.24527px 2.46286px rgba(0, 0, 0, 0.0562291), 0px 2.99255px 5.91859px rgba(0, 0, 0, 0.0807786), 0px 5.6347px 11.1442px rgba(0, 0, 0, 0.1), 0px 10.0513px 19.8793px rgba(0, 0, 0, 0.119221), 0px 18.7999px 37.1821px rgba(0, 0, 0, 0.143771), 0px 45px 89px rgba(0, 0, 0, 0.2);  
   

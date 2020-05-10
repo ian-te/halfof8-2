@@ -5,7 +5,7 @@ import { ContentWrapper } from "../Item";
 
 export const IntroWrapper = ({ children }) => {
   return (
-    <div className="sr-item load-hidden" style={{ visibility: "hidden" }}>
+    <div className="sr-item load-hidden" style={{ visibility: "visible" }}>
       <ContentWrapper>
         <Content>{children}</Content>
       </ContentWrapper>
@@ -26,11 +26,14 @@ const Content = styled.div`
   text-align: center;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 12px;
   color: #000;
   a {
-    color: #000;
+    color: #0029FF;
     text-decoration: none;
+  }
+  a:visited {
+    color: #0029FF;
   }
   a:hover {
     text-decoration: underline;

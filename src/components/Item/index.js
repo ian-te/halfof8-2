@@ -7,7 +7,7 @@ import { Links } from "./Links";
 
 export const Item = ({ name, tag, ...item }) => {
   return (
-    <div className="sr-item load-hidden" style={{ visibility: "hidden" }}>
+    <div className="sr-item load-hidden" style={{ visibility: "visible" }}>
       <ContentActionStyled item={item}>
         <ContentWrapper>
           <ContentInner>
@@ -74,6 +74,7 @@ export const ContentWrapper = styled.div`
 
 const Text = styled.div`
   padding: 8px 2px;
+
   h4 {
     font-weight: normal;
     color: grey;

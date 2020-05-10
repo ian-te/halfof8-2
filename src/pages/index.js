@@ -12,11 +12,11 @@ import {
   initialState as initialPlayerState
 } from "../reducers/Player";
 
-const applyReveal = async () => {
-  const reveal = await import("scrollreveal");
-  const ScrollReveal = reveal.default;
-  ScrollReveal().reveal(".sr-item", { interval: 50 });
-};
+// const applyReveal = async () => {
+//   const reveal = await import("scrollreveal");
+//   const ScrollReveal = reveal.default;
+//   ScrollReveal().reveal(".sr-item", { interval: 50 });
+// };
 
 export const ModalContext = React.createContext();
 
@@ -47,14 +47,18 @@ function reducer(state = initialState, action) {
 
 const IndexPage = ({ data }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   const [playerState, playerDispatch] = useReducer(
     playerReducer,
     initialPlayerState
   );
 
-  useEffect(() => {
-    applyReveal();
-  }, [data]);
+  // useEffect(() => {
+  //   applyReveal();
+  // }, [data]);
+
+   useEffect(() => { return;}, [data]);
+
 
   const modalImages = data.contentfulMainPage.items
     .filter(item => !!item.lightbox)
@@ -98,36 +102,25 @@ const IndexPage = ({ data }) => {
             <IntroWrapper>
               <footer>
                 <p>
-                  8の半
-                  <br />
-                  &copy; 2012 – {new Date().getFullYear()},
-                </p>
-                <p>
-                  Car does not move
-                  <br />
-                  till we are all buckled up, <br />
-                  so keep in touch <br />
-                  via <a href="mailto:info@halfof8.com">
-                    info@halfof8.com
-                  </a>{" "}
-                  <br />
-                </p>
-                <p>
-                  Design by{" "}
-                  <a href="https://instagram.com/halfof8">Anton Sokolov</a>
-                  <br />
-                  Development by{" "}
-                  <a href="https://github.com/yante" target="_blank">
-                    Yan Te
-                  </a>{" "}
-                  <br />
-                  Set in{" "}
-                  <a
-                    href="https://commercialtype.com/catalog/neue_haas_grotesk"
-                    target="_blank"
-                  >
-                    Neue Haas Grotesk
-                  </a>
+                  ½&#8201;8 (rus. Половина Восьми) <br />
+                  is an online exhibition of<br />
+                  design and music works <br />
+                  by Anton Sokolov
+                  <br /><br />
+          
+                  Follow me<br />
+                  <a href="https://vimeo.com/halfofeight">Instagram</a>{", "}
+                  <a href="https://vimeo.com/halfofeight">Vimeo</a><br />
+                  <a href="https://soundcloud.com/half8">Soundcloud</a>{", "}
+                  <a href="https://tglink.me/stayswim">Telegram </a><br /><br />
+
+                  {/* Design by{" "} <a href="https://instagram.com/halfof8">Anton Sokolov</a><br /> */}
+                  Developed with a help<br />of my friend {" "} <a href="https://github.com/yante" target="_blank">Yan Te</a><br /><br />
+                  {/* Set in{" "}<a href="https://commercialtype.com/catalog/neue_haas_grotesk" target="_blank">Neue Haas Grotesk</a><br /><br /> */}
+                  
+                  8の半 &copy; 2012&#8201;&#8213;&#8201;{new Date().getFullYear()}<br /><br />
+                  Car does not move till<br /> 
+                  we are all buckled up
                 </p>
               </footer>
             </IntroWrapper>
