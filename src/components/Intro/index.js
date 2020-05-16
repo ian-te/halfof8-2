@@ -27,16 +27,17 @@ const Content = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  color: #000;
+  color: grey;
   a {
-    color: #0029FF;
+    color: grey;
     text-decoration: none;
   }
   a:visited {
-    color: #0029FF;
+    color: grey;
   }
   a:hover {
-    text-decoration: underline;
+    color: #0029FF;
+    text-decoration: none;
   }
   width: 100%;
 `;

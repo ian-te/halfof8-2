@@ -45,6 +45,7 @@ const ContentInner = styled.div`
   &:hover {
     box-shadow: 0px 3.34838px 2.96096px rgba(0, 42, 125, 0.0759093), 0px 8.04662px 7.11561px rgba(0, 42, 125, 0.109051), 0px 15.1511px 13.3981px rgba(0, 42, 125, 0.135), 0px 27.0269px 23.8999px rgba(0, 42, 125, 0.160949), 0px 50.5509px 44.702px rgba(0, 42, 125, 0.194091), 0px 121px 107px rgba(0, 42, 125, 0.27);    -webkit-transform: scale(1.03);
     -ms-transform: scale(1.03);
+    transform: scale(1.03);
     transition:all 0.5s ease;
     z-index: 999;
   }
