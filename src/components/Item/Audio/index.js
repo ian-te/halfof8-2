@@ -52,20 +52,23 @@ export const Audio = ({ id, mp3, background }) => {
   }, [mp3]);
 
   const seek = e => {
-    e.stopPropagation();
     var rect = e.target.getBoundingClientRect();
     var x = e.clientX - rect.left; //x position within the element.
     player.current.currentTime = (x / rect.width) * time.duration;
   };
 
-  const playpause = useCallback(() => {
-    if (currentItem === id && isPlaying) {
-      dispatch({ type: "STOP_PLAYBACK" });
-    } else {
-      dispatch({ type: "START_PLAYBACK", data: { currentItem: id } });
-      player.current.play();
-    }
-  }, [isPlaying, currentItem]);
+  const playpause = useCallback(
+    e => {
+      e.stopPropagation();
+      if (currentItem === id && isPlaying) {
+        dispatch({ type: "STOP_PLAYBACK" });
+      } else {
+        dispatch({ type: "START_PLAYBACK", data: { currentItem: id } });
+        player.current.play();
+      }
+    },
+    [isPlaying, currentItem]
+  );
 
   return (
     <div style={{ height: "100%" }}>
@@ -142,6 +145,8 @@ const Button = styled.button`
   outline: none;
   width: 32px;
   cursor: pointer;
+  position: relative;
+  z-index: 10;
   &:active {
     ${Play} > path, ${Pause} > path {
       fill: #0029FF;
