@@ -51,6 +51,13 @@ export const Audio = ({ id, mp3, background }) => {
     };
   }, [mp3]);
 
+  const seek = e => {
+    e.stopPropagation();
+    var rect = e.target.getBoundingClientRect();
+    var x = e.clientX - rect.left; //x position within the element.
+    player.current.currentTime = (x / rect.width) * time.duration;
+  };
+
   const playpause = useCallback(() => {
     if (currentItem === id && isPlaying) {
       dispatch({ type: "STOP_PLAYBACK" });
@@ -66,15 +73,6 @@ export const Audio = ({ id, mp3, background }) => {
         <ContentImage item={{ indexBackgroundImage: background }} />
       </Background>
       <Wrapper>
-        {isPlaying && currentItem === id && (
-          <Progress>
-            <Bar
-              style={{
-                width: `${100 - (time.currentTime / time.duration) * 100}%`
-              }}
-            />
-          </Progress>
-        )}
         <audio style={{ display: "none" }} controls ref={player}>
           <source src={mp3.file.url} type="audio/mpeg" />
         </audio>
@@ -86,6 +84,15 @@ export const Audio = ({ id, mp3, background }) => {
             <CurrentTime>{readableDuration(time.currentTime)} </CurrentTime>
             <Duration>{readableDuration(time.duration)}</Duration>
           </TimeWrapper>
+          {isPlaying && currentItem === id && (
+            <Progress onClick={seek}>
+              <Bar
+                style={{
+                  width: `${100 - (time.currentTime / time.duration) * 100}%`
+                }}
+              />
+            </Progress>
+          )}
         </ControlsWrapper>
       </Wrapper>
     </div>
@@ -106,6 +113,7 @@ const Bar = styled.div`
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.4);
   z-index: 0;
+  pointer-events: none;
 `;
 
 const Play = styled(PlayBase)`
