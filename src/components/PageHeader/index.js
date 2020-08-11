@@ -3,11 +3,21 @@ import styled from "styled-components";
 import { Link } from "gatsby";
 import { Logo } from "../Logo";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS } from "@contentful/rich-text-types";
+
+const options = {
+  renderText: text => {
+    return text.split("\n").reduce((children, textSegment, index) => {
+      return [...children, index > 0 && <br key={index} />, textSegment];
+    }, []);
+  }
+};
 
 const getHeaderContents = header =>
   [header[0]].map(item =>
     documentToReactComponents(
-      item.childContentfulTextSnippetTextRichTextNode.json
+      item.childContentfulTextSnippetTextRichTextNode.json,
+      options
     )
   );
 
@@ -19,6 +29,7 @@ export const PageHeader = ({
   ft2,
   ft3
 }) => {
+  console.log(">>>", ft1);
   return (
     <HeaderWrapper>
       <IconContainer>
@@ -34,21 +45,24 @@ export const PageHeader = ({
       {ft1 && (
         <Ft1>
           {documentToReactComponents(
-            ft1.childContentfulTextSnippetTextRichTextNode.json
+            ft1.childContentfulTextSnippetTextRichTextNode.json,
+            options
           )}
         </Ft1>
       )}
-      {ft1 && (
+      {ft2 && (
         <Ft2>
           {documentToReactComponents(
-            ft2.childContentfulTextSnippetTextRichTextNode.json
+            ft2.childContentfulTextSnippetTextRichTextNode.json,
+            options
           )}
         </Ft2>
       )}
-      {ft1 && (
+      {ft3 && (
         <Ft3>
           {documentToReactComponents(
-            ft3.childContentfulTextSnippetTextRichTextNode.json
+            ft3.childContentfulTextSnippetTextRichTextNode.json,
+            options
           )}
         </Ft3>
       )}
@@ -56,17 +70,22 @@ export const PageHeader = ({
   );
 };
 
-const Ft1 = styled.div`
+const Info = styled.div`
+  align-self: flex-start;
+  font-size: 12px;
+  @media (min-width: 1024px) {
+    font-size: 20px;
+  }
+`;
+
+const Ft1 = styled(Info)`
   grid-area: ft1;
-  align-self: flex-start;
 `;
-const Ft2 = styled.div`
+const Ft2 = styled(Info)`
   grid-area: ft2;
-  align-self: flex-start;
 `;
-const Ft3 = styled.div`
+const Ft3 = styled(Info)`
   grid-area: ft3;
-  align-self: flex-start;
 `;
 
 const HeaderWrapper = styled.div`
@@ -131,5 +150,8 @@ const Text = styled.h2`
   p {
     margin-top: 0;
     margin-bottom: 0;
+  }
+  @media (max-width: 360px) {
+    font-size: 6vw;
   }
 `;
