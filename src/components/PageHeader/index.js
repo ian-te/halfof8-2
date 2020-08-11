@@ -73,6 +73,11 @@ export const PageHeader = ({
 const Info = styled.div`
   align-self: flex-start;
   font-size: 12px;
+  a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid #c4c4c4;
+  }
   @media (min-width: 1024px) {
     font-size: 20px;
   }
