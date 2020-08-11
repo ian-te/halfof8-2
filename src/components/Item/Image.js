@@ -12,14 +12,14 @@ export const ContentImage = ({ item }) => {
       {
         ...data.childImageSharp.fluid,
         sizes: `${width}vw`,
-        aspectRatio: 3 / 4,
+        aspectRatio,
         key: item.id
       },
       {
         ...data.childImageSharp.fluid,
         media: "(max-width: 480px)",
         key: `mobile${item.id}`,
-        aspectRatio: 3 / 4,
+        aspectRatio,
         sizes: "50vw"
       }
     ];

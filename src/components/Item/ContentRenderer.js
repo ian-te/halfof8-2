@@ -13,6 +13,7 @@ const IframeAsync = ({ src, ...props }) => {
 };
 
 export const ContentRenderer = ({ item }) => {
+  console.log(">>>", item.indexBackgroundImage);
   switch (true) {
     case !!item.fbxFile:
       return (

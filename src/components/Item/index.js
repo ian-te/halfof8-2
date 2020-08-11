@@ -5,11 +5,11 @@ import { ContentRenderer } from "./ContentRenderer";
 import { Icon } from "./Icon";
 import { Links } from "./Links";
 
-export const Item = ({ name, tag, ...item }) => {
+export const Item = ({ name, tag, ratio = "0.75", ...item }) => {
   return (
     <div className="sr-item load-hidden" style={{ visibility: "visible" }}>
       <ContentActionStyled item={item}>
-        <ContentWrapper>
+        <ContentWrapper ratio={item.ratio}>
           <ContentInner>
             <ContentRenderer item={item} />
             <Links links={item.externalLinks} />
@@ -40,13 +40,18 @@ const ContentInner = styled.div`
     left: 0;
     right: 0;
     z-index: 1;
-    ${'' /* background-color: rgba(12, 12, 13, 0.3); */}
   }
   &:hover {
-    box-shadow: 0px 3.34838px 2.96096px rgba(0, 42, 125, 0.0759093), 0px 8.04662px 7.11561px rgba(0, 42, 125, 0.109051), 0px 15.1511px 13.3981px rgba(0, 42, 125, 0.135), 0px 27.0269px 23.8999px rgba(0, 42, 125, 0.160949), 0px 50.5509px 44.702px rgba(0, 42, 125, 0.194091), 0px 121px 107px rgba(0, 42, 125, 0.27);    -webkit-transform: scale(1.03);
+    box-shadow: 0px 3.34838px 2.96096px rgba(0, 42, 125, 0.0759093),
+      0px 8.04662px 7.11561px rgba(0, 42, 125, 0.109051),
+      0px 15.1511px 13.3981px rgba(0, 42, 125, 0.135),
+      0px 27.0269px 23.8999px rgba(0, 42, 125, 0.160949),
+      0px 50.5509px 44.702px rgba(0, 42, 125, 0.194091),
+      0px 121px 107px rgba(0, 42, 125, 0.27);
+    -webkit-transform: scale(1.03);
     -ms-transform: scale(1.03);
     transform: scale(1.03);
-    transition:all 0.5s ease;
+    transition: all 0.5s ease;
     z-index: 999;
   }
 `;
@@ -69,7 +74,7 @@ export const ContentWrapper = styled.div`
     display: inline-block;
     width: 0;
     height: 0;
-    padding-bottom: calc(100% / (3 / 4));
+    padding-bottom: calc(100% / ${props => props.ratio || `(3 / 4)`});
   }
 `;
 
