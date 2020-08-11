@@ -11,7 +11,14 @@ const getHeaderContents = header =>
     )
   );
 
-export const PageHeader = ({ header, dark = false, actionRenderer = null }) => {
+export const PageHeader = ({
+  header,
+  dark = false,
+  actionRenderer = null,
+  ft1,
+  ft2,
+  ft3
+}) => {
   return (
     <HeaderWrapper>
       <IconContainer>
@@ -24,21 +31,42 @@ export const PageHeader = ({ header, dark = false, actionRenderer = null }) => {
         )}
       </IconContainer>
       <Text dark={dark}>{getHeaderContents(header)}</Text>
-      <Ft1>1</Ft1>
-      <Ft2>1</Ft2>
-      <Ft3>1</Ft3>
+      {ft1 && (
+        <Ft1>
+          {documentToReactComponents(
+            ft1.childContentfulTextSnippetTextRichTextNode.json
+          )}
+        </Ft1>
+      )}
+      {ft1 && (
+        <Ft2>
+          {documentToReactComponents(
+            ft2.childContentfulTextSnippetTextRichTextNode.json
+          )}
+        </Ft2>
+      )}
+      {ft1 && (
+        <Ft3>
+          {documentToReactComponents(
+            ft3.childContentfulTextSnippetTextRichTextNode.json
+          )}
+        </Ft3>
+      )}
     </HeaderWrapper>
   );
 };
 
 const Ft1 = styled.div`
   grid-area: ft1;
+  align-self: flex-start;
 `;
 const Ft2 = styled.div`
   grid-area: ft2;
+  align-self: flex-start;
 `;
 const Ft3 = styled.div`
   grid-area: ft3;
+  align-self: flex-start;
 `;
 
 const HeaderWrapper = styled.div`

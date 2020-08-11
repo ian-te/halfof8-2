@@ -54,7 +54,7 @@ const IndexPage = ({ data }) => {
     initialPlayerState
   );
 
-  const { header } = data.contentfulMainPage;
+  const { header, info } = data.contentfulMainPage;
 
   const modalImages = data.contentfulMainPage.items
     .filter(item => !!item.lightbox)
@@ -80,7 +80,12 @@ const IndexPage = ({ data }) => {
         }}
       >
         <ModalContext.Provider value={{ state, dispatch }}>
-          <PageHeader header={header} />
+          <PageHeader
+            header={header}
+            ft1={info[0]}
+            ft2={info[1]}
+            ft3={info[2]}
+          />
           <Layout>
             <SEO title={data.site.siteMetadata.title} />
             {data.contentfulMainPage.items
@@ -155,6 +160,11 @@ export const query = graphql`
     }
     contentfulMainPage {
       id
+      info {
+        childContentfulTextSnippetTextRichTextNode {
+          json
+        }
+      }
       header {
         id
         childContentfulTextSnippetTextRichTextNode {
