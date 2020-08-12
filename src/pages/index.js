@@ -102,47 +102,7 @@ const IndexPage = ({ data }) => {
                   />
                 );
               })}
-            <IntroWrapper>
-              <footer>
-                <p>
-                  ½&#8201;8 (rus. Половина Восьми) <br />
-                  is an online exhibition of
-                  <br />
-                  design and music works <br />
-                  by Anton Sokolov
-                  <br />
-                  <br />
-                  Follow me
-                  <br />
-                  <a href="https://vimeo.com/halfofeight">Instagram</a>
-                  {", "}
-                  <a href="https://vimeo.com/halfofeight">Vimeo</a>
-                  <br />
-                  <a href="https://soundcloud.com/half8">Soundcloud</a>
-                  {", "}
-                  <a href="https://tglink.me/stayswim">Telegram </a>
-                  <br />
-                  <br />
-                  {/* Design by{" "} <a href="https://instagram.com/halfof8">Anton Sokolov</a><br /> */}
-                  Developed with the help
-                  <br />
-                  of my friend{" "}
-                  <a href="https://github.com/yante" target="_blank">
-                    Yan Te
-                  </a>
-                  <br />
-                  <br />
-                  {/* Set in{" "}<a href="https://commercialtype.com/catalog/neue_haas_grotesk" target="_blank">Neue Haas Grotesk</a><br /><br /> */}
-                  半の8 &copy; 2012&#8201;&#8213;&#8201;
-                  {new Date().getFullYear()}
-                  <br />
-                  <br />
-                  Car does not move till
-                  <br />
-                  we are all buckled up
-                </p>
-              </footer>
-            </IntroWrapper>
+            
           </Layout>
           <ImageModal images={modalImages} />
         </ModalContext.Provider>

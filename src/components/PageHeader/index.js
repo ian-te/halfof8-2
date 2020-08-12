@@ -73,15 +73,27 @@ export const PageHeader = ({
 };
 
 const Info = styled.div`
+  font-family: neue-haas-grotesk-text, sans-serif;
   align-self: flex-start;
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 18px;
+
   a {
     color: inherit;
     text-decoration: none;
     border-bottom: 1px solid #c4c4c4;
   }
+  a:hover {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
   @media (min-width: 1024px) {
     font-size: 20px;
+    letter-spacing: -0.014em;
+    line-height: 24px;
+    margin-bottom: 48px;
   }
 `;
 
@@ -101,14 +113,17 @@ const HeaderWrapper = styled.div`
   padding: 16px;
   align-items: center;
   grid-template-areas:
-    "logo logo"
+    "logo empty"
     "text text"
     "ft1  ft2"
     ".    ft3";
+
   grid-template-columns: repeat(2, 1fr);
+
   @media (min-width: 360px) {
     grid-template-columns: repeat(2, 1fr);
   }
+
   @media (min-width: 640px) {
     grid-template-areas: 
       "logo text text"
@@ -117,29 +132,32 @@ const HeaderWrapper = styled.div`
     grid-template-columns: repeat(3, 1fr);
   }
   }
+
   @media (min-width: 1024px) {
     grid-template-columns: repeat(4, 1fr);
     grid-template-areas: 
       "logo text text text"
       ". ft1 ft2 ft3" ;
   }
+
   @media (min-width: 1440px) {
     grid-template-columns: repeat(5, 1fr);
     grid-template-areas: 
       "logo text text text empty"
       ". ft1 ft2 ft3 .";
   }
+
   @media (min-width: 1920px) {
     grid-template-columns: repeat(6, 1fr);
     grid-template-areas: 
-      "logo text text text empty empty"
+      "logo text text text text empty"
       ". ft1 ft2 ft3 . .";
   }
 `;
 
 const IconContainer = styled.div`
   margin: 0 auto;
-  max-width: 150px;
+  max-width: 250px;
   grid-area: logo;
   svg {
     width: 100%;
@@ -148,17 +166,28 @@ const IconContainer = styled.div`
 `;
 
 const Text = styled.h2`
-  font-size: 3vw;
+  font-family: neue-haas-grotesk-text, sans-serif;
+  font-size: 5vw;
   ${props => (props.dark ? `color: #fff` : `color: #000`)};
   font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
+
+  line-height: 1;
   grid-area: text;
+  margin-left: -6px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+
+  -moz-font-feature-settings: "salt";
+  -webkit-font-feature-settings: "salt";
+  font-feature-settings: "salt";
+
   p {
     margin-top: 0;
     margin-bottom: 0;
   }
-  @media (max-width: 360px) {
-    font-size: 6vw;
+
+  @media (max-width: 375px) {
+    font-size: 10vw;
+    margin: 0;
   }
 `;

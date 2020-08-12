@@ -16,9 +16,7 @@ export const Item = ({ name, tag, ratio = "0.75", ...item }) => {
           </ContentInner>
         </ContentWrapper>
         <Text>
-          <h4>
-            {name} {tag}
-          </h4>
+          <h4> {name} {tag} </h4> 
         </Text>
       </ContentActionStyled>
     </div>
@@ -27,7 +25,7 @@ export const Item = ({ name, tag, ratio = "0.75", ...item }) => {
 
 const ContentInner = styled.div`
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 0px;
   position: relative;
 
   width: 100%;
@@ -42,15 +40,9 @@ const ContentInner = styled.div`
     z-index: 1;
   }
   &:hover {
-    box-shadow: 0px 3.34838px 2.96096px rgba(0, 42, 125, 0.0759093),
-      0px 8.04662px 7.11561px rgba(0, 42, 125, 0.109051),
-      0px 15.1511px 13.3981px rgba(0, 42, 125, 0.135),
-      0px 27.0269px 23.8999px rgba(0, 42, 125, 0.160949),
-      0px 50.5509px 44.702px rgba(0, 42, 125, 0.194091),
-      0px 121px 107px rgba(0, 42, 125, 0.27);
-    -webkit-transform: scale(1.03);
-    -ms-transform: scale(1.03);
-    transform: scale(1.03);
+    -webkit-transform: scale(0.97);
+    -ms-transform: scale(0.97);
+    transform: scale(0.97);
     transition: all 0.5s ease;
     z-index: 999;
   }
@@ -80,16 +72,37 @@ export const ContentWrapper = styled.div`
 
 const Text = styled.div`
   padding: 8px 2px;
+  width: 80%;
 
   h4 {
     font-weight: normal;
-    color: grey;
-    font-size: 12px !important;
+    font-size: 16px;
+    line-height: 20px;
     margin: 0;
+
+    @media (max-width: 375px) {
+    font-size: 14px;
+    letter-spacing: 0em;
+    line-height: 18px;
   }
+
+  }
+
+
   p {
     margin: 0;
     font-size: 10px !important;
     padding: 0;
+  }
+  
+  .tag {
+    font-size:2rem;
+  padding: 1em 2em;
+  margin: 1em;
+  display: inline-block;
+  border-radius: 4em;
+  border:  solid transparent;
+  background: linear-gradient(0deg,#ff6064, #ff9867), linear-gradient(0deg,#ff6064, #ff9867);
+  color: #ff6064;
   }
 `;

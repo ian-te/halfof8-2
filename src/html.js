@@ -12,7 +12,7 @@ export default function HTML(props) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         {props.headComponents}
-        {/* <link rel="stylesheet" href="https://use.typekit.net/efp6eer.css" /> */}
+        <link rel="stylesheet" href="https://use.typekit.net/efp6eer.css" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </head>
       <body {...props.bodyAttributes}>
