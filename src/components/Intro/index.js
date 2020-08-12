@@ -13,10 +13,10 @@ export const IntroWrapper = ({ children }) => {
   );
 };
 
-export const Intro = () => {
+export const Intro = ({ color = "#000" }) => {
   return (
     <IntroWrapper>
-      <Logo fill={"#000"} width={"60%"} hoverfill={"#CCC"} />
+      <Logo fill={color} width={"60%"} hoverfill={"#CCC"} />
     </IntroWrapper>
   );
 };
@@ -36,7 +36,7 @@ const Content = styled.div`
     color: grey;
   }
   a:hover {
-    color: #0029FF;
+    color: #0029ff;
     text-decoration: none;
   }
   width: 100%;

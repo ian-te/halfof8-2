@@ -73,7 +73,9 @@ export const Audio = ({ id, mp3, background }) => {
   return (
     <div style={{ height: "100%" }}>
       <Background>
-        <ContentImage item={{ indexBackgroundImage: background }} />
+        <ContentImage
+          item={{ indexBackgroundImage: background, ratio: 0.75 }}
+        />
       </Background>
       <Wrapper>
         <audio style={{ display: "none" }} controls ref={player}>

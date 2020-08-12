@@ -11,6 +11,7 @@ import {
   reducer as playerReducer,
   initialState as initialPlayerState
 } from "../reducers/Player";
+import { PageHeader } from "../components/PageHeader";
 
 // const applyReveal = async () => {
 //   const reveal = await import("scrollreveal");
@@ -53,12 +54,7 @@ const IndexPage = ({ data }) => {
     initialPlayerState
   );
 
-  // useEffect(() => {
-  //   applyReveal();
-  // }, [data]);
-
-   useEffect(() => { return;}, [data]);
-
+  const { header, info } = data.contentfulMainPage;
 
   const modalImages = data.contentfulMainPage.items
     .filter(item => !!item.lightbox)
@@ -84,9 +80,14 @@ const IndexPage = ({ data }) => {
         }}
       >
         <ModalContext.Provider value={{ state, dispatch }}>
+          <PageHeader
+            header={header}
+            ft1={info[0]}
+            ft2={info[1]}
+            ft3={info[2]}
+          />
           <Layout>
             <SEO title={data.site.siteMetadata.title} />
-            <Intro />
             {data.contentfulMainPage.items
               // .filter(itemData => !itemData.fbxFile)
               .map(itemData => {
@@ -95,35 +96,13 @@ const IndexPage = ({ data }) => {
                   <Item
                     {...itemData}
                     key={itemData.id}
+                    shadow={true}
+                    ratio={0.75}
                     currentSlide={slideKey}
                   />
                 );
               })}
-            <IntroWrapper>
-              <footer>
-                <p>
-                  ½&#8201;8 (rus. Половина Восьми) <br />
-                  is an online exhibition of<br />
-                  design and music works <br />
-                  by Anton Sokolov
-                  <br /><br />
-          
-                  Follow me<br />
-                  <a href="https://vimeo.com/halfofeight">Instagram</a>{", "}
-                  <a href="https://vimeo.com/halfofeight">Vimeo</a><br />
-                  <a href="https://soundcloud.com/half8">Soundcloud</a>{", "}
-                  <a href="https://tglink.me/stayswim">Telegram </a><br /><br />
-
-                  {/* Design by{" "} <a href="https://instagram.com/halfof8">Anton Sokolov</a><br /> */}
-                  Developed with the help<br />of my friend {" "} <a href="https://github.com/yante" target="_blank">Yan Te</a><br /><br />
-                  {/* Set in{" "}<a href="https://commercialtype.com/catalog/neue_haas_grotesk" target="_blank">Neue Haas Grotesk</a><br /><br /> */}
-                  
-                  半の8 &copy; 2012&#8201;&#8213;&#8201;{new Date().getFullYear()}<br /><br />
-                  Car does not move till<br /> 
-                  we are all buckled up
-                </p>
-              </footer>
-            </IntroWrapper>
+            
           </Layout>
           <ImageModal images={modalImages} />
         </ModalContext.Provider>
@@ -141,6 +120,17 @@ export const query = graphql`
     }
     contentfulMainPage {
       id
+      info {
+        childContentfulTextSnippetTextRichTextNode {
+          json
+        }
+      }
+      header {
+        id
+        childContentfulTextSnippetTextRichTextNode {
+          json
+        }
+      }
       items {
         ... on ContentfulPortfolioItem {
           id
