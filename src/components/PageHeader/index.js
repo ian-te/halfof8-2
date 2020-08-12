@@ -15,10 +15,12 @@ const options = {
 
 const getHeaderContents = header =>
   [header[0]].map(item =>
-    documentToReactComponents(
-      item.childContentfulTextSnippetTextRichTextNode.json,
-      options
-    )
+    item.childContentfulTextSnippetTextRichTextNode
+      ? documentToReactComponents(
+          item.childContentfulTextSnippetTextRichTextNode.json,
+          options
+        )
+      : item
   );
 
 export const PageHeader = ({
