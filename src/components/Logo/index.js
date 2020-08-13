@@ -4,8 +4,7 @@ import styled from "styled-components";
 const LogoBase = ({ className, fill = "#000", width = 150 }) => (
   <svg
     className={className}
-    viewBox="0 0 150 150"
-    xmlns="http://www.w3.org/2000/svg"
+    viewbox="0 0 150 150"
     width={width}
   >
     <path
@@ -86,10 +85,11 @@ const LogoBase = ({ className, fill = "#000", width = 150 }) => (
 );
 
 export const Logo = styled(LogoBase)`
-  margin: 20px auto;
+  margin: 0 auto;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   animation: dash 7s linear forwards;
+  
   &:hover {
     path[fill] {
       stroke: ${"#0000FF"};

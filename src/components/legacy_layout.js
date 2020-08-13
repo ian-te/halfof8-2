@@ -35,6 +35,7 @@ const LayoutStyled = styled(Layout)`
   }
   p {
     padding-top: 0px;
+
     line-height: 1.4;
   }
 `;

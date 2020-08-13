@@ -18,10 +18,10 @@ const LinkBase = ({ md, className }) => {
       onClick={e => e.stopPropagation()}
       target="_blank"
       className={className}
-    >
-      <IconWrapper>
+    >↗ 
+      {/* <IconWrapper>
         <NewWindow width="10" />
-      </IconWrapper>
+      </IconWrapper> */}
       <span>{link[0]}</span>
     </a>
   );
@@ -36,18 +36,18 @@ const IconWrapper = styled.span`
 `;
 
 const Link = styled(LinkBase)`
-  height: 34px;
+  height: 32px;
   font-size: 14px;
-  line-height: 14px;
+  line-height: 12px;
   background: #ffffff;
   color: #0c0c0d;
   text-decoration: none;
-  border-radius: 34px;
-  margin-top: 14px;
+  border-radius: 12px;
+  margin-top: 12px;
   display: flex;
   align-items: center;
   justify-items: center;
-  padding: 0 12px;
+  padding: 0 10px;
   transform: scale(1);
   padding-bottom: 2px;
 

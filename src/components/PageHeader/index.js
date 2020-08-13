@@ -75,8 +75,10 @@ export const PageHeader = ({
 const Info = styled.div`
   font-family: neue-haas-grotesk-text, sans-serif;
   align-self: flex-start;
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 0;
+
 
   a {
     color: inherit;
@@ -90,10 +92,12 @@ const Info = styled.div`
   }
 
   @media (min-width: 1024px) {
-    font-size: 20px;
-    letter-spacing: -0.014em;
-    line-height: 24px;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    line-height: 22px;
     margin-bottom: 48px;
+    margin-top: 0;
+    width: 90%;
   }
 `;
 
@@ -143,22 +147,38 @@ const HeaderWrapper = styled.div`
   @media (min-width: 1440px) {
     grid-template-columns: repeat(5, 1fr);
     grid-template-areas: 
-      "logo text text text empty"
+      "logo text text text text"
       ". ft1 ft2 ft3 .";
   }
 
   @media (min-width: 1920px) {
     grid-template-columns: repeat(6, 1fr);
     grid-template-areas: 
-      "logo text text text text empty"
+      "logo text text text text text"
       ". ft1 ft2 ft3 . .";
   }
 `;
 
 const IconContainer = styled.div`
   margin: 0 auto;
-  max-width: 250px;
   grid-area: logo;
+
+  @media (min-width: 640px) {
+    transform: scale(1.5);
+  }
+
+  @media (min-width: 1024px) {
+    transform: scale(1.5);
+  }
+
+  @media (min-width: 1440px) {
+    transform: scale(2);
+  }
+
+  @media (min-width: 1920px) {
+    transform: scale(2);
+  }
+
   svg {
     width: 100%;
     height: 100%;
@@ -167,9 +187,10 @@ const IconContainer = styled.div`
 
 const Text = styled.h2`
   font-family: neue-haas-grotesk-text, sans-serif;
-  font-size: 5vw;
+  font-size: 8vw;
   ${props => (props.dark ? `color: #fff` : `color: #000`)};
   font-weight: 400;
+  letter-spacing: -0.022em;
 
   line-height: 1;
   grid-area: text;
@@ -186,8 +207,14 @@ const Text = styled.h2`
     margin-bottom: 0;
   }
 
+  @media (max-width: 360px) {
+    font-size: 40px;
+    margin: 0;
+  }
+
+
   @media (max-width: 375px) {
-    font-size: 10vw;
+    font-size: 40px;
     margin: 0;
   }
 `;
