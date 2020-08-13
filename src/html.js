@@ -13,7 +13,7 @@ export default function HTML(props) {
         />
         {props.headComponents}
         <link rel="stylesheet" href="https://use.typekit.net/efp6eer.css" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        {/* <link rel="stylesheet" href="https://rsms.me/inter/inter.css" /> */}
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}

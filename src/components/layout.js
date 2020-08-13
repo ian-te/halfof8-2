@@ -33,6 +33,7 @@ const Main = styled.main`
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 0px;
   padding: 0px;
+
   @media (min-width: 360px) {
     grid-template-columns: repeat(2, 1fr);
   }
