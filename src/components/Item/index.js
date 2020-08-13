@@ -41,11 +41,9 @@ const ContentInner = styled.div`
     z-index: 1;
   }
   &:hover {
-    -webkit-transform: scale(0.96);
-    -ms-transform: scale(0.96);
-    transform: scale(0.96);
-    transition: all 0.5s ease;
-    z-index: 999;
+    opacity: 85%;
+    transition: 1s ease;
+    ${'' /* z-index: 999; */}
   }
 `;
 
@@ -68,6 +66,7 @@ export const ContentWrapper = styled.div`
     width: 0;
     height: 0;
     padding-bottom: calc(100% / ${props => props.ratio || `(3 / 4)`});
+
   }
 `;
 
