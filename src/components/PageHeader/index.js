@@ -79,7 +79,7 @@ const Info = styled.div`
   font-family: neue-haas-grotesk-text, sans-serif;
   align-self: flex-start;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 15px;
 
   a {
     color: inherit;
@@ -129,8 +129,7 @@ const HeaderWrapper = styled.div`
   padding: 16px;
   align-items: center;
   grid-template-areas:
-    "text text"
-    "logo empty"
+    "logo text"
     "ft1  ft2"
     ".    ft3";
 
@@ -220,18 +219,16 @@ const Text = styled.h2`
     margin-bottom: 0;
   }
 
-  @media (max-width: 360px) {
-    font-size: 40px;
-    margin: 0;
-  }
 
 
   @media (max-width: 375px) {
-    font-size: 18vw;
+    font-size: 9vw;
     margin: 0;
+    margin-top: 26px;
+    margin-bottom: 18px;
+    writing-mode: vertical-rl;
+    max-height: 160px;
   }
 
-  @media (max-width: 1024px) {
-    font-size: 18vw;
-  }
+
 `;
