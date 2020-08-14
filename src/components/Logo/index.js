@@ -85,7 +85,7 @@ const LogoBase = ({ className, fill = "#000", width = 150 }) => (
 );
 
 export const Logo = styled(LogoBase)`
-  margin: 0 auto;
+  ${'' /* margin: 0 auto; */}
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   animation: dash 7s linear forwards;

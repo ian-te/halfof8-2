@@ -34,6 +34,8 @@ export const PageHeader = ({
   console.log(">>>", ft1);
   return (
     <HeaderWrapper>
+     {/* <Text dark={dark}>HALF OF EIGHT</Text> */}
+       <Text dark={dark}>ポスターと環境音楽</Text>
       <IconContainer>
         {actionRenderer ? (
           actionRenderer()
@@ -44,6 +46,7 @@ export const PageHeader = ({
         )}
       </IconContainer>
       {/* <Text dark={dark}>{getHeaderContents(header)}</Text> */}
+       
       {ft1 && (
         <Ft1>
           {documentToReactComponents(
@@ -126,6 +129,7 @@ const HeaderWrapper = styled.div`
   padding: 16px;
   align-items: center;
   grid-template-areas:
+    "text text"
     "logo empty"
     "ft1  ft2"
     ".    ft3";
@@ -138,9 +142,9 @@ const HeaderWrapper = styled.div`
 
   @media (min-width: 640px) {
     grid-template-areas: 
-      "logo text text"
-      ". ft1 ft2"
-      ". . ft3";
+      "text text text"
+      "logo ft1 ft2"
+      ". .  ft3";
     grid-template-columns: repeat(3, 1fr);
   }
   }
@@ -148,13 +152,15 @@ const HeaderWrapper = styled.div`
   @media (min-width: 1024px) {
     grid-template-columns: repeat(4, 1fr);
     grid-template-areas: 
-      "logo ft1 ft2 ft3";
+    "text text text text"
+    "logo ft1 ft2 ft3";
 
   }
 
   @media (min-width: 1440px) {
     grid-template-columns: repeat(5, 1fr);
     grid-template-areas: 
+    "text text text text text"
     "logo ft1 ft2 ft3 empty";
   }
 
@@ -166,7 +172,7 @@ const HeaderWrapper = styled.div`
 `;
 
 const IconContainer = styled.div`
-  margin: 0 auto;
+  ${'' /* margin: 0 auto; */}
   grid-area: logo;
 
   ${'' /* @media (min-width: 640px) {
@@ -192,8 +198,9 @@ const IconContainer = styled.div`
 `;
 
 const Text = styled.h2`
-  font-family: neue-haas-grotesk-text, sans-serif;
-  font-size: 8vw;
+  font-family: 'M PLUS 1p', neue-haas-grotesk-text, sans-serif;
+  font-size: 11vw;
+  max-width: 100%;
   ${props => (props.dark ? `color: #fff` : `color: #000`)};
   font-weight: 400;
   letter-spacing: -0.022em;
@@ -220,7 +227,11 @@ const Text = styled.h2`
 
 
   @media (max-width: 375px) {
-    font-size: 40px;
+    font-size: 18vw;
     margin: 0;
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 18vw;
   }
 `;
