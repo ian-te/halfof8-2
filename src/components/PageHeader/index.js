@@ -35,7 +35,8 @@ export const PageHeader = ({
   return (
     <HeaderWrapper>
      {/* <Text dark={dark}>HALF OF EIGHT</Text> */}
-       <Text dark={dark}>ポスターと環境音楽</Text>
+       {/* <Text dark={dark}>このページの仕掛品あります</Text> */}
+      <Text dark={dark}>{getHeaderContents(header)}</Text>
       <IconContainer>
         {actionRenderer ? (
           actionRenderer()
@@ -45,7 +46,7 @@ export const PageHeader = ({
           </Link>
         )}
       </IconContainer>
-      {/* <Text dark={dark}>{getHeaderContents(header)}</Text> */}
+  
        
       {ft1 && (
         <Ft1>
@@ -197,7 +198,7 @@ const IconContainer = styled.div`
 `;
 
 const Text = styled.h2`
-  font-family: 'M PLUS 1p', neue-haas-grotesk-text, sans-serif;
+  font-family: 'M PLUS 1p', sans-serif;
   font-size: 11vw;
   max-width: 100%;
   ${props => (props.dark ? `color: #fff` : `color: #000`)};
