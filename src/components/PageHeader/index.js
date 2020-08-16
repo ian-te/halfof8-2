@@ -142,11 +142,9 @@ const HeaderWrapper = styled.div`
 
   @media (min-width: 640px) {
     grid-template-areas: 
-      "text text text"
-      "logo ft1 ft2"
-      ". .  ft3";
+      "logo text text"
+      "ft1 ft2 ft3";
     grid-template-columns: repeat(3, 1fr);
-  }
   }
 
   @media (min-width: 1024px) {
@@ -154,7 +152,6 @@ const HeaderWrapper = styled.div`
     grid-template-areas: 
     "text text text text"
     "logo ft1 ft2 ft3";
-
   }
 
   @media (min-width: 1440px) {
@@ -167,7 +164,8 @@ const HeaderWrapper = styled.div`
   @media (min-width: 1920px) {
     grid-template-columns: repeat(6, 1fr);
     grid-template-areas: 
-    "logo ft1 ft2 ft3 empty empty";
+    "text text text text text text"
+    "logo ft1 . ft2 ft3 empty";
   }
 `;
 
@@ -199,36 +197,61 @@ const IconContainer = styled.div`
 
 const Text = styled.h2`
   font-family: 'M PLUS 1p', sans-serif;
-  font-size: 11vw;
-  max-width: 100%;
+  font-size: 7vw;
+  margin: 0;
+  margin-top: 26px;
+  margin-bottom: 18px;
+  writing-mode: vertical-rl;
+  max-height: 160px;
+
+
+
   ${props => (props.dark ? `color: #fff` : `color: #000`)};
   font-weight: 400;
-  letter-spacing: -0.022em;
 
   line-height: 1;
   grid-area: text;
-  margin-left: -6px;
-  margin-top: 16px;
-  margin-bottom: 16px;
 
-  -moz-font-feature-settings: "salt";
-  -webkit-font-feature-settings: "salt";
-  font-feature-settings: "salt";
+
 
   p {
     margin-top: 0;
     margin-bottom: 0;
   }
 
-
-
-  @media (max-width: 375px) {
-    font-size: 9vw;
+  @media (min-width: 640px) {
+    font-size: 10vw;
     margin: 0;
-    margin-top: 26px;
-    margin-bottom: 18px;
-    writing-mode: vertical-rl;
-    max-height: 160px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    writing-mode: horizontal-tb;
+    max-height: none;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 10.7vw;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    writing-mode: horizontal-tb;
+    max-height: none;
+  }
+
+  @media (min-width: 1440px) {
+    font-size: 10.8vw;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    writing-mode: horizontal-tb;
+    max-width: 100%;
+    max-height: none;
+  }
+
+  @media (min-width: 1920px) {
+    font-size: 10.8vw;
+    margin-top: 0px;
+    margin-bottom: 32px;
+    writing-mode: horizontal-tb;
+    max-width: 100%;
+    max-height: none;
   }
 
 
