@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { ContentImage } from "./Image";
 import { Icon } from "./Icon";
-import { ThreeRenderer } from "./ThreeRenderer";
+// import { ThreeRenderer } from "./ThreeRenderer";
 import { Audio } from "./Audio";
 
 const IframeAsync = ({ src, ...props }) => {
@@ -16,16 +16,17 @@ export const ContentRenderer = ({ item }) => {
   console.log(">>>", item.indexBackgroundImage);
   switch (true) {
     case !!item.fbxFile:
-      return (
-        <Fragment>
-          <Icon item={item} />
-          <ThreeRenderer
-            model={item.fbxFile.file.url}
-            lights={item.lights}
-            color={item.fbxColor}
-          />
-        </Fragment>
-      );
+      return null;
+    // return (
+    //   <Fragment>
+    //     <Icon item={item} />
+    //     <ThreeRenderer
+    //       model={item.fbxFile.file.url}
+    //       lights={item.lights}
+    //       color={item.fbxColor}
+    //     />
+    //   </Fragment>
+    // );
     case !!item.mp3:
       return <Audio {...item} />;
     case !!item.indexBackgroundImage:
