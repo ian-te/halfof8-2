@@ -102,7 +102,6 @@ const IndexPage = ({ data }) => {
                   />
                 );
               })}
-            
           </Layout>
           <ImageModal images={modalImages} />
         </ModalContext.Provider>

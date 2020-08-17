@@ -15,9 +15,9 @@ export const Item = ({ name, tag, ratio = "0.75", ...item }) => {
             <Links links={item.externalLinks} />
           </ContentInner>
         </ContentWrapper>
-        <Text>
+        {/* <Text>
           <h4> {name} {tag} </h4> 
-        </Text>
+        </Text> */}
       </ContentActionStyled>
     </div>
   );
@@ -29,6 +29,7 @@ const ContentInner = styled.div`
   position: relative;
 
   width: 100%;
+
   &:before {
     content: "";
     position: absolute;
@@ -40,11 +41,9 @@ const ContentInner = styled.div`
     z-index: 1;
   }
   &:hover {
-    -webkit-transform: scale(0.97);
-    -ms-transform: scale(0.97);
-    transform: scale(0.97);
-    transition: all 0.5s ease;
-    z-index: 999;
+    opacity: 85%;
+    transition: 1s ease;
+    ${'' /* z-index: 999; */}
   }
 `;
 
@@ -67,17 +66,17 @@ export const ContentWrapper = styled.div`
     width: 0;
     height: 0;
     padding-bottom: calc(100% / ${props => props.ratio || `(3 / 4)`});
+
   }
 `;
 
 const Text = styled.div`
   padding: 8px 2px;
-  width: 80%;
 
   h4 {
     font-weight: normal;
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 14px;
+    line-height: 18px;
     margin: 0;
 
     @media (max-width: 375px) {
@@ -95,14 +94,5 @@ const Text = styled.div`
     padding: 0;
   }
   
-  .tag {
-    font-size:2rem;
-  padding: 1em 2em;
-  margin: 1em;
-  display: inline-block;
-  border-radius: 4em;
-  border:  solid transparent;
-  background: linear-gradient(0deg,#ff6064, #ff9867), linear-gradient(0deg,#ff6064, #ff9867);
-  color: #ff6064;
-  }
+
 `;

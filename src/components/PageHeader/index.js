@@ -34,6 +34,9 @@ export const PageHeader = ({
   console.log(">>>", ft1);
   return (
     <HeaderWrapper>
+     {/* <Text dark={dark}>HALF OF EIGHT</Text> */}
+       {/* <Text dark={dark}>このページの仕掛品あります</Text> */}
+      <Text dark={dark}>{getHeaderContents(header)}</Text>
       <IconContainer>
         {actionRenderer ? (
           actionRenderer()
@@ -43,7 +46,8 @@ export const PageHeader = ({
           </Link>
         )}
       </IconContainer>
-      <Text dark={dark}>{getHeaderContents(header)}</Text>
+  
+       
       {ft1 && (
         <Ft1>
           {documentToReactComponents(
@@ -75,14 +79,15 @@ export const PageHeader = ({
 const Info = styled.div`
   font-family: neue-haas-grotesk-text, sans-serif;
   align-self: flex-start;
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 12px;
+  line-height: 15px;
 
   a {
     color: inherit;
     text-decoration: none;
     border-bottom: 1px solid #c4c4c4;
   }
+
   a:hover {
     color: inherit;
     text-decoration: none;
@@ -90,10 +95,22 @@ const Info = styled.div`
   }
 
   @media (min-width: 1024px) {
-    font-size: 20px;
-    letter-spacing: -0.014em;
-    line-height: 24px;
-    margin-bottom: 48px;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    line-height: 22px;
+    margin-top: 0;
+    width: 90%;
+  }
+
+  p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+
+    @media (min-width: 1024px) {
+    margin-block-start: 40px;
+    margin-block-end:  40px;
+    }
+   
   }
 `;
 
@@ -113,8 +130,7 @@ const HeaderWrapper = styled.div`
   padding: 16px;
   align-items: center;
   grid-template-areas:
-    "logo empty"
-    "text text"
+    "logo text"
     "ft1  ft2"
     ".    ft3";
 
@@ -127,38 +143,52 @@ const HeaderWrapper = styled.div`
   @media (min-width: 640px) {
     grid-template-areas: 
       "logo text text"
-      ". ft1 ft2"
-      ". . ft3";
+      "ft1 ft2 ft3";
     grid-template-columns: repeat(3, 1fr);
-  }
   }
 
   @media (min-width: 1024px) {
     grid-template-columns: repeat(4, 1fr);
     grid-template-areas: 
-      "logo text text text"
-      ". ft1 ft2 ft3" ;
+    "text text text text"
+    "logo ft1 ft2 ft3";
   }
 
   @media (min-width: 1440px) {
     grid-template-columns: repeat(5, 1fr);
     grid-template-areas: 
-      "logo text text text empty"
-      ". ft1 ft2 ft3 .";
+    "text text text text text"
+    "logo ft1 ft2 ft3 empty";
   }
 
   @media (min-width: 1920px) {
     grid-template-columns: repeat(6, 1fr);
     grid-template-areas: 
-      "logo text text text text empty"
-      ". ft1 ft2 ft3 . .";
+    "text text text text text text"
+    "logo ft1 . ft2 ft3 empty";
   }
 `;
 
 const IconContainer = styled.div`
-  margin: 0 auto;
-  max-width: 250px;
+  ${'' /* margin: 0 auto; */}
   grid-area: logo;
+
+  ${'' /* @media (min-width: 640px) {
+    transform: scale(1.5);
+  }
+
+  @media (min-width: 1024px) {
+    transform: scale(1.5);
+  }
+
+  @media (min-width: 1440px) {
+    transform: scale(2);
+  }
+
+  @media (min-width: 1920px) {
+    transform: scale(2);
+  } */}
+
   svg {
     width: 100%;
     height: 100%;
@@ -166,28 +196,63 @@ const IconContainer = styled.div`
 `;
 
 const Text = styled.h2`
-  font-family: neue-haas-grotesk-text, sans-serif;
-  font-size: 5vw;
+  font-family: 'M PLUS 1p', sans-serif;
+  font-size: 7vw;
+  margin: 0;
+  margin-top: 26px;
+  margin-bottom: 18px;
+  writing-mode: vertical-rl;
+  max-height: 160px;
+
+
+
   ${props => (props.dark ? `color: #fff` : `color: #000`)};
   font-weight: 400;
 
   line-height: 1;
   grid-area: text;
-  margin-left: -6px;
-  margin-top: 16px;
-  margin-bottom: 16px;
 
-  -moz-font-feature-settings: "salt";
-  -webkit-font-feature-settings: "salt";
-  font-feature-settings: "salt";
+
 
   p {
     margin-top: 0;
     margin-bottom: 0;
   }
 
-  @media (max-width: 375px) {
+  @media (min-width: 640px) {
     font-size: 10vw;
     margin: 0;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    writing-mode: horizontal-tb;
+    max-height: none;
   }
+
+  @media (min-width: 1024px) {
+    font-size: 10.7vw;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    writing-mode: horizontal-tb;
+    max-height: none;
+  }
+
+  @media (min-width: 1440px) {
+    font-size: 10.8vw;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    writing-mode: horizontal-tb;
+    max-width: 100%;
+    max-height: none;
+  }
+
+  @media (min-width: 1920px) {
+    font-size: 10.8vw;
+    margin-top: 0px;
+    margin-bottom: 32px;
+    writing-mode: horizontal-tb;
+    max-width: 100%;
+    max-height: none;
+  }
+
+
 `;

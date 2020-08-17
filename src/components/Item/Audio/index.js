@@ -106,8 +106,8 @@ export const Audio = ({ id, mp3, background }) => {
 
 const Background = styled.div`
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 101%;
+  height: 101%;
 `;
 
 const Bar = styled.div`
@@ -151,7 +151,7 @@ const Button = styled.button`
   z-index: 10;
   &:active {
     ${Play} > path, ${Pause} > path {
-      fill: #0029FF;
+      fill: black;
     }
   }
 `;
@@ -168,7 +168,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 const ControlsWrapper = styled.div`
-  padding: 2px;
+  padding: 0px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -182,7 +182,8 @@ const Time = styled.span`
   font-weight: normal;
   font-size: 12px;
   line-height: 15px;
-  padding: 1px 3px;
+  border-radius: 0px;
+  padding: 0px 2px;
 `;
 
 const CurrentTime = styled(Time)`
