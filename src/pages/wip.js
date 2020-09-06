@@ -37,7 +37,6 @@ function reducer(state = initialState, action) {
 export default ({ data }) => {
   const { images, header } = data.contentfulWip;
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(">>>>>", images, PageHeader);
   const modalImages = images.map(item => ({
     src: item.file.url
   }));
@@ -61,7 +60,7 @@ export default ({ data }) => {
       <GlobalStyle />
       <ModalContext.Provider value={{ state, dispatch }}>
         <Layout>
-          {images.map((image, key) => {
+          {images.reverse().map((image, key) => {
             return (
               <Item
                 lightbox={true}

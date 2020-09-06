@@ -28,10 +28,7 @@
     "react-images": "^1.1.0",
     "react-modal-image": "^2.5.0",
     "react-scrollreveal": "^1.2.0",
-    "scrollreveal": "^4.0.6",
-    "styled-components": "^5.0.1",
-    "three": "^0.115.0",
-    "three-fbx-loader": "^1.0.3"
+    "styled-components": "^5.0.1"
   },
   "devDependencies": {
     "prettier": "^1.19.1"

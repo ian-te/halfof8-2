@@ -23,7 +23,12 @@ export const ContentImage = ({ item }) => {
         sizes: "50vw"
       }
     ];
-    return <Image fluid={sources} />;
+    return (
+      <Image
+        style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+        fluid={sources}
+      />
+    );
   }
   return (
     <img

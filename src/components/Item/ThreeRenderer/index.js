@@ -65,7 +65,7 @@ async function main(el, model, width, height, lightsInput) {
     scene.background = new THREE.Color(0x000000);
 
     // white
-    light = new THREE.PointLight(0xFFFFFF, 1, 100);
+    light = new THREE.PointLight(0xffffff, 1, 100);
     light.position.set(0, 50, 0);
     scene.add(light);
 
@@ -75,7 +75,7 @@ async function main(el, model, width, height, lightsInput) {
     scene.add(lightmain);
 
     // pink
-    lightsupport = new THREE.PointLight(0xFF00B8, 3, 100);
+    lightsupport = new THREE.PointLight(0xff00b8, 3, 100);
     lightsupport.position.set(40, 0, 60);
     scene.add(lightsupport);
 
