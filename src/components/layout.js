@@ -34,6 +34,18 @@ const Main = styled.main`
   grid-gap: 0px;
   padding: 0px;
 
+  animation: appear 1s ease-in;
+  animation-fill-mode: both;
+  animation-delay: 2s;
+
+  @keyframes appear { 
+	0% { top:-800px; opacity: 0; }
+	100% { top:0px; opacity: 1}
+}
+
+  }
+
+
   @media (min-width: 360px) {
     grid-template-columns: repeat(2, 1fr);
   }

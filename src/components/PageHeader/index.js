@@ -34,7 +34,7 @@ export const PageHeader = ({
   console.log(">>>", ft1);
   return (
     <HeaderWrapper>
-     {/* <Text dark={dark}>HALF OF EIGHT</Text> */}
+     {/* <Text dark={dark}>HALF<br/>OF EIGHT<br/>ポスターと<br/>環境音楽 <span>&nbsp;</span> </Text> */}
        {/* <Text dark={dark}>このページの仕掛品あります</Text> */}
       <Text dark={dark}>{getHeaderContents(header)}</Text>
       <IconContainer>
@@ -79,38 +79,84 @@ export const PageHeader = ({
 const Info = styled.div`
   font-family: neue-haas-grotesk-text, sans-serif;
   align-self: flex-start;
-  font-size: 12px;
-  line-height: 15px;
+  font-size: 14px;
+  line-height: 1.3;
+
+  animation: appear 1s ease-in;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+
+  @keyframes appear { 
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+  }
+${'' /* 
+  :nth-child(3) { animation-delay: 1s }
+  :nth-child(4) { animation-delay: 1s }
+  :nth-child(5) { animation-delay: 3s } */}
 
   a {
     color: inherit;
     text-decoration: none;
-    border-bottom: 1px solid #c4c4c4;
+    background-color: #FFF500;
+    ${'' /* border-bottom: 1px solid #c4c4c4; */}
   }
 
   a:hover {
     color: inherit;
     text-decoration: none;
     border-bottom: none;
+    background-color: white;
+  }
+
+
+  }
+
+
+   @media (min-width: 640px) {
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    margin-top: 12px;
+    width: 90%;
+
   }
 
   @media (min-width: 1024px) {
-    font-size: 16px;
+    font-size: 17px;
     letter-spacing: -0.01em;
-    line-height: 22px;
-    margin-top: 0;
+    line-height: 1.4;
+    margin-top: 12px;
     width: 90%;
   }
+
+  @media (min-width: 1440px) {
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    margin-top: 12px;
+    width: 90%;
+  }
+
+  @media (min-width: 1920px) {
+   
+  }
+
 
   p {
     margin-block-start: 0;
     margin-block-end: 0;
 
-    @media (min-width: 1024px) {
-    margin-block-start: 40px;
-    margin-block-end:  40px;
+    @media (max-width: 2000px) {
+    ${'' /* margin-block-start: 16px; */}
+    margin-block-end:  32px;
     }
-   
+
+    @media (max-width: 640px) {
+    ${'' /* margin-block-start: 16px; */}
+    margin-block-end:  16px;
+    }
+
   }
 `;
 
@@ -124,15 +170,20 @@ const Ft3 = styled(Info)`
   grid-area: ft3;
 `;
 
+
+
+
+
 const HeaderWrapper = styled.div`
   display: grid;
   grid-gap: 16px;
   padding: 16px;
-  align-items: center;
+  ${'' /* align-items: center; */}
   grid-template-areas:
-    "logo text"
-    "ft1  ft2"
-    ".    ft3";
+    "text text"
+    "logo empty"
+    "ft1  ft2";
+
 
   grid-template-columns: repeat(2, 1fr);
 
@@ -142,76 +193,95 @@ const HeaderWrapper = styled.div`
 
   @media (min-width: 640px) {
     grid-template-areas: 
-      "logo text text"
-      "ft1 ft2 ft3";
+      "text ft1 ft2"
+      "logo ft1 ft2";
     grid-template-columns: repeat(3, 1fr);
   }
 
   @media (min-width: 1024px) {
     grid-template-columns: repeat(4, 1fr);
     grid-template-areas: 
-    "text text text text"
-    "logo ft1 ft2 ft3";
+    "text ft1 ft2 logo";
   }
 
   @media (min-width: 1440px) {
     grid-template-columns: repeat(5, 1fr);
     grid-template-areas: 
-    "text text text text text"
-    "logo ft1 ft2 ft3 empty";
+    "text text ft1 ft2 logo";
   }
 
   @media (min-width: 1920px) {
     grid-template-columns: repeat(6, 1fr);
     grid-template-areas: 
-    "text text text text text text"
-    "logo ft1 . ft2 ft3 empty";
+    "text text ft1 ft2 . logo";;
   }
 `;
 
 const IconContainer = styled.div`
-  ${'' /* margin: 0 auto; */}
   grid-area: logo;
+  margin-bottom: auto;
 
-  ${'' /* @media (min-width: 640px) {
-    transform: scale(1.5);
+  animation: appear 1s ease-in;
+  animation-fill-mode: both;
+
+  @keyframes appear { 
+  0% { opacity: 0; }
+  100% { opacity: 1; }
   }
-
-  @media (min-width: 1024px) {
-    transform: scale(1.5);
-  }
-
-  @media (min-width: 1440px) {
-    transform: scale(2);
-  }
-
-  @media (min-width: 1920px) {
-    transform: scale(2);
-  } */}
-
+  
   svg {
     width: 100%;
     height: 100%;
   }
+
+  @media (min-width: 640px) {
+    margin-right: auto;
+    margin-bottom: auto;
+  }
+
+  @media (min-width: 1024px) {
+    margin-left: auto;
+  }
+
+  @media (min-width: 1440px) {
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+  @media (min-width: 1920px) {
+    margin-right: 0;
+    margin-left: auto;
+  }
+
 `;
 
+
+
+
+
 const Text = styled.h2`
-  font-family: 'M PLUS 1p', sans-serif;
-  font-size: 7vw;
+  font-family: inter, 'M PLUS 1p', sans-serif;
+  font-size: 16.9vw;
+  font-weight: bold;
   margin: 0;
-  margin-top: 26px;
-  margin-bottom: 18px;
-  writing-mode: vertical-rl;
-  max-height: 160px;
-
-
+  margin-top: 0px;
+  margin-bottom: 0px;
+  letter-spacing: -0.03em;
 
   ${props => (props.dark ? `color: #fff` : `color: #000`)};
   font-weight: 400;
 
   line-height: 1;
   grid-area: text;
+  text-align: top;
 
+  animation: appear 1s ease-in;
+  animation-fill-mode: both;
+
+  @keyframes appear { 
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+  }
 
 
   p {
@@ -220,38 +290,33 @@ const Text = styled.h2`
   }
 
   @media (min-width: 640px) {
-    font-size: 10vw;
-    margin: 0;
-    margin-top: 0px;
+    font-size: 5.5vw;
+    margin-top: 12px;
     margin-bottom: 0px;
-    writing-mode: horizontal-tb;
-    max-height: none;
+
   }
 
   @media (min-width: 1024px) {
-    font-size: 10.7vw;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    writing-mode: horizontal-tb;
-    max-height: none;
+    font-size: 4.2vw;
+    margin-left: 0px;
+    margin-top: 12px;
+    margin-bottom: 42px;
   }
 
   @media (min-width: 1440px) {
-    font-size: 10.8vw;
+    font-size: 7.2vw;
+    margin-left: 0px;
     margin-top: 0px;
-    margin-bottom: 0px;
-    writing-mode: horizontal-tb;
+    margin-bottom: 42px;
     max-width: 100%;
-    max-height: none;
   }
 
   @media (min-width: 1920px) {
-    font-size: 10.8vw;
+    font-size: 122px;
+    margin-left: 0px;
     margin-top: 0px;
-    margin-bottom: 32px;
-    writing-mode: horizontal-tb;
+    margin-bottom: 42px;
     max-width: 100%;
-    max-height: none;
   }
 
 

@@ -85,10 +85,11 @@ const LogoBase = ({ className, fill = "#000", width = 150 }) => (
 );
 
 export const Logo = styled(LogoBase)`
-  ${'' /* margin: 0 auto; */}
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: dash 7s linear forwards;
+  margin: 0 auto;
+  ${'' /* stroke-dasharray: 1000; */}
+  ${'' /* stroke-dashoffset: 1000; */}
+  ${'' /* animation: dash 10s linear forwards; */}
+  ${'' /* animation-delay: 3s; */}
   
   &:hover {
     path[fill] {
