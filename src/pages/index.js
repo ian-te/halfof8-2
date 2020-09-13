@@ -145,6 +145,12 @@ export const query = graphql`
               url
             }
           }
+          shortText {
+            childMarkdownRemark {
+              html
+            }
+          }
+          displayShortText
           fbxColor
           lights
           indexBackgroundImage {
