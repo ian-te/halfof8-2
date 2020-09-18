@@ -26,27 +26,40 @@ export const Icon = styled(IconBase)`
   position: absolute;
   background-color: #fff;
   border-radius: 100%;
-  width: 68px;
-  height: 68px;
-  margin-top: -34px;
-  margin-left: -34px;
-  left: 50%;
-  top: 50%;
+  left: 16px;
+  bottom: 16px;
+  width: 52px;
+  height: 52px;
+  margin-top: auto;
+ 
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 2;
 
-  box-shadow: 0px 1.24527px 2.46286px rgba(0, 0, 0, 0.0562291), 0px 2.99255px 5.91859px rgba(0, 0, 0, 0.0807786), 0px 5.6347px 11.1442px rgba(0, 0, 0, 0.1), 0px 10.0513px 19.8793px rgba(0, 0, 0, 0.119221), 0px 18.7999px 37.1821px rgba(0, 0, 0, 0.143771), 0px 45px 89px rgba(0, 0, 0, 0.2);  
+  ${'' /* box-shadow: 0px 1.24527px 2.46286px rgba(0, 0, 0, 0.0562291), 0px 2.99255px 5.91859px rgba(0, 0, 0, 0.0807786), 0px 5.6347px 11.1442px rgba(0, 0, 0, 0.1), 0px 10.0513px 19.8793px rgba(0, 0, 0, 0.119221), 0px 18.7999px 37.1821px rgba(0, 0, 0, 0.143771), 0px 45px 89px rgba(0, 0, 0, 0.2);   */}
 
   animation: popping 0.3s ease-in;
   animation-fill-mode: both;
 
-  @media (max-width: 480px) {
-    left: 16px;
-    top: 16px;
-    margin-left: 0;
-    margin-top: 0;
+  @media (min-width: 1024px) {
+    width: 68px;
+    height: 68px;
+    margin-top: -34px;
+    margin-left: -34px;
+    left: 50%;
+    top: 50%;
+
+    svg {
+    width: 24px;
+    height: 24px;
+  }
+
   }
 
   &:hover {

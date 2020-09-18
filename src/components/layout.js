@@ -34,15 +34,17 @@ const Main = styled.main`
   grid-gap: 0px;
   padding: 0px;
 
-  animation: appear 1s ease-in;
-  animation-fill-mode: both;
-  animation-delay: 2s;
+  & > * {
+    animation: fadein 0.5s ease-in;
+    animation-fill-mode: both;
+    animation-delay: 2s;
+  }
 
-  @keyframes appear { 
-	0% { top:-800px; opacity: 0; }
-	100% { top:0px; opacity: 1}
-}
+  ${Array.from(Array(20).keys()).map(key => `& > :nth-child(${key}) {animation-delay: ${ ( key + 1 ) / 4}s;}`)}
 
+  @keyframes fadein { 
+	0% { opacity: 0; }
+	100% { opacity: 1; }
   }
 
 

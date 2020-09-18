@@ -90,6 +90,8 @@ const Info = styled.div`
   0% { opacity: 0; }
   100% { opacity: 1; }
   }
+
+
 ${'' /* 
   :nth-child(3) { animation-delay: 1s }
   :nth-child(4) { animation-delay: 1s }
@@ -110,10 +112,8 @@ ${'' /*
   }
 
 
-  }
 
-
-   @media (min-width: 640px) {
+  @media (min-width: 640px) {
     font-size: 17px;
     letter-spacing: -0.01em;
     line-height: 1.4;
@@ -171,9 +171,6 @@ const Ft3 = styled(Info)`
 `;
 
 
-
-
-
 const HeaderWrapper = styled.div`
   display: grid;
   grid-gap: 16px;
@@ -228,14 +225,10 @@ const IconContainer = styled.div`
   0% { opacity: 0; }
   100% { opacity: 1; }
   }
-  
-  svg {
-    width: 100%;
-    height: 100%;
-  }
 
+  
   @media (min-width: 640px) {
-    margin-right: auto;
+    margin-right: 0;
     margin-bottom: auto;
   }
 
@@ -244,18 +237,15 @@ const IconContainer = styled.div`
   }
 
   @media (min-width: 1440px) {
-    margin-right: 0;
     margin-left: auto;
+    margin-right: 0;
   }
 
   @media (min-width: 1920px) {
-    margin-right: 0;
     margin-left: auto;
   }
 
 `;
-
-
 
 
 
