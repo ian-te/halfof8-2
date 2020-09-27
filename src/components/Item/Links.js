@@ -30,6 +30,7 @@ const LinkBase = ({ md, className }) => {
 const IconWrapper = styled.span`
   display: none;
   margin-right: 8px;
+
   @media (min-width: 640px) {
     display: block;
   }

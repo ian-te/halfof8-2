@@ -27,10 +27,9 @@ export const Icon = styled(IconBase)`
   background-color: #fff;
   border-radius: 100%;
   left: 16px;
-  bottom: 16px;
+  top: 16px;
   width: 52px;
   height: 52px;
-  margin-top: auto;
  
   svg {
     width: 20px;
@@ -64,10 +63,7 @@ export const Icon = styled(IconBase)`
 
   &:hover {
     color: #0029FF;
-  
-    svg path {
-      fill: #0029FF !important;
-    }
+    svg path { fill: #0029FF !important; }
   }
 
   @keyframes popping { 

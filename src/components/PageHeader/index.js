@@ -100,8 +100,8 @@ ${'' /*
   a {
     color: inherit;
     text-decoration: none;
-    background-color: #FFF500;
-    ${'' /* border-bottom: 1px solid #c4c4c4; */}
+    ${'' /* background-color: #FFF500; */}
+    border-bottom: 1px solid #8F9499;
   }
 
   a:hover {
