@@ -36,7 +36,7 @@ function reducer(state = initialState, action) {
 
 export default ({ data }) => {
   const { images: initialImages, header } = data.contentfulWip;
-  const images = useMemo(() => initialImages.reverse(), [images]);
+  const images = useMemo(() => initialImages.reverse(), [initialImages]);
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const modalImages = images.map(item => ({
