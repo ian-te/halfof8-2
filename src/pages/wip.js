@@ -6,7 +6,6 @@ import Layout from "../components/layout";
 import { Item } from "../components/Item/index.js";
 import { ModalContext } from "./index.js";
 import { PageHeader } from "../components/PageHeader";
-import { createGlobalStyle } from "styled-components";
 import BackArrow from "../components/Icons/BackArrow.js";
 
 const initialState = {
@@ -57,7 +56,6 @@ export default ({ data }) => {
         <br />
         work in progress
       </PageHeader>
-      <GlobalStyle />
       <ModalContext.Provider value={{ state, dispatch }}>
         <Layout>
           {images.reverse().map((image, key) => {
@@ -77,12 +75,6 @@ export default ({ data }) => {
     </div>
   );
 };
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: #242424;
-  }
-`;
 
 export const query = graphql`
   query WIPQuery {

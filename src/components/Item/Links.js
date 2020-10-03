@@ -3,14 +3,10 @@ import styled from "styled-components";
 import { NewWindow } from "../Icons/NewWindow";
 
 const LinkBase = ({ md, className }) => {
-  console.log("before slice", md);
-
   const link = md
     .slice(1)
     .slice(0, -1)
     .split("](");
-
-  console.log("after slice", link);
 
   return (
     <a
@@ -44,8 +40,8 @@ const Link = styled(LinkBase)`
   padding: 0 10px;
   padding-bottom: 2px;
 
-  background: #ffffff;
-  color: #0c0c0d;
+  background: ${props => props.theme.bgColor};
+  color: ${props => props.theme.textColor};
   text-decoration: none;
   border-radius: 2px;
   display: flex;

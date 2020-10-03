@@ -4,7 +4,6 @@ import { ModalContext } from "../../pages/index";
 
 const LightBoxWrapper = ({ children, item }) => {
   const { dispatch } = useContext(ModalContext);
-  console.log(">>>", item.currentSlide);
   return (
     <div
       onClick={() =>

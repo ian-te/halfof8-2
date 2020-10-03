@@ -2,7 +2,6 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`
 });
 
-console.log(">>>", `.env.${process.env.NODE_ENV}`, process.env);
 module.exports = {
   siteMetadata: {
     title: `halfof8.com`,

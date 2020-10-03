@@ -31,11 +31,10 @@ export const PageHeader = ({
   ft2,
   ft3
 }) => {
-  console.log(">>>", ft1);
   return (
     <HeaderWrapper>
-     {/* <Text dark={dark}>HALF<br/>OF EIGHT<br/>ポスターと<br/>環境音楽 <span>&nbsp;</span> </Text> */}
-       {/* <Text dark={dark}>このページの仕掛品あります</Text> */}
+      {/* <Text dark={dark}>HALF<br/>OF EIGHT<br/>ポスターと<br/>環境音楽 <span>&nbsp;</span> </Text> */}
+      {/* <Text dark={dark}>このページの仕掛品あります</Text> */}
       <Text dark={dark}>{getHeaderContents(header)}</Text>
       <IconContainer>
         {actionRenderer ? (
@@ -46,8 +45,7 @@ export const PageHeader = ({
           </Link>
         )}
       </IconContainer>
-  
-       
+
       {ft1 && (
         <Ft1>
           {documentToReactComponents(
@@ -86,13 +84,16 @@ const Info = styled.div`
   animation-delay: 1s;
   animation-fill-mode: both;
 
-  @keyframes appear { 
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  @keyframes appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
-
-${'' /* 
+  ${"" /* 
   :nth-child(3) { animation-delay: 1s }
   :nth-child(4) { animation-delay: 1s }
   :nth-child(5) { animation-delay: 3s } */}
@@ -100,7 +101,7 @@ ${'' /*
   a {
     color: inherit;
     text-decoration: none;
-    ${'' /* background-color: #FFF500; */}
+    ${"" /* background-color: #FFF500; */}
     border-bottom: 1px solid #8F9499;
   }
 
@@ -111,15 +112,12 @@ ${'' /*
     background-color: white;
   }
 
-
-
   @media (min-width: 640px) {
     font-size: 17px;
     letter-spacing: -0.01em;
     line-height: 1.4;
     margin-top: 12px;
     width: 90%;
-
   }
 
   @media (min-width: 1024px) {
@@ -139,24 +137,21 @@ ${'' /*
   }
 
   @media (min-width: 1920px) {
-   
   }
-
 
   p {
     margin-block-start: 0;
     margin-block-end: 0;
 
     @media (max-width: 2000px) {
-    ${'' /* margin-block-start: 16px; */}
-    margin-block-end:  32px;
+      ${"" /* margin-block-start: 16px; */}
+      margin-block-end:  32px;
     }
 
     @media (max-width: 640px) {
-    ${'' /* margin-block-start: 16px; */}
-    margin-block-end:  16px;
+      ${"" /* margin-block-start: 16px; */}
+      margin-block-end:  16px;
     }
-
   }
 `;
 
@@ -170,17 +165,15 @@ const Ft3 = styled(Info)`
   grid-area: ft3;
 `;
 
-
 const HeaderWrapper = styled.div`
   display: grid;
   grid-gap: 16px;
   padding: 16px;
-  ${'' /* align-items: center; */}
+  ${"" /* align-items: center; */}
   grid-template-areas:
     "text text"
     "logo empty"
     "ft1  ft2";
-
 
   grid-template-columns: repeat(2, 1fr);
 
@@ -189,7 +182,7 @@ const HeaderWrapper = styled.div`
   }
 
   @media (min-width: 640px) {
-    grid-template-areas: 
+    grid-template-areas:
       "text ft1 ft2"
       "logo ft1 ft2";
     grid-template-columns: repeat(3, 1fr);
@@ -197,20 +190,17 @@ const HeaderWrapper = styled.div`
 
   @media (min-width: 1024px) {
     grid-template-columns: repeat(4, 1fr);
-    grid-template-areas: 
-    "text ft1 ft2 logo";
+    grid-template-areas: "text ft1 ft2 logo";
   }
 
   @media (min-width: 1440px) {
     grid-template-columns: repeat(5, 1fr);
-    grid-template-areas: 
-    "text text ft1 ft2 logo";
+    grid-template-areas: "text text ft1 ft2 logo";
   }
 
   @media (min-width: 1920px) {
     grid-template-columns: repeat(6, 1fr);
-    grid-template-areas: 
-    "text text ft1 ft2 . logo";;
+    grid-template-areas: "text text ft1 ft2 . logo";
   }
 `;
 
@@ -221,12 +211,15 @@ const IconContainer = styled.div`
   animation: appear 1s ease-in;
   animation-fill-mode: both;
 
-  @keyframes appear { 
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  @keyframes appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
-  
   @media (min-width: 640px) {
     margin-right: 0;
     margin-bottom: auto;
@@ -244,13 +237,10 @@ const IconContainer = styled.div`
   @media (min-width: 1920px) {
     margin-left: auto;
   }
-
 `;
 
-
-
 const Text = styled.h2`
-  font-family: inter, 'M PLUS 1p', sans-serif;
+  font-family: inter, "M PLUS 1p", sans-serif;
   font-size: 16.9vw;
   font-weight: bold;
   margin: 0;
@@ -258,7 +248,6 @@ const Text = styled.h2`
   margin-bottom: 0px;
   letter-spacing: -0.03em;
 
-  ${props => (props.dark ? `color: #fff` : `color: #000`)};
   font-weight: 400;
 
   line-height: 1;
@@ -268,11 +257,14 @@ const Text = styled.h2`
   animation: appear 1s ease-in;
   animation-fill-mode: both;
 
-  @keyframes appear { 
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  @keyframes appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
-
 
   p {
     margin-top: 0;
@@ -283,7 +275,6 @@ const Text = styled.h2`
     font-size: 5.5vw;
     margin-top: 12px;
     margin-bottom: 0px;
-
   }
 
   @media (min-width: 1024px) {
@@ -308,6 +299,4 @@ const Text = styled.h2`
     margin-bottom: 42px;
     max-width: 100%;
   }
-
-
 `;

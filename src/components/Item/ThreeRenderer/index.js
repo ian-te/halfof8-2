@@ -165,7 +165,6 @@ async function main(el, model, width, height, lightsInput) {
 }
 export const ThreeRenderer = ({ model, lights, className }) => {
   const el = useRef();
-  console.log(">> three", lights);
 
   useEffect(() => {
     main(

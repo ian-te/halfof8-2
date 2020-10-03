@@ -46,7 +46,6 @@ const ContentInner = styled.div`
 `;
 
 const ContentActionStyled = styled(ContentAction)`
-  color: #0c0c0d;
   text-decoration: none;
   &:hover {
     ${Links}, ${Icon}, ${ContentInner}:before {
