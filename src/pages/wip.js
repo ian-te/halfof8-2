@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from "react";
+import React, { useReducer, useContext, useMemo } from "react";
 import { Intro, IntroWrapper } from "../components/Intro/index.js";
 import { ImageModal, useModalState } from "../components/ImageModal";
 import { graphql, Link } from "gatsby";
@@ -7,6 +7,7 @@ import { Item } from "../components/Item/index.js";
 import { ModalContext } from "./index.js";
 import { PageHeader } from "../components/PageHeader";
 import BackArrow from "../components/Icons/BackArrow.js";
+import { initial } from "lodash";
 
 const initialState = {
   isOpen: false,
@@ -34,7 +35,9 @@ function reducer(state = initialState, action) {
 }
 
 export default ({ data }) => {
-  const { images, header } = data.contentfulWip;
+  const { images: initialImages, header } = data.contentfulWip;
+  const images = useMemo(() => initialImages.reverse(), [images]);
+
   const [state, dispatch] = useReducer(reducer, initialState);
   const modalImages = images.map(item => ({
     src: item.file.url
@@ -58,7 +61,7 @@ export default ({ data }) => {
       </PageHeader>
       <ModalContext.Provider value={{ state, dispatch }}>
         <Layout>
-          {images.reverse().map((image, key) => {
+          {images.map((image, key) => {
             return (
               <Item
                 lightbox={true}

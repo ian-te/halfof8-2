@@ -1,11 +1,12 @@
-/**
- * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/ssr-apis/
- */
+const React = require("react");
+const { DarkThemeProvider } = require("./src/providers/ThemeProvider");
 
-// You can delete this file if you're not using it
+// exports.wrapPageElement = ({ element, props }) => {
+//   return element;
+// };
+exports.wrapRootElement = ({ element, props }) => {
+  // props provide same data to Layout as Page element will get
+  // including location, data, etc - you don't need to pass it
 
-const wrapRootElement = require("./src/wrapRootElement");
-
-// exports = { wrapRootElement };
+  return <DarkThemeProvider>{element}</DarkThemeProvider>;
+};

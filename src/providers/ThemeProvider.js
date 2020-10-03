@@ -13,16 +13,18 @@ export const DarkThemeProvider = ({ children }) => {
   let [isDarkTheme, toggleTheme] = useState(false);
   useEffect(() => {
     if (
+      window &&
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
     ) {
       toggleTheme(true);
     }
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", e => {
-        toggleTheme(e.matches);
-      });
+    window &&
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", e => {
+          toggleTheme(e.matches);
+        });
   }, []);
 
   //   const action = () => {
