@@ -1,5 +1,5 @@
 const darkTheme = {
-  bgColor: "#252525",
+  bgColor: "#111",
   textColor: "white",
   linkActiveColor: "#0029ff"
 };

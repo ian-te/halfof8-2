@@ -109,7 +109,7 @@ const Info = styled.div`
     color: inherit;
     text-decoration: none;
     border-bottom: none;
-    background-color: white;
+    background-color: none;
   }
 
   @media (min-width: 640px) {
