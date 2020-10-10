@@ -95,12 +95,8 @@ const Info = styled.div`
   animation-fill-mode: both;
 
   @keyframes appear {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+    0% { opacity: 0; }
+    100% { opacity: 1; }
   }
 
   ${"" /* 
@@ -111,7 +107,6 @@ const Info = styled.div`
   a {
     color: inherit;
     text-decoration: none;
-    ${"" /* background-color: #FFF500; */}
     border-bottom: 1px solid rgba(143, 148, 153, 0.5);;
   }
 
@@ -123,7 +118,7 @@ const Info = styled.div`
   }
 
   @media (min-width: 640px) {
-    font-size: 14px;
+    font-size: 1.8vw;
     letter-spacing: -0.01em;
     line-height: 1.4;
     margin-top: 12px;
@@ -131,15 +126,15 @@ const Info = styled.div`
   }
 
   @media (min-width: 1024px) {
-    font-size: 16px;
+    font-size: 1.3vw;
     letter-spacing: -0.01em;
     line-height: 1.4;
-    margin-top: 12px;
+    margin-top: 18px;
     width: 90%;
   }
 
   @media (min-width: 1440px) {
-    font-size: 19px;
+    font-size: 1vw;
     letter-spacing: -0.01em;
     line-height: 1.4;
     margin-top: 24px;
@@ -193,9 +188,9 @@ const HeaderWrapper = styled.div`
 
   @media (min-width: 640px) {
     grid-template-areas:
-      "sup1 sup3 sup2 ."
-      "text ft1 ft2"
-      "logo ft1 ft2";
+      "sup3 logo ."
+      "sup1 text text"
+      "sup2 ft1 ft2";
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -242,17 +237,24 @@ const IconContainer = styled.div`
   @media (min-width: 640px) {
     margin-right: 0;
     margin-bottom: auto;
+    
   }
 
   @media (min-width: 1024px) {
     margin-left: auto;
-    margin-top: 16px;
+    margin-top: 0px;
+    svg {
+      width: 42px;
+    }
   }
 
   @media (min-width: 1440px) {
     margin-left: auto;
     margin-right: 0;
     margin-top: 24px;
+    svg {
+      width: 62px;
+    }
   }
 
   @media (min-width: 1920px) {
@@ -266,21 +268,21 @@ const IconContainer = styled.div`
 
 const Text = styled.h2`
   grid-area: text;
-  font-family: inter, "M PLUS 1p", sans-serif;
+  font-family: Inter, "M PLUS 1p", "Playfair Display", sans-serif;
   font-size: 16.9vw;
   margin: 0;
   margin-top: 0px;
   margin-bottom: 24px;
   letter-spacing: -0.03em;
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.02;
   text-align: top;
 
   animation: appear 1s ease-in;
   animation-fill-mode: both;
 
   & ::first-line {
-    font-family:  'Playfair Display', serif;
+    font-family:  "Playfair Display", serif;
     font-weight: 400;
   }
 
@@ -312,7 +314,7 @@ const Text = styled.h2`
   }
 
   @media (min-width: 1440px) {
-    font-size: 110px;
+    font-size: 6.5vw;
     margin-left: 8px;
     margin-top: 0px;
     margin-bottom: 42px;
@@ -320,7 +322,7 @@ const Text = styled.h2`
   }
 
   @media (min-width: 1920px) {
-    font-size: 120px;
+    font-size: 6.5vw;
     margin-left: 0px;
     margin-top: 0px;
     margin-bottom: 42px;
@@ -342,13 +344,13 @@ const Support = styled.div`
   }
 
   @media (min-width: 1024px) {
-    font-size: 12px;
+    font-size: 10px;
     margin-top: 12px;
   }
 
   @media (min-width: 1440px) {
     margin-top: 16px;
-    font-size: 12px;
+    font-size: 10px;
   }
 
 `;
