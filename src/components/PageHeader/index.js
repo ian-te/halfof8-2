@@ -33,19 +33,12 @@ export const PageHeader = ({
 }) => {
   return (
     <HeaderWrapper>
-      {/* <Text dark={dark}>HALF<br/>OF EIGHT<br/>ポスターと<br/>環境音楽 <span>&nbsp;</span> </Text> */}
-      {/* <Text dark={dark}>このページの仕掛品あります</Text> */}
-      <Text dark={dark}>{getHeaderContents(header)}</Text>
-      <IconContainer>
-        {actionRenderer ? (
-          actionRenderer()
-        ) : (
-          <Link href="/">
-            <Logo />
-          </Link>
-        )}
-      </IconContainer>
+      <Support1 dark={dark}>IN SHORT<br/>ショート</Support1>
+      <Support2 dark={dark}>DESCRIPTION<br/>デスクリプション</Support2>
+      <Support3 dark={dark}>HALF OF EIGHT<br/>エイトの半分</Support3>
 
+      <Text dark={dark}>{getHeaderContents(header)}</Text>
+     
       {ft1 && (
         <Ft1>
           {documentToReactComponents(
@@ -70,14 +63,31 @@ export const PageHeader = ({
           )}
         </Ft3>
       )}
+
+      <IconContainer>
+        {actionRenderer ? (
+          actionRenderer()
+        ) : (
+          <Link href="/">
+            <Logo />
+          </Link>
+        )}
+      </IconContainer>
+
+
     </HeaderWrapper>
   );
 };
 
+
+// MAIN TEXT 
+
 const Info = styled.div`
   font-family: neue-haas-grotesk-text, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   align-self: flex-start;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.3;
 
   animation: appear 1s ease-in;
@@ -102,7 +112,7 @@ const Info = styled.div`
     color: inherit;
     text-decoration: none;
     ${"" /* background-color: #FFF500; */}
-    border-bottom: 1px solid #8F9499;
+    border-bottom: 1px solid rgba(143, 148, 153, 0.5);;
   }
 
   a:hover {
@@ -113,7 +123,7 @@ const Info = styled.div`
   }
 
   @media (min-width: 640px) {
-    font-size: 17px;
+    font-size: 14px;
     letter-spacing: -0.01em;
     line-height: 1.4;
     margin-top: 12px;
@@ -121,7 +131,7 @@ const Info = styled.div`
   }
 
   @media (min-width: 1024px) {
-    font-size: 17px;
+    font-size: 16px;
     letter-spacing: -0.01em;
     line-height: 1.4;
     margin-top: 12px;
@@ -132,7 +142,7 @@ const Info = styled.div`
     font-size: 19px;
     letter-spacing: -0.01em;
     line-height: 1.4;
-    margin-top: 12px;
+    margin-top: 24px;
     width: 90%;
   }
 
@@ -144,13 +154,11 @@ const Info = styled.div`
     margin-block-end: 0;
 
     @media (max-width: 2000px) {
-      ${"" /* margin-block-start: 16px; */}
-      margin-block-end:  32px;
+      margin-block-end: 32px;
     }
 
     @media (max-width: 640px) {
-      ${"" /* margin-block-start: 16px; */}
-      margin-block-end:  16px;
+      margin-block-end: 16px;
     }
   }
 `;
@@ -171,8 +179,10 @@ const HeaderWrapper = styled.div`
   padding: 16px;
   ${"" /* align-items: center; */}
   grid-template-areas:
-    "text text"
+    "sup3 sup1"
     "logo empty"
+    "sup2 ."
+    "text text"
     "ft1  ft2";
 
   grid-template-columns: repeat(2, 1fr);
@@ -183,6 +193,7 @@ const HeaderWrapper = styled.div`
 
   @media (min-width: 640px) {
     grid-template-areas:
+      "sup1 sup3 sup2 ."
       "text ft1 ft2"
       "logo ft1 ft2";
     grid-template-columns: repeat(3, 1fr);
@@ -190,24 +201,32 @@ const HeaderWrapper = styled.div`
 
   @media (min-width: 1024px) {
     grid-template-columns: repeat(4, 1fr);
-    grid-template-areas: "text ft1 ft2 logo";
+    grid-template-areas: 
+    "sup1 sup2 .  sup3"
+    "text ft1 ft2 logo";
   }
 
   @media (min-width: 1440px) {
     grid-template-columns: repeat(5, 1fr);
-    grid-template-areas: "text text ft1 ft2 logo";
+    grid-template-areas: 
+    "sup1 . sup2 . sup3"
+    "text text ft1 ft2 logo";
   }
 
   @media (min-width: 1920px) {
     grid-template-columns: repeat(6, 1fr);
-    grid-template-areas: "text text ft1 ft2 . logo";
+    grid-template-areas: 
+    "sup1 . sup2 . . sup3"
+    "text text ft1 ft2 . logo";
   }
 `;
+
+
+// LOGOTYPE
 
 const IconContainer = styled.div`
   grid-area: logo;
   margin-bottom: auto;
-
   animation: appear 1s ease-in;
   animation-fill-mode: both;
 
@@ -227,35 +246,43 @@ const IconContainer = styled.div`
 
   @media (min-width: 1024px) {
     margin-left: auto;
+    margin-top: 16px;
   }
 
   @media (min-width: 1440px) {
     margin-left: auto;
     margin-right: 0;
+    margin-top: 24px;
   }
 
   @media (min-width: 1920px) {
     margin-left: auto;
+    margin-top: 24px;
   }
 `;
 
+
+// BIG HEADLINE WITH KANJIS
+
 const Text = styled.h2`
+  grid-area: text;
   font-family: inter, "M PLUS 1p", sans-serif;
   font-size: 16.9vw;
-  font-weight: bold;
   margin: 0;
   margin-top: 0px;
-  margin-bottom: 0px;
+  margin-bottom: 24px;
   letter-spacing: -0.03em;
-
   font-weight: 400;
-
   line-height: 1;
-  grid-area: text;
   text-align: top;
 
   animation: appear 1s ease-in;
   animation-fill-mode: both;
+
+  & ::first-line {
+    font-family:  'Playfair Display', serif;
+    font-weight: 400;
+  }
 
   @keyframes appear {
     0% {
@@ -280,23 +307,90 @@ const Text = styled.h2`
   @media (min-width: 1024px) {
     font-size: 4.2vw;
     margin-left: 0px;
-    margin-top: 12px;
+    margin-top: 8px;
     margin-bottom: 42px;
   }
 
   @media (min-width: 1440px) {
-    font-size: 7.2vw;
-    margin-left: 0px;
+    font-size: 110px;
+    margin-left: 8px;
     margin-top: 0px;
     margin-bottom: 42px;
     max-width: 100%;
   }
 
   @media (min-width: 1920px) {
-    font-size: 122px;
+    font-size: 120px;
     margin-left: 0px;
     margin-top: 0px;
     margin-bottom: 42px;
     max-width: 100%;
+  }
+`;
+
+
+// Info text at the top
+
+const Support = styled.div`
+  font-family: inter, san-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.4;
+
+  @media (min-width: 640px) {
+    font-size: 10px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 12px;
+    margin-top: 12px;
+  }
+
+  @media (min-width: 1440px) {
+    margin-top: 16px;
+    font-size: 12px;
+  }
+
+`;
+
+const Support1 = styled(Support)`
+  grid-area: sup1;
+  
+  @media (min-width: 640px) {
+  }
+
+  @media (min-width: 1024px) {
+    margin-left: 4px;
+  }
+
+  @media (min-width: 1440px) {
+    margin-left: 12px;
+  }
+
+`;
+const Support2 = styled(Support)`
+  grid-area: sup2;
+  margin-top: 24px;
+
+  @media (min-width: 640px) {
+    margin-bottom: 0px;
+  }
+
+  @media (min-width: 1024px) {
+    margin-bottom: 0px;
+  }
+
+  @media (min-width: 1440px) {
+    margin-bottom: 0px;
+  }
+
+`;
+
+const Support3 = styled(Support)`
+  grid-area: sup3;
+
+  @media (min-width: 1024px) {
+    text-align: right;
+    margin-left: auto;
   }
 `;

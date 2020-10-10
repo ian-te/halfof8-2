@@ -35,10 +35,11 @@ function reducer(state = initialState, action) {
 }
 
 export default ({ data }) => {
-  const { images: initialImages, header } = data.contentfulWip;
+  const { images: initialImages, header, info} = data.contentfulWip;
   const images = useMemo(() => initialImages.reverse(), [initialImages]);
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
   const modalImages = images.map(item => ({
     src: item.file.url
   }));
@@ -46,19 +47,13 @@ export default ({ data }) => {
     <div>
       <PageHeader
         header={header}
+        ft1={info[0]}
+        ft2={info[1]}
         dark
-        actionRenderer={() => (
-          <Link href="/">
-            <BackArrow />
-          </Link>
-        )}
+        
       >
-        this is a page
-        <br />
-        with snapshots of
-        <br />
-        work in progress
       </PageHeader>
+
       <ModalContext.Provider value={{ state, dispatch }}>
         <Layout>
           {images.map((image, key) => {
@@ -75,6 +70,7 @@ export default ({ data }) => {
         </Layout>
         <ImageModal images={modalImages} />
       </ModalContext.Provider>
+
     </div>
   );
 };
@@ -87,6 +83,13 @@ export const query = graphql`
           json
         }
       }
+
+      info {
+        childContentfulTextSnippetTextRichTextNode {
+          json
+        }
+      }
+    
       images {
         file {
           url
@@ -116,6 +119,7 @@ export const query = graphql`
             }
           }
         }
+
       }
     }
   }

@@ -14,6 +14,7 @@ export default function HTML(props) {
         {props.headComponents}
         <link rel="stylesheet" href="https://use.typekit.net/efp6eer.css" />
         <link href="https://fonts.googleapis.com/css2?family=Inter&family=M+PLUS+1p&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet"></link>
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
