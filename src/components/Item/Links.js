@@ -65,9 +65,9 @@ const Link = styled(LinkBase)`
   }
 
   &:hover {
-    color: #0029ff;
+    color: ${props => props.theme.linkActiveColor} ;
     svg path {
-      fill: #0029ff !important;
+      fill: ${props => props.theme.linkActiveColor}  !important;
     }
   }
 

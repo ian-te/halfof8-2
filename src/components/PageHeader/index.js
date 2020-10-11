@@ -111,7 +111,7 @@ const Info = styled.div`
   }
 
   a:hover {
-    color: inherit;
+    color: ${props => props.theme.linkActiveColor} ;
     text-decoration: none;
     border-bottom: none;
     background-color: none;
@@ -277,13 +277,15 @@ const Text = styled.h2`
   font-weight: 400;
   line-height: 1.02;
   text-align: top;
+  color: ${props => props.theme.textColor};
 
   animation: appear 1s ease-in;
   animation-fill-mode: both;
 
-  & ::first-line {
+  &::first-line {
     font-family:  "Playfair Display", serif;
     font-weight: 400;
+    color: ${props => props.theme.textColor} !important;
   }
 
   @keyframes appear {

@@ -24,7 +24,8 @@ const IconBase = ({ item, className, ...props }) => {
 
 export const Icon = styled(IconBase)`
   position: absolute;
-  background-color: #fff;
+  background-color: ${props => props.theme.bgColor};
+  svg path { fill: ${props => props.theme.textColor}; }
   border-radius: 100%;
   left: 16px;
   top: 16px;
@@ -62,8 +63,8 @@ export const Icon = styled(IconBase)`
   }
 
   &:hover {
-    color: #0029FF;
-    svg path { fill: #0029FF !important; }
+    svg path { fill: ${props => props.theme.linkActiveColor} 
+    !important; }
   }
 
   @keyframes popping { 

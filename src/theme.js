@@ -3,13 +3,15 @@ import { nominalTypeHack } from "prop-types";
 const darkTheme = {
   bgColor: "#111",
   textColor: "#EFEFEF",
-  linkActiveColor: "#0029ff"
+  linkActiveColor: "#FFA800",
+  logoActiveColor: "#FFA800"
 };
 
 const lightTheme = {
   bgColor: "#ECEAE4",
   textColor: "#28282A",
-  linkActiveColor: "#0029ff"
+  linkActiveColor: "#FFA800",
+  logoActiveColor: "#FFA800"
 };
 
 

@@ -26,7 +26,7 @@ export const Logo = styled(LogoBase)`
 
   &:hover {
     path[fill] {
-      fill: #FFA800;
+      fill: ${props => props.theme.logoActiveColor};
     }
   }
 
