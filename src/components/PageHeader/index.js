@@ -33,12 +33,24 @@ export const PageHeader = ({
 }) => {
   return (
     <HeaderWrapper>
-      <Support1 dark={dark}>IN SHORT<br/>ショート</Support1>
-      <Support2 dark={dark}>DESCRIPTION<br/>デスクリプション</Support2>
-      <Support3 dark={dark}>HALF OF EIGHT<br/>エイトの半分</Support3>
+      <Support1 dark={dark}>
+        IN SHORT
+        <br />
+        ショート
+      </Support1>
+      <Support2 dark={dark}>
+        DESCRIPTION
+        <br />
+        デスクリプション
+      </Support2>
+      <Support3 dark={dark}>
+        HALF OF EIGHT
+        <br />
+        エイトの半分
+      </Support3>
 
       <Text dark={dark}>{getHeaderContents(header)}</Text>
-     
+
       {ft1 && (
         <Ft1>
           {documentToReactComponents(
@@ -73,14 +85,11 @@ export const PageHeader = ({
           </Link>
         )}
       </IconContainer>
-
-
     </HeaderWrapper>
   );
 };
 
-
-// MAIN TEXT 
+// MAIN TEXT
 
 const Info = styled.div`
   font-family: neue-haas-grotesk-text, sans-serif;
@@ -95,8 +104,12 @@ const Info = styled.div`
   animation-fill-mode: both;
 
   @keyframes appear {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   ${"" /* 
@@ -107,11 +120,11 @@ const Info = styled.div`
   a {
     color: inherit;
     text-decoration: none;
-    border-bottom: 1px solid rgba(143, 148, 153, 0.5);;
+    border-bottom: 1px solid rgba(143, 148, 153, 0.5);
   }
 
   a:hover {
-    color: ${props => props.theme.linkActiveColor} ;
+    color: ${props => props.theme.linkActiveColor};
     text-decoration: none;
     border-bottom: none;
     background-color: none;
@@ -196,26 +209,25 @@ const HeaderWrapper = styled.div`
 
   @media (min-width: 1024px) {
     grid-template-columns: repeat(4, 1fr);
-    grid-template-areas: 
-    "sup1 sup2 .  sup3"
-    "text ft1 ft2 logo";
+    grid-template-areas:
+      "sup1 sup2 .  sup3"
+      "text ft1 ft2 logo";
   }
 
   @media (min-width: 1440px) {
     grid-template-columns: repeat(5, 1fr);
-    grid-template-areas: 
-    "sup1 . sup2 . sup3"
-    "text text ft1 ft2 logo";
+    grid-template-areas:
+      "sup1 . sup2 . sup3"
+      "text text ft1 ft2 logo";
   }
 
   @media (min-width: 1920px) {
     grid-template-columns: repeat(6, 1fr);
-    grid-template-areas: 
-    "sup1 . sup2 . . sup3"
-    "text text ft1 ft2 . logo";
+    grid-template-areas:
+      "sup1 . sup2 . . sup3"
+      "text text ft1 ft2 . logo";
   }
 `;
-
 
 // LOGOTYPE
 
@@ -237,7 +249,6 @@ const IconContainer = styled.div`
   @media (min-width: 640px) {
     margin-right: 0;
     margin-bottom: auto;
-    
   }
 
   @media (min-width: 1024px) {
@@ -263,7 +274,6 @@ const IconContainer = styled.div`
   }
 `;
 
-
 // BIG HEADLINE WITH KANJIS
 
 const Text = styled.h2`
@@ -277,15 +287,16 @@ const Text = styled.h2`
   font-weight: 400;
   line-height: 1.02;
   text-align: top;
-  color: ${props => props.theme.textColor};
+  color: ${props => props.theme.textColor}!important;
 
   animation: appear 1s ease-in;
   animation-fill-mode: both;
 
-  &::first-line {
-    font-family:  "Playfair Display", serif;
+  ::first-line,
+  u {
+    font-family: "Playfair Display", serif !important;
     font-weight: 400;
-    color: ${props => props.theme.textColor} !important;
+    text-decoration: none;
   }
 
   @keyframes appear {
@@ -332,7 +343,6 @@ const Text = styled.h2`
   }
 `;
 
-
 // Info text at the top
 
 const Support = styled.div`
@@ -354,12 +364,11 @@ const Support = styled.div`
     margin-top: 16px;
     font-size: 10px;
   }
-
 `;
 
 const Support1 = styled(Support)`
   grid-area: sup1;
-  
+
   @media (min-width: 640px) {
   }
 
@@ -370,7 +379,6 @@ const Support1 = styled(Support)`
   @media (min-width: 1440px) {
     margin-left: 12px;
   }
-
 `;
 const Support2 = styled(Support)`
   grid-area: sup2;
@@ -387,7 +395,6 @@ const Support2 = styled(Support)`
   @media (min-width: 1440px) {
     margin-bottom: 0px;
   }
-
 `;
 
 const Support3 = styled(Support)`
