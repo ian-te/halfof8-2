@@ -292,7 +292,6 @@ const Text = styled.h2`
   animation: appear 1s ease-in;
   animation-fill-mode: both;
 
-  ::first-line,
   u {
     font-family: "Playfair Display", serif !important;
     font-weight: 400;
