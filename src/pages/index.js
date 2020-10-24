@@ -6,6 +6,7 @@ import { Item } from "../components/Item/index";
 import "./index.css";
 import { ImageModal, useModalState } from "../components/ImageModal";
 import { Intro, IntroWrapper } from "../components/Intro/index.js";
+import { Blobs } from "../components/BlobAnimation";
 import {
   PlayerContext,
   reducer as playerReducer,
@@ -73,6 +74,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <Fragment>
+      <Blobs />
       <PlayerContext.Provider
         value={{
           state: playerState,
