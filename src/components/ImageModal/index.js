@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
 import Carousel, { Modal, ModalGateway } from "react-images";
-import { ModalContext } from "../../pages/index";
+import { ReducerContext } from "../../reducers/root";
 
 export const ImageModal = ({ images }) => {
-  const { state, dispatch } = useContext(ModalContext);
-  const { isOpen, currentSlide } = state;
+  const {
+    state: { modal },
+    dispatch
+  } = useContext(ReducerContext);
+  const { isOpen, currentSlide } = modal;
   return (
     <ModalGateway>
       {isOpen && (

@@ -1,61 +1,19 @@
-import React, { useEffect, Fragment, useReducer } from "react";
+import React, { useContext, Fragment, useReducer } from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { Item } from "../components/Item/index";
 import "./index.css";
 import { ImageModal, useModalState } from "../components/ImageModal";
-import { Intro, IntroWrapper } from "../components/Intro/index.js";
 import { Blobs } from "../components/BlobAnimation";
-import {
-  PlayerContext,
-  reducer as playerReducer,
-  initialState as initialPlayerState
-} from "../reducers/Player";
 import { PageHeader } from "../components/PageHeader";
-
-// const applyReveal = async () => {
-//   const reveal = await import("scrollreveal");
-//   const ScrollReveal = reveal.default;
-//   ScrollReveal().reveal(".sr-item", { interval: 50 });
-// };
-
-export const ModalContext = React.createContext();
-
-const initialState = {
-  isOpen: false,
-  currentSlide: 0
-};
-
-function reducer(state = initialState, action) {
-  switch (action.type) {
-    case "OPEN_MODAL":
-      return {
-        ...state,
-        isOpen: true,
-        currentSlide: action.data.slide
-      };
-
-    case "CLOSE_MODAL":
-      return {
-        ...state,
-        isOpen: false
-      };
-
-    default:
-      return state;
-  }
-}
+import { useRootReducer, ReducerContext } from "../reducers/root";
+import { Filter } from "../components/Filter";
 
 const IndexPage = ({ data }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const [playerState, playerDispatch] = useReducer(
-    playerReducer,
-    initialPlayerState
-  );
-
   const { header, info } = data.contentfulMainPage;
+
+  const [state, dispatch] = useRootReducer();
 
   const modalImages = data.contentfulMainPage.items
     .filter(item => !!item.lightbox)
@@ -70,45 +28,48 @@ const IndexPage = ({ data }) => {
       )
     }));
 
-  let slideKey = -1;
-
   return (
     <Fragment>
       <Blobs />
-      <PlayerContext.Provider
-        value={{
-          state: playerState,
-          dispatch: playerDispatch
-        }}
-      >
-        <ModalContext.Provider value={{ state, dispatch }}>
-          <PageHeader
-            header={header}
-            ft1={info[0]}
-            ft2={info[1]}
-            ft3={info[2]}
-          />
-          <Layout>
-            <SEO title={data.site.siteMetadata.title} />
-            {data.contentfulMainPage.items
-              // .filter(itemData => !itemData.fbxFile)
-              .map(itemData => {
-                if (itemData.lightbox) slideKey = slideKey + 1;
-                return (
-                  <Item
-                    {...itemData}
-                    key={itemData.id}
-                    shadow={true}
-                    ratio={0.75}
-                    currentSlide={slideKey}
-                  />
-                );
-              })}
-          </Layout>
-          <ImageModal images={modalImages} />
-        </ModalContext.Provider>
-      </PlayerContext.Provider>
+      <ReducerContext.Provider value={{ state, dispatch }}>
+        <PageHeader header={header} ft1={info[0]} ft2={info[1]} ft3={info[2]} />
+        <Layout>
+          <SEO title={data.site.siteMetadata.title} />
+          <ItemsRender items={data.contentfulMainPage.items} />
+          <Filter />
+        </Layout>
+        <ImageModal images={modalImages} />
+      </ReducerContext.Provider>
     </Fragment>
+  );
+};
+const ItemsRender = ({ items }) => {
+  let slideKey = -1;
+  const {
+    state: { filter }
+  } = useContext(ReducerContext);
+
+  return (
+    items &&
+    items.map(itemData => {
+      if (itemData.lightbox) slideKey = slideKey + 1;
+      if (
+        filter.tag &&
+        (!itemData.tags ||
+          itemData.tags.find(tag => filter.tag !== tag.identifier))
+      ) {
+        return null;
+      }
+      return (
+        <Item
+          {...itemData}
+          key={itemData.id}
+          shadow={true}
+          ratio={0.75}
+          currentSlide={slideKey}
+        />
+      );
+    })
   );
 };
 
@@ -142,6 +103,11 @@ export const query = graphql`
           externalLinks
           isRootPage
           lightbox
+
+          tags {
+            name
+            identifier
+          }
           fbxFile {
             file {
               url
