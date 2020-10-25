@@ -3,13 +3,20 @@ import styled from "styled-components";
 import { Link } from "gatsby";
 import { Logo } from "../Logo";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
+import { INLINES } from "@contentful/rich-text-types";
+import { Tag } from "../Tag";
 
 const options = {
   renderText: text => {
     return text.split("\n").reduce((children, textSegment, index) => {
       return [...children, index > 0 && <br key={index} />, textSegment];
     }, []);
+  },
+  renderNode: {
+    [INLINES.EMBEDDED_ENTRY]: node => {
+      const { name, identifier } = node.data.target.fields;
+      return <Tag name={name["en-US"]} identifier={identifier["en-US"]} />;
+    }
   }
 };
 
@@ -294,7 +301,8 @@ const Text = styled.h2`
 
   u {
     font-family: "Playfair Display", serif !important;
-    font-weight: 400;
+    font-weight: 400;import { Tag } from '../Tag/index';
+
     text-decoration: none;
   }
 

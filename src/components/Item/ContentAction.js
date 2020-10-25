@@ -1,9 +1,9 @@
 import { Link } from "gatsby";
 import React, { useContext } from "react";
-import { ModalContext } from "../../pages/index";
+import { ReducerContext } from "../../reducers/root";
 
 const LightBoxWrapper = ({ children, item }) => {
-  const { dispatch } = useContext(ModalContext);
+  const { dispatch } = useContext(ReducerContext);
   return (
     <div
       onClick={() =>

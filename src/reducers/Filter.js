@@ -8,6 +8,12 @@ export const initialState = {
 export function reducer(state = initialState, action) {
   switch (action.type) {
     case "FILTER_BY_TAG":
+      if (action.payload.tag === state.tag) {
+        return {
+          ...state,
+          tag: null
+        };
+      }
       return {
         ...state,
         tag: action.payload.tag
