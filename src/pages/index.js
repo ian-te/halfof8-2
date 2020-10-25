@@ -159,6 +159,10 @@ export const query = graphql`
               url
             }
           }
+          tags {
+            name
+            identifier
+          }
           background {
             localFile {
               childImageSharp {

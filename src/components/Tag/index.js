@@ -12,6 +12,7 @@ export const Tag = ({ name, identifier, onClick }) => {
     onClick && onClick(identifier);
     dispatch({ type: "FILTER_BY_TAG", payload: { tag: identifier } });
   };
+  console.log('>>>>', tag, identifier)
   const isActive = tag === identifier;
   return (
     <Wrapper onClick={onTagClick} active={isActive}>
