@@ -2,53 +2,76 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const animations = css`
+
+
+ @media (min-width: 360px) {
   @keyframes ball0 {
     from {
-      transform: translate(0, 0);
-    }
-    25% {
-      transform: translate(21vw, -10vw);
-    }
-    50% {
-      transform: translate(-10vw, 0);
-    }
-    75% {
-      transform: translate(100vw, 10vw);
+      transform: translate(0, -100vw);
     }
     to {
       transform: translate(0, 0);
     }
   }
+
   @keyframes ball1 {
     from {
-      transform: translate(100vw, 0);
-    }
-    25% {
-      transform: translate(10vw, 10vw);
-    }
-    50% {
-      transform: translate(50vw, 0);
-    }
-    75% {
-      transform: translate(21vw, -10vw);
+      transform: translate(-110vw, 150vw);
     }
     to {
       transform: translate(100vw, 0);
     }
   }
+
+  }
+
+  @media (min-width: 640px) {
+    @keyframes ball0 {
+    
+    from {
+      transform: translate(-15vw, -15vw);
+    }
+    to {
+      transform: translate(70vw, 10vw);
+    }
+  }
+
+  @keyframes ball1 {
+    from {
+      transform: translate(70vw, 10vw);
+    }
+    to {
+      transform: translate(-15vw, -15vw);
+    }
+  }
+
+  }
+
 `;
 
 const Blob = styled.div`
   ${animations};
-  width: 50vw;
-  height: 50vw;
+  
+
+  @media (min-width: 360px) {
+    width: 200vw;
+    height: 200vw;
+  }
+
+  @media (min-width: 640px) {
+    width: 60vw;
+    height: 60vw;
+  }
+
   background-image: radial-gradient(
     circle,
     rgba(255, 0, 0, 1) 0%,
-    rgba(0, 212, 255, 0) 66%
+    rgba(236, 234, 228, 0) 66%
   );
+
+
   position: absolute;
-  animation: ${props => `ball${props.num}`} 30s linear infinite;
+  animation: ${props => `ball${props.num}`} 200s linear infinite;
 `;
 const Wrapper = styled.div`
   position: absolute;
