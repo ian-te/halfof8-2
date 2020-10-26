@@ -127,7 +127,7 @@ const Info = styled.div`
   a {
     color: inherit;
     text-decoration: none;
-    border-bottom: 1px solid ${props => props.theme.textColor};
+    border-bottom: 1px solid ${props => props.theme.borderColor};
   }
 
   a:hover {

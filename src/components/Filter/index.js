@@ -56,7 +56,7 @@ const Content = styled.div`
 
   a {
     color: ${props => props.theme.textColor};
-    border-bottom: 0.01em solid ${props => props.theme.textColor};
+    border-bottom: 0.1em solid ${props => props.theme.borderColor};
     text-decoration: none;
     word-wrap: ;
   }

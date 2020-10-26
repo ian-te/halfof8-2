@@ -28,12 +28,12 @@ const Wrapper = styled.a`
   padding: 0px 6px;
   border-radius: 25px;
   background-color: ${props => props.active && props.theme.textColor};
-  color: ${props => props.active && "#FFF!important"};
+  color: ${props => props.active && props.theme.bgColor}!important;
   cursor: pointer;
 
   &:hover {
-    border: 1px solid rgba(0,0,0,0);
-    border-bottom: 1px solid rgba(0,0,0,0)!important;
+    border: 1px solid ${props => props.theme.textColor};
+    border-bottom: 1px solid ${props => props.theme.textColor}!important;
     color: ${props => props.theme.bgColor}!important;
     background-color: ${props => props.theme.textColor};
   }
