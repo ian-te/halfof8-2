@@ -73,6 +73,7 @@ const Blob = styled.div`
   position: absolute;
   animation: ${props => `ball${props.num}`} 200s linear infinite;
 `;
+
 const Wrapper = styled.div`
   position: absolute;
   top: 0;
@@ -80,6 +81,7 @@ const Wrapper = styled.div`
   left: 0;
   right: 0;
   overflow: hidden;
+  height: 200%;
 `;
 
 export const Blobs = ({ blobs = 2 }) => (
