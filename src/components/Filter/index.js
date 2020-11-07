@@ -44,15 +44,19 @@ export const Filter = ({ color = "#000" }) => {
 
 const Content = styled.div`
   display: flex;
-  text-align: center;
-  align-items: center;
+  text-align: left;
+  align-items: top;
   justify-content: center;
-  font-size: 10vw;
-  padding: 0.5vw;
+  font-size: 1vw;
+  line-height: 1.2;
+  padding: 1.5vw;
+  top: 10px;
+
   color: ${props => props.theme.textColor};
+
   a {
     color: ${props => props.theme.textColor};
-    border-bottom: 0.1em solid ${props => props.theme.textColor};
+    border-bottom: 0.1em solid ${props => props.theme.borderColor};
     text-decoration: none;
     word-wrap: ;
   }
@@ -71,12 +75,12 @@ const Content = styled.div`
     font-size: 4vw;
   }
   @media (min-width: 1024px) {
-    font-size: 3vw;
+    font-size: 1vw;
   }
   @media (min-width: 1440px) {
-    font-size: 2.5vw;
+    font-size: 1vw;
   }
   @media (min-width: 1920px) {
-    font-size: 2vw;
+    font-size: 1vw;
   }
 `;
