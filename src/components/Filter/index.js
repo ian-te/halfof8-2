@@ -58,7 +58,6 @@ const Content = styled.div`
     color: ${props => props.theme.textColor};
     border-bottom: 0.1em solid ${props => props.theme.borderColor};
     text-decoration: none;
-    word-wrap: ;
   }
   a:visited {
     color: ${props => props.theme.textColor};

@@ -4,16 +4,16 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { Item } from "../components/Item/index";
 import "./index.css";
-import { ImageModal, useModalState } from "../components/ImageModal";
+import { ImageModal } from "../components/ImageModal";
 import { Blobs } from "../components/BlobAnimation";
 import { PageHeader } from "../components/PageHeader";
-import { useRootReducer, ReducerContext } from "../reducers/root";
+import { ReducerContext } from "../reducers/root";
 import { Filter } from "../components/Filter";
+
+import { Router, Route } from "@reach/router";
 
 const IndexPage = ({ data }) => {
   const { header, info } = data.contentfulMainPage;
-
-  const [state, dispatch] = useRootReducer();
 
   const modalImages = data.contentfulMainPage.items
     .filter(item => !!item.lightbox)
@@ -31,15 +31,16 @@ const IndexPage = ({ data }) => {
   return (
     <Fragment>
       <Blobs />
-      <ReducerContext.Provider value={{ state, dispatch }}>
-        <PageHeader header={header} ft1={info[0]} ft2={info[1]} ft3={info[2]} />
-        <Layout>
-          <SEO title={data.site.siteMetadata.title} />
-          <ItemsRender items={data.contentfulMainPage.items} />
-          <Filter />
-        </Layout>
-        <ImageModal images={modalImages} />
-      </ReducerContext.Provider>
+      <PageHeader header={header} ft1={info[0]} ft2={info[1]} ft3={info[2]} />
+      <Router basepath={"/tag"}>
+        <Route path="/tag/:tagId" component={<div>TAG!</div>} />
+      </Router>
+      <Layout>
+        <SEO title={data.site.siteMetadata.title} />
+        <ItemsRender items={data.contentfulMainPage.items} />
+        <Filter />
+      </Layout>
+      <ImageModal images={modalImages} />
     </Fragment>
   );
 };
@@ -125,29 +126,14 @@ export const query = graphql`
             file {
               url
             }
-            localFile {
-              childImageSharp {
-                id
-                fluid(
-                  srcSetBreakpoints: [240, 320, 380, 480, 640, 1280]
-                  webpQuality: 90
-                  pngQuality: 80
-                  jpegQuality: 90
-                  jpegProgressive: true
-                  cropFocus: ATTENTION
-                  fit: COVER
-                ) {
-                  src
-                  aspectRatio
-                  base64
-                  presentationHeight
-                  presentationWidth
-                  sizes
-                  srcSet
-                  srcWebp
-                  srcSetWebp
-                }
-              }
+            fluid {
+              src
+              aspectRatio
+              base64
+              sizes
+              srcSet
+              srcWebp
+              srcSetWebp
             }
           }
         }
@@ -168,7 +154,6 @@ export const query = graphql`
               childImageSharp {
                 id
                 fluid(
-                  srcSetBreakpoints: [180, 320, 380, 480, 640, 1280]
                   webpQuality: 90
                   pngQuality: 80
                   jpegQuality: 90

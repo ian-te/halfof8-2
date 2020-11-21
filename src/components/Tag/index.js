@@ -1,3 +1,4 @@
+import { Link } from "gatsby";
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { ReducerContext } from "../../reducers/root";
@@ -8,19 +9,18 @@ export const Tag = ({ name, identifier, onClick }) => {
     filter: { tag }
   } = state;
   const onTagClick = e => {
-    e.preventDefault();
     onClick && onClick(identifier);
     dispatch({ type: "FILTER_BY_TAG", payload: { tag: identifier } });
   };
   const isActive = tag === identifier;
   return (
-    <Wrapper onClick={onTagClick} active={isActive}>
+    <Wrapper to={`/tag/${tag}`} onClick={onTagClick} active={isActive}>
       {name}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.a`
+const Wrapper = styled(Link)`
   border: 1px solid ${props => props.theme.textColor};
   border-bottom: 1px solid ${props => props.theme.textColor}!important;
   border-opacity: 0.1;

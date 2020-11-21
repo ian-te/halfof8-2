@@ -38,3 +38,12 @@ export const useRootReducer = () =>
       filter: initialFilterState
     }
   );
+
+export const ReducerProvider = ({ children }) => {
+  const [state, dispatch] = useRootReducer();
+  return (
+    <ReducerContext.Provider value={{ state, dispatch }}>
+      {children}
+    </ReducerContext.Provider>
+  );
+};
