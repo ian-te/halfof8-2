@@ -20,7 +20,7 @@ export const Tag = ({ name, identifier, onClick }) => {
   );
 };
 
-const Wrapper = styled(Link)`
+const Wrapper = styled.span`
   border: 1px solid ${props => props.theme.textColor};
   border-bottom: 1px solid ${props => props.theme.textColor}!important;
   padding: 0px 6px;
