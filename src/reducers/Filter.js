@@ -2,7 +2,10 @@ import React from "react";
 import { navigate } from "@reach/router";
 
 const getTag = () => {
-  if (window && window.location.href.indexOf("/tag/")) {
+  if (
+    typeof window !== "undefined" &&
+    window.location.href.indexOf("/tag/") > -1
+  ) {
     const location = window.location.href
       .split("/")
       .filter(part => part !== "");

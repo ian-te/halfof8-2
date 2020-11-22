@@ -20,15 +20,15 @@ import combineReducers from "react-combine-reducers";
 export const ReducerContext = React.createContext();
 
 export const useRootReducer = () => {
-  const [reducerCombined, initialStateCombined] = useCallback(
-    combineReducers({
-      player: [playerReducer, initialPlayerState],
-      modal: [modalReducer, initialModalState],
-      filter: [filterReducer, initialFilterState]
-    }),
-    [reducerCombined, initialStateCombined]
-  );
-  return useReducer(reducerCombined, initialStateCombined);
+  const [reducerCombined, initialStateCombined] = combineReducers({
+    player: [playerReducer, initialPlayerState],
+    modal: [modalReducer, initialModalState],
+    filter: [filterReducer, initialFilterState]
+  });
+  return useCallback(useReducer(reducerCombined, initialStateCombined), [
+    reducerCombined,
+    initialStateCombined
+  ]);
 };
 export const useReducerContext = () => useContext(ReducerContext);
 

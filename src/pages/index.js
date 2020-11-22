@@ -49,17 +49,17 @@ const ItemsRender = ({ items }) => {
     items &&
     items.map(itemData => {
       if (itemData.lightbox) slideKey = slideKey + 1;
-      if (
-        filter.tag &&
-        (!itemData.tags ||
-          itemData.tags.find(tag => filter.tag !== tag.identifier))
-      ) {
-        return null;
-      }
       return (
         <Item
           {...itemData}
           key={itemData.id}
+          visible={
+            !(
+              filter.tag &&
+              (!itemData.tags ||
+                itemData.tags.find(tag => filter.tag !== tag.identifier))
+            )
+          }
           shadow={true}
           ratio={0.75}
           currentSlide={slideKey}
