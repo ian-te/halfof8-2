@@ -1,4 +1,4 @@
-import React, { useContext, Fragment, useReducer } from "react";
+import React, { useContext, Fragment } from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
@@ -7,10 +7,8 @@ import "./index.css";
 import { ImageModal } from "../components/ImageModal";
 import { Blobs } from "../components/BlobAnimation";
 import { PageHeader } from "../components/PageHeader";
-import { ReducerContext } from "../reducers/root";
 import { Filter } from "../components/Filter";
-
-import { Router, Route } from "@reach/router";
+import { useReducerContext } from "../reducers/root";
 
 const IndexPage = ({ data }) => {
   const { header, info } = data.contentfulMainPage;
@@ -32,9 +30,6 @@ const IndexPage = ({ data }) => {
     <Fragment>
       <Blobs />
       <PageHeader header={header} ft1={info[0]} ft2={info[1]} ft3={info[2]} />
-      <Router basepath={"/tag"}>
-        <Route path="/tag/:tagId" component={<div>TAG!</div>} />
-      </Router>
       <Layout>
         <SEO title={data.site.siteMetadata.title} />
         <ItemsRender items={data.contentfulMainPage.items} />
@@ -48,7 +43,7 @@ const ItemsRender = ({ items }) => {
   let slideKey = -1;
   const {
     state: { filter }
-  } = useContext(ReducerContext);
+  } = useReducerContext();
 
   return (
     items &&

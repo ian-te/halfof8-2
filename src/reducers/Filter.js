@@ -1,15 +1,15 @@
 import React from "react";
 import { navigate } from "@reach/router";
 
-export const FilterContext = React.createContext();
-
 export const initialState = {
   tag: null
 };
 
 export function reducer(state = initialState, action) {
+  console.log(">>>", action);
   switch (action.type) {
     case "FILTER_BY_TAG":
+      console.log(">>> filter by tag");
       if (action.payload.tag === state.tag) {
         navigate(`/`);
         return {
@@ -24,6 +24,7 @@ export function reducer(state = initialState, action) {
       };
 
     case "RESET_FILTER":
+      console.log(">>> filter by tag");
       navigate(`/`);
       return {
         ...state,

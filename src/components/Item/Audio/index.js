@@ -9,7 +9,7 @@ import React, {
 import { Play as PlayBase, Pause as PauseBase } from "./components/Play";
 import styled from "styled-components";
 import { ContentImage } from "../Image";
-import { ReducerContext } from "../../../reducers/root";
+import { useReducerContext } from "../../../reducers/root";
 
 function readableDuration(seconds) {
   let sec = Math.floor(seconds);
@@ -28,7 +28,7 @@ export const Audio = ({ id, mp3, background }) => {
       player: { isPlaying, currentItem }
     },
     dispatch
-  } = useContext(ReducerContext);
+  } = useReducerContext();
 
   useEffect(() => {
     if (isPlaying && currentItem === id) {

@@ -3,7 +3,6 @@ const React = require("react");
 const { ThemeProvider } = require("styled-components");
 const { ReducerProvider } = require("./reducers/root");
 const { DarkThemeProvider } = require("./providers/ThemeProvider");
-const { darkTheme, lightTheme } = require("./theme");
 // import { ThemeProvider } from "styled-components";
 // import { darkTheme } from "./theme";
 

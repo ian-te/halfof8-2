@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { ReducerContext } from "../../reducers/root";
+import { useReducerContext } from "../../reducers/root";
 
 const LogoBase = ({ className, width = 150 }) => {
   const { textColor: fill } = useContext(ThemeContext);
@@ -9,7 +9,7 @@ const LogoBase = ({ className, width = 150 }) => {
       filter: { tag }
     },
     dispatch
-  } = useContext(ReducerContext);
+  } = useReducerContext();
   const handleLogoClick = e => {
     if (tag) {
       e.preventDefault();
@@ -42,12 +42,6 @@ const LogoBase = ({ className, width = 150 }) => {
 
 export const Logo = styled(LogoBase)`
   margin: 0 auto;
-
-  ${"" /* &:hover {
-    path[fill] {
-      stroke: ${props => props.theme.textColor};
-    }
-  } */}
 
   &:hover {
     path[fill] {

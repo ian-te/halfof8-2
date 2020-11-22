@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   reducer as playerReducer,
   initialState as initialPlayerState
@@ -39,8 +39,11 @@ export const useRootReducer = () =>
     }
   );
 
+export const useReducerContext = () => useContext(ReducerContext);
+
 export const ReducerProvider = ({ children }) => {
   const [state, dispatch] = useRootReducer();
+  console.log(">>> called Reducer Provider");
   return (
     <ReducerContext.Provider value={{ state, dispatch }}>
       {children}
