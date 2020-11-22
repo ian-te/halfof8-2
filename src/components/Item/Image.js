@@ -2,12 +2,11 @@ import React from "react";
 import Image from "gatsby-image";
 
 export const ContentImage = ({ item }) => {
-  console.log(">>>", item);
   if (!item.indexBackgroundImage) {
     return null;
   } else if (item.indexBackgroundImage.fluid) {
     const data = item.indexBackgroundImage;
-    const aspectRatio = data.aspectRatio;
+    const aspectRatio = data.fluid.aspectRatio;
     const width = ((100 / 4) * aspectRatio) / 0.75 - 2;
     const sources = [
       {
@@ -20,8 +19,8 @@ export const ContentImage = ({ item }) => {
         ...data.fluid,
         media: "(max-width: 480px)",
         key: `mobile${item.id}`,
-        aspectRatio,
-        sizes: "50vw"
+        aspectRatio
+        // sizes: "50vw"
       }
     ];
     return (

@@ -150,26 +150,17 @@ export const query = graphql`
             identifier
           }
           background {
-            localFile {
-              childImageSharp {
-                id
-                fluid(
-                  webpQuality: 90
-                  pngQuality: 80
-                  jpegQuality: 90
-                  jpegProgressive: true
-                ) {
-                  src
-                  aspectRatio
-                  base64
-                  presentationHeight
-                  presentationWidth
-                  sizes
-                  srcSet
-                  srcWebp
-                  srcSetWebp
-                }
-              }
+            file {
+              url
+            }
+            fluid {
+              src
+              aspectRatio
+              base64
+              sizes
+              srcSet
+              srcWebp
+              srcSetWebp
             }
           }
         }
