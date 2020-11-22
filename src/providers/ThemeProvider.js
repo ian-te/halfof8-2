@@ -29,10 +29,6 @@ export const DarkThemeProvider = ({ children }) => {
         });
   }, []);
 
-  //   const action = () => {
-  //     toggleTheme((isDarkTheme = !isDarkTheme));
-  //   };
-
   return (
     <ThemeProvider theme={isDarkTheme ? themes.darkTheme : themes.lightTheme}>
       <GlobalStyle />

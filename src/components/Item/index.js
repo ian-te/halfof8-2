@@ -5,9 +5,9 @@ import { ContentRenderer } from "./ContentRenderer";
 import { Icon } from "./Icon";
 import { Links } from "./Links";
 
-export const Item = ({ name, tag, ratio = "0.75", ...item }) => {
+export const Item = ({ visible, name, tag, ratio = "0.75", ...item }) => {
   return (
-    <ContentActionStyled item={item}>
+    <ContentActionStyled visible={visible} item={item}>
       <ContentWrapper ratio={ratio}>
         <ContentInner>
           <ContentRenderer item={item} />
@@ -47,6 +47,8 @@ const ContentInner = styled.div`
 
 const ContentActionStyled = styled(ContentAction)`
   text-decoration: none;
+  ${props =>
+    !props.visible && `visibility: hidden; position: absolute; z-index: -10;`}
   &:hover {
     ${Links}, ${Icon}, ${ContentInner}:before {
       display: flex;

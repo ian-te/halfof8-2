@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
-import Logo from "../Logo";
+import React from "react";
 import styled from "styled-components";
 import { ContentWrapper } from "../Item";
-import { ReducerContext } from "../../reducers/root";
+import { useReducerContext } from "../../reducers/root";
 import { Link } from "gatsby";
 
 export const IntroWrapper = ({ children }) => {
@@ -19,13 +18,17 @@ export const Filter = ({ color = "#000" }) => {
       filter: { tag }
     },
     dispatch
-  } = useContext(ReducerContext);
+  } = useReducerContext();
   return (
     <IntroWrapper>
       {!!tag && (
         <div>
           You viewed all the {tag}.{" "}
-          <a onClick={() => dispatch({ type: "RESET_FILTER" })}>
+          <a
+            onClick={() => {
+              dispatch({ type: "RESET_FILTER" });
+            }}
+          >
             Reset filters
           </a>{" "}
           to see all types of work or explore{" "}
@@ -58,7 +61,7 @@ const Content = styled.div`
     color: ${props => props.theme.textColor};
     border-bottom: 0.1em solid ${props => props.theme.borderColor};
     text-decoration: none;
-    word-wrap: ;
+    cursor: pointer;
   }
   a:visited {
     color: ${props => props.theme.textColor};

@@ -2,25 +2,25 @@ import React from "react";
 import Image from "gatsby-image";
 
 export const ContentImage = ({ item }) => {
-  if (!item.indexBackgroundImage || !item.indexBackgroundImage.localFile) {
+  if (!item.indexBackgroundImage) {
     return null;
-  } else if (item.indexBackgroundImage.localFile.childImageSharp) {
-    const data = item.indexBackgroundImage.localFile;
-    const aspectRatio = data.childImageSharp.fluid.aspectRatio;
+  } else if (item.indexBackgroundImage.fluid) {
+    const data = item.indexBackgroundImage;
+    const aspectRatio = data.fluid.aspectRatio;
     const width = ((100 / 4) * aspectRatio) / 0.75 - 2;
     const sources = [
       {
-        ...data.childImageSharp.fluid,
+        ...data.fluid,
         sizes: `${width}vw`,
         aspectRatio,
         key: item.id
       },
       {
-        ...data.childImageSharp.fluid,
+        ...data.fluid,
         media: "(max-width: 480px)",
         key: `mobile${item.id}`,
-        aspectRatio,
-        sizes: "50vw"
+        aspectRatio
+        // sizes: "50vw"
       }
     ];
     return (

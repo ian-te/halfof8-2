@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useReducer, useCallback } from "react";
+import { useParams } from "@reach/router";
 import {
   reducer as playerReducer,
   initialState as initialPlayerState
@@ -14,27 +15,29 @@ import {
   initialState as initialFilterState
 } from "./Filter";
 
-export const combineReducers = slices => (prevState, action) =>
-  Object.keys(slices).reduce(
-    (nextState, nextProp) => ({
-      ...nextState,
-      [nextProp]: slices[nextProp](prevState[nextProp], action)
-    }),
-    prevState
-  );
+import combineReducers from "react-combine-reducers";
 
 export const ReducerContext = React.createContext();
 
-export const useRootReducer = () =>
-  React.useReducer(
-    combineReducers({
-      player: playerReducer,
-      modal: modalReducer,
-      filter: filterReducer
-    }), // here we create the reducer slices
-    {
-      player: initialPlayerState,
-      modal: initialModalState,
-      filter: initialFilterState
-    }
+export const useRootReducer = () => {
+  const [reducerCombined, initialStateCombined] = combineReducers({
+    player: [playerReducer, initialPlayerState],
+    modal: [modalReducer, initialModalState],
+    filter: [filterReducer, initialFilterState]
+  });
+  return useCallback(useReducer(reducerCombined, initialStateCombined), [
+    reducerCombined,
+    initialStateCombined
+  ]);
+};
+export const useReducerContext = () => useContext(ReducerContext);
+
+export const ReducerProvider = ({ children }) => {
+  const [state, dispatch] = useRootReducer();
+
+  return (
+    <ReducerContext.Provider value={{ state, dispatch }}>
+      {children}
+    </ReducerContext.Provider>
   );
+};

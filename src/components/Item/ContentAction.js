@@ -1,19 +1,19 @@
 import { Link } from "gatsby";
 import React, { useContext } from "react";
-import { ReducerContext } from "../../reducers/root";
+import { useReducerContext } from "../../reducers/root";
 
 const LightBoxWrapper = ({ children, item }) => {
-  const { dispatch } = useContext(ReducerContext);
+  const { dispatch } = useReducerContext();
   return (
     <div
-      onClick={() =>
+      onClick={() => {
         dispatch({
           type: "OPEN_MODAL",
           data: {
             slide: item.currentSlide
           }
-        })
-      }
+        });
+      }}
       style={{ cursor: "pointer" }}
     >
       {children}
