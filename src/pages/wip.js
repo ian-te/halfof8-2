@@ -21,6 +21,7 @@ export default ({ data }) => {
           return (
             <Item
               lightbox={true}
+              visible={true}
               indexBackgroundImage={image}
               key={key}
               ratio={0.562}
