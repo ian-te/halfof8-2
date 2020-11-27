@@ -104,7 +104,7 @@ const Info = styled.div`
   -moz-osx-font-smoothing: grayscale;
   align-self: flex-start;
   font-size: 13px;
-  line-height: 1.3;
+  line-height: 1.4;
 
   animation: appear 1s ease-in;
   animation-delay: 1s;
