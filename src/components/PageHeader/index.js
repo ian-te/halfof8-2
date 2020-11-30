@@ -105,6 +105,7 @@ const Info = styled.div`
   align-self: flex-start;
   font-size: 13px;
   line-height: 1.4;
+  margin-block-end: 32px;
 
   animation: appear 1s ease-in;
   animation-delay: 1s;
