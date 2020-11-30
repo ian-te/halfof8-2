@@ -7,19 +7,19 @@ const animations = css`
  @media (min-width: 360px) {
   @keyframes ball0 {
     from {
-      transform: translate(0, -100vw);
+      transform: translate(-100vw, -50vw);
     }
     to {
-      transform: translate(0, 0);
+      transform: translate(100vw, 0vw);
     }
   }
 
   @keyframes ball1 {
     from {
-      transform: translate(-110vw, 150vw);
+      transform: translate(-110vw, 250vw);
     }
     to {
-      transform: translate(100vw, 0);
+      transform: translate(100vw, 0vw);
     }
   }
 

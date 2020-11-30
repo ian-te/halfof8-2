@@ -41,9 +41,9 @@ export const PageHeader = ({
   return (
     <HeaderWrapper>
       <Support1 dark={dark}>
-        IN SHORT
+        HALF OF EIGHT
         <br />
-        ショート
+        エイトの半分
       </Support1>
       <Support2 dark={dark}>
         DESCRIPTION
@@ -51,9 +51,9 @@ export const PageHeader = ({
         デスクリプション
       </Support2>
       <Support3 dark={dark}>
-        HALF OF EIGHT
+        IN SHORT
         <br />
-        エイトの半分
+        ショート
       </Support3>
 
       <Text dark={dark}>{getHeaderContents(header)}</Text>
@@ -169,11 +169,11 @@ const Info = styled.div`
     margin-block-end: 0;
 
     @media (max-width: 2000px) {
-      margin-block-end: 32px;
+      ${'' /* margin-block-end: 32px; */}
     }
 
     @media (max-width: 640px) {
-      margin-block-end: 16px;
+      ${'' /* margin-block-end: 16px; */}
     }
   }
 `;
@@ -193,8 +193,9 @@ const HeaderWrapper = styled.div`
   grid-gap: 16px;
   padding: 16px;
   ${"" /* align-items: center; */}
+
   grid-template-areas:
-    "sup3 sup1"
+    "sup1 sup3"
     "logo empty"
     "sup2 ."
     "text text"
@@ -218,21 +219,21 @@ const HeaderWrapper = styled.div`
     grid-template-columns: repeat(4, 1fr);
     grid-template-areas:
       "sup1 sup2 .  sup3"
-      "text ft1 ft2 logo";
+      "logo ft1 ft2 text";
   }
 
   @media (min-width: 1440px) {
     grid-template-columns: repeat(5, 1fr);
     grid-template-areas:
-      "sup1 . sup2 . sup3"
-      "text text ft1 ft2 logo";
+      "sup1 sup2 . . sup3"
+      "logo ft1 ft2 text text";
   }
 
   @media (min-width: 1920px) {
     grid-template-columns: repeat(6, 1fr);
     grid-template-areas:
-      "sup1 . sup2 . . sup3"
-      "text text ft1 ft2 . logo";
+      "sup1 sup2 . . . sup3"
+      "logo ft1 ft2 . text text";
   }
 `;
 
@@ -259,7 +260,6 @@ const IconContainer = styled.div`
   }
 
   @media (min-width: 1024px) {
-    margin-left: auto;
     margin-top: 0px;
     svg {
       width: 42px;
@@ -267,7 +267,6 @@ const IconContainer = styled.div`
   }
 
   @media (min-width: 1440px) {
-    margin-left: auto;
     margin-right: 0;
     margin-top: 24px;
     svg {
@@ -276,7 +275,6 @@ const IconContainer = styled.div`
   }
 
   @media (min-width: 1920px) {
-    margin-left: auto;
     margin-top: 24px;
   }
 `;
@@ -294,7 +292,7 @@ const Text = styled.h2`
   font-weight: 400;
   line-height: 1.02;
   text-align: top;
-  color: ${props => props.theme.textColor}!important;
+  color: ${props => props.theme.bgColor}!important;
 
   animation: appear 1s ease-in;
   animation-fill-mode: both;
@@ -302,7 +300,6 @@ const Text = styled.h2`
   u {
     font-family: "Playfair Display", serif !important;
     font-weight: 400;import { Tag } from '../Tag/index';
-
     text-decoration: none;
   }
 
@@ -328,14 +325,14 @@ const Text = styled.h2`
 
   @media (min-width: 1024px) {
     font-size: 4.2vw;
-    margin-left: 0px;
+    margin-left: auto;
     margin-top: 8px;
     margin-bottom: 42px;
   }
 
   @media (min-width: 1440px) {
     font-size: 6.5vw;
-    margin-left: 8px;
+    margin-left: auto;
     margin-top: 0px;
     margin-bottom: 42px;
     max-width: 100%;
@@ -343,7 +340,7 @@ const Text = styled.h2`
 
   @media (min-width: 1920px) {
     font-size: 6.5vw;
-    margin-left: 0px;
+    margin-left: auto;
     margin-top: 0px;
     margin-bottom: 42px;
     max-width: 100%;
@@ -375,18 +372,8 @@ const Support = styled.div`
 
 const Support1 = styled(Support)`
   grid-area: sup1;
-
-  @media (min-width: 640px) {
-  }
-
-  @media (min-width: 1024px) {
-    margin-left: 4px;
-  }
-
-  @media (min-width: 1440px) {
-    margin-left: 12px;
-  }
 `;
+
 const Support2 = styled(Support)`
   grid-area: sup2;
   margin-top: 24px;
