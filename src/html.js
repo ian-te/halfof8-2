@@ -13,9 +13,12 @@ export default function HTML(props) {
         />
         {props.headComponents}
         <link rel="stylesheet" href="https://use.typekit.net/efp6eer.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter&family=M+PLUS+1p&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter&family=M+PLUS+1p&family=Playfair+Display:ital@0;1&display=swap"
+          rel="stylesheet"
+        />
       </head>
-      <body {...props.bodyAttributes}>
+      <body style={{ backgroundColor: "#ECEAE4" }} {...props.bodyAttributes}>
         {props.preBodyComponents}
         <div
           key={`body`}
@@ -23,7 +26,11 @@ export default function HTML(props) {
           dangerouslySetInnerHTML={{ __html: props.body }}
         />
         {props.postBodyComponents}
-        <div dangerouslySetInnerHTML={{__html: `<script type="text/javascript" >(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter13731373 = new Ya.Metrika({ id:13731373, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script>`}}></div> 
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `<script type="text/javascript" >(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter13731373 = new Ya.Metrika({ id:13731373, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script>`
+          }}
+        ></div>
       </body>
     </html>
   );
