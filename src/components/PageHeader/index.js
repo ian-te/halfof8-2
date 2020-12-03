@@ -380,15 +380,14 @@ const Support2 = styled(Support)`
   margin-top: 24px;
 
   @media (min-width: 640px) {
-    margin-bottom: 0px;
   }
 
   @media (min-width: 1024px) {
-    margin-bottom: 0px;
+
   }
 
   @media (min-width: 1440px) {
-    margin-bottom: 0px;
+
   }
 `;
 

@@ -76,7 +76,7 @@ const theme = {
     color: "#FFF"
   },
   white: {
-    body: "#FFF",
+    body: "#ECEAE4",
     color: "#000"
   }
 };
