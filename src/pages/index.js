@@ -28,8 +28,8 @@ const IndexPage = ({ data }) => {
 
   return (
     <Fragment>
-      <Blobs />
-      <PageHeader header={header} ft1={info[0]} ft2={info[1]} ft3={info[2]} />
+      {/* <Blobs /> */}
+      <PageHeader header={header} ft1={info[0]} ft2={info[1]} ft3={info[2]} ft4={info[3]} />
       <Layout>
         <SEO title={data.site.siteMetadata.title} />
         <ItemsRender items={data.contentfulMainPage.items} />

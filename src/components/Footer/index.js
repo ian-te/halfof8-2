@@ -9,7 +9,6 @@ const Text = () => (
     via <a href="mailto:info@halfof8.com">info@halfof8.com</a> <br/>
     Design by <a href="https://instagram.com/halfof8">Anton Sokolov</a> <br/>
     Development by <a href="https://github.com/yante" target="_blank">Yan Te</a><br/>
-    Set in <a href="https://commercialtype.com/catalog/neue_haas_grotesk" target="_blank">Neue Haas Grotesk</a>
   </p>
 );
 const FooterBase = ({ className, children }) => (

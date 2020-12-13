@@ -24,9 +24,9 @@ const getHeaderContents = header =>
   [header[0]].map(item =>
     item.childContentfulTextSnippetTextRichTextNode
       ? documentToReactComponents(
-          item.childContentfulTextSnippetTextRichTextNode.json,
-          options
-        )
+        item.childContentfulTextSnippetTextRichTextNode.json,
+        options
+      )
       : item
   );
 
@@ -36,12 +36,13 @@ export const PageHeader = ({
   actionRenderer = null,
   ft1,
   ft2,
-  ft3
+  ft3,
+  ft4
 }) => {
   return (
     <HeaderWrapper>
-      <Support1 dark={dark}>
-        HALF OF EIGHT
+      {/* <Support1 dark={dark}>
+      HALF OF EIGHT
         <br />
         エイトの半分
       </Support1>
@@ -54,9 +55,9 @@ export const PageHeader = ({
         IN SHORT
         <br />
         ショート
-      </Support3>
+      </Support3> */}
 
-      <Text dark={dark}>{getHeaderContents(header)}</Text>
+      {/* <Text dark={dark}>{getHeaderContents(header)}</Text> */}
 
       {ft1 && (
         <Ft1>
@@ -66,6 +67,7 @@ export const PageHeader = ({
           )}
         </Ft1>
       )}
+
       {ft2 && (
         <Ft2>
           {documentToReactComponents(
@@ -74,6 +76,7 @@ export const PageHeader = ({
           )}
         </Ft2>
       )}
+
       {ft3 && (
         <Ft3>
           {documentToReactComponents(
@@ -83,6 +86,16 @@ export const PageHeader = ({
         </Ft3>
       )}
 
+      {ft4 && (
+        <Ft4>
+          {documentToReactComponents(
+            ft4.childContentfulTextSnippetTextRichTextNode.json,
+            options
+          )}
+        </Ft4>
+      )}
+
+      {/* 
       <IconContainer>
         {actionRenderer ? (
           actionRenderer()
@@ -91,7 +104,7 @@ export const PageHeader = ({
             <Logo />
           </Link>
         )}
-      </IconContainer>
+      </IconContainer> */}
     </HeaderWrapper>
   );
 };
@@ -99,17 +112,13 @@ export const PageHeader = ({
 // MAIN TEXT
 
 const Info = styled.div`
-  font-family: neue-haas-grotesk-text, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   align-self: flex-start;
-  font-size: 13px;
-  line-height: 1.4;
-  margin-block-end: 32px;
 
   animation: appear 1s ease-in;
   animation-delay: 1s;
   animation-fill-mode: both;
+
+  ${'' /* width: 90%; */}
 
   @keyframes appear {
     0% {
@@ -119,11 +128,6 @@ const Info = styled.div`
       opacity: 1;
     }
   }
-
-  ${"" /* 
-  :nth-child(3) { animation-delay: 1s }
-  :nth-child(4) { animation-delay: 1s }
-  :nth-child(5) { animation-delay: 3s } */}
 
   a {
     color: inherit;
@@ -138,44 +142,61 @@ const Info = styled.div`
     background-color: none;
   }
 
-  @media (min-width: 640px) {
-    font-size: 1.8vw;
-    letter-spacing: -0.01em;
-    line-height: 1.4;
-    margin-top: 12px;
-    width: 90%;
-  }
-
-  @media (min-width: 1024px) {
-    font-size: 1.3vw;
-    letter-spacing: -0.01em;
-    line-height: 1.4;
-    margin-top: 18px;
-    width: 90%;
-  }
-
-  @media (min-width: 1440px) {
-    font-size: 1vw;
-    letter-spacing: -0.01em;
-    line-height: 1.4;
-    margin-top: 24px;
-    width: 90%;
-  }
-
-  @media (min-width: 1920px) {
-  }
-
   p {
     margin-block-start: 0;
     margin-block-end: 0;
+  }
+`;
 
-    @media (max-width: 2000px) {
-      ${'' /* margin-block-end: 32px; */}
-    }
 
-    @media (max-width: 640px) {
-      ${'' /* margin-block-end: 16px; */}
-    }
+const HeaderWrapper = styled.div`
+  display: grid;
+
+
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "ft1  ft2"
+    "ft3  ft4";
+
+  @media (min-width: 360px) {
+    grid-gap: 24px;
+    padding: 8px;
+    padding-bottom: 42px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 640px) {
+    grid-gap: 16px;
+  padding: 16px;
+  padding-bottom: 42px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+      "ft1 ft3 ."
+      "ft2 ft4 .";
+  }
+
+  @media (min-width: 1024px) {
+    grid-gap: 16px;
+  padding: 16px;
+  padding-bottom: 42px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+      "ft1 ft2 ft3 ft4";
+  }
+
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas:
+      "ft1 ft2 ft3 ft4 .";
+  }
+
+  @media (min-width: 1920px) {
+    grid-gap: 16px;
+  padding: 16px;
+  padding-bottom: 42px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+      "ft1 ft2 ft3 ft4 . .";
   }
 `;
 
@@ -189,213 +210,37 @@ const Ft3 = styled(Info)`
   grid-area: ft3;
 `;
 
-const HeaderWrapper = styled.div`
-  display: grid;
-  grid-gap: 16px;
-  padding: 16px;
-  ${"" /* align-items: center; */}
-
-  grid-template-areas:
-    "sup1 sup3"
-    "logo empty"
-    "sup2 ."
-    "text text"
-    "ft1  ft2";
-
-  grid-template-columns: repeat(2, 1fr);
-
-  @media (min-width: 360px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 640px) {
-    grid-template-areas:
-      "sup3 logo ."
-      "sup1 text text"
-      "sup2 ft1 ft2";
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-areas:
-      "sup1 sup2 .  sup3"
-      "logo ft1 ft2 text";
-  }
-
-  @media (min-width: 1440px) {
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-areas:
-      "sup1 sup2 . . sup3"
-      "logo ft1 ft2 text text";
-  }
-
-  @media (min-width: 1920px) {
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-areas:
-      "sup1 sup2 . . . sup3"
-      "logo ft1 ft2 . text text";
-  }
+const Ft4 = styled(Info)`
+  grid-area: ft4;
 `;
 
-// LOGOTYPE
-
-const IconContainer = styled.div`
-  grid-area: logo;
-  margin-bottom: auto;
-  animation: appear 1s ease-in;
-  animation-fill-mode: both;
-
-  @keyframes appear {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @media (min-width: 640px) {
-    margin-right: 0;
-    margin-bottom: auto;
-  }
-
-  @media (min-width: 1024px) {
-    margin-top: 0px;
-    svg {
-      width: 42px;
-    }
-  }
-
-  @media (min-width: 1440px) {
-    margin-right: 0;
-    margin-top: 24px;
-    svg {
-      width: 62px;
-    }
-  }
-
-  @media (min-width: 1920px) {
-    margin-top: 24px;
-  }
-`;
-
-// BIG HEADLINE WITH KANJIS
-
-const Text = styled.h2`
-  grid-area: text;
-  font-family: Inter, "M PLUS 1p", "Playfair Display", sans-serif;
-  font-size: 16.9vw;
-  margin: 0;
-  margin-top: 0px;
-  margin-bottom: 24px;
-  letter-spacing: -0.03em;
-  font-weight: 400;
-  line-height: 1.02;
-  text-align: top;
-  color: ${props => props.theme.bgColor}!important;
-
-  animation: appear 1s ease-in;
-  animation-fill-mode: both;
-
-  u {
-    font-family: "Playfair Display", serif !important;
-    font-weight: 400;import { Tag } from '../Tag/index';
-    text-decoration: none;
-  }
-
-  @keyframes appear {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  p {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  @media (min-width: 640px) {
-    font-size: 5.5vw;
-    margin-top: 12px;
-    margin-bottom: 0px;
-  }
-
-  @media (min-width: 1024px) {
-    font-size: 4.2vw;
-    margin-left: auto;
-    margin-top: 8px;
-    margin-bottom: 42px;
-  }
-
-  @media (min-width: 1440px) {
-    font-size: 6.5vw;
-    margin-left: auto;
-    margin-top: 0px;
-    margin-bottom: 42px;
-    max-width: 100%;
-  }
-
-  @media (min-width: 1920px) {
-    font-size: 6.5vw;
-    margin-left: auto;
-    margin-top: 0px;
-    margin-bottom: 42px;
-    max-width: 100%;
-  }
-`;
 
 // Info text at the top
 
-const Support = styled.div`
-  font-family: inter, san-serif;
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 1.4;
+// const Support = styled.div`
+//   font-family: inter, san-serif;
+//   z-index: 1;
 
-  @media (min-width: 640px) {
-    font-size: 10px;
-  }
+//   @media (min-width: 640px) {
+//   }
 
-  @media (min-width: 1024px) {
-    font-size: 10px;
-    margin-top: 12px;
-  }
+//   @media (min-width: 1024px) {
+//     margin-top: 12px;
+//   }
 
-  @media (min-width: 1440px) {
-    margin-top: 16px;
-    font-size: 10px;
-  }
-`;
+//   @media (min-width: 1440px) {
+//     margin-top: 16px;
+//   }
+// `;
 
-const Support1 = styled(Support)`
-  grid-area: sup1;
-`;
+// const Support1 = styled(Support)`
+//   grid-area: sup1;
+// `;
 
-const Support2 = styled(Support)`
-  grid-area: sup2;
-  margin-top: 24px;
+// const Support2 = styled(Support)`
+//   grid-area: sup2;
+// `;
 
-  @media (min-width: 640px) {
-  }
-
-  @media (min-width: 1024px) {
-
-  }
-
-  @media (min-width: 1440px) {
-
-  }
-`;
-
-const Support3 = styled(Support)`
-  grid-area: sup3;
-
-  @media (min-width: 1024px) {
-    text-align: right;
-    margin-left: auto;
-  }
-`;
+// const Support3 = styled(Support)`
+//   grid-area: sup3;
+// `;

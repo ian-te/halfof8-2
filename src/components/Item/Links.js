@@ -15,7 +15,7 @@ const LinkBase = ({ md, className }) => {
       target="_blank"
       className={className}
     >
-      ↗{/* <IconWrapper>
+      {/* <IconWrapper>
         <NewWindow width="10" />
       </IconWrapper> */}
       <span>{link[0]}</span>
@@ -113,7 +113,7 @@ export const Links = styled(LinksBase)`
   align-items: flex-start;
   display: none;
 
-  @media (max-width: 360px) {
+  @media (min-width: 640px) {
     top: 8px;
     left: 16px;
   }

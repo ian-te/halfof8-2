@@ -10,7 +10,7 @@ import { nominalTypeHack } from "prop-types";
 const darkTheme = {
   bgColor: "#ECEAE4",
   textColor: "#28282A",
-  borderColor: "#28282A",
+  borderColor: "#8F9499",
   linkActiveColor: "#FFA800",
   logoActiveColor: "#FFA800"
   };
@@ -18,7 +18,7 @@ const darkTheme = {
 const lightTheme = {
   bgColor: "#ECEAE4",
   textColor: "#28282A",
-  borderColor: "#28282A",
+  borderColor: "#8F9499",
   linkActiveColor: "#FFA800",
   logoActiveColor: "#FFA800"
 };
