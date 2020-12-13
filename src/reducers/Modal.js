@@ -12,6 +12,18 @@ export function reducer(state = initialState, action) {
         currentSlide: action.data.slide
       };
 
+    case "NEXT_SLIDE":
+      return {
+        ...state,
+        currentSlide: state.currentSlide + 1
+      };
+
+    case "PREV_SLIDE":
+      return {
+        ...state,
+        currentSlide: state.currentSlide - 1
+      };
+
     case "CLOSE_MODAL":
       return {
         ...state,

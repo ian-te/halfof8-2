@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Carousel, { Modal, ModalGateway } from "react-images";
+import Lightbox from "react-spring-lightbox";
 import { useReducerContext } from "../../reducers/root";
 
 export const ImageModal = ({ images }) => {
@@ -9,16 +9,36 @@ export const ImageModal = ({ images }) => {
   } = useReducerContext();
   const { isOpen, currentSlide } = modal;
   return (
-    <ModalGateway>
-      {isOpen && (
-        <Modal
-          onClose={() => {
-            dispatch({ type: "CLOSE_MODAL" });
-          }}
-        >
-          <Carousel currentIndex={currentSlide} views={images} />
-        </Modal>
-      )}
-    </ModalGateway>
+    <Lightbox
+      isOpen={isOpen}
+      onPrev={() => {
+        if (currentSlide > 0) {
+          dispatch({ type: "PREV_SLIDE" });
+        }
+      }}
+      onNext={() => {
+        if (currentSlide < images.length - 1) {
+          dispatch({ type: "NEXT_SLIDE" });
+        }
+      }}
+      images={images}
+      currentIndex={currentSlide}
+      onClose={() => {
+        dispatch({ type: "CLOSE_MODAL" });
+      }}
+      /* Add your own UI */
+      // renderHeader={() => (<CustomHeader />)}
+      // renderFooter={() => (<CustomFooter />)}
+      // renderPrevButton={() => (<CustomLeftArrowButton />)}
+      // renderNextButton={() => (<CustomRightArrowButton />)}
+      // renderImageOverlay={() => (<ImageOverlayComponent >)}
+
+      /* Add styling */
+      // className="cool-class"
+      // style={{ background: "grey" }}
+
+      /* Handle closing */
+      // onClose={handleClose}
+    />
   );
 };

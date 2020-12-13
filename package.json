@@ -29,6 +29,7 @@
     "react-images": "^1.1.0",
     "react-modal-image": "^2.5.0",
     "react-scrollreveal": "^1.2.0",
+    "react-spring-lightbox": "^1.4.11",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
