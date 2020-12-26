@@ -32,7 +32,7 @@ export const Filter = ({ color = "#000" }) => {
             Reset filters
           </a>{" "}
           to see all types of work or explore{" "}
-          <Link to={"/wip"}>Work in Progress&nbsp;&rarr;</Link>
+          <Link to={"/wip/"}>Work in Progress&nbsp;&rarr;</Link>
         </div>
       )}
       {!tag && (
