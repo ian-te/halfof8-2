@@ -1,27 +1,26 @@
-import React from 'react'
-import Logo from './logo'
-import styled from 'styled-components'
-import Link from 'gatsby-link'
-import { TypingText } from '../Intro'
-import {MobileHide} from '../MobileHide'
-import Footer from '../Footer'
+import React from "react";
+import Logo from "./logo";
+import styled from "styled-components";
+import Link from "gatsby-link";
+import { MobileHide } from "../MobileHide";
+import Footer from "../Footer";
 
 const Sidebar = ({ className, color, bgColor }) => (
   <div className={className}>
     <LogoContainer>
       <Link to="/">
-        <Logo fill={color || "#000"} hoverfill={color ? '#CCC' : "#0000FF"} />
+        <Logo fill={color || "#000"} hoverfill={color ? "#CCC" : "#0000FF"} />
       </Link>
     </LogoContainer>
-    <div/>
+    <div />
     <MobileHide>
       <Footer padding="36px 48px 48px" />
     </MobileHide>
   </div>
-)
+);
 
 const LogoContainer = styled.div`
-  @media(min-width: 560px){
+  @media (min-width: 560px) {
     text-align: center;
     position: fixed;
     width: 17%;
@@ -38,25 +37,26 @@ const SidebarStyled = styled(Sidebar)`
   flex-grow: 0;
   text-align: center;
   font-size: 13px;
-  background-color: ${props => props.bgColor ? props.bgColor : '#fff'};
+  background-color: ${props => (props.bgColor ? props.bgColor : "#fff")};
   line-height: 1.7;
   max-width: 320px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   p {
-    color: ${props => props.color ? props.color : '#000000'};
+    color: ${props => (props.color ? props.color : "#000000")};
   }
-  ${props => props.color ?
-  `a{
+  ${props =>
+    props.color
+      ? `a{
     color ${props.color}
   }`
-  : ''}
-  @media(max-width: 560px){
+      : ""}
+  @media(max-width: 560px) {
     position: relative;
     width: 100%;
     margin: 0 auto;
   }
-`
+`;
 
-export default SidebarStyled
+export default SidebarStyled;

@@ -8,9 +8,10 @@ const slash = require(`slash`);
 // access to any information necessary to programmatically
 // create pages.
 const getNodesMap = edges =>
-  edges
-    .reduce((acc, current) => (current.node.slug ? [current, ...acc] : acc), [])
-    .sort((a, b) => a.node.order - b.node.order);
+  edges.reduce(
+    (acc, current) => (current.node.slug ? [current, ...acc] : acc),
+    []
+  );
 
 const getPreivousPage = (map, page) => {
   const index = map.findIndex(el => el.node.id === page.id);
@@ -35,17 +36,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     graphql(
       `
         {
-          allContentfulPortfolioItem(
-            limit: 1000
-            sort: { order: ASC, fields: [order] }
-          ) {
+          allContentfulPortfolioItem(limit: 1000) {
             edges {
               node {
                 id
                 slug
                 backgroundColor
                 textColor
-                order
                 isRootPage
               }
             }

@@ -1,5 +1,4 @@
 import React, { useContext, useReducer, useCallback } from "react";
-import { useParams } from "@reach/router";
 import {
   reducer as playerReducer,
   initialState as initialPlayerState

@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "gatsby";
-import { Logo } from "../Logo";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { INLINES } from "@contentful/rich-text-types";
 import { Tag } from "../Tag";
@@ -20,45 +18,9 @@ const options = {
   }
 };
 
-const getHeaderContents = header =>
-  [header[0]].map(item =>
-    item.childContentfulTextSnippetTextRichTextNode
-      ? documentToReactComponents(
-        item.childContentfulTextSnippetTextRichTextNode.json,
-        options
-      )
-      : item
-  );
-
-export const PageHeader = ({
-  header,
-  dark = false,
-  actionRenderer = null,
-  ft1,
-  ft2,
-  ft3,
-  ft4
-}) => {
+export const PageHeader = ({ ft1, ft2, ft3, ft4 }) => {
   return (
     <HeaderWrapper>
-      {/* <Support1 dark={dark}>
-      HALF OF EIGHT
-        <br />
-        エイトの半分
-      </Support1>
-      <Support2 dark={dark}>
-        DESCRIPTION
-        <br />
-        デスクリプション
-      </Support2>
-      <Support3 dark={dark}>
-        IN SHORT
-        <br />
-        ショート
-      </Support3> */}
-
-      {/* <Text dark={dark}>{getHeaderContents(header)}</Text> */}
-
       {ft1 && (
         <Ft1>
           {documentToReactComponents(
@@ -118,7 +80,7 @@ const Info = styled.div`
   animation-delay: 1s;
   animation-fill-mode: both;
 
-  ${'' /* width: 90%; */}
+  ${"" /* width: 90%; */}
 
   @keyframes appear {
     0% {
@@ -148,10 +110,8 @@ const Info = styled.div`
   }
 `;
 
-
 const HeaderWrapper = styled.div`
   display: grid;
-
 
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
@@ -167,8 +127,8 @@ const HeaderWrapper = styled.div`
 
   @media (min-width: 640px) {
     grid-gap: 16px;
-  padding: 16px;
-  padding-bottom: 42px;
+    padding: 16px;
+    padding-bottom: 42px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-areas:
       "ft1 ft3 ."
@@ -177,26 +137,23 @@ const HeaderWrapper = styled.div`
 
   @media (min-width: 1024px) {
     grid-gap: 16px;
-  padding: 16px;
-  padding-bottom: 42px;
+    padding: 16px;
+    padding-bottom: 42px;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-areas:
-      "ft1 ft2 ft3 ft4";
+    grid-template-areas: "ft1 ft2 ft3 ft4";
   }
 
   @media (min-width: 1440px) {
     grid-template-columns: repeat(5, 1fr);
-    grid-template-areas:
-      "ft1 ft2 ft3 ft4 .";
+    grid-template-areas: "ft1 ft2 ft3 ft4 .";
   }
 
   @media (min-width: 1920px) {
     grid-gap: 16px;
-  padding: 16px;
-  padding-bottom: 42px;
+    padding: 16px;
+    padding-bottom: 42px;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-areas:
-      "ft1 ft2 ft3 ft4 . .";
+    grid-template-areas: "ft1 ft2 ft3 ft4 . .";
   }
 `;
 
@@ -213,7 +170,6 @@ const Ft3 = styled(Info)`
 const Ft4 = styled(Info)`
   grid-area: ft4;
 `;
-
 
 // Info text at the top
 

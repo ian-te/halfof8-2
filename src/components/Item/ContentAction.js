@@ -1,5 +1,5 @@
 import { Link } from "gatsby";
-import React, { useContext } from "react";
+import React from "react";
 import { useReducerContext } from "../../reducers/root";
 
 const LightBoxWrapper = ({ children, item }) => {
@@ -45,6 +45,6 @@ export const ContentAction = ({ item, children, ...props }) => {
         </Link>
       );
     default:
-      return <div>{children}</div>;
+      return <div {...props}>{children}</div>;
   }
 };

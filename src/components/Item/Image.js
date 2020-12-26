@@ -33,6 +33,7 @@ export const ContentImage = ({ item }) => {
   return (
     <img
       width="100%"
+      alt={item.indexBackgroundImage.file.description}
       style={{ display: "block" }}
       src={item.indexBackgroundImage.file.url}
     />

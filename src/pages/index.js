@@ -1,11 +1,11 @@
-import React, { useContext, Fragment } from "react";
+import React, { Fragment } from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { Item } from "../components/Item/index";
 import "./index.css";
 import { ImageModal } from "../components/ImageModal";
-import { Blobs } from "../components/BlobAnimation";
+// import { Blobs } from "../components/BlobAnimation";
 import { PageHeader } from "../components/PageHeader";
 import { Filter } from "../components/Filter";
 import { useReducerContext } from "../reducers/root";
@@ -29,7 +29,13 @@ const IndexPage = ({ data }) => {
   return (
     <Fragment>
       {/* <Blobs /> */}
-      <PageHeader header={header} ft1={info[0]} ft2={info[1]} ft3={info[2]} ft4={info[3]} />
+      <PageHeader
+        header={header}
+        ft1={info[0]}
+        ft2={info[1]}
+        ft3={info[2]}
+        ft4={info[3]}
+      />
       <Layout>
         <SEO title={data.site.siteMetadata.title} />
         <ItemsRender items={data.contentfulMainPage.items} />
@@ -99,15 +105,9 @@ export const query = graphql`
           externalLinks
           isRootPage
           lightbox
-
           tags {
             name
             identifier
-          }
-          fbxFile {
-            file {
-              url
-            }
           }
           shortText {
             childMarkdownRemark {
@@ -115,8 +115,6 @@ export const query = graphql`
             }
           }
           displayShortText
-          fbxColor
-          lights
           indexBackgroundImage {
             file {
               url
@@ -131,6 +129,11 @@ export const query = graphql`
               srcSetWebp
             }
           }
+        }
+        ... on ContentfulWidget {
+          name
+          embedUrl
+          width
         }
         ... on ContentfulAudio {
           id

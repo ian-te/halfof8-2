@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { NewWindow } from "../Icons/NewWindow";
+// import { NewWindow } from "../Icons/NewWindow";
 
 const LinkBase = ({ md, className }) => {
   const link = md
@@ -13,6 +13,7 @@ const LinkBase = ({ md, className }) => {
       href={link[1]}
       onClick={e => e.stopPropagation()}
       target="_blank"
+      rel="noopener noreferrer"
       className={className}
     >
       {/* <IconWrapper>
@@ -22,15 +23,6 @@ const LinkBase = ({ md, className }) => {
     </a>
   );
 };
-
-const IconWrapper = styled.span`
-  display: none;
-  margin-right: 8px;
-
-  @media (min-width: 640px) {
-    display: block;
-  }
-`;
 
 const Link = styled(LinkBase)`
   height: 24px;
@@ -65,9 +57,9 @@ const Link = styled(LinkBase)`
   }
 
   &:hover {
-    color: ${props => props.theme.linkActiveColor} ;
+    color: ${props => props.theme.linkActiveColor};
     svg path {
-      fill: ${props => props.theme.linkActiveColor}  !important;
+      fill: ${props => props.theme.linkActiveColor} !important;
     }
   }
 

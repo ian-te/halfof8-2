@@ -6,17 +6,19 @@ import { Icon } from "./Icon";
 import { Links } from "./Links";
 
 export const Item = ({ visible, name, tag, ratio = "0.75", ...item }) => {
+  if (!!item.embedUrl) ratio = 6 / 4;
   return (
-    <ContentActionStyled visible={visible} item={item}>
+    <ContentActionStyled
+      isDouble={!!item.embedUrl}
+      visible={visible}
+      item={item}
+    >
       <ContentWrapper ratio={ratio}>
         <ContentInner>
           <ContentRenderer item={item} />
           <Links links={item.externalLinks} />
         </ContentInner>
       </ContentWrapper>
-      {/* <Text>
-          <h4> {name} {tag} </h4> 
-        </Text> */}
     </ContentActionStyled>
   );
 };
@@ -47,6 +49,9 @@ const ContentInner = styled.div`
 
 const ContentActionStyled = styled(ContentAction)`
   text-decoration: none;
+  @media (min-width: 360px) {
+    ${props => props.isDouble && `grid-column: span 2;`}
+  }
   ${props =>
     !props.visible && `visibility: hidden; position: absolute; z-index: -10;`}
   &:hover {
@@ -65,28 +70,5 @@ export const ContentWrapper = styled.div`
     width: 0;
     height: 0;
     padding-bottom: calc(100% / ${props => props.ratio || `(3 / 4)`});
-  }
-`;
-
-const Text = styled.div`
-  padding: 8px 2px;
-
-  h4 {
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 18px;
-    margin: 0;
-
-    @media (max-width: 375px) {
-      font-size: 14px;
-      letter-spacing: 0em;
-      line-height: 18px;
-    }
-  }
-
-  p {
-    margin: 0;
-    font-size: 10px !important;
-    padding: 0;
   }
 `;

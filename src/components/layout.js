@@ -7,20 +7,9 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { useStaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 
 const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `);
-
   return (
     <div>
       <Main>{children}</Main>
@@ -31,6 +20,7 @@ const Layout = ({ children }) => {
 const Main = styled.main`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+  grid-auto-flow: dense;
   grid-gap: 0px;
   padding: 0px;
 
@@ -40,13 +30,18 @@ const Main = styled.main`
     animation-delay: 2s;
   }
 
-  ${Array.from(Array(20).keys()).map(key => `& > :nth-child(${key}) {animation-delay: ${ ( key + 1 ) / 4}s;}`)}
+  ${Array.from(Array(20).keys()).map(
+    key => `& > :nth-child(${key}) {animation-delay: ${(key + 1) / 4}s;}`
+  )}
 
-  @keyframes fadein { 
-	0% { opacity: 0; }
-	100% { opacity: 1; }
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
-
 
   @media (min-width: 360px) {
     grid-template-columns: repeat(2, 1fr);

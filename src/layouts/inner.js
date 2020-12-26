@@ -1,7 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
 import styled from "styled-components";
-import Link from "gatsby-link";
 import { MobileShow } from "../components/MobileHide";
 import Layout from "../components/legacy_layout";
 import Sidebar from "../components/Sidebar";
@@ -70,16 +69,6 @@ const Content = styled.div`
   }
 `;
 
-const theme = {
-  black: {
-    body: "#000",
-    color: "#FFF"
-  },
-  white: {
-    body: "#ECEAE4",
-    color: "#000"
-  }
-};
 export default function Template({ data, transition, pathContext }) {
   const node = data.allContentfulPortfolioItem.edges[0].node;
   if (!node.body) return null;
@@ -156,9 +145,7 @@ export const pageQuery = graphql`
         node {
           id
           name
-          theme
           tag
-          secondaryTag
           backgroundColor
           textColor
           body {

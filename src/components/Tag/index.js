@@ -1,5 +1,4 @@
-import { Link } from "gatsby";
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useReducerContext } from "../../reducers/root";
 
