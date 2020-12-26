@@ -10,6 +10,7 @@ export const Item = ({ visible, name, tag, ratio = "0.75", ...item }) => {
   return (
     <ContentActionStyled
       isDouble={!!item.embedUrl}
+      noHover={!!item.embedUrl}
       visible={visible}
       item={item}
     >
@@ -54,11 +55,15 @@ const ContentActionStyled = styled(ContentAction)`
   }
   ${props =>
     !props.visible && `visibility: hidden; position: absolute; z-index: -10;`}
+  ${props =>
+    !props.noHover &&
+    `
   &:hover {
     ${Links}, ${Icon}, ${ContentInner}:before {
       display: flex;
     }
   }
+  `}
 `;
 
 export const ContentWrapper = styled.div`
