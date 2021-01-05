@@ -12,7 +12,9 @@ export default function HTML(props) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         {props.headComponents}
-        <link rel="stylesheet" href="https://use.typekit.net/efp6eer.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+        {/* <link rel="stylesheet" href="https://use.typekit.net/efp6eer.css" /> */}
         {/* <link
           href="https://fonts.googleapis.com/css2?family=Inter&family=M+PLUS+1p&family=Playfair+Display:ital@0;1&display=swap"
           rel="stylesheet"

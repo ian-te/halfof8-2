@@ -10,7 +10,7 @@ export const IntroWrapper = ({ children }) => {
       <Content>{children}</Content>
     </ContentWrapper>
   );
-};
+}; 
 
 export const Filter = ({ color = "#000" }) => {
   const {
@@ -50,10 +50,8 @@ const Content = styled.div`
   text-align: left;
   align-items: top;
   justify-content: center;
-  font-size: 1vw;
-  line-height: 1.2;
-  padding: 1.5vw;
-  top: 10px;
+  padding: 1vw;
+  ${'' /* top: 10px; */}
 
   color: ${props => props.theme.textColor};
 
@@ -63,27 +61,15 @@ const Content = styled.div`
     text-decoration: none;
     cursor: pointer;
   }
+
   a:visited {
     color: ${props => props.theme.textColor};
   }
+
   a:hover {
     border-bottom: none;
   }
   width: 100%;
 
-  @media (min-width: 360px) {
-    font-size: 6vw;
-  }
-  @media (min-width: 640px) {
-    font-size: 4vw;
-  }
-  @media (min-width: 1024px) {
-    font-size: 1vw;
-  }
-  @media (min-width: 1440px) {
-    font-size: 1vw;
-  }
-  @media (min-width: 1920px) {
-    font-size: 1vw;
-  }
+
 `;
