@@ -171,32 +171,3 @@ const Ft4 = styled(Info)`
   grid-area: ft4;
 `;
 
-// Info text at the top
-
-// const Support = styled.div`
-//   font-family: inter, san-serif;
-//   z-index: 1;
-
-//   @media (min-width: 640px) {
-//   }
-
-//   @media (min-width: 1024px) {
-//     margin-top: 12px;
-//   }
-
-//   @media (min-width: 1440px) {
-//     margin-top: 16px;
-//   }
-// `;
-
-// const Support1 = styled(Support)`
-//   grid-area: sup1;
-// `;
-
-// const Support2 = styled(Support)`
-//   grid-area: sup2;
-// `;
-
-// const Support3 = styled(Support)`
-//   grid-area: sup3;
-// `;
