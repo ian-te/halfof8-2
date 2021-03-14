@@ -10,8 +10,8 @@ const LightBoxWrapper = ({ children, item }) => {
         dispatch({
           type: "OPEN_MODAL",
           data: {
-            slide: item.currentSlide
-          }
+            slide: item.currentSlide,
+          },
         });
       }}
       style={{ cursor: "pointer" }}
@@ -37,10 +37,7 @@ export const ContentAction = ({ item, children, ...props }) => {
       );
     case !!item.slug:
       return (
-        <Link
-          to={`${item.isRootPage ? "/" : "project/"}${item.slug}`}
-          {...props}
-        >
+        <Link to={item.slug} {...props}>
           {children}
         </Link>
       );

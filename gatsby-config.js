@@ -2,6 +2,8 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`
 });
 
+const {CONTENTFUL_SPACE_ID, CONTENTFUL_ACCESS_TOKEN, CONTENTFUL_HOST } = process.env;
+
 module.exports = {
   siteMetadata: {
     title: `halfof8.com`,
@@ -15,9 +17,10 @@ module.exports = {
     {
       resolve: `gatsby-source-contentful`,
       options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        spaceId: CONTENTFUL_SPACE_ID,
         // Learn about environment variables: https://gatsby.dev/env-vars
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        accessToken: CONTENTFUL_ACCESS_TOKEN,
+        host: CONTENTFUL_HOST || 'cdn.contentful.com',
         downloadLocal: false
       }
     },
