@@ -31,7 +31,7 @@ const Main = styled.main`
   }
 
   ${Array.from(Array(20).keys()).map(
-    key => `& > :nth-child(${key}) {animation-delay: ${(key + 1) / 4}s;}`
+    (key) => `& > :nth-child(${key}) {animation-delay: ${(key + 1) / 4}s;}`
   )}
 
   @keyframes fadein {
@@ -61,7 +61,7 @@ const Main = styled.main`
 `;
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default Layout;

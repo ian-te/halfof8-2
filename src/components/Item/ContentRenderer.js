@@ -3,6 +3,7 @@ import { ContentImage } from "./Image";
 import { Icon } from "./Icon";
 import { Text } from "./Text";
 import { Audio } from "./Audio";
+import { RichText } from "./RichText";
 
 const IframeAsync = ({ src, ...props }) => {
   const [deferredSrc, setSrc] = useState(null);
@@ -23,6 +24,9 @@ const IframeAsync = ({ src, ...props }) => {
 
 export const ContentRenderer = ({ item }) => {
   switch (true) {
+    case item.__typename == "ContentfulTextSnippet":
+    case item.__typename == "ContentfulWip":
+      return <RichText item={item} />;
     case !!item.displayShortText:
       return (
         <div>
@@ -58,7 +62,7 @@ export const ContentRenderer = ({ item }) => {
           <img
             width="100%"
             alt={item.name}
-            src="https://placehold.it/600x800"
+            src={`https://via.placeholder.com/600x800?text=${item.__typename}`}
             style={{ display: "block" }}
           />
         </div>

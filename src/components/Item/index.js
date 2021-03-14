@@ -1,15 +1,26 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { ContentAction } from "./ContentAction";
 import { ContentRenderer } from "./ContentRenderer";
 import { Icon } from "./Icon";
 import { Links } from "./Links";
 
-export const Item = ({ visible, name, tag, ratio = "0.75", ...item }) => {
-  if (!!item.embedUrl) ratio = 6 / 4;
+export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
+  const isTextSnippet =
+    item.__typename == "ContentfulTextSnippet" ||
+    item.__typename == "ContentfulWip";
+
+  if (!!item.embedUrl) {
+    ratio = 6 / 4;
+  }
+  if (isTextSnippet) {
+    ratio = false;
+  }
+  console.log(">>>", ratio, isTextSnippet);
   return (
     <ContentActionStyled
       isDouble={!!item.embedUrl}
+      isDoubleSm={isTextSnippet}
       noHover={!!item.embedUrl}
       visible={visible}
       item={item}
@@ -51,11 +62,15 @@ const ContentInner = styled.div`
 const ContentActionStyled = styled(ContentAction)`
   text-decoration: none;
   @media (min-width: 360px) {
-    ${props => props.isDouble && `grid-column: span 2;`}
+    ${(props) => props.isDoubleSm && `grid-column: span 2;`}
+    ${(props) => props.isDouble && `grid-column: span 2;`}
   }
-  ${props =>
+  @media (min-width: 640px) {
+    ${(props) => props.isDoubleSm && `grid-column: span 1;`}
+  }
+  ${(props) =>
     !props.visible && `visibility: hidden; position: absolute; z-index: -10;`}
-  ${props =>
+  ${(props) =>
     !props.noHover &&
     `
   &:hover {
@@ -69,11 +84,16 @@ const ContentActionStyled = styled(ContentAction)`
 export const ContentWrapper = styled.div`
   display: flex;
   width: 100%;
-  &:after {
-    content: "";
-    display: inline-block;
-    width: 0;
-    height: 0;
-    padding-bottom: calc(100% / ${props => props.ratio || `(3 / 4)`});
-  }
+  height: 100%;
+  ${(props) =>
+    props.ratio &&
+    css`
+      :after {
+        content: "";
+        display: inline-block;
+        width: 0;
+        height: 0;
+        padding-bottom: calc(100% / ${(props) => props.ratio || `(3 / 4)`});
+      }
+    `}
 `;

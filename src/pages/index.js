@@ -5,17 +5,13 @@ import SEO from "../components/seo";
 import { Item } from "../components/Item/index";
 import "./index.css";
 import { ImageModal } from "../components/ImageModal";
-// import { Blobs } from "../components/BlobAnimation";
-import { PageHeader } from "../components/PageHeader";
 import { Filter } from "../components/Filter";
 import { useReducerContext } from "../reducers/root";
 
 const IndexPage = ({ data }) => {
-  const { header, info } = data.contentfulMainPage;
-
   const modalImages = data.contentfulMainPage.items
-    .filter(item => !!item.lightbox)
-    .map(item => ({
+    .filter((item) => !!item.lightbox)
+    .map((item) => ({
       src: item.indexBackgroundImage.file.url,
       caption: (
         <span>
@@ -23,19 +19,11 @@ const IndexPage = ({ data }) => {
           <br />
           {item.tag}
         </span>
-      )
+      ),
     }));
 
   return (
     <Fragment>
-      {/* <Blobs /> */}
-      <PageHeader
-        header={header}
-        ft1={info[0]}
-        ft2={info[1]}
-        ft3={info[2]}
-        ft4={info[3]}
-      />
       <Layout>
         <SEO title={data.site.siteMetadata.title} />
         <ItemsRender items={data.contentfulMainPage.items} />
@@ -48,22 +36,24 @@ const IndexPage = ({ data }) => {
 const ItemsRender = ({ items }) => {
   let slideKey = -1;
   const {
-    state: { filter }
+    state: { filter },
   } = useReducerContext();
+  console.log(">>>", items);
 
   return (
     items &&
-    items.map(itemData => {
+    items.map((itemData) => {
       if (itemData.lightbox) slideKey = slideKey + 1;
       return (
         <Item
           {...itemData}
           key={itemData.id}
           visible={
+            itemData.__typename == "ContentfulTextSnippet" ||
             !(
               filter.tag &&
               (!itemData.tags ||
-                itemData.tags.find(tag => filter.tag !== tag.identifier))
+                itemData.tags.find((tag) => filter.tag !== tag.identifier))
             )
           }
           shadow={true}
@@ -76,7 +66,7 @@ const ItemsRender = ({ items }) => {
 };
 
 export const query = graphql`
-  query MyQuery {
+  {
     site {
       siteMetadata {
         title
@@ -84,18 +74,14 @@ export const query = graphql`
     }
     contentfulMainPage {
       id
-      info {
-        childContentfulTextSnippetTextRichTextNode {
-          json
-        }
-      }
-      header {
-        id
-        childContentfulTextSnippetTextRichTextNode {
-          json
-        }
-      }
       items {
+        __typename
+        ... on ContentfulWip {
+          slug
+          text: descriptionInList {
+            raw
+          }
+        }
         ... on ContentfulPortfolioItem {
           id
           name
@@ -159,6 +145,24 @@ export const query = graphql`
               srcSet
               srcWebp
               srcSetWebp
+            }
+          }
+        }
+        ... on ContentfulTextSnippet {
+          name
+          textColor
+          backgroundColor
+          expandable
+          text {
+            raw
+            references {
+              id
+              __typename
+              contentful_id
+              ... on ContentfulTag {
+                name
+                identifier
+              }
             }
           }
         }

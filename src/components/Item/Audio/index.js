@@ -1,11 +1,4 @@
-import React, {
-  useRef,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  useMemo
-} from "react";
+import React, { useRef, useCallback, useEffect, useState } from "react";
 import { Play as PlayBase, Pause as PauseBase } from "./components/Play";
 import styled from "styled-components";
 import { ContentImage } from "../Image";
@@ -25,9 +18,9 @@ export const Audio = ({ id, mp3, background }) => {
   const [time, setTime] = useState({ currentTime: 0, duration: 0 });
   const {
     state: {
-      player: { isPlaying, currentItem }
+      player: { isPlaying, currentItem },
     },
-    dispatch
+    dispatch,
   } = useReducerContext();
 
   useEffect(() => {
@@ -42,10 +35,10 @@ export const Audio = ({ id, mp3, background }) => {
   }, [isPlaying, currentItem]);
 
   useEffect(() => {
-    player.current.addEventListener("timeupdate", e => {
+    player.current.addEventListener("timeupdate", (e) => {
       setTime({
         currentTime: e.target.currentTime,
-        duration: e.target.duration
+        duration: e.target.duration,
       });
     });
     return () => {
@@ -53,14 +46,14 @@ export const Audio = ({ id, mp3, background }) => {
     };
   }, [mp3]);
 
-  const seek = e => {
+  const seek = (e) => {
     var rect = e.target.getBoundingClientRect();
     var x = e.clientX - rect.left; //x position within the element.
     player.current.currentTime = (x / rect.width) * time.duration;
   };
 
   const playpause = useCallback(
-    e => {
+    (e) => {
       e.stopPropagation();
       if (currentItem === id && isPlaying) {
         dispatch({ type: "STOP_PLAYBACK" });
@@ -95,7 +88,7 @@ export const Audio = ({ id, mp3, background }) => {
             <Progress onClick={seek}>
               <Bar
                 style={{
-                  width: `${100 - (time.currentTime / time.duration) * 100}%`
+                  width: `${100 - (time.currentTime / time.duration) * 100}%`,
                 }}
               />
             </Progress>

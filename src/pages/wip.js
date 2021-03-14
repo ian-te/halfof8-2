@@ -10,11 +10,11 @@ export default ({ data }) => {
   const images = useMemo(() => initialImages.reverse(), [initialImages]);
 
   const modalImages = images.map(item => ({
-    src: item.file.url
+    src: item.file.url + '?w=1600'
   }));
   return (
     <div>
-      <PageHeader header={header} ft1={info[0]} ft2={info[1]} dark></PageHeader>
+      <PageHeader header={header} ft1={info[0].text} ft2={info[1].text} dark></PageHeader>
 
       <Layout>
         {images.map((image, key) => {
@@ -39,14 +39,14 @@ export const query = graphql`
   query WIPQuery {
     contentfulWip {
       header {
-        childContentfulTextSnippetTextRichTextNode {
-          json
+        text {
+          raw
         }
       }
 
       info {
-        childContentfulTextSnippetTextRichTextNode {
-          json
+        text {
+          raw
         }
       }
 

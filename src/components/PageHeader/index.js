@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { INLINES } from "@contentful/rich-text-types";
 import { Tag } from "../Tag";
 
@@ -23,8 +23,8 @@ export const PageHeader = ({ ft1, ft2, ft3, ft4 }) => {
     <HeaderWrapper>
       {ft1 && (
         <Ft1>
-          {documentToReactComponents(
-            ft1.childContentfulTextSnippetTextRichTextNode.json,
+          {renderRichText(
+            ft1,
             options
           )}
         </Ft1>
@@ -32,8 +32,8 @@ export const PageHeader = ({ ft1, ft2, ft3, ft4 }) => {
 
       {ft2 && (
         <Ft2>
-          {documentToReactComponents(
-            ft2.childContentfulTextSnippetTextRichTextNode.json,
+          {renderRichText(
+            ft2,
             options
           )}
         </Ft2>
@@ -41,8 +41,8 @@ export const PageHeader = ({ ft1, ft2, ft3, ft4 }) => {
 
       {ft3 && (
         <Ft3>
-          {documentToReactComponents(
-            ft3.childContentfulTextSnippetTextRichTextNode.json,
+          {renderRichText(
+            ft3,
             options
           )}
         </Ft3>
@@ -50,8 +50,8 @@ export const PageHeader = ({ ft1, ft2, ft3, ft4 }) => {
 
       {ft4 && (
         <Ft4>
-          {documentToReactComponents(
-            ft4.childContentfulTextSnippetTextRichTextNode.json,
+          {renderRichText(
+            ft4,
             options
           )}
         </Ft4>
