@@ -78,10 +78,11 @@ const RichTextWrapper = styled.div`
   height: 100%;
   line-height: 1.2;
   background-color: ${(props) => props.backgroundColor};
-  color: ${(props) => props.textColor};
+  color: ${(props) => props.textColor || props.theme.textColor};
   a {
-    color: ${(props) => props.textColor};
-    border-bottom: 0.1em solid ${(props) => props.textColor};
+    color: ${(props) => props.textColor || props.theme.textColor};
+    border-bottom: 0.1em solid
+      ${(props) => props.textColor || props.theme.textColor};
     text-decoration: none;
   }
   @media (min-width: 360px) {
