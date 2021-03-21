@@ -105,6 +105,13 @@ const RichTextWrapper = styled.div`
       ${(props) => props.textColor || props.theme.textColor};
     text-decoration: none;
   }
+
+  a:hover {
+    color: ${(props) => props.textColor || props.theme.textColor};
+    border-bottom: 0px solid
+      ${(props) => props.textColor || props.theme.textColor};
+    text-decoration: none;
+  }
   
   p {  
     margin-block-start: 0;
