@@ -17,7 +17,7 @@ const Header = styled.button`
   outline: none;
   width: 100%;
   min-height: 40px;
-  padding: 16px;
+  padding: 8px;
   & > :first-child {
     margin-right: 14px;
   }
@@ -29,9 +29,12 @@ const Header = styled.button`
 const Text = styled.div`
   display: ${(props) => (props.isOpen ? "block" : "none")};
   padding: 7px;
+  padding-right: 24px;
+
   @media (min-width: 480px) {
     display: block;
   }
+  
 `;
 
 export const RichText = ({ item }) => {
@@ -74,30 +77,39 @@ export const RichText = ({ item }) => {
 const RichTextWrapper = styled.div`
   z-index: 1000;
   position: relative;
-  font-size: 22px;
+  font-size: 20px;
   height: 100%;
-  line-height: 1.2;
+  line-height: 1.35;
+  
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.textColor};
+
   a {
     color: ${(props) => props.textColor};
-    border-bottom: 0.1em solid ${(props) => props.textColor};
+    border-bottom: 1px solid ${(props) => props.textColor};
     text-decoration: none;
   }
+  
+  p {  
+    margin-block-start: 0;
+    margin-block-end: 10; 
+  }
   @media (min-width: 360px) {
-    font-size: 30px;
+    font-size: 28px;
+    line-height: 1.2;
   }
   @media (min-width: 640px) {
-    font-size: 1.9vw;
+    font-size: 20px;
   }
   @media (min-width: 1024px) {
-    font-size: 1.4vw;
+    font-size: 16px;
   }
   @media (min-width: 1440px) {
-    font-size: 1.2vw;
+    font-size: 20px;
+    line-height: 1.3;
   }
   @media (min-width: 1920px) {
-    font-size: 1vw;
+    font-size: 20px;
   }
 `;
 

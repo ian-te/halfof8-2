@@ -14,6 +14,8 @@ const TextInner = styled.div`
   p {
     padding: 0;
     margin: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
   }
 
   @media (min-width: 360px) {
