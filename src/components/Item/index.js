@@ -26,7 +26,7 @@ export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
       item={item}
     >
       <ContentWrapper ratio={ratio}>
-        <ContentInner>
+      <ContentInner hasHover={!isTextSnippet}>
           <ContentRenderer item={item} />
           <Links links={item.externalLinks} />
         </ContentInner>
@@ -52,11 +52,16 @@ const ContentInner = styled.div`
     right: 0;
     z-index: 1;
   }
-  &:hover {
-    opacity: 85%;
-    transition: 1s ease;
-    ${"" /* z-index: 999; */}
-  }
+  ${(props) =>
+    props.hasHover &&
+    css`
+      &:hover {
+        opacity: 85%;
+        transition: 1s ease;
+        ${"" /* z-index: 999; */}
+      }
+    `}
+
 `;
 
 const ContentActionStyled = styled(ContentAction)`

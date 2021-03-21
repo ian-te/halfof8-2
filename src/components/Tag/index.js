@@ -24,12 +24,22 @@ export const Tag = ({ name, identifier, onClick }) => {
 const Wrapper = styled.a`
   border: 1px solid ${(props) => props.theme.textColor};
   border-bottom: 1px solid ${(props) => props.theme.textColor}!important;
-  padding: 0px 6px;
-  border-radius: 25px;
+
   background-color: ${(props) => props.active && props.theme.textColor};
   color: ${(props) =>
     props.active ? props.theme.bgColor : props.theme.textColor}!important;
   cursor: pointer;
+
+  @media (min-width: 360px) {
+    padding: 0px 6px;
+    border-radius: 25px;
+    line-height: 1;
+  }
+
+  @media (min-width: 640px) {
+    padding: 0px 6px;
+    border-radius: 25px;
+  }
 
   &:hover {
     border: 1px solid ${(props) => props.theme.textColor};

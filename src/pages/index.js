@@ -27,7 +27,7 @@ const IndexPage = ({ data }) => {
       <Layout>
         <SEO title={data.site.siteMetadata.title} />
         <ItemsRender items={data.contentfulMainPage.items} />
-        <Filter />
+        {/* <Filter /> */}
       </Layout>
       <ImageModal images={modalImages} />
     </Fragment>

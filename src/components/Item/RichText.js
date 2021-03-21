@@ -16,8 +16,15 @@ const Header = styled.button`
   color: inherit;
   outline: none;
   width: 100%;
-  min-height: 40px;
+  min-height: 64px;
   padding: 8px;
+
+  font-family: neue-haas-grotesk-text, "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-size: 7vw;
+
   & > :first-child {
     margin-right: 14px;
   }
@@ -28,8 +35,16 @@ const Header = styled.button`
 
 const Text = styled.div`
   display: ${(props) => (props.isOpen ? "block" : "none")};
-  padding: 7px;
-  padding-right: 24px;
+
+  @media (min-width: 360px) {
+    padding:8px;
+  }
+
+  @media (min-width: 640px) {
+    padding: 12px;
+    padding-right: 24px;
+  }
+
 
   @media (min-width: 480px) {
     display: block;
@@ -82,11 +97,12 @@ const RichTextWrapper = styled.div`
   line-height: 1.35;
   
   background-color: ${(props) => props.backgroundColor};
-  color: ${(props) => props.textColor};
+  color: ${(props) => props.textColor || props.theme.textColor};
 
   a {
-    color: ${(props) => props.textColor};
-    border-bottom: 1px solid ${(props) => props.textColor};
+    color: ${(props) => props.textColor || props.theme.textColor};
+    border-bottom: 1px solid
+      ${(props) => props.textColor || props.theme.textColor};
     text-decoration: none;
   }
   
@@ -94,22 +110,24 @@ const RichTextWrapper = styled.div`
     margin-block-start: 0;
     margin-block-end: 10; 
   }
+
   @media (min-width: 360px) {
-    font-size: 28px;
+    font-size: 7vw;
     line-height: 1.2;
   }
+
   @media (min-width: 640px) {
-    font-size: 20px;
+    font-size: 1.7vw;
+    line-height: 1.35;
   }
   @media (min-width: 1024px) {
-    font-size: 16px;
+    font-size: 1.3vw;
   }
   @media (min-width: 1440px) {
-    font-size: 20px;
-    line-height: 1.3;
+    font-size: 1vw;
   }
   @media (min-width: 1920px) {
-    font-size: 20px;
+    font-size: 0.85vw;
   }
 `;
 
