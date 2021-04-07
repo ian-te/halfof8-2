@@ -16,8 +16,15 @@ const Header = styled.button`
   color: inherit;
   outline: none;
   width: 100%;
-  min-height: 40px;
-  padding: 16px;
+  min-height: 64px;
+  padding: 8px;
+
+  font-family: neue-haas-grotesk-text, "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-size: 7vw;
+
   & > :first-child {
     margin-right: 14px;
   }
@@ -37,10 +44,21 @@ const Header = styled.button`
 
 const Text = styled.div`
   display: ${(props) => (props.isOpen ? "block" : "none")};
-  padding: 7px;
+
+  @media (min-width: 360px) {
+    padding:8px;
+  }
+
+  @media (min-width: 640px) {
+    padding: 12px;
+    padding-right: 24px;
+  }
+
+
   @media (min-width: 480px) {
     display: block;
   }
+  
 `;
 
 export const RichText = ({ item }) => {
@@ -82,31 +100,49 @@ export const RichText = ({ item }) => {
 const RichTextWrapper = styled.div`
   z-index: 1000;
   position: relative;
-  font-size: 22px;
+  font-size: 20px;
   height: 100%;
-  line-height: 1.2;
+  line-height: 1.35;
+  
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.textColor || props.theme.textColor};
+
   a {
     color: ${(props) => props.textColor || props.theme.textColor};
-    border-bottom: 0.1em solid
+    border-bottom: 1px solid
       ${(props) => props.textColor || props.theme.textColor};
     text-decoration: none;
   }
-  @media (min-width: 360px) {
-    font-size: 30px;
+
+  a:hover {
+    color: ${(props) => props.textColor || props.theme.textColor};
+    border-bottom: 0px solid
+      ${(props) => props.textColor || props.theme.textColor};
+    text-decoration: none;
   }
+  
+  p {  
+    margin-block-start: 0;
+    margin-block-end: 10; 
+  }
+
+  @media (min-width: 360px) {
+    font-size: 7vw;
+    line-height: 1.2;
+  }
+
   @media (min-width: 640px) {
-    font-size: 1.9vw;
+    font-size: 1.7vw;
+    line-height: 1.35;
   }
   @media (min-width: 1024px) {
-    font-size: 1.4vw;
+    font-size: 1.3vw;
   }
   @media (min-width: 1440px) {
-    font-size: 1.2vw;
+    font-size: 1vw;
   }
   @media (min-width: 1920px) {
-    font-size: 1vw;
+    font-size: 0.85vw;
   }
 `;
 

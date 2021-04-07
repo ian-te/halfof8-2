@@ -26,7 +26,7 @@ export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
       item={item}
     >
       <ContentWrapper ratio={ratio}>
-        <ContentInner hasHover={!isTextSnippet}>
+      <ContentInner hasHover={!isTextSnippet}>
           <ContentRenderer item={item} />
           <Links links={item.externalLinks} />
         </ContentInner>
@@ -61,6 +61,7 @@ const ContentInner = styled.div`
         ${"" /* z-index: 999; */}
       }
     `}
+
 `;
 
 const ContentActionStyled = styled(ContentAction)`

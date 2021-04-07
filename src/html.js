@@ -13,6 +13,7 @@ export default function HTML(props) {
         />
         {props.headComponents}
         <link rel="stylesheet" href="https://rsms.me/inter/inter/inter.css?v=3.15" />
+        <link rel="stylesheet" href="https://use.typekit.net/efp6eer.css" />
       </head>
       <body style={{ backgroundColor: "#ECEAE4" }} {...props.bodyAttributes}>
         {props.preBodyComponents}
