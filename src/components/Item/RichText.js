@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 import { Tag } from "../Tag/index";
@@ -24,6 +24,15 @@ const Header = styled.button`
   @media (min-width: 480px) {
     display: none;
   }
+  margin-bottom: -1px;
+  svg {
+    transition: transform 0.2s;
+    ${({ isOpen }) =>
+      isOpen &&
+      css`
+        transform: rotate(45deg);
+      `}
+  }
 `;
 
 const Text = styled.div`
@@ -35,7 +44,6 @@ const Text = styled.div`
 `;
 
 export const RichText = ({ item }) => {
-  console.log(">>> Rich Text props", item);
   const { text, name, textColor, expandable, backgroundColor } = item;
   const [isOpen, setOpen] = useState(false);
 
@@ -46,7 +54,7 @@ export const RichText = ({ item }) => {
       style={{ zIndex: 1000, position: "relative" }}
     >
       {expandable && (
-        <Header onClick={() => setOpen(!isOpen)}>
+        <Header onClick={() => setOpen(!isOpen)} isOpen={isOpen}>
           <svg
             width="33"
             height="33"
