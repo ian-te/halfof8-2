@@ -45,8 +45,9 @@ const Header = styled.button`
 const Text = styled.div`
   display: ${(props) => (props.isOpen ? "block" : "none")};
 
+  padding: 8px;
   @media (min-width: 360px) {
-    padding:8px;
+    padding: 8px;
   }
 
   @media (min-width: 640px) {
@@ -54,11 +55,9 @@ const Text = styled.div`
     padding-right: 24px;
   }
 
-
   @media (min-width: 480px) {
     display: block;
   }
-  
 `;
 
 export const RichText = ({ item }) => {
@@ -103,7 +102,7 @@ const RichTextWrapper = styled.div`
   font-size: 20px;
   height: 100%;
   line-height: 1.35;
-  
+
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.textColor || props.theme.textColor};
 
@@ -120,10 +119,10 @@ const RichTextWrapper = styled.div`
       ${(props) => props.textColor || props.theme.textColor};
     text-decoration: none;
   }
-  
-  p {  
+
+  p {
     margin-block-start: 0;
-    margin-block-end: 10; 
+    margin-block-end: 10;
   }
 
   @media (min-width: 360px) {
