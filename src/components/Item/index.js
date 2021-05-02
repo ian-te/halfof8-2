@@ -5,6 +5,17 @@ import { ContentRenderer } from "./ContentRenderer";
 import { Icon } from "./Icon";
 import { Links } from "./Links";
 
+const getGridColumns = item => {
+  switch(true) {
+    case !!item.gridColumns:
+      return item.gridColumns
+    case !!item.embedUrl:
+      return 2
+    default: 
+      return 1
+  }
+}
+
 export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
   const isTextSnippet =
     item.__typename == "ContentfulTextSnippet" ||
@@ -21,6 +32,8 @@ export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
     <ContentActionStyled
       isDouble={!!item.embedUrl}
       isDoubleSm={isTextSnippet}
+      gridColumns={getGridColumns(item)}
+      gridRows={item.gridRows}
       noHover={!!item.embedUrl}
       visible={visible}
       item={item}
@@ -67,8 +80,9 @@ const ContentInner = styled.div`
 const ContentActionStyled = styled(ContentAction)`
   text-decoration: none;
   @media (min-width: 360px) {
+    ${(props) => props.gridColumns && `grid-column: span ${props.gridColumns};`}
+    ${(props) => props.gridRows && `grid-row: span ${props.gridRows};`}
     ${(props) => props.isDoubleSm && `grid-column: span 2;`}
-    ${(props) => props.isDouble && `grid-column: span 2;`}
   }
   @media (min-width: 640px) {
     ${(props) => props.isDoubleSm && `grid-column: span 1;`}

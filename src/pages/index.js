@@ -5,7 +5,6 @@ import SEO from "../components/seo";
 import { Item } from "../components/Item/index";
 import "./index.css";
 import { ImageModal } from "../components/ImageModal";
-import { Filter } from "../components/Filter";
 import { useReducerContext } from "../reducers/root";
 
 const IndexPage = ({ data }) => {
@@ -91,6 +90,8 @@ export const query = graphql`
           externalLinks
           isRootPage
           lightbox
+          gridColumns
+          gridRows
           tags {
             name
             identifier
