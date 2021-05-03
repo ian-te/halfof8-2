@@ -106,7 +106,7 @@ export const query = graphql`
             file {
               url
             }
-            fluid {
+            fluid(maxWidth: 640) {
               src
               aspectRatio
               base64
