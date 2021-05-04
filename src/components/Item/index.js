@@ -69,7 +69,8 @@ const ContentInner = styled.div`
     props.hasHover &&
     css`
       &:hover {
-        opacity: 85%;
+        ${'' /* opacity: 85%; */}
+        filter: saturate(2);
         transition: 1s ease;
         ${"" /* z-index: 999; */}
       }

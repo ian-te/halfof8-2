@@ -7,7 +7,7 @@ export const ContentImage = ({ item }) => {
   } else if (item.indexBackgroundImage.fluid) {
     const data = item.indexBackgroundImage;
     const aspectRatio = data.fluid.aspectRatio;
-    const width = ((100 / 4) * aspectRatio) / 0.75 - 2;
+    const width = ((item.gridColumns || 1) * ((100 / 4) * aspectRatio)) / 0.75 - 2;
     const sources = [
       {
         ...data.fluid,

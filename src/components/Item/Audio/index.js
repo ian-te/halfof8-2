@@ -13,9 +13,11 @@ function readableDuration(seconds) {
   return min + ":" + sec;
 }
 
-export const Audio = ({ id, mp3, background }) => {
+export const Audio = ({ name, id, mp3, background, waveformImage }) => {
   const player = useRef();
+  console.log('waveformImage ', waveformImage.file.url );
   const [time, setTime] = useState({ currentTime: 0, duration: 0 });
+
   const {
     state: {
       player: { isPlaying, currentItem },
@@ -80,6 +82,15 @@ export const Audio = ({ id, mp3, background }) => {
           <Button onClick={playpause}>
             {currentItem === id && isPlaying ? <Pause /> : <Play />}
           </Button>
+          <ArtistTitle>
+            Half of Eight
+          </ArtistTitle>
+          <TrackName>
+            {name}
+          </TrackName>
+          <WaveForm>
+          <img src={waveformImage.file.url} width="100%"/>    
+          </WaveForm>
           <TimeWrapper>
             <CurrentTime>{readableDuration(time.currentTime)} </CurrentTime>
             <Duration>{readableDuration(time.duration)}</Duration>
@@ -105,6 +116,15 @@ const Background = styled.div`
   height: 101%;
 `;
 
+const WaveForm = styled.div`
+  position: absolute; 
+  left: 8px;
+  width: calc(100% - 16px);
+  bottom: 36px;
+  ${'' /* path {fill: black}; */}
+  ${'' /* background-color: black; */}
+`;
+
 const Bar = styled.div`
   position: absolute;
   top: 0;
@@ -117,30 +137,19 @@ const Bar = styled.div`
 `;
 
 const Play = styled(PlayBase)`
-  filter: drop-shadow(0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0590406))
-    drop-shadow(0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0848175))
-    drop-shadow(0px 12.5216px 10.0172px rgba(0, 0, 0, 0.105))
-    drop-shadow(0px 22.3363px 17.869px rgba(0, 0, 0, 0.125183))
-    drop-shadow(0px 41.7776px 33.4221px rgba(0, 0, 0, 0.150959))
-    drop-shadow(0px 100px 80px rgba(0, 0, 0, 0.21));
 `;
 
 const Pause = styled(PauseBase)`
-  filter: drop-shadow(0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0590406))
-    drop-shadow(0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0848175))
-    drop-shadow(0px 12.5216px 10.0172px rgba(0, 0, 0, 0.105))
-    drop-shadow(0px 22.3363px 17.869px rgba(0, 0, 0, 0.125183))
-    drop-shadow(0px 41.7776px 33.4221px rgba(0, 0, 0, 0.150959))
-    drop-shadow(0px 100px 80px rgba(0, 0, 0, 0.21));
 `;
 
 const Button = styled.button`
-  background-color: transparent;
+  background: rgba(255, 255, 255, 0.5);
   border: none;
   padding: 0;
-  padding: 28px;
+  ${'' /* padding: 28px; */}
   outline: none;
-  width: 32px;
+  width: 44px;
+  height: 44px;
   cursor: pointer;
   position: relative;
   z-index: 10;
@@ -159,9 +168,68 @@ const Progress = styled.div`
   bottom: 0;
 `;
 
+const TrackName = styled.div`
+  position: absolute;
+  top: 22px;
+  left: 44px;
+  color: #000;
+  padding-left: 4px;
+  padding-right: 4px;
+  height: 22px;
+  line-height: 22px;
+  background: rgba(255, 255, 255, 0.8);
+
+  @media (min-width: 360px) {
+    font-size: 10px;
+  }
+  @media (min-width: 640px) {
+    font-size: 10px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 12px;
+  }
+  @media (min-width: 1440px) {
+    font-size: 14px;
+  }
+  @media (min-width: 1920px) {
+    font-size: 14px;
+  }
+`;
+
+const ArtistTitle = styled.div`
+  position: absolute;
+  top: 0;
+  left: 44px;
+  height: 22px;
+  color: #000;
+  line-height: 22px;
+  padding-left: 4px;
+  padding-right: 4px;
+  background: #FFFFFF;
+
+  @media (min-width: 360px) {
+    font-size: 10px;
+  }
+  @media (min-width: 640px) {
+    font-size: 10px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 12px;
+  }
+  @media (min-width: 1440px) {
+    font-size: 14px;
+  }
+  @media (min-width: 1920px) {
+    font-size: 14px;
+  }
+`;
+
 const Wrapper = styled.div`
   height: 100%;
 `;
+
+
+
 const ControlsWrapper = styled.div`
   padding: 0px;
   display: flex;

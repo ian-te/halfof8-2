@@ -106,7 +106,7 @@ export const query = graphql`
             file {
               url
             }
-            fluid(maxWidth: 980) {
+            fluid(maxWidth: 1600) {
               src
               aspectRatio
               base64
@@ -146,6 +146,12 @@ export const query = graphql`
               srcSet
               srcWebp
               srcSetWebp
+            }
+          }
+          waveformImage
+          {
+            file {
+              url
             }
           }
         }
