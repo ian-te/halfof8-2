@@ -168,7 +168,6 @@ const options = {
     // },
     [INLINES.EMBEDDED_ENTRY]: (node) => {
       const { name, identifier } = node.data.target;
-      console.log(">>>", node);
       return <Tag name={name} identifier={identifier} />;
     },
   },

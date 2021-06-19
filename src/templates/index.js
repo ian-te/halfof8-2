@@ -3,9 +3,10 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { Item } from "../components/Item/index";
-import "./index.css";
+import "../index.css";
 import { ImageModal } from "../components/ImageModal";
 import { useReducerContext } from "../reducers/root";
+import { Header } from "../components/Header/index";
 
 const IndexPage = ({ data }) => {
   const modalImages = data.contentfulMainPage.items
@@ -23,8 +24,9 @@ const IndexPage = ({ data }) => {
 
   return (
     <Fragment>
+      <SEO title={data.site.siteMetadata.title} />
+      <Header menu={data.menus.nodes[0]} />
       <Layout>
-        <SEO title={data.site.siteMetadata.title} />
         <ItemsRender items={data.contentfulMainPage.items} />
         {/* <Filter /> */}
       </Layout>
@@ -37,7 +39,6 @@ const ItemsRender = ({ items }) => {
   const {
     state: { filter },
   } = useReducerContext();
-  console.log(">>>", items);
 
   return (
     items &&
@@ -49,6 +50,8 @@ const ItemsRender = ({ items }) => {
           key={itemData.id}
           visible={
             itemData.__typename == "ContentfulTextSnippet" ||
+            (filter.tag === "uncategorized" &&
+              itemData.__typename == "ContentfulWidget") ||
             !(
               filter.tag &&
               (!itemData.tags ||
@@ -65,13 +68,13 @@ const ItemsRender = ({ items }) => {
 };
 
 export const query = graphql`
-  {
+  query MainPageQuery($locale: String!) {
     site {
       siteMetadata {
         title
       }
     }
-    contentfulMainPage {
+    contentfulMainPage(node_locale: { eq: $locale }) {
       id
       items {
         __typename
@@ -148,8 +151,7 @@ export const query = graphql`
               srcSetWebp
             }
           }
-          waveformImage
-          {
+          waveformImage {
             file {
               url
             }
@@ -162,17 +164,47 @@ export const query = graphql`
           expandable
           text {
             raw
-            references {
-              id
-              __typename
-              contentful_id
-              ... on ContentfulTag {
-                name
-                identifier
-              }
+            # references {
+            #   id
+            #   __typename
+            #   contentful_id
+            #   ... on ContentfulTag {
+            #     name
+            #     identifier
+            #   }
+            # }
+          }
+        }
+      }
+    }
+    menus: allContentfulMenu(filter: { node_locale: { eq: $locale } }) {
+      nodes {
+        leftItems {
+          __typename
+          ... on ContentfulTag {
+            id
+            name
+            identifier
+          }
+          ... on ContentfulTextSnippet {
+            id
+            name
+            text {
+              raw
             }
           }
         }
+        # rightItems {
+        #   __typename
+        #   ... on ContentfulTag {
+        #     id
+        #     name
+        #   }
+        #   ... on ContentfulTextSnippet {
+        #     id
+        #     name
+        #   }
+        # }
       }
     }
   }

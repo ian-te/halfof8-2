@@ -7,25 +7,20 @@ const slash = require(`slash`);
 // called after the Gatsby bootstrap is finished so you have
 // access to any information necessary to programmatically
 // create pages.
-const getNodesMap = edges =>
-  edges.reduce(
-    (acc, current) => (current.node.slug ? [current, ...acc] : acc),
-    []
-  );
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+  const homepageTemplate = path.resolve(`src/templates/index.js`);
 
-const getPreivousPage = (map, page) => {
-  const index = map.findIndex(el => el.node.id === page.id);
-  if (index === 0) return map[map.length - 1];
-  return map[index - 1];
+  ["en-US", "ja"].forEach((lang) => {
+    createPage({
+      path: `/${lang}`,
+      component: homepageTemplate,
+      context: {
+        locale: lang,
+      },
+    });
+  });
 };
-const getNextPage = (map, page) => {
-  const index = map.findIndex(el => el.node.id === page.id);
-  if (index === map.length - 1) return map[0];
-  return map[index + 1];
-};
-
-const getFolder = isRootPage => (isRootPage ? "/" : "/project/");
-
 
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.

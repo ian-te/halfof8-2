@@ -8,7 +8,6 @@ export const Tag = ({ name, identifier, onClick }) => {
     filter: { tag },
   } = state;
   const onTagClick = (e) => {
-    console.log(">>>", identifier);
     e.preventDefault();
     onClick && onClick(identifier);
     dispatch({ type: "FILTER_BY_TAG", payload: { tag: identifier } });
