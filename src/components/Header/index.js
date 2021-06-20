@@ -17,31 +17,97 @@ export const Header = ({ menu }) => {
   console.log(">>>", menu);
   return (
     <Wrapper>
-      <ItemsContainer>
+      <ItemsContainerLeft>
         {menu.leftItems.map((item) => (
           <Item item={item} />
         ))}
-      </ItemsContainer>
+      </ItemsContainerLeft>
+      <ItemsContainerRight>
+        {menu.rightItems.map((item) => (
+          <Item item={item} />
+        ))}
+      </ItemsContainerRight>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.header`
   background-color: ${(props) => props.theme.headerBgColor};
-  padding: 4px 10px;
+  
   p {
+    color: ${(props) => props.theme.textColor}!important;
     margin: 0;
+
+    a {
+    color: ${props => props.theme.textColor};
+    text-decoration: none;
   }
+
+  }
+
+  @media (min-width: 320px) {
+    font-size: 7.5vw;
+    line-height: 1.3;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 12px 12px;
+  }
+
   @media (min-width: 640px) {
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 12px;
+    font-size: 2vw;
   }
 `;
 
-const ItemsContainer = styled.nav`
+const ItemsContainerLeft = styled.nav`
   display: flex;
+
   & > * {
     margin-right: 10px;
   }
+
+  @media (min-width: 320px) {
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    & > * {
+    margin-bottom: 12px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    & > * {
+    margin-bottom: 0px !important;    }
+  }
+
+`;
+
+const ItemsContainerRight = styled.nav`
+  display: flex;
+  align-items: center;
+
+
+  @media (min-width: 320px) {
+    & > * {
+    margin-right: 10px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    & > * {
+    margin-left: 10px;
+    }
+  }
+
 `;

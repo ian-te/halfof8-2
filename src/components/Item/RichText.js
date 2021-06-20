@@ -31,7 +31,9 @@ const Header = styled.button`
   @media (min-width: 480px) {
     display: none;
   }
-  margin-bottom: -1px;
+  ${'' /* margin-bottom: -1px; */}
+  margin-top: 0px !important;
+
   svg {
     transition: transform 0.2s;
     ${({ isOpen }) =>
@@ -73,16 +75,16 @@ export const RichText = ({ item }) => {
       {expandable && (
         <Header onClick={() => setOpen(!isOpen)} isOpen={isOpen}>
           <svg
-            width="33"
-            height="33"
-            viewBox="0 0 33 33"
+            width="40" 
+            height="40" 
+            viewBox="0 0 40 40" 
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
-              d="M30.5 16.8027C30.5 24.5347 24.232 30.8027 16.5 30.8027C8.76801 30.8027 2.5 24.5347 2.5 16.8027C2.5 9.07075 8.76801 2.80273 16.5 2.80273C24.232 2.80273 30.5 9.07075 30.5 16.8027ZM16 16.3027V8.80273H17V16.3027H24.5V17.3027H17V24.8027H16V17.3027H8.5V16.3027H16Z"
+              d="M40 20C40 31.0457 31.0457 40 20 40C8.9543 40 0 31.0457 0 20C0 8.9543 8.9543 0 20 0C31.0457 0 40 8.9543 40 20ZM19 19H8.57178V21H19V31.4281H21V21H31.4289V19H21V8.57096H19V19Z"
               fill={textColor}
             />
           </svg>
@@ -126,8 +128,8 @@ const RichTextWrapper = styled.div`
   }
 
   @media (min-width: 360px) {
-    font-size: 7vw;
-    line-height: 1.2;
+    font-size: 20;
+    line-height: 1.3;
   }
 
   @media (min-width: 640px) {

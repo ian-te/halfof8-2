@@ -49,7 +49,7 @@ const ItemsRender = ({ items }) => {
           {...itemData}
           key={itemData.id}
           visible={
-            itemData.__typename == "ContentfulTextSnippet" ||
+            // itemData.__typename == "ContentfulTextSnippet" ||
             (filter.tag === "uncategorized" &&
               itemData.__typename == "ContentfulWidget") ||
             !(
@@ -124,6 +124,10 @@ export const query = graphql`
           name
           embedUrl
           width
+          tags {
+            name
+            identifier
+          }
         }
         ... on ContentfulAudio {
           id
@@ -174,6 +178,10 @@ export const query = graphql`
             #   }
             # }
           }
+          tags {
+            name
+            identifier
+          }
         }
       }
     }
@@ -194,17 +202,16 @@ export const query = graphql`
             }
           }
         }
-        # rightItems {
-        #   __typename
-        #   ... on ContentfulTag {
-        #     id
-        #     name
-        #   }
-        #   ... on ContentfulTextSnippet {
-        #     id
-        #     name
-        #   }
-        # }
+        rightItems {
+          __typename
+          ... on ContentfulTextSnippet {
+            id
+            name
+            text {
+              raw
+            }
+          }
+        }
       }
     }
   }
