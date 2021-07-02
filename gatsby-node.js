@@ -3,6 +3,11 @@ const Promise = require(`bluebird`);
 const path = require(`path`);
 const slash = require(`slash`);
 
+const getPath = (path, locale) => {
+  if (locale == "en-US") return path;
+  return `/${locale}${path}`;
+};
+
 // Implement the Gatsby API “createPages”. This is
 // called after the Gatsby bootstrap is finished so you have
 // access to any information necessary to programmatically
@@ -10,11 +15,19 @@ const slash = require(`slash`);
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const homepageTemplate = path.resolve(`src/templates/index.js`);
+  const wipTemplate = path.resolve(`src/templates/wip.js`);
 
   ["en-US", "ja"].forEach((lang) => {
     createPage({
-      path: `/${lang}`,
+      path: getPath("/", lang),
       component: homepageTemplate,
+      context: {
+        locale: lang,
+      },
+    });
+    createPage({
+      path: getPath("/wip", lang),
+      component: wipTemplate,
       context: {
         locale: lang,
       },
