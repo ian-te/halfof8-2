@@ -15,7 +15,6 @@ function readableDuration(seconds) {
 
 export const Audio = ({ name, id, mp3, background, waveformImage }) => {
   const player = useRef();
-  console.log('waveformImage ', waveformImage.file.url );
   const [time, setTime] = useState({ currentTime: 0, duration: 0 });
 
   const {
@@ -82,14 +81,10 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
           <Button onClick={playpause}>
             {currentItem === id && isPlaying ? <Pause /> : <Play />}
           </Button>
-          <ArtistTitle>
-            Half of Eight
-          </ArtistTitle>
-          <TrackName>
-            {name}
-          </TrackName>
+          <ArtistTitle>Half of Eight</ArtistTitle>
+          <TrackName>{name}</TrackName>
           <WaveForm>
-          <img src={waveformImage.file.url} width="100%"/>    
+            <img src={waveformImage.file.url} width="100%" />
           </WaveForm>
           <TimeWrapper>
             <CurrentTime>{readableDuration(time.currentTime)} </CurrentTime>
@@ -117,12 +112,12 @@ const Background = styled.div`
 `;
 
 const WaveForm = styled.div`
-  position: absolute; 
+  position: absolute;
   left: 8px;
   width: calc(100% - 16px);
   bottom: 36px;
-  ${'' /* path {fill: black}; */}
-  ${'' /* background-color: black; */}
+  ${"" /* path {fill: black}; */}
+  ${"" /* background-color: black; */}
 `;
 
 const Bar = styled.div`
@@ -136,17 +131,15 @@ const Bar = styled.div`
   pointer-events: none;
 `;
 
-const Play = styled(PlayBase)`
-`;
+const Play = styled(PlayBase)``;
 
-const Pause = styled(PauseBase)`
-`;
+const Pause = styled(PauseBase)``;
 
 const Button = styled.button`
   background: rgba(255, 255, 255, 0.5);
   border: none;
   padding: 0;
-  ${'' /* padding: 28px; */}
+  ${"" /* padding: 28px; */}
   outline: none;
   width: 44px;
   height: 44px;
@@ -205,7 +198,7 @@ const ArtistTitle = styled.div`
   line-height: 22px;
   padding-left: 4px;
   padding-right: 4px;
-  background: #FFFFFF;
+  background: #ffffff;
 
   @media (min-width: 360px) {
     font-size: 10px;
@@ -227,8 +220,6 @@ const ArtistTitle = styled.div`
 const Wrapper = styled.div`
   height: 100%;
 `;
-
-
 
 const ControlsWrapper = styled.div`
   padding: 0px;

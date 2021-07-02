@@ -7,37 +7,37 @@ const getTag = () => {
   ) {
     const location = window.location.href
       .split("/")
-      .filter(part => part !== "");
+      .filter((part) => part !== "");
     return location[location.length - 1];
   }
   return null;
 };
 
 export const initialState = {
-  tag: getTag()
+  tag: getTag(),
 };
 
 export function reducer(state = initialState, action) {
   switch (action.type) {
     case "FILTER_BY_TAG":
       if (action.payload.tag === state.tag) {
-        navigate(`/`);
+        // navigate(`/`);
         return {
           ...state,
-          tag: null
+          tag: null,
         };
       }
-      navigate(`/tag/${action.payload.tag}`);
+      // navigate(`/tag/${action.payload.tag}`);
       return {
         ...state,
-        tag: action.payload.tag
+        tag: action.payload.tag,
       };
 
     case "RESET_FILTER":
-      navigate(`/`);
+      // navigate(`/`);
       return {
         ...state,
-        tag: null
+        tag: null,
       };
 
     default:

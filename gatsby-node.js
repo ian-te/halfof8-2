@@ -3,29 +3,37 @@ const Promise = require(`bluebird`);
 const path = require(`path`);
 const slash = require(`slash`);
 
+const getPath = (path, locale) => {
+  if (locale == "en-US") return path;
+  return `/${locale}${path}`;
+};
+
 // Implement the Gatsby API “createPages”. This is
 // called after the Gatsby bootstrap is finished so you have
 // access to any information necessary to programmatically
 // create pages.
-const getNodesMap = edges =>
-  edges.reduce(
-    (acc, current) => (current.node.slug ? [current, ...acc] : acc),
-    []
-  );
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+  const homepageTemplate = path.resolve(`src/templates/index.js`);
+  const wipTemplate = path.resolve(`src/templates/wip.js`);
 
-const getPreivousPage = (map, page) => {
-  const index = map.findIndex(el => el.node.id === page.id);
-  if (index === 0) return map[map.length - 1];
-  return map[index - 1];
+  ["en-US", "ja"].forEach((lang) => {
+    createPage({
+      path: getPath("/", lang),
+      component: homepageTemplate,
+      context: {
+        locale: lang,
+      },
+    });
+    createPage({
+      path: getPath("/wip", lang),
+      component: wipTemplate,
+      context: {
+        locale: lang,
+      },
+    });
+  });
 };
-const getNextPage = (map, page) => {
-  const index = map.findIndex(el => el.node.id === page.id);
-  if (index === map.length - 1) return map[0];
-  return map[index + 1];
-};
-
-const getFolder = isRootPage => (isRootPage ? "/" : "/project/");
-
 
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.

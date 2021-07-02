@@ -5,16 +5,16 @@ import { ContentRenderer } from "./ContentRenderer";
 import { Icon } from "./Icon";
 import { Links } from "./Links";
 
-const getGridColumns = item => {
-  switch(true) {
+const getGridColumns = (item) => {
+  switch (true) {
     case !!item.gridColumns:
-      return item.gridColumns
+      return item.gridColumns;
     case !!item.embedUrl:
-      return 2
-    default: 
-      return 1
+      return 2;
+    default:
+      return 1;
   }
-}
+};
 
 export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
   const isTextSnippet =
@@ -27,7 +27,6 @@ export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
   if (isTextSnippet) {
     ratio = false;
   }
-  console.log(">>>", ratio, isTextSnippet);
   return (
     <ContentActionStyled
       isDouble={!!item.embedUrl}
@@ -39,7 +38,7 @@ export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
       item={item}
     >
       <ContentWrapper ratio={ratio}>
-      <ContentInner hasHover={!isTextSnippet}>
+        <ContentInner hasHover={!isTextSnippet}>
           <ContentRenderer item={item} />
           <Links links={item.externalLinks} />
         </ContentInner>
@@ -69,13 +68,12 @@ const ContentInner = styled.div`
     props.hasHover &&
     css`
       &:hover {
-        ${'' /* opacity: 85%; */}
+        ${"" /* opacity: 85%; */}
         filter: saturate(2);
         transition: 1s ease;
         ${"" /* z-index: 999; */}
       }
     `}
-
 `;
 
 const ContentActionStyled = styled(ContentAction)`
