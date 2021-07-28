@@ -32,7 +32,9 @@ export const Header = ({ menu }) => {
 };
 
 const Wrapper = styled.header`
-  background-color: ${(props) => props.theme.headerBgColor};
+  ${'' /* background-color: ${(props) => props.theme.headerBgColor}; */}
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
   
   p {
     color: ${(props) => props.theme.textColor}!important;
@@ -74,6 +76,27 @@ const ItemsContainerLeft = styled.nav`
     margin-right: 10px;
   }
 
+  & > * {
+    animation: menuappearleft 0.5s ease-in;
+    animation-fill-mode: both;
+    animation-delay: 0s;
+  }
+
+  ${Array.from(Array(20).keys()).map(
+    (key) => `& > :nth-child(${key}) {animation-delay: ${(key + 1) / 4}s;}`
+  )}
+
+  @keyframes menuappearleft {
+    0% {
+      transform: translateX(-10px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0px);
+      opacity: 1;
+    }
+  }
+
   @media (min-width: 320px) {
     flex-direction: row;
     align-items: flex-start;
@@ -97,6 +120,26 @@ const ItemsContainerRight = styled.nav`
   display: flex;
   align-items: center;
 
+  & > * {
+    animation: menuappearright 0.5s ease-in;
+    animation-fill-mode: both;
+    animation-delay: 0s;
+  }
+
+  ${Array.from(Array(20).keys()).map(
+    (key) => `& > :nth-child(${key}) {animation-delay: ${(key + 1) / 4}s;}`
+  )}
+
+  @keyframes menuappearright {
+    0% {
+      transform: translateX(10px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 
   @media (min-width: 320px) {
     & > * {
