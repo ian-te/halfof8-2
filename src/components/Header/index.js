@@ -79,7 +79,7 @@ const ItemsContainerLeft = styled.nav`
   & > * {
     animation: menuappearleft 0.5s ease-in;
     animation-fill-mode: both;
-    animation-delay: 0s;
+    animation-delay: 0.1s;
   }
 
   ${Array.from(Array(20).keys()).map(
