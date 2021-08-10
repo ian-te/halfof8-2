@@ -13,7 +13,6 @@ const getLocaleName = (lng) => {
 
 export const LanguageSwitcher = ({ locales = [], activeLocale = "en-US" }) => {
   const { languages, language, originalPath } = useI18next();
-  console.log(">>>", languages, language, originalPath);
   return (
     <Wrapper>
       {languages.map((lng) => (

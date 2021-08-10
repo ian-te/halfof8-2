@@ -9,8 +9,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
+import { Link, useI18next } from "gatsby-plugin-react-i18next";
 
 function SEO({ description, lang, meta, title: propsTitle }) {
+  const { languages, language, originalPath } = useI18next();
   const { site, allContentfulMeta } = useStaticQuery(
     graphql`
       query {
@@ -24,6 +26,7 @@ function SEO({ description, lang, meta, title: propsTitle }) {
         allContentfulMeta {
           edges {
             node {
+              node_locale
               title
               image {
                 file {
@@ -43,7 +46,9 @@ function SEO({ description, lang, meta, title: propsTitle }) {
       }
     `
   );
-  const node = allContentfulMeta.edges[0].node;
+  const node = allContentfulMeta.edges.find(
+    (edge) => edge.node.node_locale === language
+  ).node;
   const title = propsTitle || node.title;
 
   const metaDescription =
@@ -52,47 +57,47 @@ function SEO({ description, lang, meta, title: propsTitle }) {
   return (
     <Helmet
       htmlAttributes={{
-        lang
+        lang,
       }}
       title={title}
       titleTemplate={`${node.title}`}
       meta={[
         {
           name: `description`,
-          content: metaDescription
+          content: metaDescription,
         },
         {
           property: `og:image`,
-          content: node.image.file.url
+          content: node.image.file.url,
         },
         {
           property: `og:title`,
-          content: title
+          content: title,
         },
         {
           property: `og:description`,
-          content: metaDescription
+          content: metaDescription,
         },
         {
           property: `og:type`,
-          content: `website`
+          content: `website`,
         },
         {
           name: `twitter:card`,
-          content: `summary`
+          content: `summary`,
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author
+          content: site.siteMetadata.author,
         },
         {
           name: `twitter:title`,
-          content: title
+          content: title,
         },
         {
           name: `twitter:description`,
-          content: metaDescription
-        }
+          content: metaDescription,
+        },
       ].concat(meta)}
     />
   );
@@ -101,14 +106,14 @@ function SEO({ description, lang, meta, title: propsTitle }) {
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
-  description: ``
+  description: ``,
 };
 
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 };
 
 export default SEO;

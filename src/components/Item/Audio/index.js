@@ -43,7 +43,7 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
       });
     });
     return () => {
-      player.current.remove();
+      player.current && player.current.remove();
     };
   }, [mp3]);
 
