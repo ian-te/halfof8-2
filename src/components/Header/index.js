@@ -124,15 +124,15 @@ const ItemsContainerRight = styled.nav`
   display: flex;
   align-items: center;
 
-  <<<<<<< HEAD ======= & > * {
+  & > * {
     animation: menuappearright 0.5s ease-in;
     animation-fill-mode: both;
     animation-delay: 0s;
   }
 
-  ${Array.from(Array(20).keys()).map(
+  ${'' /* ${Array.from(Array(20).keys()).map(
     (key) => `& > :nth-child(${key}) {animation-delay: ${(key + 1) / 4}s;}`
-  )}
+  )} */}
 
   @keyframes menuappearright {
     0% {
@@ -145,13 +145,25 @@ const ItemsContainerRight = styled.nav`
     }
   }
 
-  >>>>>>>1a890eff6e18406e7bc5ee63ad39e8384e36b8f9 @media (min-width: 320px) {
-    & > * {
-      margin-right: 10px;
+  @media (min-width: 320px) {
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    flex-wrap: wrap;
+
+    & > :first-child {
+      margin-bottom: 10px;
     }
   }
 
   @media (min-width: 640px) {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    & > :first-child {
+      margin-bottom: 0px;
+    }
+
     & > * {
       margin-left: 10px;
     }
