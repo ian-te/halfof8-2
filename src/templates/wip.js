@@ -41,8 +41,8 @@ const Wip = ({ data }) => {
 };
 
 export const query = graphql`
-  query WIPQuery {
-    contentfulWip {
+  query WIPQuery($language: String!) {
+    contentfulWip(node_locale: { eq: $language }) {
       header {
         text {
           raw

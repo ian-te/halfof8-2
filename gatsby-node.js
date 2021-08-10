@@ -13,7 +13,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const homepageTemplate = path.resolve(`src/templates/index.js`);
   const wipTemplate = path.resolve(`src/templates/wip.js`);
 
-  ["en-US", "ja"].forEach((lang) => {
+  ["en-US"].forEach((lang) => {
     createPage({
       path: getPath("/", lang),
       component: homepageTemplate,

@@ -1,6 +1,15 @@
-exports.wrapPageElement = ({ element, props }) => {
-  // props provide same data to Layout as Page element will get
-  // including location, data, etc - you don't need to pass it
-  console.log(">>>", props);
-  return element;
+const React = require("react");
+
+const { ReducerProvider } = require("./reducers/root");
+const { DarkThemeProvider } = require("./providers/ThemeProvider");
+const { LocaleProvider } = require("./providers/LocaleProvider");
+
+exports.wrapPageElement = ({ element, props: { pageContext } }) => {
+  return (
+    <DarkThemeProvider>
+      <LocaleProvider locale={pageContext.language}>
+        <ReducerProvider>{element}</ReducerProvider>
+      </LocaleProvider>
+    </DarkThemeProvider>
+  );
 };

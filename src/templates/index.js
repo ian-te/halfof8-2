@@ -68,13 +68,13 @@ const ItemsRender = ({ items }) => {
 };
 
 export const query = graphql`
-  query MainPageQuery($locale: String!) {
+  query MainPageQuery($language: String!) {
     site {
       siteMetadata {
         title
       }
     }
-    contentfulMainPage(node_locale: { eq: $locale }) {
+    contentfulMainPage(node_locale: { eq: $language }) {
       id
       items {
         __typename
@@ -185,7 +185,7 @@ export const query = graphql`
         }
       }
     }
-    menus: allContentfulMenu(filter: { node_locale: { eq: $locale } }) {
+    menus: allContentfulMenu(filter: { node_locale: { eq: $language } }) {
       nodes {
         leftItems {
           __typename
