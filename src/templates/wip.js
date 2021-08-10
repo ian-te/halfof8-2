@@ -5,16 +5,21 @@ import Layout from "../components/layout";
 import { Item } from "../components/Item/index.js";
 import { PageHeader } from "../components/PageHeader";
 
-export default ({ data }) => {
+const Wip = ({ data }) => {
   const { images: initialImages, header, info } = data.contentfulWip;
   const images = useMemo(() => initialImages.reverse(), [initialImages]);
 
-  const modalImages = images.map(item => ({
-    src: item.file.url + '?w=1600'
+  const modalImages = images.map((item) => ({
+    src: item.file.url + "?w=1600",
   }));
   return (
     <div>
-      <PageHeader header={header} ft1={info[0].text} ft2={info[1].text} dark></PageHeader>
+      <PageHeader
+        header={header}
+        ft1={info[0].text}
+        ft2={info[1].text}
+        dark
+      ></PageHeader>
 
       <Layout>
         {images.map((image, key) => {
@@ -67,3 +72,4 @@ export const query = graphql`
     }
   }
 `;
+export default Wip;

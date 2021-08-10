@@ -2,11 +2,7 @@ const each = require(`lodash/each`);
 const Promise = require(`bluebird`);
 const path = require(`path`);
 const slash = require(`slash`);
-
-const getPath = (path, locale) => {
-  if (locale == "en-US") return path;
-  return `/${locale}${path}`;
-};
+const { getPath } = require("./src/helpers/locale");
 
 // Implement the Gatsby API “createPages”. This is
 // called after the Gatsby bootstrap is finished so you have

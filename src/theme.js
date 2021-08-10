@@ -6,6 +6,7 @@
 // };
 
 const darkTheme = {
+  bodyColor: "#FFFFFF",
   bgColor: "#ECEAE4",
   headerBgColor: "#FFF",
   textColor: "#28282A",
@@ -15,6 +16,7 @@ const darkTheme = {
 };
 
 const lightTheme = {
+  bodyColor: "#FFFFFF",
   bgColor: "#ECEAE4",
   headerBgColor: "#FFF",
   textColor: "#28282A",

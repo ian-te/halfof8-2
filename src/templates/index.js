@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
-import SEO from "../components/seo";
+import Seo from "../components/seo";
 import { Item } from "../components/Item/index";
 import "../index.css";
 import { ImageModal } from "../components/ImageModal";
@@ -24,7 +24,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <Fragment>
-      <SEO title={data.site.siteMetadata.title} />
+      <Seo title={data.site.siteMetadata.title} />
       <Header menu={data.menus.nodes[0]} />
       <Layout>
         <ItemsRender items={data.contentfulMainPage.items} />
@@ -51,7 +51,7 @@ const ItemsRender = ({ items }) => {
           visible={
             // itemData.__typename == "ContentfulTextSnippet" ||
             (filter.tag === "uncategorized" &&
-              itemData.__typename == "ContentfulWidget") ||
+              itemData.__typename === "ContentfulWidget") ||
             !(
               filter.tag &&
               (!itemData.tags ||

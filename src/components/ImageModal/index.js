@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import Lightbox from "react-spring-lightbox";
 import { useReducerContext } from "../../reducers/root";
 
 export const ImageModal = ({ images }) => {
   const {
     state: { modal },
-    dispatch
+    dispatch,
   } = useReducerContext();
   const { isOpen, currentSlide } = modal;
   return (

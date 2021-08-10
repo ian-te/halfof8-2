@@ -21,7 +21,6 @@ export const Tag = ({ name, identifier, onClick }) => {
 };
 
 const Wrapper = styled.a`
-
   text-decoration: none !important;
   border: 1px solid ${(props) => props.theme.textColor};
   border-bottom: 1px solid ${(props) => props.theme.textColor}!important;

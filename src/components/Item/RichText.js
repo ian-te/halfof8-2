@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types";
+import { MARKS, INLINES } from "@contentful/rich-text-types";
 import styled, { css } from "styled-components";
 
 import { renderRichText } from "gatsby-source-contentful/rich-text";
@@ -31,7 +31,7 @@ const Header = styled.button`
   @media (min-width: 480px) {
     display: none;
   }
-  ${'' /* margin-bottom: -1px; */}
+  ${"" /* margin-bottom: -1px; */}
   margin-top: 0px !important;
 
   svg {
@@ -75,9 +75,9 @@ export const RichText = ({ item }) => {
       {expandable && (
         <Header onClick={() => setOpen(!isOpen)} isOpen={isOpen}>
           <svg
-            width="40" 
-            height="40" 
-            viewBox="0 0 40 40" 
+            width="40"
+            height="40"
+            viewBox="0 0 40 40"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >

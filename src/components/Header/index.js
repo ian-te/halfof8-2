@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useStaticQuery, graphql } from "gatsby";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 import { Tag } from "../Tag";
+import { LanguageSwitcher } from "../LanguageSwitcher";
 
 const Item = ({ item }) => {
   switch (item.__typename) {
@@ -23,6 +23,7 @@ export const Header = ({ menu }) => {
         ))}
       </ItemsContainerLeft>
       <ItemsContainerRight>
+        <LanguageSwitcher locales={["en-US", "ja"]} />
         {menu.rightItems.map((item) => (
           <Item item={item} />
         ))}
@@ -33,16 +34,15 @@ export const Header = ({ menu }) => {
 
 const Wrapper = styled.header`
   background-color: ${(props) => props.theme.headerBgColor};
-  
+
   p {
     color: ${(props) => props.theme.textColor}!important;
     margin: 0;
 
     a {
-    color: ${props => props.theme.textColor};
-    text-decoration: none;
-  }
-
+      color: ${(props) => props.theme.textColor};
+      text-decoration: none;
+    }
   }
 
   @media (min-width: 320px) {
@@ -79,7 +79,7 @@ const ItemsContainerLeft = styled.nav`
     align-items: flex-start;
     flex-wrap: wrap;
     & > * {
-    margin-bottom: 12px;
+      margin-bottom: 12px;
     }
   }
 
@@ -88,26 +88,24 @@ const ItemsContainerLeft = styled.nav`
     justify-content: center;
     align-items: center;
     & > * {
-    margin-bottom: 0px !important;    }
+      margin-bottom: 0px !important;
+    }
   }
-
 `;
 
 const ItemsContainerRight = styled.nav`
   display: flex;
   align-items: center;
 
-
   @media (min-width: 320px) {
     & > * {
-    margin-right: 10px;
+      margin-right: 10px;
     }
   }
 
   @media (min-width: 640px) {
     & > * {
-    margin-left: 10px;
+      margin-left: 10px;
     }
   }
-
 `;

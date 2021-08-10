@@ -1,17 +1,17 @@
 import React, { useContext, useReducer, useCallback } from "react";
 import {
   reducer as playerReducer,
-  initialState as initialPlayerState
+  initialState as initialPlayerState,
 } from "./Player";
 
 import {
   reducer as modalReducer,
-  initialState as initialModalState
+  initialState as initialModalState,
 } from "./Modal";
 
 import {
   reducer as filterReducer,
-  initialState as initialFilterState
+  initialState as initialFilterState,
 } from "./Filter";
 
 import combineReducers from "react-combine-reducers";
@@ -22,11 +22,11 @@ export const useRootReducer = () => {
   const [reducerCombined, initialStateCombined] = combineReducers({
     player: [playerReducer, initialPlayerState],
     modal: [modalReducer, initialModalState],
-    filter: [filterReducer, initialFilterState]
+    filter: [filterReducer, initialFilterState],
   });
   return useCallback(useReducer(reducerCombined, initialStateCombined), [
     reducerCombined,
-    initialStateCombined
+    initialStateCombined,
   ]);
 };
 export const useReducerContext = () => useContext(ReducerContext);

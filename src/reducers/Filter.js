@@ -1,5 +1,3 @@
-import { navigate } from "@reach/router";
-
 const getTag = () => {
   if (
     typeof window !== "undefined" &&
