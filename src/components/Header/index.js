@@ -17,8 +17,6 @@ const Item = ({ item }) => {
 export const Header = ({ menu }) => {
   const locale = useLocale();
 
-  console.log(">>>", menu, locale);
-  // const locale = "en-US";
   return (
     <Wrapper>
       <ItemsContainerLeft>

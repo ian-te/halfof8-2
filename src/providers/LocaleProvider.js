@@ -8,7 +8,6 @@ export const useLocale = () => {
 };
 
 export const LocaleProvider = ({ children, locale }) => {
-  console.log(">>>", locale);
   return (
     <LocaleContext.Provider value={{ locale }}>
       {children}
