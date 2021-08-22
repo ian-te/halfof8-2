@@ -78,12 +78,6 @@ export const query = graphql`
       id
       items {
         __typename
-        ... on ContentfulWip {
-          slug
-          text: descriptionInList {
-            raw
-          }
-        }
         ... on ContentfulPortfolioItem {
           id
           name

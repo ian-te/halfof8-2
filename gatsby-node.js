@@ -11,7 +11,6 @@ const { getPath } = require("./src/helpers/locale");
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const homepageTemplate = path.resolve(`src/templates/index.js`);
-  const wipTemplate = path.resolve(`src/templates/wip.js`);
 
   ["en-US"].forEach((lang) => {
     createPage({
@@ -21,13 +20,7 @@ exports.createPages = async ({ graphql, actions }) => {
         locale: lang,
       },
     });
-    createPage({
-      path: getPath("/wip", lang),
-      component: wipTemplate,
-      context: {
-        locale: lang,
-      },
-    });
+
   });
 };
 

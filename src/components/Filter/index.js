@@ -20,28 +20,29 @@ export const Filter = ({ color = "#000" }) => {
     dispatch
   } = useReducerContext();
   return (
-    <IntroWrapper>
-      {!!tag && (
-        <div>
-          You viewed all the {tag}.{" "}
-          <a
-            onClick={() => {
-              dispatch({ type: "RESET_FILTER" });
-            }}
-          >
-            Reset filters
-          </a>{" "}
-          to see all types of work or explore{" "}
-          <Link to={"/wip/"}>Work in Progress&nbsp;&rarr;</Link>
-        </div>
-      )}
-      {!tag && (
-        <div>
-          You viewed all the work, thanks! Also, don't forget to fasten your
-          seat-belt while driving. Safety, dah.
-        </div>
-      )}
-    </IntroWrapper>
+
+    // <IntroWrapper>
+    //   {!!tag && (
+    //     <div>
+    //       You viewed all the {tag}.{" "}
+    //       <a
+    //         onClick={() => {
+    //           dispatch({ type: "RESET_FILTER" });
+    //         }}
+    //       >
+    //         Reset filters
+    //       </a>{" "}
+    //       to see all types of work or explore{" "}
+    //       {/* <Link to={"/wip/"}>Work in Progress&nbsp;&rarr;</Link> */}
+    //     </div>
+    //   )}
+    //   {!tag && (
+    //     <div>
+    //       You viewed all the work, thanks! Also, don't forget to fasten your
+    //       seat-belt while driving. Safety, dah.
+    //     </div>
+    //   )}
+    // </IntroWrapper>
   );
 };
 
