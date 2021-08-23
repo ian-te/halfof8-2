@@ -81,11 +81,9 @@ export const query = graphql`
         ... on ContentfulPortfolioItem {
           id
           name
-          tag
           slug
           externalUrl
           externalLinks
-          isRootPage
           lightbox
           gridColumns
           gridRows
@@ -93,16 +91,16 @@ export const query = graphql`
             name
             identifier
           }
-          shortText {
-            childMarkdownRemark {
-              html
-            }
-          }
-          displayShortText
           indexBackgroundImage {
             file {
               url
             }
+            modalImage: gatsbyImageData(
+              jpegProgressive: true
+              formats: AUTO
+              breakpoints: [320, 640]
+              layout: CONSTRAINED
+            )
             fluid(maxWidth: 1600) {
               src
               aspectRatio
@@ -117,7 +115,6 @@ export const query = graphql`
         ... on ContentfulWidget {
           name
           embedUrl
-          width
           tags {
             name
             identifier
@@ -162,15 +159,6 @@ export const query = graphql`
           expandable
           text {
             raw
-            # references {
-            #   id
-            #   __typename
-            #   contentful_id
-            #   ... on ContentfulTag {
-            #     name
-            #     identifier
-            #   }
-            # }
           }
           tags {
             name

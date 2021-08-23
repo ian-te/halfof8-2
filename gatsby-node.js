@@ -20,7 +20,6 @@ exports.createPages = async ({ graphql, actions }) => {
         locale: lang,
       },
     });
-
   });
 };
 
@@ -36,4 +35,35 @@ exports.onCreatePage = async ({ page, actions }) => {
     // Update the page.
     createPage(page);
   }
+};
+
+exports.createSchemaCustomization = ({ actions }) => {
+  actions.createTypes(`
+    union ContentfulMainPageItems = ContentfulPortfolioItem | ContentfulWidget | ContentfulAudio | ContentfulTextSnippet
+
+    # Replace MyContentfulEntryType below with your actual type name having a link field
+    type ContentfulMainPage {
+      items: [ContentfulMainPageItems] @link(from: "items___NODE")
+    }
+
+    union ContentfulMenuItems = ContentfulTextSnippet | ContentfulTag
+
+    type ContentfulMenu {
+      rightItems: [ContentfulMenuItems] @link(from: "rightItems___NODE")
+      leftItems: [ContentfulMenuItems] @link(from: "leftItems___NODE")
+    }
+
+    type ContentfulWidget {
+      name: String
+      embedUrl: String
+      tags: [ContentfulTag]
+    }
+
+    type ContentfulAudio {
+      waveformImage: ContentfulAsset
+      background: ContentfulAsset
+      tags: [ContentfulTag]
+    }
+
+  `);
 };

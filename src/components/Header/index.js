@@ -20,15 +20,11 @@ export const Header = ({ menu }) => {
   return (
     <Wrapper>
       <ItemsContainerLeft>
-        {menu.leftItems.map((item) => (
-          <Item item={item} />
-        ))}
+        {menu.leftItems && menu.leftItems.map((item) => <Item item={item} />)}
       </ItemsContainerLeft>
       <ItemsContainerRight>
         <LanguageSwitcher locales={["en-US", "ja"]} activeLocale={locale} />
-        {menu.rightItems.map((item) => (
-          <Item item={item} />
-        ))}
+        {menu.rightItems && menu.rightItems.map((item) => <Item item={item} />)}
       </ItemsContainerRight>
     </Wrapper>
   );
@@ -128,9 +124,11 @@ const ItemsContainerRight = styled.nav`
     animation-delay: 0s;
   }
 
-  ${'' /* ${Array.from(Array(20).keys()).map(
+  ${
+    "" /* ${Array.from(Array(20).keys()).map(
     (key) => `& > :nth-child(${key}) {animation-delay: ${(key + 1) / 4}s;}`
-  )} */}
+  )} */
+  }
 
   @keyframes menuappearright {
     0% {

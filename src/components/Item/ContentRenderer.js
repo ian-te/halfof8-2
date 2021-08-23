@@ -28,7 +28,6 @@ export const ContentRenderer = ({ item }) => {
       return <RichText item={item} />;
     // case item.__typename === "ContentfulWip":
 
-
     case !!item.displayShortText:
       return (
         <div>
