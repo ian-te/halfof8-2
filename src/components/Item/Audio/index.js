@@ -83,9 +83,11 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
           </Button>
           <ArtistTitle>Half of Eight</ArtistTitle>
           <TrackName>{name}</TrackName>
-          <WaveForm>
-            <img src={waveformImage.file.url} width="100%" />
-          </WaveForm>
+          {waveformImage && (
+            <WaveForm>
+              <img src={waveformImage.file.url} width="100%" />
+            </WaveForm>
+          )}
           <TimeWrapper>
             <CurrentTime>{readableDuration(time.currentTime)} </CurrentTime>
             <Duration>{readableDuration(time.duration)}</Duration>

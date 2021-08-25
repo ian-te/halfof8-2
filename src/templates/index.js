@@ -7,19 +7,24 @@ import "../index.css";
 import { ImageModal } from "../components/ImageModal";
 import { useReducerContext } from "../reducers/root";
 import { Header } from "../components/Header/index";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const IndexPage = ({ data }) => {
   const modalImages = data.contentfulMainPage.items
     .filter((item) => !!item.lightbox)
     .map((item) => ({
       src: item.indexBackgroundImage.file.url,
-      caption: (
-        <span>
-          <b>{item.name}</b>
-          <br />
-          {item.tag}
-        </span>
-      ),
+      caption: () => {
+        const textJson = JSON.stringify(item.lightboxText.raw);
+        console.log(">>>", textJson);
+        item.lightboxText && item.lightboxText.raw ? (
+          documentToReactComponents(item.lightboxText.raw)
+        ) : (
+          <span>
+            <h3>{item.name}</h3>
+          </span>
+        );
+      },
     }));
 
   return (
@@ -87,6 +92,10 @@ export const query = graphql`
           lightbox
           gridColumns
           gridRows
+          lightbox
+          lightboxText {
+            raw
+          }
           tags {
             name
             identifier

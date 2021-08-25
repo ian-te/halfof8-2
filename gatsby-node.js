@@ -42,7 +42,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     union ContentfulMainPageItems = ContentfulPortfolioItem | ContentfulWidget | ContentfulAudio | ContentfulTextSnippet
 
     # Replace MyContentfulEntryType below with your actual type name having a link field
-    type ContentfulMainPage {
+    type ContentfulMainPage implements Node {
       items: [ContentfulMainPageItems] @link(from: "items___NODE")
     }
 
@@ -51,6 +51,10 @@ exports.createSchemaCustomization = ({ actions }) => {
     type ContentfulMenu {
       rightItems: [ContentfulMenuItems] @link(from: "rightItems___NODE")
       leftItems: [ContentfulMenuItems] @link(from: "leftItems___NODE")
+    }
+
+    type ContentfulPortfolioItem implements Node {
+      externalLinks: [String]
     }
 
     type ContentfulWidget {
