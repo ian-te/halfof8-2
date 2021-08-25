@@ -55,6 +55,7 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type ContentfulPortfolioItem implements Node {
       externalLinks: [String]
+      externalUrl: String
     }
 
     type ContentfulWidget {
