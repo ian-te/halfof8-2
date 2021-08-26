@@ -17,15 +17,14 @@ const getGridColumns = (item) => {
 };
 
 export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
-  const isTextSnippet =
-    item.__typename === "ContentfulTextSnippet" 
-    // || item.__typename === "ContentfulWip";
+  const isTextSnippet = item.__typename === "ContentfulTextSnippet";
+  // || item.__typename === "ContentfulWip";
 
   if (!!item.embedUrl) {
     ratio = 6 / 4;
   }
   if (isTextSnippet) {
-    ratio = false;
+    ratio = 3 / 4;
   }
   return (
     <ContentActionStyled

@@ -13,17 +13,10 @@ const IndexPage = ({ data }) => {
   const modalImages = data.contentfulMainPage.items
     .filter((item) => !!item.lightbox)
     .map((item) => ({
-      src: item.indexBackgroundImage.file.url,
+      gatsbyImageData: item.indexBackgroundImage.modalImage,
       caption: () => {
-        const textJson = JSON.stringify(item.lightboxText.raw);
-        console.log(">>>", textJson);
-        item.lightboxText && item.lightboxText.raw ? (
-          documentToReactComponents(item.lightboxText.raw)
-        ) : (
-          <span>
-            <h3>{item.name}</h3>
-          </span>
-        );
+        const textJson = JSON.parse(item.lightboxText.raw);
+        return documentToReactComponents(textJson);
       },
     }));
 

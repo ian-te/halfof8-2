@@ -14,10 +14,9 @@ export default ({
   onClose,
   ...props
 }) => {
-  console.log(">>>", props, currentIndex > -1 && images[currentIndex].caption);
+  console.log(">>>", images, currentIndex);
   if (currentIndex == -1 || !isOpen) return null;
   const image = getImage(images[currentIndex].gatsbyImageData);
-  console.log(">>>", images[currentIndex]);
   useHotkeys("left", () => onPrev());
   useHotkeys("right", () => onNext());
   useHotkeys("esc", () => onClose());
