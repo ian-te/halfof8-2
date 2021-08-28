@@ -122,6 +122,17 @@ const RichTextWrapper = styled.div`
     text-decoration: none;
   }
 
+  h3 {
+    font-family: neue-haas-grotesk-display, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
   p {
     margin-block-start: 0;
     margin-block-end: 10;
@@ -130,20 +141,27 @@ const RichTextWrapper = styled.div`
   @media (min-width: 360px) {
     font-size: 20;
     line-height: 1.3;
+
+    h3 {font-size: 40px;}
   }
 
   @media (min-width: 640px) {
-    font-size: 1.7vw;
+    font-size: 2vw;
     line-height: 1.35;
+    h3 {font-size: 3vw;}
   }
+
   @media (min-width: 1024px) {
     font-size: 1.3vw;
+    h3 {font-size: 2.7vw;}
   }
   @media (min-width: 1440px) {
     font-size: 1vw;
+    h3 {font-size: 2.2vw;}
   }
   @media (min-width: 1920px) {
     font-size: 0.85vw;
+    h3 {font-size: 1.8vw;}
   }
 `;
 

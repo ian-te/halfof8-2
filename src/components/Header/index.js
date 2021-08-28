@@ -52,6 +52,7 @@ const Wrapper = styled.header`
     flex-wrap: wrap;
     flex-direction: column;
     padding: 12px 12px;
+    word-break: break-word;
   }
 
   @media (min-width: 640px) {
