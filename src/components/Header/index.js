@@ -64,7 +64,7 @@ const Wrapper = styled.header`
     justify-content: space-between;
     align-items: center;
     padding: 12px 12px;
-    font-size: 2vw;
+    font-size: 1.95vw;
   }
 `;
 
@@ -104,10 +104,10 @@ const ItemsContainerLeft = styled.nav`
       margin-bottom: 12px;
     }
   }
-
+  justify-content: center;
   @media (min-width: 640px) {
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     & > * {
       margin-bottom: 0px !important;
