@@ -9,7 +9,7 @@ export const ContentImage = ({ item }) => {
     const image = getImage(item.indexBackgroundImage.thumbImage);
     return (
       <GatsbyImage
-        style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+        style={{ position: "absolute", inset: "-6px" }}
         image={image}
         objectFit="contain"
         objectPosition="50% 50%"
