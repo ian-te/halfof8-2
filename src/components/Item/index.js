@@ -36,7 +36,7 @@ export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
       visible={visible}
       item={item}
     >
-      <ContentWrapper ratio={ratio}>
+      <ContentWrapper ratio={ratio} isCollapsible={isTextSnippet}>
         <ContentInner hasHover={!isTextSnippet}>
           <ContentRenderer item={item} />
           <Links links={item.externalLinks} />
@@ -110,7 +110,15 @@ export const ContentWrapper = styled.div`
         display: inline-block;
         width: 0;
         height: 0;
-        padding-bottom: calc(100% / ${(props) => props.ratio || `(3 / 4)`});
       }
     `}
+  @media(min-width: 640px) {
+    ${(props) =>
+      props.ratio &&
+      css`
+        :after {
+          padding-bottom: calc(100% / ${(props) => props.ratio || `(3 / 4)`});
+        }
+      `}
+  }
 `;

@@ -104,10 +104,9 @@ const ItemsContainerLeft = styled.nav`
       margin-bottom: 12px;
     }
   }
-  justify-content: center;
+  justify-content: left;
   @media (min-width: 640px) {
     flex-direction: row;
-    justify-content: left;
     align-items: center;
     & > * {
       margin-bottom: 0px !important;
