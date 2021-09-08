@@ -58,6 +58,10 @@ exports.createSchemaCustomization = ({ actions }) => {
       externalUrl: String
     }
 
+    type ContentfulTextSnippet implements Node {
+      externalUrl: String
+    }
+
     type ContentfulWidget {
       name: String
       embedUrl: String
