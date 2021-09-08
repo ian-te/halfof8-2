@@ -105,19 +105,21 @@ export const ContentWrapper = styled.div`
   ${(props) =>
     props.ratio &&
     css`
-      :after {
+      &:after {
         content: "";
         display: inline-block;
         width: 0;
         height: 0;
-      }
-    `}
-  ${(props) =>
-    props.ratio &&
-    !props.isCollapsible &&
-    css`
-      :after {
         padding-bottom: calc(100% / ${(props) => props.ratio || `(3 / 4)`});
       }
     `}
+  @media(max-width:640px) {
+    ${(props) =>
+      props.isCollapsible &&
+      css`
+        &:after {
+          padding-bottom: 0;
+        }
+      `}
+  }
 `;

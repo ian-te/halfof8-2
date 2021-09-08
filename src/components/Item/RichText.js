@@ -146,7 +146,7 @@ const RichTextWrapper = styled.div`
   }
 
   @media (min-width: 360px) {
-    font-size: 20;
+    font-size: 20px;
     line-height: 1.3;
 
     h3 {
@@ -155,7 +155,7 @@ const RichTextWrapper = styled.div`
   }
 
   @media (min-width: 640px) {
-    font-size: 2vw;
+    font-size: 1.7vw;
     line-height: 1.35;
     h3 {
       font-size: 3vw;
