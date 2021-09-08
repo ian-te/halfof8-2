@@ -112,13 +112,12 @@ export const ContentWrapper = styled.div`
         height: 0;
       }
     `}
-  @media(min-width: 640px) {
-    ${(props) =>
-      props.ratio &&
-      css`
-        :after {
-          padding-bottom: calc(100% / ${(props) => props.ratio || `(3 / 4)`});
-        }
-      `}
-  }
+  ${(props) =>
+    props.ratio &&
+    !props.isCollapsible &&
+    css`
+      :after {
+        padding-bottom: calc(100% / ${(props) => props.ratio || `(3 / 4)`});
+      }
+    `}
 `;
