@@ -8,6 +8,7 @@ export const ImageModal = ({ images }) => {
     dispatch,
   } = useReducerContext();
   const { isOpen, currentSlide } = modal;
+  console.log(">>>", currentSlide, images.length);
   return (
     <Lightbox
       isOpen={isOpen}

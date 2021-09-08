@@ -63,7 +63,8 @@ const Text = styled.div`
 `;
 
 export const RichText = ({ item }) => {
-  const { text, name, textColor, expandable, backgroundColor } = item;
+  const { text, name, textColor, expandable, backgroundColor, externalUrl } =
+    item;
   const [isOpen, setOpen] = useState(false);
 
   return (
@@ -92,7 +93,13 @@ export const RichText = ({ item }) => {
         </Header>
       )}
       <Text isOpen={isOpen || !expandable}>
-        {renderRichText(text, options)}
+        {externalUrl ? (
+          renderRichText(text, options)
+        ) : (
+          <a target="_blank" href={externalUrl}>
+            {renderRichText(text, options)}
+          </a>
+        )}
       </Text>
     </RichTextWrapper>
   );
@@ -131,7 +138,7 @@ const RichTextWrapper = styled.div`
     margin-block-end: 0em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-}
+  }
 
   p {
     margin-block-start: 0;
@@ -142,26 +149,36 @@ const RichTextWrapper = styled.div`
     font-size: 20;
     line-height: 1.3;
 
-    h3 {font-size: 40px;}
+    h3 {
+      font-size: 40px;
+    }
   }
 
   @media (min-width: 640px) {
     font-size: 2vw;
     line-height: 1.35;
-    h3 {font-size: 3vw;}
+    h3 {
+      font-size: 3vw;
+    }
   }
 
   @media (min-width: 1024px) {
     font-size: 1.3vw;
-    h3 {font-size: 2.7vw;}
+    h3 {
+      font-size: 2.7vw;
+    }
   }
   @media (min-width: 1440px) {
     font-size: 1vw;
-    h3 {font-size: 2.2vw;}
+    h3 {
+      font-size: 2.2vw;
+    }
   }
   @media (min-width: 1920px) {
     font-size: 0.85vw;
-    h3 {font-size: 1.8vw;}
+    h3 {
+      font-size: 1.8vw;
+    }
   }
 `;
 

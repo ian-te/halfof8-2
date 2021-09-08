@@ -102,6 +102,7 @@ export const query = graphql`
               formats: AUTO
               breakpoints: [320, 640]
               layout: CONSTRAINED
+              placeholder: NONE
             )
             thumbImage: gatsbyImageData(
               jpegProgressive: true
@@ -158,6 +159,7 @@ export const query = graphql`
           textColor
           backgroundColor
           expandable
+          externalUrl
           text {
             raw
           }

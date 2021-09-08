@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import ModalArrow from "../../Icons/ModalArrow";
 import ModalClose from "../../Icons/ModalClose";
-import { useHotkeys } from "react-hotkeys-hook";
+// import { useHotkeys } from "react-hotkeys-hook";
 
 export default ({
   currentIndex,
@@ -14,12 +14,11 @@ export default ({
   onClose,
   ...props
 }) => {
-  console.log(">>>", images, currentIndex);
   if (currentIndex == -1 || !isOpen) return null;
   const image = getImage(images[currentIndex].gatsbyImageData);
-  useHotkeys("left", () => onPrev());
-  useHotkeys("right", () => onNext());
-  useHotkeys("esc", () => onClose());
+  // useHotkeys("left", () => onPrev());
+  // useHotkeys("right", () => onNext());
+  // useHotkeys("esc", () => onClose());
 
   return (
     isOpen &&

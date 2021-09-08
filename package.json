@@ -16,6 +16,7 @@
     "gatsby-plugin-scroll-reveal": "0.0.7",
     "gatsby-plugin-sharp": "^3.10.2",
     "gatsby-plugin-styled-components": "^4.10.0",
+    "gatsby-plugin-yandex-metrika": "^2.5.0",
     "gatsby-source-contentful": "^5.10.0",
     "gatsby-source-filesystem": "^3.10.0",
     "gatsby-transformer-remark": "^4.7.0",
