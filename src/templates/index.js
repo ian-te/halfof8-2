@@ -138,15 +138,14 @@ export const query = graphql`
             file {
               url
             }
-            fluid {
-              src
-              aspectRatio
-              base64
-              sizes
-              srcSet
-              srcWebp
-              srcSetWebp
-            }
+            thumbImage: gatsbyImageData(
+              jpegProgressive: true
+              formats: AUTO
+              width: 1000
+              breakpoints: [320, 640]
+              layout: CONSTRAINED
+              placeholder: BLURRED
+            )
           }
           waveformImage {
             file {

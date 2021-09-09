@@ -39,6 +39,7 @@ export const ContentRenderer = ({ item }) => {
     case !!item.fbxFile:
       return null;
     case !!item.mp3:
+      console.log(">>> item", item);
       return <Audio {...item} />;
     case !!item.indexBackgroundImage:
       return (

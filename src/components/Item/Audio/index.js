@@ -16,6 +16,7 @@ function readableDuration(seconds) {
 export const Audio = ({ name, id, mp3, background, waveformImage }) => {
   const player = useRef();
   const [time, setTime] = useState({ currentTime: 0, duration: 0 });
+  console.log(">>>", background);
 
   const {
     state: {
