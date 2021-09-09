@@ -20,15 +20,11 @@ export const Header = ({ menu }) => {
   return (
     <Wrapper>
       <ItemsContainerLeft>
-        {menu.leftItems.map((item) => (
-          <Item item={item} />
-        ))}
+        {menu.leftItems && menu.leftItems.map((item) => <Item item={item} />)}
       </ItemsContainerLeft>
       <ItemsContainerRight>
         <LanguageSwitcher locales={["en-US", "ja"]} activeLocale={locale} />
-        {menu.rightItems.map((item) => (
-          <Item item={item} />
-        ))}
+        {menu.rightItems && menu.rightItems.map((item) => <Item item={item} />)}
       </ItemsContainerRight>
     </Wrapper>
   );
@@ -56,6 +52,7 @@ const Wrapper = styled.header`
     flex-wrap: wrap;
     flex-direction: column;
     padding: 12px 12px;
+    word-break: break-word;
   }
 
   @media (min-width: 640px) {
@@ -67,7 +64,7 @@ const Wrapper = styled.header`
     justify-content: space-between;
     align-items: center;
     padding: 12px 12px;
-    font-size: 2vw;
+    font-size: 1.95vw;
   }
 `;
 
@@ -107,10 +104,9 @@ const ItemsContainerLeft = styled.nav`
       margin-bottom: 12px;
     }
   }
-
+  justify-content: left;
   @media (min-width: 640px) {
     flex-direction: row;
-    justify-content: center;
     align-items: center;
     & > * {
       margin-bottom: 0px !important;
@@ -128,9 +124,11 @@ const ItemsContainerRight = styled.nav`
     animation-delay: 0s;
   }
 
-  ${'' /* ${Array.from(Array(20).keys()).map(
+  ${
+    "" /* ${Array.from(Array(20).keys()).map(
     (key) => `& > :nth-child(${key}) {animation-delay: ${(key + 1) / 4}s;}`
-  )} */}
+  )} */
+  }
 
   @keyframes menuappearright {
     0% {

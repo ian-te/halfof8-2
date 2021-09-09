@@ -2,8 +2,13 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
-const { CONTENTFUL_SPACE_ID, CONTENTFUL_ACCESS_TOKEN, CONTENTFUL_HOST } =
-  process.env;
+const {
+  CONTENTFUL_SPACE_ID,
+  CONTENTFUL_ACCESS_TOKEN,
+  CONTENTFUL_HOST,
+  FAVICON_PATH,
+  YA_METRIKA_ID,
+} = process.env;
 
 module.exports = {
   siteMetadata: {
@@ -42,12 +47,12 @@ module.exports = {
         short_name: `halfof8`,
         start_url: `/`,
         display: `minimal-ui`,
-        icon: `src/images/h8-favicon-wh.png`,
+        icon: FAVICON_PATH || `src/images/h8-favicon-wh.png`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    `gatsby-plugin-offline`,
+    // `gatsby-plugin-offline`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -72,6 +77,23 @@ module.exports = {
           keySeparator: false,
           nsSeparator: false,
         },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-yandex-metrika`,
+      options: {
+        // The ID of yandex metrika.
+        trackingId: YA_METRIKA_ID || 13731373,
+        // Enabled a webvisor. The default value is `false`.
+        webvisor: true,
+        // Enables tracking a hash in URL. The default value is `false`.
+        trackHash: true,
+        // Defines where to place the tracking script - `false` means before body (slower loading, more hits)
+        // and `true` means after the body (faster loading, less hits). The default value is `false`.
+        afterBody: true,
+        // Use `defer` attribute of metrika script. If set to `false` - script will be loaded with `async` attribute.
+        // Async enables earlier loading of the metrika but it can negatively affect page loading speed. The default value is `false`.
+        defer: false,
       },
     },
   ],

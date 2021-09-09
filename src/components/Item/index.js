@@ -17,15 +17,14 @@ const getGridColumns = (item) => {
 };
 
 export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
-  const isTextSnippet =
-    item.__typename === "ContentfulTextSnippet" 
-    // || item.__typename === "ContentfulWip";
+  const isTextSnippet = item.__typename === "ContentfulTextSnippet";
+  // || item.__typename === "ContentfulWip";
 
   if (!!item.embedUrl) {
     ratio = 6 / 4;
   }
   if (isTextSnippet) {
-    ratio = false;
+    ratio = 3 / 4;
   }
   return (
     <ContentActionStyled
@@ -37,7 +36,7 @@ export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
       visible={visible}
       item={item}
     >
-      <ContentWrapper ratio={ratio}>
+      <ContentWrapper ratio={ratio} isCollapsible={isTextSnippet}>
         <ContentInner hasHover={!isTextSnippet}>
           <ContentRenderer item={item} />
           <Links links={item.externalLinks} />
@@ -106,7 +105,7 @@ export const ContentWrapper = styled.div`
   ${(props) =>
     props.ratio &&
     css`
-      :after {
+      &:after {
         content: "";
         display: inline-block;
         width: 0;
@@ -114,4 +113,13 @@ export const ContentWrapper = styled.div`
         padding-bottom: calc(100% / ${(props) => props.ratio || `(3 / 4)`});
       }
     `}
+  @media(max-width:640px) {
+    ${(props) =>
+      props.isCollapsible &&
+      css`
+        &:after {
+          padding-bottom: 0;
+        }
+      `}
+  }
 `;

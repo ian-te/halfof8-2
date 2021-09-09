@@ -1,6 +1,6 @@
 export const initialState = {
   isOpen: false,
-  currentSlide: -1
+  currentSlide: -1,
 };
 
 export function reducer(state = initialState, action) {
@@ -9,25 +9,25 @@ export function reducer(state = initialState, action) {
       return {
         ...state,
         isOpen: true,
-        currentSlide: action.data.slide
+        currentSlide: action.data.slide,
       };
 
     case "NEXT_SLIDE":
       return {
         ...state,
-        currentSlide: state.currentSlide + 1
+        currentSlide: state.currentSlide + 1,
       };
 
     case "PREV_SLIDE":
       return {
         ...state,
-        currentSlide: state.currentSlide - 1
+        currentSlide: state.currentSlide - 1,
       };
 
     case "CLOSE_MODAL":
       return {
         ...state,
-        isOpen: false
+        isOpen: false,
       };
 
     default:

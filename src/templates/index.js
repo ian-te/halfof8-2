@@ -7,19 +7,18 @@ import "../index.css";
 import { ImageModal } from "../components/ImageModal";
 import { useReducerContext } from "../reducers/root";
 import { Header } from "../components/Header/index";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const IndexPage = ({ data }) => {
   const modalImages = data.contentfulMainPage.items
     .filter((item) => !!item.lightbox)
     .map((item) => ({
-      src: item.indexBackgroundImage.file.url,
-      caption: (
-        <span>
-          <b>{item.name}</b>
-          <br />
-          {item.tag}
-        </span>
-      ),
+      gatsbyImageData: item.indexBackgroundImage.modalImage,
+      caption: () => {
+        if (!item.lightboxText) return null;
+        const textJson = JSON.parse(item.lightboxText.raw);
+        return documentToReactComponents(textJson);
+      },
     }));
 
   return (
@@ -81,43 +80,44 @@ export const query = graphql`
         ... on ContentfulPortfolioItem {
           id
           name
-          tag
           slug
           externalUrl
           externalLinks
-          isRootPage
           lightbox
           gridColumns
           gridRows
+          lightbox
+          lightboxText {
+            raw
+          }
           tags {
             name
             identifier
           }
-          shortText {
-            childMarkdownRemark {
-              html
-            }
-          }
-          displayShortText
           indexBackgroundImage {
             file {
               url
             }
-            fluid(maxWidth: 1600) {
-              src
-              aspectRatio
-              base64
-              sizes
-              srcSet
-              srcWebp
-              srcSetWebp
-            }
+            modalImage: gatsbyImageData(
+              jpegProgressive: true
+              formats: AUTO
+              breakpoints: [320, 640]
+              layout: CONSTRAINED
+              placeholder: BLURRED
+            )
+            thumbImage: gatsbyImageData(
+              jpegProgressive: true
+              formats: AUTO
+              width: 1000
+              breakpoints: [320, 640]
+              layout: CONSTRAINED
+              placeholder: BLURRED
+            )
           }
         }
         ... on ContentfulWidget {
           name
           embedUrl
-          width
           tags {
             name
             identifier
@@ -139,15 +139,14 @@ export const query = graphql`
             file {
               url
             }
-            fluid {
-              src
-              aspectRatio
-              base64
-              sizes
-              srcSet
-              srcWebp
-              srcSetWebp
-            }
+            thumbImage: gatsbyImageData(
+              jpegProgressive: true
+              formats: AUTO
+              width: 1000
+              breakpoints: [320, 640]
+              layout: CONSTRAINED
+              placeholder: BLURRED
+            )
           }
           waveformImage {
             file {
@@ -160,17 +159,9 @@ export const query = graphql`
           textColor
           backgroundColor
           expandable
+          externalUrl
           text {
             raw
-            # references {
-            #   id
-            #   __typename
-            #   contentful_id
-            #   ... on ContentfulTag {
-            #     name
-            #     identifier
-            #   }
-            # }
           }
           tags {
             name

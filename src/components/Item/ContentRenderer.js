@@ -28,7 +28,6 @@ export const ContentRenderer = ({ item }) => {
       return <RichText item={item} />;
     // case item.__typename === "ContentfulWip":
 
-
     case !!item.displayShortText:
       return (
         <div>
@@ -40,6 +39,7 @@ export const ContentRenderer = ({ item }) => {
     case !!item.fbxFile:
       return null;
     case !!item.mp3:
+      console.log(">>> item", item);
       return <Audio {...item} />;
     case !!item.indexBackgroundImage:
       return (

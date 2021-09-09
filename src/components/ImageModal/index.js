@@ -1,5 +1,5 @@
 import React from "react";
-import Lightbox from "react-spring-lightbox";
+import Lightbox from "./components/Modal";
 import { useReducerContext } from "../../reducers/root";
 
 export const ImageModal = ({ images }) => {
@@ -8,6 +8,7 @@ export const ImageModal = ({ images }) => {
     dispatch,
   } = useReducerContext();
   const { isOpen, currentSlide } = modal;
+  console.log(">>>", currentSlide, images.length);
   return (
     <Lightbox
       isOpen={isOpen}
