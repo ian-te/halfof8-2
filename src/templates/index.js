@@ -15,6 +15,7 @@ const IndexPage = ({ data }) => {
     .map((item) => ({
       gatsbyImageData: item.indexBackgroundImage.modalImage,
       caption: () => {
+        if (!item.lightboxText) return null;
         const textJson = JSON.parse(item.lightboxText.raw);
         return documentToReactComponents(textJson);
       },
