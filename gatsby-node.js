@@ -65,13 +65,13 @@ exports.createSchemaCustomization = ({ actions }) => {
     type ContentfulWidget implements Node{
       name: String
       embedUrl: String
-      tags: [ContentfulTag]
+      tags: [ContentfulTag] @link(from: "tags___NODE")
     }
 
     type ContentfulAudio implements Node{
       waveformImage: ContentfulAsset @link(from: "waveformImage___NODE")
       background: ContentfulAsset @link(from: "background___NODE")
-      tags: [ContentfulTag]
+      tags: [ContentfulTag] @link(from: "tags___NODE")
     }
 
   `);
