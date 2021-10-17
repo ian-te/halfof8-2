@@ -4,14 +4,15 @@ import { Arrow } from "../Icons/Arrow";
 import { Expand } from "../Icons/Expand";
 import { NewWindow } from "../Icons/NewWindow";
 
-const getIcon = item => {
+const getIcon = (item) => {
+  console.log(">>>", item.externalUrl);
   switch (true) {
     case !!item.lightbox:
       return <Expand />;
     case !!item.externalUrl:
       return <NewWindow width={24} />;
     default:
-      return <Arrow />;
+      return null;
   }
 };
 
@@ -24,14 +25,16 @@ const IconBase = ({ item, className, ...props }) => {
 
 export const Icon = styled(IconBase)`
   position: absolute;
-  background-color: ${props => props.theme.bgColor};
-  svg path { fill: ${props => props.theme.textColor}; }
+  background-color: ${(props) => props.theme.bgColor};
+  svg path {
+    fill: ${(props) => props.theme.textColor};
+  }
   border-radius: 100%;
   left: 16px;
   top: 16px;
   width: 52px;
   height: 52px;
- 
+
   svg {
     width: 20px;
     height: 20px;
@@ -42,7 +45,9 @@ export const Icon = styled(IconBase)`
   align-items: center;
   z-index: 2;
 
-  ${'' /* box-shadow: 0px 1.24527px 2.46286px rgba(0, 0, 0, 0.0562291), 0px 2.99255px 5.91859px rgba(0, 0, 0, 0.0807786), 0px 5.6347px 11.1442px rgba(0, 0, 0, 0.1), 0px 10.0513px 19.8793px rgba(0, 0, 0, 0.119221), 0px 18.7999px 37.1821px rgba(0, 0, 0, 0.143771), 0px 45px 89px rgba(0, 0, 0, 0.2);   */}
+  ${
+    "" /* box-shadow: 0px 1.24527px 2.46286px rgba(0, 0, 0, 0.0562291), 0px 2.99255px 5.91859px rgba(0, 0, 0, 0.0807786), 0px 5.6347px 11.1442px rgba(0, 0, 0, 0.1), 0px 10.0513px 19.8793px rgba(0, 0, 0, 0.119221), 0px 18.7999px 37.1821px rgba(0, 0, 0, 0.143771), 0px 45px 89px rgba(0, 0, 0, 0.2);   */
+  }
 
   animation: popping 0.3s ease-in;
   animation-fill-mode: both;
@@ -56,31 +61,28 @@ export const Icon = styled(IconBase)`
     top: 50%;
 
     svg {
-    width: 24px;
-    height: 24px;
-  }
-
+      width: 24px;
+      height: 24px;
+    }
   }
 
   &:hover {
-    svg path { fill: ${props => props.theme.linkActiveColor} 
-    !important; }
+    svg path {
+      fill: ${(props) => props.theme.linkActiveColor} !important;
+    }
   }
 
-  @keyframes popping { 
-  0% {
-    opacity: 0;
-    transform: scale(1);
+  @keyframes popping {
+    0% {
+      opacity: 0;
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  }
-
-  
-
 `;

@@ -71,7 +71,7 @@ export const RichText = ({ item }) => {
     <RichTextWrapper
       textColor={textColor}
       backgroundColor={backgroundColor}
-      style={{ zIndex: 1000, position: "relative" }}
+      style={{ zIndex: 1, position: "relative" }}
     >
       {expandable && (
         <Header onClick={() => setOpen(!isOpen)} isOpen={isOpen}>

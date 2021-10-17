@@ -25,7 +25,12 @@ const IframeAsync = ({ src, ...props }) => {
 export const ContentRenderer = ({ item }) => {
   switch (true) {
     case item.__typename === "ContentfulTextSnippet":
-      return <RichText item={item} />;
+      return (
+        <>
+          <Icon item={item} />
+          <RichText item={item} />;
+        </>
+      );
     // case item.__typename === "ContentfulWip":
 
     case !!item.displayShortText:
