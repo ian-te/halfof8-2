@@ -18,8 +18,11 @@ const getIcon = (item) => {
 
 const IconBase = ({ item, className, ...props }) => {
   switch (true) {
-    default:
+    case !!item.lightbox:
+    case !!item.externalUrl:
       return <div className={className}>{getIcon(item)}</div>;
+    default:
+      return null;
   }
 };
 
