@@ -25,7 +25,7 @@ const IndexPage = ({ data }) => {
     <Fragment>
       <Seo title={data.site.siteMetadata.title} />
       <Header menu={data.menus.nodes[0]} />
-      <Layout>
+      <Layout isBordersEnabled={data.contentfulSettings.enableItemBorders}>
         <ItemsRender items={data.contentfulMainPage.items} />
         {/* <Filter /> */}
       </Layout>
@@ -33,7 +33,7 @@ const IndexPage = ({ data }) => {
     </Fragment>
   );
 };
-const ItemsRender = ({ items }) => {
+const ItemsRender = ({ items, isBordersEnabled }) => {
   let slideKey = -1;
   const {
     state: { filter },
@@ -72,6 +72,9 @@ export const query = graphql`
       siteMetadata {
         title
       }
+    }
+    contentfulSettings {
+      enableItemBorders
     }
     contentfulMainPage(node_locale: { eq: $language }) {
       id
