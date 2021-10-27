@@ -39,14 +39,23 @@ const Wrapper = styled.a`
 
   @media (min-width: 640px) {
     font-size: 2vw;
+    padding: 4px 8px;
+    border-radius: 40px;
+  }
+
+
+  @media (min-width: 1024px) {
+    font-size: 2vw;
     padding: 8px 16px;
     border-radius: 40px;
   }
+
 
   &:hover {
     border: 1px solid ${(props) => props.theme.textColor};
     border-bottom: 1px solid ${(props) => props.theme.textColor}!important;
     color: ${(props) => props.theme.bgColor}!important;
     background-color: ${(props) => props.theme.textColor};
+    transition: 0.5s ease;
   }
 `;
