@@ -25,6 +25,10 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
   } = useReducerContext();
 
   useEffect(() => {
+    dispatch({ type: "ADD_TRACK", data: { id, name } });
+  }, []);
+
+  useEffect(() => {
     if (isPlaying && currentItem === id) {
     } else if (isPlaying && currentItem !== id) {
       player.current.pause();
@@ -42,6 +46,14 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
         duration: e.target.duration,
       });
     });
+
+    player.current.addEventListener("ended", (e) => {
+      setTime({
+        currentTime: 0,
+        duration: e.target.duration,
+      });
+      dispatch({ type: "NEXT_TRACK" });
+    });
     return () => {
       player.current && player.current.remove();
     };
@@ -53,9 +65,15 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
     player.current.currentTime = (x / rect.width) * time.duration;
   };
 
+  useEffect(() => {
+    if (currentItem === id) {
+      player.current.play();
+    }
+  }, [currentItem]);
+
   const playpause = useCallback(
     (e) => {
-      e.stopPropagation();
+      if (!!e) e.stopPropagation();
       if (currentItem === id && isPlaying) {
         dispatch({ type: "STOP_PLAYBACK" });
       } else {

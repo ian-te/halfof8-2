@@ -17,6 +17,7 @@ const getGridColumns = (item) => {
 };
 
 export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
+  if (!visible) return null;
   const isTextSnippet = item.__typename === "ContentfulTextSnippet";
   // || item.__typename === "ContentfulWip";
 
@@ -86,7 +87,7 @@ const ContentActionStyled = styled(ContentAction)`
     ${(props) => props.isDoubleSm && `grid-column: span 1;`}
   }
   ${(props) =>
-    !props.visible && `visibility: hidden; position: absolute; z-index: -10;`}
+    !props.visible && `display: none;position: absolute; z-index: -10;`}
   ${(props) =>
     !props.noHover &&
     `
