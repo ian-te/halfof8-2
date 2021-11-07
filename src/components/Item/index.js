@@ -40,7 +40,7 @@ export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
       <ContentWrapper ratio={ratio} isCollapsible={isTextSnippet}>
         <ContentInner hasHover={!isTextSnippet}>
           <ContentRenderer item={item} />
-          <Links links={item.externalLinks} />
+          {/* <Links links={item.externalLinks} /> */}
         </ContentInner>
       </ContentWrapper>
     </ContentActionStyled>

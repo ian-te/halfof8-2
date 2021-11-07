@@ -1,15 +1,12 @@
 import React from "react"
 export const Expand = () => (
   <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
+    width="34"
+    height="34"
+    viewBox="0 0 34 34"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path
-      d="M16 0L19.0667 3.06667L15.2133 6.89333L17.1067 8.78667L20.9333 4.93333L24 8V0H16ZM0 8L3.06667 4.93333L6.89333 8.78667L8.78667 6.89333L4.93333 3.06667L8 0H0V8ZM8 24L4.93333 20.9333L8.78667 17.1067L6.89333 15.2133L3.06667 19.0667L0 16V24H8ZM24 16L20.9333 19.0667L17.1067 15.2133L15.2133 17.1067L19.0667 20.9333L16 24H24V16Z"
-      fill="black"
-    />
+    <path stroke="#000" stroke-width="2" d="m1 1 9.6 9.6M33 1l-9.6 9.6M1 33l9.6-9.6M33 33l-9.6-9.6M1 25v8h8M33 25v8h-8M1 9V1h8M33 9V1h-8"/>
   </svg>
 )
