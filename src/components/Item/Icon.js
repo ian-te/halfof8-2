@@ -5,7 +5,6 @@ import { Expand } from "../Icons/Expand";
 import { NewWindow } from "../Icons/NewWindow";
 
 const getIcon = (item) => {
-  console.log(">>>", item.externalUrl);
   switch (true) {
     case !!item.lightbox:
       return <Expand />;

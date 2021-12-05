@@ -3,15 +3,7 @@ import { Play as PlayBase, Pause as PauseBase } from "./components/Play";
 import styled from "styled-components";
 import { ContentImage } from "../Image";
 import { useReducerContext } from "../../../reducers/root";
-
-function readableDuration(seconds) {
-  let sec = Math.floor(seconds);
-  let min = Math.floor(sec / 60);
-  min = min >= 10 ? min : "0" + min;
-  sec = Math.floor(sec % 60);
-  sec = sec >= 10 ? sec : "0" + sec;
-  return min + ":" + sec;
-}
+import { readableDuration } from "../../../helpers/readableDuration";
 
 export const Audio = ({ name, id, mp3, background, waveformImage }) => {
   const player = useRef();
@@ -44,6 +36,13 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
       setTime({
         currentTime: e.target.currentTime,
         duration: e.target.duration,
+      });
+      dispatch({
+        type: "UPDATE_TIME",
+        data: {
+          currentTime: e.target.currentTime,
+          duration: e.target.duration,
+        },
       });
     });
 

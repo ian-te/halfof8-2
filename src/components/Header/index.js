@@ -4,6 +4,7 @@ import { renderRichText } from "gatsby-source-contentful/rich-text";
 import { Tag } from "../Tag";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { useLocale } from "../../providers/LocaleProvider";
+import { Player } from "../Player";
 
 const Item = ({ item }) => {
   switch (item.__typename) {
@@ -26,6 +27,7 @@ export const Header = ({ menu }) => {
         <LanguageSwitcher locales={["en-US", "ja"]} activeLocale={locale} />
         {menu.rightItems && menu.rightItems.map((item) => <Item item={item} />)}
       </ItemsContainerRight>
+      <Player />
     </Wrapper>
   );
 };
@@ -35,7 +37,7 @@ const Wrapper = styled.header`
   background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(30px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-
+  align-content: space-between;
   p {
     color: rgba(0, 0, 0, 0.5);
     margin: 0;
@@ -53,9 +55,11 @@ const Wrapper = styled.header`
   @media (min-width: 320px) {
     font-size: 7.5vw;
     line-height: 1.3;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas:
+      "leftNav"
+      "rightNav"
+      "player";
     padding: 12px 12px;
     word-break: break-word;
   }
@@ -64,10 +68,10 @@ const Wrapper = styled.header`
     position: sticky;
     top: 0;
     z-index: 10;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-areas:
+      "leftNav rightNav"
+      "player player";
     padding: 6px 12px;
     font-size: 1.95vw;
   }
@@ -76,10 +80,6 @@ const Wrapper = styled.header`
     position: sticky;
     top: 0;
     z-index: 10;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
     padding: 12px 12px;
     font-size: 1.95vw;
   }
@@ -87,6 +87,7 @@ const Wrapper = styled.header`
 
 const ItemsContainerLeft = styled.nav`
   display: flex;
+  grid-area: leftNav;
 
   & > * {
     margin-right: 10px;
@@ -124,7 +125,7 @@ const ItemsContainerLeft = styled.nav`
   }
 
   justify-content: left;
- 
+
   @media (min-width: 640px) {
     flex-direction: row;
     align-items: center;
@@ -147,17 +148,11 @@ const ItemsContainerLeft = styled.nav`
 const ItemsContainerRight = styled.nav`
   display: flex;
   align-items: center;
-
+  grid-area: rightNav;
   & > * {
     animation: menuappearright 0.5s ease-in;
     animation-fill-mode: both;
     animation-delay: 0s;
-  }
-
-  ${
-    "" /* ${Array.from(Array(20).keys()).map(
-    (key) => `& > :nth-child(${key}) {animation-delay: ${(key + 1) / 4}s;}`
-  )} */
   }
 
   @keyframes menuappearright {
@@ -183,7 +178,7 @@ const ItemsContainerRight = styled.nav`
 
   @media (min-width: 640px) {
     flex-direction: row;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
 
     & > :first-child {
@@ -194,6 +189,4 @@ const ItemsContainerRight = styled.nav`
       margin-left: 10px;
     }
   }
-
-  
 `;
