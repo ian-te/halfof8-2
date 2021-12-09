@@ -32,14 +32,15 @@ export const LanguageSwitcher = ({ locales = [], activeLocale = "en-US" }) => {
 const Wrapper = styled.div`
   /* border: 0.2em solid ${(props) => props.theme.textColor}; */
   display: flex;
-  background-color: rgba(0, 0, 0, 0.1);
-  color: ${(props) => props.theme.textColor};
+  background-color:  none;
+  color: ${(props) => props.theme.headerTextColor};
+  border: 1px solid ${(props) => props.theme.headerTextColor};
   border-radius: 1000px;
   position: relative;
 
   a:hover {
-    background-color: rgba(0, 0, 0, 1);
-    color: white;
+    background-color: ${(props) => props.theme.bodyColor};;
+    color: ${(props) => props.theme.headerTextColor}!important;
     border-radius: 1000px;
     transition: 0.5s ease;
   }
@@ -50,19 +51,19 @@ const Locale = styled(Link)`
   ${(props) =>
     props.active &&
     css`
-      background-color: none!important;
+      background-color: ${(props) => props.theme.bodyColor};;
       box-sizing: border-box;
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
-      border: 1px solid #000000;
+      ${'' /* border: 1px solid #000000; */}
       border-radius: 1000px;
-      color: ${(props) => props.theme.textColor};
+      color: ${(props) => props.theme.headerTextColor}!important;
     `}
 
 
   text-decoration: none;
 
-  color: ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.headerTextColor};
 
   @media (min-width: 320px) {
     padding-top: 0.1em;
