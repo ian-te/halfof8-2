@@ -14,7 +14,7 @@ export const Player = () => {
   const nextTrackId = nextTrackSelector(state.player);
   const currentTrack = getTrackById(state.player, currentItem);
   const nextTrack = getTrackById(state.player, nextTrackId);
-  if (!isPlaying) return null;
+  if (!currentItem) return null;
   return (
     <Wrapper>
       <button onClick={() => dispatch({ type: "PREV_TRACK" })}>PREV</button>
