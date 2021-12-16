@@ -7,6 +7,7 @@ import "../index.css";
 import { ImageModal } from "../components/ImageModal";
 import { useReducerContext } from "../reducers/root";
 import { Header } from "../components/Header/index";
+import { Player } from "../components/Player";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const IndexPage = ({ data }) => {
@@ -30,6 +31,7 @@ const IndexPage = ({ data }) => {
         {/* <Filter /> */}
       </Layout>
       <ImageModal images={modalImages} />
+      <Player />
     </Fragment>
   );
 };

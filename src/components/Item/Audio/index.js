@@ -155,16 +155,28 @@ const Play = styled(PlayBase)``;
 const Pause = styled(PauseBase)``;
 
 const Button = styled.button`
-  background: rgba(255, 255, 255, 0.5);
+  background: white;
   border: none;
-  padding: 0;
+  top: 8px;
+  left: 8px;
+  padding-top: 2px;
   ${"" /* padding: 28px; */}
   outline: none;
   width: 44px;
   height: 44px;
+  border-radius: 22px;
   cursor: pointer;
   position: relative;
   z-index: 10;
+
+  &:hover {
+    background: black;
+    svg path {
+      fill: white!important;
+      transition: 0.5s ease;
+    }
+  }
+
   &:active {
     ${Play} > path, ${Pause} > path {
       fill: black;
@@ -182,13 +194,14 @@ const Progress = styled.div`
 
 const TrackName = styled.div`
   position: absolute;
-  top: 22px;
-  left: 44px;
+  top: 30px;
+  left: 58px;
   color: #000;
   padding-left: 4px;
   padding-right: 4px;
   height: 22px;
   line-height: 22px;
+  ${'' /* border-radius: 11px; */}
   background: rgba(255, 255, 255, 0.8);
 
   @media (min-width: 360px) {
@@ -210,14 +223,15 @@ const TrackName = styled.div`
 
 const ArtistTitle = styled.div`
   position: absolute;
-  top: 0;
-  left: 44px;
+  top: 8px;
+  left: 58px;
   height: 22px;
   color: #000;
   line-height: 22px;
   padding-left: 4px;
   padding-right: 4px;
   background: #ffffff;
+  ${'' /* border-radius: 11px; */}
 
   @media (min-width: 360px) {
     font-size: 10px;
@@ -252,20 +266,25 @@ const ControlsWrapper = styled.div`
 `;
 
 const Time = styled.span`
+  position: absolute;
   font-weight: normal;
   font-size: 12px;
   line-height: 15px;
-  border-radius: 0px;
-  padding: 0px 2px;
+  border-radius: 12px;
+  bottom: 8px;
+  padding: 0px 4px;
 `;
 
 const CurrentTime = styled(Time)`
   background-color: white;
   color: #0c0c0d;
+  left: 8px;
+
 `;
 const Duration = styled(Time)`
   color: white;
   background-color: #0c0c0d;
+  right: 8px;
 `;
 
 const TimeWrapper = styled.div`
