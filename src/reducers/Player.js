@@ -49,6 +49,12 @@ export function reducer(state = initialState, action) {
         currentItem: null,
       };
 
+    case "PLAYPAUSE":
+      return {
+        ...state,
+        isPlaying: !state.isPlaying,
+      };
+
     case "FINISH_PLAYBACK":
       return {
         ...state,

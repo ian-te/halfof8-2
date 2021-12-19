@@ -65,10 +65,13 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
   };
 
   useEffect(() => {
-    if (currentItem === id) {
+    if (currentItem === id && isPlaying) {
       player.current.play();
     }
-  }, [currentItem]);
+    if (currentItem === id && !isPlaying) {
+      player.current.pause();
+    }
+  }, [currentItem, isPlaying]);
 
   const playpause = useCallback(
     (e) => {
@@ -172,7 +175,7 @@ const Button = styled.button`
   &:hover {
     background: black;
     svg path {
-      fill: white!important;
+      fill: white !important;
       transition: 0.5s ease;
     }
   }
@@ -201,7 +204,7 @@ const TrackName = styled.div`
   padding-right: 4px;
   height: 22px;
   line-height: 22px;
-  ${'' /* border-radius: 11px; */}
+  ${"" /* border-radius: 11px; */}
   background: rgba(255, 255, 255, 0.8);
 
   @media (min-width: 360px) {
@@ -231,7 +234,7 @@ const ArtistTitle = styled.div`
   padding-left: 4px;
   padding-right: 4px;
   background: #ffffff;
-  ${'' /* border-radius: 11px; */}
+  ${"" /* border-radius: 11px; */}
 
   @media (min-width: 360px) {
     font-size: 10px;
@@ -279,7 +282,6 @@ const CurrentTime = styled(Time)`
   background-color: white;
   color: #0c0c0d;
   left: 8px;
-
 `;
 const Duration = styled(Time)`
   color: white;
