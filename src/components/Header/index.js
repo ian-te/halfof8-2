@@ -34,10 +34,12 @@ export const Header = ({ menu }) => {
 
 const Wrapper = styled.header`
   ${"" /* background-color: ${(props) => props.theme.headerBgColor}; */}
-  ${'' /* background-color: rgba(255, 255, 255, 0.5);
+  ${
+    "" /* background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(30px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3); */}
-  ${'' /* filter: drop-shadow(0px 0px 10px #ECEAE4); */}
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); */
+  }
+  ${"" /* filter: drop-shadow(0px 0px 10px #ECEAE4); */}
 
   align-content: space-between;
 
@@ -45,32 +47,34 @@ const Wrapper = styled.header`
     color: ${(props) => props.theme.headerTextHover};
     margin: 0;
 
-      a {
-      color: ${(props) => props.theme.textColor};
-      text-decoration: none;
-      background-color: ${(props) => props.theme.headerBgColor};
-
+    a {
       @media (min-width: 320px) {
-      padding: 4px 16px;
-      border-radius: 32px;
+        padding: 4px 16px;
+        border-radius: 32px;
       }
 
       @media (min-width: 640px) {
-      padding: 2px 8px;
-      border-radius: 40px;
+        padding: 2px 8px;
+        border-radius: 40px;
       }
 
       @media (min-width: 1024px) {
-      padding: 4px 16px;
-      border-radius: 40px;
+        padding: 4px 16px;
+        border-radius: 40px;
       }
     }
 
     a:hover {
-      background-color: ${(props) => props.theme.textColor};;
+      background-color: ${(props) => props.theme.textColor};
       color: ${(props) => props.theme.bgColor}!important;
       transition: 0.5s ease;
     }
+  }
+
+  a {
+    color: ${(props) => props.theme.textColor};
+    text-decoration: none;
+    background-color: ${(props) => props.theme.headerBgColor};
   }
 
   @media (min-width: 320px) {
@@ -120,8 +124,8 @@ const ItemsContainerLeft = styled.nav`
   }
 
   ${Array.from(Array(20).keys()).map(
-  (key) => `& > :nth-child(${key}) {animation-delay: ${(key + 1) / 4}s;}`
-)}
+    (key) => `& > :nth-child(${key}) {animation-delay: ${(key + 1) / 4}s;}`
+  )}
 
   @keyframes menuappearleft {
     0% {

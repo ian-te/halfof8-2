@@ -22,19 +22,13 @@ export const Tag = ({ name, identifier, onClick }) => {
 
 const Wrapper = styled.a`
   text-decoration: none !important;
-  ${'' /* border: 0px solid ${(props) => props.theme.textColor};
-  border-bottom: 0px solid ${(props) => props.theme.textColor}!important;
-  border: 0px solid ${(props) => props.active && props.theme.textColor};
-  border-bottom: 0px solid ${(props) => props.active && props.theme.textColor}!important; */}
 
-  background-color:  ${(props) => props.theme.headerBgColor};
+  background-color: ${(props) => props.theme.headerBgColor};
   background-color: ${(props) => props.active && props.theme.textColor};
   line-height: 1;
- 
-  ${'' /* background-color:  ${(props) => props.theme.bgColor}; */}
-  
+
   color: ${(props) =>
-    props.active ? props.theme.bgColor : props.theme.headerTextColor}!important;
+    props.active ? props.theme.bgColor : props.theme.headerTextColor}
 
   cursor: pointer;
 
@@ -53,12 +47,8 @@ const Wrapper = styled.a`
     border-radius: 40px;
   }
 
-
   &:hover {
-    ${'' /* border: 1px solid transparent;
-    border-bottom: 1px solid transparent!important; */}
-
-    background-color: ${(props) => props.theme.textColor};;
+    background-color: ${(props) => props.theme.textColor};
     color: ${(props) => props.theme.bgColor}!important;
 
     transition: 0.5s ease;
