@@ -9,6 +9,73 @@ import {
 import { Progress } from "./Progress";
 import { lighten } from "polished";
 
+const setupMediaSession = (track, dispatch) => {
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.metadata = new window.MediaMetadata({
+      title: track.name,
+      artist: "Half of Eight",
+      // album: "The Ultimate Collection (Remastered)",
+      // artwork: [
+      //   {
+      //     src: "https://dummyimage.com/96x96",
+      //     sizes: "96x96",
+      //     type: "image/png",
+      //   },
+      //   {
+      //     src: "https://dummyimage.com/128x128",
+      //     sizes: "128x128",
+      //     type: "image/png",
+      //   },
+      //   {
+      //     src: "https://dummyimage.com/192x192",
+      //     sizes: "192x192",
+      //     type: "image/png",
+      //   },
+      //   {
+      //     src: "https://dummyimage.com/256x256",
+      //     sizes: "256x256",
+      //     type: "image/png",
+      //   },
+      //   {
+      //     src: "https://dummyimage.com/384x384",
+      //     sizes: "384x384",
+      //     type: "image/png",
+      //   },
+      //   {
+      //     src: "https://dummyimage.com/512x512",
+      //     sizes: "512x512",
+      //     type: "image/png",
+      //   },
+      // ],
+    });
+
+    navigator.mediaSession.setActionHandler("play", function () {
+      dispatch({ type: "START_PLAYBACK" });
+    });
+    navigator.mediaSession.setActionHandler("pause", function () {
+      dispatch({ type: "FINISH_PLAYBACK" });
+    });
+    navigator.mediaSession.setActionHandler("stop", function () {
+      dispatch({ type: "FINISH_PLAYBACK" });
+    });
+    // navigator.mediaSession.setActionHandler("seekbackward", function () {
+    //   /* Code excerpted. */
+    // });
+    // navigator.mediaSession.setActionHandler("seekforward", function () {
+    //   /* Code excerpted. */
+    // });
+    // navigator.mediaSession.setActionHandler("seekto", function () {
+    //   /* Code excerpted. */
+    // });
+    navigator.mediaSession.setActionHandler("previoustrack", function () {
+      dispatch({ type: "PREV_TRACK" });
+    });
+    navigator.mediaSession.setActionHandler("nexttrack", function () {
+      dispatch({ type: "NEXT_TRACK" });
+    });
+  }
+};
+
 export const Player = () => {
   const { state, dispatch } = useReducerContext();
 
@@ -25,6 +92,10 @@ export const Player = () => {
   const source = useRef();
 
   const setTime = () => {};
+
+  useEffect(() => {
+    if (currentItem) setupMediaSession(currentTrack, dispatch);
+  }, [currentItem]);
 
   useEffect(() => {
     player.current?.addEventListener("timeupdate", (e) => {

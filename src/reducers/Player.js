@@ -40,7 +40,7 @@ export function reducer(state = initialState, action) {
       return {
         ...state,
         isPlaying: true,
-        currentItem: action.data.currentItem,
+        currentItem: action.data?.currentItem || state.currentItem,
       };
 
     case "STOP_PLAYBACK":
