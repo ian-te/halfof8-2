@@ -22,15 +22,12 @@ export const Tag = ({ name, identifier, onClick }) => {
 
 const Wrapper = styled.a`
   text-decoration: none !important;
-  border: 1px solid ${(props) => props.theme.headerTextColor};
-  border-bottom: 1px solid ${(props) => props.theme.headerTextColor}!important;
+  border: 1px solid ${(props) => props.theme.textColor};
+  border-bottom: 1px solid ${(props) => props.theme.textColor}!important;
 
-  ${'' /* background-color:  ${(props) => props.theme.bgColor}; */}
-  background-color: ${(props) => props.active && props.theme.bodyColor};
-  
+  background-color: ${(props) => props.active && props.theme.textColor};
   color: ${(props) =>
-    props.active ? props.theme.headerTextColor : props.theme.headerTextColor}!important;
-
+    props.active ? props.theme.bgColor : props.theme.textColor}!important;
   cursor: pointer;
 
   @media (min-width: 320px) {
@@ -55,12 +52,10 @@ const Wrapper = styled.a`
 
 
   &:hover {
-    border: 1px solid ${(props) => props.theme.headerTextColor};
-    border-bottom: 1px solid ${(props) => props.theme.headerTextColor}!important;
-
-    background-color: ${(props) => props.theme.bodyColor};;
-    color: ${(props) => props.theme.headerTextColor}!important;
-
+    border: 1px solid ${(props) => props.theme.textColor};
+    border-bottom: 1px solid ${(props) => props.theme.textColor}!important;
+    color: ${(props) => props.theme.bgColor}!important;
+    background-color: ${(props) => props.theme.textColor};
     transition: 0.5s ease;
   }
 `;

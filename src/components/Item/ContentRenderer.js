@@ -28,7 +28,7 @@ export const ContentRenderer = ({ item }) => {
       return (
         <>
           <Icon item={item} />
-          <RichText item={item} />
+          <RichText item={item} />;
         </>
       );
     // case item.__typename === "ContentfulWip":

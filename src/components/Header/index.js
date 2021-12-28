@@ -32,22 +32,21 @@ export const Header = ({ menu }) => {
 
 const Wrapper = styled.header`
   ${"" /* background-color: ${(props) => props.theme.headerBgColor}; */}
-  ${'' /* background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(30px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3); */}
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 
   p {
-    color: ${(props) => props.theme.headerTextHover};
+    color: rgba(0, 0, 0, 0.5);
     margin: 0;
 
     a {
-      color: ${(props) => props.theme.headerTextColor};
+      color: ${(props) => props.theme.textColor};
       text-decoration: none;
     }
 
     a:hover {
-      color: ${(props) => props.theme.headerTextHover};
-      transition: 0.5s ease;
+      color: rgba(0, 0, 0, 0.5);
     }
   }
 
