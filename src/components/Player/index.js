@@ -7,13 +7,20 @@ import {
   prevTrackSelector,
 } from "../../reducers/Player";
 import { Progress } from "./Progress";
-import { lighten } from "polished";
 
 const setupMediaSession = (track, dispatch) => {
   if ("mediaSession" in navigator) {
+    console.log(">>>", track);
     navigator.mediaSession.metadata = new window.MediaMetadata({
       title: track.name,
       artist: "Half of Eight",
+      artwork: [
+        {
+          src: track.art,
+          sizes: "512x512",
+          type: "image/jpg",
+        },
+      ],
       // album: "The Ultimate Collection (Remastered)",
       // artwork: [
       //   {

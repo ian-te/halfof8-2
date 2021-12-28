@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { ContentImage } from "../Image";
 import { useReducerContext } from "../../../reducers/root";
 import { readableDuration } from "../../../helpers/readableDuration";
+import { getSrc } from "gatsby-plugin-image";
 
 export const Audio = ({ name, id, mp3, background, waveformImage }) => {
   const player = useRef();
@@ -18,7 +19,13 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
   useEffect(() => {
     dispatch({
       type: "ADD_TRACK",
-      data: { id, name, file: mp3.file.url, duration },
+      data: {
+        id,
+        name,
+        file: mp3.file.url,
+        duration,
+        art: getSrc(background.albumArt),
+      },
     });
   }, []);
 

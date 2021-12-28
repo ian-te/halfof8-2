@@ -144,6 +144,16 @@ export const query = graphql`
             file {
               url
             }
+            albumArt: gatsbyImageData(
+              jpegProgressive: true
+              formats: AUTO
+              width: 512
+              height: 512
+              layout: FIXED
+              aspectRatio: 1
+              placeholder: BLURRED
+              resizingBehavior: CROP
+            )
             thumbImage: gatsbyImageData(
               jpegProgressive: true
               formats: AUTO
