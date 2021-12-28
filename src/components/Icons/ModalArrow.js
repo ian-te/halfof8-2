@@ -1,11 +1,11 @@
 import React from "react";
 
-export default ({
+export default function ModalArrow({
   color = "white",
   width = "66",
   height = "66",
   direction = "right",
-}) => {
+}) {
   return (
     <svg
       width={width}
@@ -20,4 +20,4 @@ export default ({
       </g>
     </svg>
   );
-};
+}

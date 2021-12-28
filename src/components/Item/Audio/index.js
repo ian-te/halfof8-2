@@ -1,75 +1,40 @@
-import React, { useRef, useCallback, useEffect, useState } from "react";
+import React, { useRef, useCallback, useEffect, useMemo } from "react";
 import { Play as PlayBase, Pause as PauseBase } from "./components/Play";
 import styled from "styled-components";
 import { ContentImage } from "../Image";
 import { useReducerContext } from "../../../reducers/root";
-
-function readableDuration(seconds) {
-  let sec = Math.floor(seconds);
-  let min = Math.floor(sec / 60);
-  min = min >= 10 ? min : "0" + min;
-  sec = Math.floor(sec % 60);
-  sec = sec >= 10 ? sec : "0" + sec;
-  return min + ":" + sec;
-}
+import { readableDuration } from "../../../helpers/readableDuration";
 
 export const Audio = ({ name, id, mp3, background, waveformImage }) => {
   const player = useRef();
-  const [time, setTime] = useState({ currentTime: 0, duration: 0 });
 
   const {
     state: {
-      player: { isPlaying, currentItem },
+      player: { isPlaying, currentItem, currentTime, duration },
     },
     dispatch,
   } = useReducerContext();
 
   useEffect(() => {
-    dispatch({ type: "ADD_TRACK", data: { id, name } });
+    dispatch({
+      type: "ADD_TRACK",
+      data: { id, name, file: mp3.file.url, duration },
+    });
   }, []);
-
-  useEffect(() => {
-    if (isPlaying && currentItem === id) {
-    } else if (isPlaying && currentItem !== id) {
-      player.current.pause();
-      player.current.currentTime = 0;
-    } else {
-      player.current.pause();
-    }
-    return () => {};
-  }, [isPlaying, currentItem]);
-
-  useEffect(() => {
-    player.current.addEventListener("timeupdate", (e) => {
-      setTime({
-        currentTime: e.target.currentTime,
-        duration: e.target.duration,
-      });
-    });
-
-    player.current.addEventListener("ended", (e) => {
-      setTime({
-        currentTime: 0,
-        duration: e.target.duration,
-      });
-      dispatch({ type: "NEXT_TRACK" });
-    });
-    return () => {
-      player.current && player.current.remove();
-    };
-  }, [mp3]);
 
   const seek = (e) => {
     var rect = e.target.getBoundingClientRect();
     var x = e.clientX - rect.left; //x position within the element.
-    player.current.currentTime = (x / rect.width) * time.duration;
+    dispatch({
+      type: "SEEK_TIME",
+      data: { seekTime: (x / rect.width) * duration },
+    });
   };
 
-  useEffect(() => {
-    if (currentItem === id) {
-      player.current.play();
-    }
-  }, [currentItem]);
+  const isCurrentPlaying = useMemo(
+    () => isPlaying && currentItem === id,
+    [id, currentItem, isPlaying]
+  );
 
   const playpause = useCallback(
     (e) => {
@@ -78,7 +43,6 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
         dispatch({ type: "STOP_PLAYBACK" });
       } else {
         dispatch({ type: "START_PLAYBACK", data: { currentItem: id } });
-        player.current.play();
       }
     },
     [isPlaying, currentItem]
@@ -92,9 +56,6 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
         />
       </Background>
       <Wrapper>
-        <audio style={{ display: "none" }} controls ref={player}>
-          <source src={mp3.file.url} type="audio/mpeg" />
-        </audio>
         <ControlsWrapper>
           <Button onClick={playpause}>
             {currentItem === id && isPlaying ? <Pause /> : <Play />}
@@ -106,15 +67,17 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
               <img src={waveformImage.file.url} width="100%" />
             </WaveForm>
           )}
-          <TimeWrapper>
-            <CurrentTime>{readableDuration(time.currentTime)} </CurrentTime>
-            <Duration>{readableDuration(time.duration)}</Duration>
-          </TimeWrapper>
-          {isPlaying && currentItem === id && (
+          {isCurrentPlaying && (
+            <TimeWrapper>
+              <CurrentTime>{readableDuration(currentTime)} </CurrentTime>
+              <Duration>{readableDuration(duration)}</Duration>
+            </TimeWrapper>
+          )}
+          {isCurrentPlaying && (
             <Progress onClick={seek}>
               <Bar
                 style={{
-                  width: `${100 - (time.currentTime / time.duration) * 100}%`,
+                  width: `${100 - (currentTime / duration) * 100}%`,
                 }}
               />
             </Progress>
@@ -156,16 +119,28 @@ const Play = styled(PlayBase)``;
 const Pause = styled(PauseBase)``;
 
 const Button = styled.button`
-  background: rgba(255, 255, 255, 0.5);
+  background: white;
   border: none;
-  padding: 0;
+  top: 8px;
+  left: 8px;
+  padding-top: 2px;
   ${"" /* padding: 28px; */}
   outline: none;
   width: 44px;
   height: 44px;
+  border-radius: 22px;
   cursor: pointer;
   position: relative;
   z-index: 10;
+
+  &:hover {
+    background: black;
+    svg path {
+      fill: white !important;
+      transition: 0.5s ease;
+    }
+  }
+
   &:active {
     ${Play} > path, ${Pause} > path {
       fill: black;
@@ -183,13 +158,14 @@ const Progress = styled.div`
 
 const TrackName = styled.div`
   position: absolute;
-  top: 22px;
-  left: 44px;
+  top: 30px;
+  left: 58px;
   color: #000;
   padding-left: 4px;
   padding-right: 4px;
   height: 22px;
   line-height: 22px;
+  ${"" /* border-radius: 11px; */}
   background: rgba(255, 255, 255, 0.8);
 
   @media (min-width: 360px) {
@@ -211,14 +187,15 @@ const TrackName = styled.div`
 
 const ArtistTitle = styled.div`
   position: absolute;
-  top: 0;
-  left: 44px;
+  top: 8px;
+  left: 58px;
   height: 22px;
   color: #000;
   line-height: 22px;
   padding-left: 4px;
   padding-right: 4px;
   background: #ffffff;
+  ${"" /* border-radius: 11px; */}
 
   @media (min-width: 360px) {
     font-size: 10px;
@@ -253,20 +230,24 @@ const ControlsWrapper = styled.div`
 `;
 
 const Time = styled.span`
+  position: absolute;
   font-weight: normal;
   font-size: 12px;
   line-height: 15px;
-  border-radius: 0px;
-  padding: 0px 2px;
+  border-radius: 12px;
+  bottom: 8px;
+  padding: 0px 4px;
 `;
 
 const CurrentTime = styled(Time)`
   background-color: white;
   color: #0c0c0d;
+  left: 8px;
 `;
 const Duration = styled(Time)`
   color: white;
   background-color: #0c0c0d;
+  right: 8px;
 `;
 
 const TimeWrapper = styled.div`

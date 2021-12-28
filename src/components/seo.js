@@ -9,10 +9,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
-import { Link, useI18next } from "gatsby-plugin-react-i18next";
+import { useI18next } from "gatsby-plugin-react-i18next";
 
 function SEO({ description, lang, meta, title: propsTitle }) {
-  const { languages, language, originalPath } = useI18next();
+  const { language } = useI18next();
   const { site, allContentfulMeta } = useStaticQuery(
     graphql`
       query {
