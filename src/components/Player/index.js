@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { useReducerContext } from "../../reducers/root";
 import {
@@ -13,7 +13,7 @@ export const Player = () => {
   const { state, dispatch } = useReducerContext();
 
   const {
-    player: { isPlaying, currentItem, tracks, currentTime, duration },
+    player: { isPlaying, currentItem, seekTime, tracks, currentTime, duration },
   } = state;
   const prevTrackId = prevTrackSelector(state.player);
   const nextTrackId = nextTrackSelector(state.player);
@@ -21,10 +21,70 @@ export const Player = () => {
   const prevTrack = getTrackById(state.player, prevTrackId);
   const currentTrack = getTrackById(state.player, currentItem);
   const nextTrack = getTrackById(state.player, nextTrackId);
+  const player = useRef();
+  const source = useRef();
+
+  const setTime = () => {};
+
+  useEffect(() => {
+    player.current?.addEventListener("timeupdate", (e) => {
+      dispatch({
+        type: "UPDATE_TIME",
+        data: {
+          currentTime: e.target.currentTime,
+          duration: e.target.duration,
+        },
+      });
+    });
+
+    player.current?.addEventListener("ended", (e) => {
+      console.log(">>> ended", e);
+      dispatch({ type: "NEXT_TRACK" });
+    });
+    return () => {
+      // player.current && player.current.remove();
+    };
+  }, [currentItem]);
+
+  useEffect(() => {
+    if (!!currentItem && isPlaying && currentTrack.file) {
+      console.log(">>>toggle play");
+      if (!player.current?.paused) {
+        player.current.pause();
+      }
+      player.current.load();
+      player.current.play();
+    }
+  }, [currentItem]);
+
+  useEffect(() => {
+    if (!currentItem) return null;
+    if (!isPlaying) {
+      console.log(">>> pausing");
+      player.current.pause();
+    }
+    if (
+      isPlaying &&
+      player.current?.paused &&
+      source.current?.src.includes(currentTrack?.file)
+    ) {
+      console.log(">>> playing");
+      player.current.play();
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (!player.current) return null;
+    player.current.currentTime = seekTime;
+  }, [seekTime]);
 
   if (!currentItem) return null;
+
   return (
     <Wrapper>
+      <audio style={{ display: "none" }} controls ref={player}>
+        <source src={currentTrack.file} ref={source} type="audio/mpeg" />
+      </audio>
       <button onClick={() => dispatch({ type: "PREV_TRACK" })}>
         <svg
           width="16"
@@ -39,7 +99,11 @@ export const Player = () => {
         <p>{prevTrack.name}</p>
       </button>
 
-      <button onClick={() => dispatch({ type: "PLAYPAUSE" })}>
+      <button
+        onClick={() =>
+          dispatch({ type: "PLAYPAUSE", data: { currentItem: currentItem } })
+        }
+      >
         {isPlaying ? (
           <svg
             width="16"

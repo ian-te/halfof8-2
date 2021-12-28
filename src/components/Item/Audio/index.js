@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect, useState } from "react";
+import React, { useRef, useCallback, useEffect, useMemo } from "react";
 import { Play as PlayBase, Pause as PauseBase } from "./components/Play";
 import styled from "styled-components";
 import { ContentImage } from "../Image";
@@ -7,71 +7,34 @@ import { readableDuration } from "../../../helpers/readableDuration";
 
 export const Audio = ({ name, id, mp3, background, waveformImage }) => {
   const player = useRef();
-  const [time, setTime] = useState({ currentTime: 0, duration: 0 });
 
   const {
     state: {
-      player: { isPlaying, currentItem },
+      player: { isPlaying, currentItem, currentTime, duration },
     },
     dispatch,
   } = useReducerContext();
 
   useEffect(() => {
-    dispatch({ type: "ADD_TRACK", data: { id, name } });
+    dispatch({
+      type: "ADD_TRACK",
+      data: { id, name, file: mp3.file.url, duration },
+    });
   }, []);
-
-  useEffect(() => {
-    if (isPlaying && currentItem === id) {
-    } else if (isPlaying && currentItem !== id) {
-      player.current.pause();
-      player.current.currentTime = 0;
-    } else {
-      player.current.pause();
-    }
-    return () => {};
-  }, [isPlaying, currentItem]);
-
-  useEffect(() => {
-    player.current.addEventListener("timeupdate", (e) => {
-      setTime({
-        currentTime: e.target.currentTime,
-        duration: e.target.duration,
-      });
-      dispatch({
-        type: "UPDATE_TIME",
-        data: {
-          currentTime: e.target.currentTime,
-          duration: e.target.duration,
-        },
-      });
-    });
-
-    player.current.addEventListener("ended", (e) => {
-      setTime({
-        currentTime: 0,
-        duration: e.target.duration,
-      });
-      dispatch({ type: "NEXT_TRACK" });
-    });
-    return () => {
-      player.current && player.current.remove();
-    };
-  }, [mp3]);
 
   const seek = (e) => {
     var rect = e.target.getBoundingClientRect();
     var x = e.clientX - rect.left; //x position within the element.
-    player.current.currentTime = (x / rect.width) * time.duration;
+    dispatch({
+      type: "SEEK_TIME",
+      data: { seekTime: (x / rect.width) * duration },
+    });
   };
 
-  useEffect(() => {
-    if (currentItem === id && isPlaying) {
-      player.current.play();
-    }
-    if (currentItem === id && !isPlaying) {
-      player.current.pause();
-    }
-  }, [currentItem, isPlaying]);
+  const isCurrentPlaying = useMemo(
+    () => isPlaying && currentItem === id,
+    [id, currentItem, isPlaying]
+  );
 
   const playpause = useCallback(
     (e) => {
@@ -80,7 +43,6 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
         dispatch({ type: "STOP_PLAYBACK" });
       } else {
         dispatch({ type: "START_PLAYBACK", data: { currentItem: id } });
-        player.current.play();
       }
     },
     [isPlaying, currentItem]
@@ -94,9 +56,6 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
         />
       </Background>
       <Wrapper>
-        <audio style={{ display: "none" }} controls ref={player}>
-          <source src={mp3.file.url} type="audio/mpeg" />
-        </audio>
         <ControlsWrapper>
           <Button onClick={playpause}>
             {currentItem === id && isPlaying ? <Pause /> : <Play />}
@@ -108,15 +67,17 @@ export const Audio = ({ name, id, mp3, background, waveformImage }) => {
               <img src={waveformImage.file.url} width="100%" />
             </WaveForm>
           )}
-          <TimeWrapper>
-            <CurrentTime>{readableDuration(time.currentTime)} </CurrentTime>
-            <Duration>{readableDuration(time.duration)}</Duration>
-          </TimeWrapper>
-          {isPlaying && currentItem === id && (
+          {isCurrentPlaying && (
+            <TimeWrapper>
+              <CurrentTime>{readableDuration(currentTime)} </CurrentTime>
+              <Duration>{readableDuration(duration)}</Duration>
+            </TimeWrapper>
+          )}
+          {isCurrentPlaying && (
             <Progress onClick={seek}>
               <Bar
                 style={{
-                  width: `${100 - (time.currentTime / time.duration) * 100}%`,
+                  width: `${100 - (currentTime / duration) * 100}%`,
                 }}
               />
             </Progress>

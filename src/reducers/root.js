@@ -24,10 +24,13 @@ export const useRootReducer = () => {
     modal: [modalReducer, initialModalState],
     filter: [filterReducer, initialFilterState],
   });
+  /* eslint-disable */
+
   return useCallback(useReducer(reducerCombined, initialStateCombined), [
     reducerCombined,
     initialStateCombined,
   ]);
+  /* eslint-enable */
 };
 export const useReducerContext = () => useContext(ReducerContext);
 

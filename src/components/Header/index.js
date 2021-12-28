@@ -4,7 +4,6 @@ import { renderRichText } from "gatsby-source-contentful/rich-text";
 import { Tag } from "../Tag";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { useLocale } from "../../providers/LocaleProvider";
-import { Player } from "../Player";
 
 const Item = ({ item }) => {
   switch (item.__typename) {
@@ -27,7 +26,6 @@ export const Header = ({ menu }) => {
         <LanguageSwitcher locales={["en-US", "ja"]} activeLocale={locale} />
         {menu.rightItems && menu.rightItems.map((item) => <Item item={item} />)}
       </ItemsContainerRight>
-      {/* <Player /> */}
     </Wrapper>
   );
 };

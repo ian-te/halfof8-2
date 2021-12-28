@@ -7,13 +7,14 @@ export const initialState = {
   tracks: [],
   currentTime: 0,
   duration: 0,
+  seekTime: 0,
 };
 
 export const nextTrackSelector = ({ tracks, currentItem }) => {
   if (!tracks || !tracks[0]) return null;
   if (!currentItem) return tracks[0]?.id;
   const index = tracks?.map((track) => track.id).indexOf(currentItem);
-  if (index == tracks.length - 1) return tracks[0].id;
+  if (index === tracks.length - 1) return tracks[0].id;
   return tracks[index + 1].id;
 };
 
@@ -21,7 +22,7 @@ export const prevTrackSelector = ({ tracks, currentItem }) => {
   if (!tracks || !tracks[0]) return null;
   if (!currentItem) return tracks[0]?.id;
   const index = tracks?.map((track) => track.id).indexOf(currentItem);
-  if (index == 0) return tracks[tracks.length - 1].id;
+  if (index === 0) return tracks[tracks.length - 1].id;
   return tracks[index - 1].id;
 };
 
@@ -53,6 +54,7 @@ export function reducer(state = initialState, action) {
       return {
         ...state,
         isPlaying: !state.isPlaying,
+        currentItem: action.data.currentItem,
       };
 
     case "FINISH_PLAYBACK":
@@ -80,6 +82,12 @@ export function reducer(state = initialState, action) {
         ...state,
         currentTime: action.data.currentTime,
         duration: action.data.duration,
+      };
+
+    case "SEEK_TIME":
+      return {
+        ...state,
+        seekTime: action.data.seekTime,
       };
 
     case "ADD_TRACK":
