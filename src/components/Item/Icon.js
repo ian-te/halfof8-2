@@ -27,11 +27,7 @@ const IconBase = ({ item, className, ...props }) => {
 
 export const Icon = styled(IconBase)`
   position: absolute;
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(10px);
-  ${'' /* svg path {
-    fill: ${(props) => props.theme.textColor};
-  } */}
+  background: ${(props) => props.theme.bodyColor};
   
   border-radius: 100%;
 
@@ -61,8 +57,7 @@ export const Icon = styled(IconBase)`
     svg path {
       stroke: white !important;
     }
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
+    background: black;
   }
 
   @keyframes popping {

@@ -7,10 +7,11 @@ import {
   prevTrackSelector,
 } from "../../reducers/Player";
 import { Progress } from "./Progress";
+import { useHotkeys } from "react-hotkeys-hook";
 
 const setupMediaSession = (track, dispatch) => {
   if ("mediaSession" in navigator) {
-    console.log(">>>", track);
+
     navigator.mediaSession.metadata = new window.MediaMetadata({
       title: track.name,
       artist: "Half of Eight",
@@ -99,6 +100,14 @@ export const Player = () => {
   const source = useRef();
 
   const setTime = () => {};
+
+  useHotkeys(
+    "esc",
+    () => {
+      dispatch({ type: "STOP_PLAYBACK" });
+    },
+    [currentItem]
+  );
 
   useEffect(() => {
     if (currentItem) setupMediaSession(currentTrack, dispatch);

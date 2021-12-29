@@ -200,7 +200,7 @@ const ItemsContainerRight = styled.nav`
   }
 
   @media (min-width: 640px) {
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: right;
     align-items: center;
     margin-bottom: 0px;

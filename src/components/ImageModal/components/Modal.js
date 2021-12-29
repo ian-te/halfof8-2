@@ -58,10 +58,12 @@ export default ({
           <button onClick={onNext}>
             <ModalArrow width="100%" height="100%" direction="right" />
           </button>
+        </Controls>
+        <Controls2>
           <button onClick={onClose}>
             <ModalClose width="100%" height="100%" />
           </button>
-        </Controls>
+        </Controls2>
         <Text>{images[currentIndex].caption()}</Text>
       </Wrapper>
     )
@@ -76,23 +78,36 @@ const Wrapper = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
   color: #fff;
   grid-template-columns: 1fr;
   grid-template-areas:
     "controls"
     "image"
     "text";
-  grid-template-rows: 32px min-content 1fr;
+  ${'' /* grid-template-rows: 32px min-content 1fr; */}
   overflow-y: scroll;
   grid-gap: 16px;
-  @media (min-width: 1024px) {
+
+  @media (min-width: 640px) {
     grid-gap: 32px;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 32px 1fr;
+    grid-template-areas:
+      "controls controls2"
+      "image image"
+      "text text";
+    overflow-y: visible;
+  }
+
+  @media (min-width: 1024px) {
+    grid-gap: 32px;
+    grid-template-columns: 216px 1fr 216px;
     grid-template-rows: 64px 1fr;
     grid-template-areas:
-      "image controls"
-      "image text";
+      "controls image controls2"
+      "controls image text";
     overflow-y: visible;
   }
 `;
@@ -131,10 +146,13 @@ const Text = styled.div`
 const Controls = styled.div`
   grid-area: controls;
   display: grid;
-  grid-template-columns: 33px auto 33px;
+  grid-template-columns: 32px 32px;
   justify-items: left;
   grid-gap: 12px;
   margin: 8px 8px 0;
+
+
+
   button {
     background-color: transparent;
     border: none;
@@ -142,14 +160,53 @@ const Controls = styled.div`
     padding: 0;
     width: 32px;
     height: 32px;
+    &:hover {
+    svg path {
+      stroke: red !important;
+      transition: 0.5s ease;
+    }
   }
+  }
+  
   @media (min-width: 1024px) {
-    grid-template-columns: 66px auto 66px;
+    grid-template-columns: 64px 64px;
     margin-top: 12px;
     margin-right: 12px;
     button {
-      width: 66px;
-      height: 66px;
+      width: 64px;
+      height: 64px;
+    }
+  }
+`;
+
+const Controls2 = styled.div`
+  grid-area: controls2;
+  justify-items: right;
+  display: flex;
+  justify-content: flex-end;
+  margin: 8px 8px 0;
+
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    &:hover {
+    svg path {
+      stroke: red !important;
+      transition: 0.5s ease;
+    }
+    }
+  }
+
+  @media (min-width: 1024px) {
+    margin-top: 12px;
+    margin-right: 12px;
+    button {
+      width: 64px;
+      height: 64px;
     }
   }
 `;

@@ -13,6 +13,8 @@ const LightBoxWrapper = ({ children, item }) => {
             slide: item.currentSlide,
           },
         });
+        const body = document.querySelector("body");
+        body.style.overflow = "hidden";
       }}
       style={{ cursor: "pointer" }}
     >

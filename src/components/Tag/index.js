@@ -24,11 +24,14 @@ const Wrapper = styled.a`
   text-decoration: none !important;
 
   background-color: ${(props) => props.theme.headerBgColor};
-  background-color: ${(props) => props.active && props.theme.textColor};
+
   line-height: 1;
 
+
+  background-color: ${(props) => 
+    props.active && props.theme.textColor}!important;
   color: ${(props) =>
-    props.active ? props.theme.bgColor : props.theme.headerTextColor}
+    props.active ? props.theme.bgColor : props.theme.headerTextColor}!important;
 
   cursor: pointer;
 
