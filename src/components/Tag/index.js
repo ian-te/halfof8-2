@@ -33,7 +33,7 @@ const Wrapper = styled(Link)`
           color: ${(props) => props.theme.bgColor}!important;
         `
       : css`
-          background-color: ${(props) => props.theme.headerBgColor}!important;
+          background-color: ${(props) => props.theme.headerBgColor};
           color: ${(props) => props.theme.headerTextColor};
         `}
 
