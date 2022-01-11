@@ -5,7 +5,7 @@ import { Match } from "@reach/router";
 
 export const Tag = ({ name, identifier }) => {
   return (
-    <Match path={`/:lang?/tag/${identifier}`}>
+    <Match path={`(/:lang)/tag/${identifier}`}>
       {(props) =>
         props.match ? (
           <Wrapper to={`/`} isActive={true}>
