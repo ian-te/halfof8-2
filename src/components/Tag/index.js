@@ -1,37 +1,28 @@
+import { Link } from "gatsby-plugin-react-i18next";
 import React from "react";
 import styled from "styled-components";
-import { useReducerContext } from "../../reducers/root";
 
-export const Tag = ({ name, identifier, onClick }) => {
-  const { state, dispatch } = useReducerContext();
-  const {
-    filter: { tag },
-  } = state;
-  const onTagClick = (e) => {
-    e.preventDefault();
-    onClick && onClick(identifier);
-    dispatch({ type: "FILTER_BY_TAG", payload: { tag: identifier } });
-  };
-  const isActive = tag === identifier;
+export const Tag = ({ name, identifier }) => {
   return (
-    <Wrapper href={`/tag/${name}`} onClick={onTagClick} active={isActive}>
+    <Wrapper to={`/tag/${identifier}`} activeClassName="active">
       {name}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.a`
+const Wrapper = styled(Link)`
   text-decoration: none !important;
 
   background-color: ${(props) => props.theme.headerBgColor};
 
   line-height: 1;
 
+  color: ${(props) => props.theme.headerTextColor};
 
-  background-color: ${(props) => 
-    props.active && props.theme.textColor}!important;
-  color: ${(props) =>
-    props.active ? props.theme.bgColor : props.theme.headerTextColor}!important;
+  &.active {
+    background-color: ${(props) => props.theme.textColor}!important;
+    color: ${(props) => props.theme.bgColor};
+  }
 
   cursor: pointer;
 

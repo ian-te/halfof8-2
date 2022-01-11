@@ -31,14 +31,6 @@ export const Header = ({ menu }) => {
 };
 
 const Wrapper = styled.header`
-  ${"" /* background-color: ${(props) => props.theme.headerBgColor}; */}
-  ${
-    "" /* background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(30px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3); */
-  }
-  ${"" /* filter: drop-shadow(0px 0px 10px #ECEAE4); */}
-
   align-content: space-between;
 
   p {

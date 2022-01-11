@@ -19,7 +19,6 @@ const getGridColumns = (item) => {
 export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
   if (!visible) return null;
   const isTextSnippet = item.__typename === "ContentfulTextSnippet";
-  // || item.__typename === "ContentfulWip";
 
   if (!!item.embedUrl) {
     ratio = 6 / 4;
