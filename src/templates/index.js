@@ -44,7 +44,10 @@ const ItemsRender = ({ items, activeTag, isBordersEnabled }) => {
   return (
     items &&
     items
-      .filter((item) => item.tags.find((tag) => tag.identifier === activeTag))
+      .filter(
+        (item) =>
+          !activeTag || item.tags.find((tag) => tag.identifier === activeTag)
+      )
       .map((itemData) => {
         if (itemData.lightbox) slideKey = slideKey + 1;
         return (

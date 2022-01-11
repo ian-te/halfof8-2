@@ -1,23 +1,41 @@
 import { Link } from "gatsby-plugin-react-i18next";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { Match } from "@reach/router";
 
 export const Tag = ({ name, identifier }) => {
   return (
-    <Wrapper to={`/tag/${identifier}`} activeClassName="active">
-      {name}
-    </Wrapper>
+    <Match path={`/:lang?/tag/${identifier}`}>
+      {(props) =>
+        props.match ? (
+          <Wrapper to={`/`} isActive={true}>
+            {name}
+          </Wrapper>
+        ) : (
+          <Wrapper to={`/tag/${identifier}`} activeClassName="active">
+            {name}
+          </Wrapper>
+        )
+      }
+    </Match>
   );
 };
 
 const Wrapper = styled(Link)`
   text-decoration: none !important;
 
-  background-color: ${(props) => props.theme.headerBgColor};
-
   line-height: 1;
 
-  color: ${(props) => props.theme.headerTextColor};
+  ${(props) =>
+    props.isActive
+      ? css`
+          background-color: ${(props) => props.theme.textColor}!important;
+          color: ${(props) => props.theme.bgColor}!important;
+        `
+      : css`
+          background-color: ${(props) => props.theme.headerBgColor}!important;
+          color: ${(props) => props.theme.headerTextColor};
+        `}
 
   &.active {
     background-color: ${(props) => props.theme.textColor}!important;
