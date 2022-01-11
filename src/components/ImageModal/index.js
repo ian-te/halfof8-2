@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Lightbox from "./components/Modal";
 import { useReducerContext } from "../../reducers/root";
 
@@ -8,25 +8,31 @@ export const ImageModal = ({ images }) => {
     dispatch,
   } = useReducerContext();
   const { isOpen, currentSlide } = modal;
+  useEffect(() => {
+    dispatch({ type: "INIT_MODAL", data: { totalSlides: images.length } });
+  }, [images.length]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpen]);
 
   return (
     <Lightbox
       isOpen={isOpen}
       onPrev={() => {
-        if (currentSlide > 0) {
-          dispatch({ type: "PREV_SLIDE" });
-        }
+        dispatch({ type: "PREV_SLIDE" });
       }}
       onNext={() => {
-        if (currentSlide < images.length - 1) {
-          dispatch({ type: "NEXT_SLIDE" });
-        }
+        dispatch({ type: "NEXT_SLIDE" });
       }}
       images={images}
       currentIndex={currentSlide}
       onClose={() => {
         dispatch({ type: "CLOSE_MODAL" });
-        document.body.style.overflow = "auto";
       }}
       /* Add your own UI */
       // renderHeader={() => (<CustomHeader />)}

@@ -13,7 +13,6 @@ const LightBoxWrapper = ({ children, item }) => {
             slide: item.currentSlide,
           },
         });
-        document.body.style.overflow = "hidden";
       }}
       style={{ cursor: "pointer" }}
     >
