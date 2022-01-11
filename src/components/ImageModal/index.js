@@ -9,8 +9,6 @@ export const ImageModal = ({ images }) => {
   } = useReducerContext();
   const { isOpen, currentSlide } = modal;
 
-  const body = document.querySelector("body");
-
   return (
     <Lightbox
       isOpen={isOpen}
@@ -28,7 +26,7 @@ export const ImageModal = ({ images }) => {
       currentIndex={currentSlide}
       onClose={() => {
         dispatch({ type: "CLOSE_MODAL" });
-        body.style.overflow = "auto";
+        document.body.style.overflow = "auto";
       }}
       /* Add your own UI */
       // renderHeader={() => (<CustomHeader />)}
