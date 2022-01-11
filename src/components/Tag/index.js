@@ -1,11 +1,13 @@
-import { Link } from "gatsby-plugin-react-i18next";
+import { Link, useI18next } from "gatsby-plugin-react-i18next";
 import React from "react";
 import styled, { css } from "styled-components";
 import { Match } from "@reach/router";
+import { getPath } from "../../helpers/locale";
 
 export const Tag = ({ name, identifier }) => {
+  const language = useI18next().language;
   return (
-    <Match path={`(/:lang)/tag/${identifier}`}>
+    <Match path={getPath(`/tag/${identifier}`, language)}>
       {(props) =>
         props.match ? (
           <Wrapper to={`/`} isActive={true}>
