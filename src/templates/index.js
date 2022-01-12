@@ -10,7 +10,7 @@ import { Header } from "../components/Header/index";
 import { Player } from "../components/Player";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data, pageContext }) => {
   const modalImages = data.contentfulMainPage.items
     .filter((item) => !!item.lightbox)
     .map((item) => ({
@@ -21,50 +21,47 @@ const IndexPage = ({ data }) => {
         return documentToReactComponents(textJson);
       },
     }));
+  console.log(">>>", pageContext);
 
   return (
     <Fragment>
       <Seo title={data.site.siteMetadata.title} />
       <Header menu={data.menus.nodes[0]} />
       <Layout isBordersEnabled={data.contentfulSettings.enableItemBorders}>
-        <ItemsRender items={data.contentfulMainPage.items} />
-        {/* <Filter /> */}
+        <ItemsRender
+          items={data.contentfulMainPage.items}
+          activeTag={pageContext.tag}
+        />
       </Layout>
       <ImageModal images={modalImages} />
       <Player />
     </Fragment>
   );
 };
-const ItemsRender = ({ items, isBordersEnabled }) => {
+const ItemsRender = ({ items, activeTag, isBordersEnabled }) => {
   let slideKey = -1;
-  const {
-    state: { filter },
-  } = useReducerContext();
 
   return (
     items &&
-    items.map((itemData) => {
-      if (itemData.lightbox) slideKey = slideKey + 1;
-      return (
-        <Item
-          {...itemData}
-          key={itemData.id}
-          visible={
-            // itemData.__typename == "ContentfulTextSnippet" ||
-            (filter.tag === "uncategorized" &&
-              itemData.__typename === "ContentfulWidget") ||
-            !(
-              filter.tag &&
-              (!itemData.tags ||
-                itemData.tags.find((tag) => filter.tag !== tag.identifier))
-            )
-          }
-          shadow={true}
-          ratio={0.75}
-          currentSlide={slideKey}
-        />
-      );
-    })
+    items
+      .filter(
+        (item) =>
+          !activeTag || item.tags.find((tag) => tag.identifier === activeTag)
+      )
+      .map((itemData) => {
+        if (itemData.lightbox) slideKey = slideKey + 1;
+        return (
+          <Item
+            {...itemData}
+            key={itemData.id}
+            visible={true}
+            // visible={!activeTag || itemData.tags.includes(activeTag)}
+            shadow={true}
+            ratio={0.75}
+            currentSlide={slideKey}
+          />
+        );
+      })
   );
 };
 

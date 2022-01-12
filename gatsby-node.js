@@ -12,30 +12,55 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const homepageTemplate = path.resolve(`src/templates/index.js`);
 
-  ["en-US"].forEach((lang) => {
+  const result = await graphql(`
+    {
+      allContentfulTag {
+        nodes {
+          id
+          name
+          node_locale
+          identifier
+        }
+      }
+    }
+  `);
+  const {
+    allContentfulTag: { nodes: tags },
+  } = result.data;
+
+  tags.forEach((tag) => {
     createPage({
-      path: getPath("/", lang),
+      path: getPath(`/tag/${tag.identifier}`, tag.node_locale),
       component: homepageTemplate,
       context: {
-        locale: lang,
+        tag: tag.identifier,
+        locale: tag.node_locale,
       },
     });
   });
+
+  createPage({
+    path: "/",
+    component: homepageTemplate,
+    context: {
+      tag: null,
+    },
+  });
 };
 
-// Implement the Gatsby API “onCreatePage”. This is
-// called after every page is created.
-exports.onCreatePage = async ({ page, actions }) => {
-  const { createPage } = actions;
-  // Only update the `/app` page.
-  if (page.path == "/") {
-    // page.matchPath is a special key that's used for matching pages
-    // with corresponding routes only on the client.
-    page.matchPath = "/*";
-    // Update the page.
-    createPage(page);
-  }
-};
+// // Implement the Gatsby API “onCreatePage”. This is
+// // called after every page is created.
+// exports.onCreatePage = async ({ page, actions }) => {
+//   const { createPage } = actions;
+//   // Only update the `/app` page.
+//   if (page.path == "/") {
+//     // page.matchPath is a special key that's used for matching pages
+//     // with corresponding routes only on the client.
+//     page.matchPath = "/*";
+//     // Update the page.
+//     createPage(page);
+//   }
+// };
 
 exports.createSchemaCustomization = ({ actions }) => {
   actions.createTypes(`

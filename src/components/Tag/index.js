@@ -1,37 +1,48 @@
+import { Link, useI18next } from "gatsby-plugin-react-i18next";
 import React from "react";
-import styled from "styled-components";
-import { useReducerContext } from "../../reducers/root";
+import styled, { css } from "styled-components";
+import { Match } from "@reach/router";
+import { getPath } from "../../helpers/locale";
 
-export const Tag = ({ name, identifier, onClick }) => {
-  const { state, dispatch } = useReducerContext();
-  const {
-    filter: { tag },
-  } = state;
-  const onTagClick = (e) => {
-    e.preventDefault();
-    onClick && onClick(identifier);
-    dispatch({ type: "FILTER_BY_TAG", payload: { tag: identifier } });
-  };
-  const isActive = tag === identifier;
+export const Tag = ({ name, identifier }) => {
+  const language = useI18next().language;
   return (
-    <Wrapper href={`/tag/${name}`} onClick={onTagClick} active={isActive}>
-      {name}
-    </Wrapper>
+    <Match path={getPath(`/tag/${identifier}`, language)}>
+      {(props) =>
+        props.match ? (
+          <Wrapper to={`/`} isActive={true}>
+            {name}
+          </Wrapper>
+        ) : (
+          <Wrapper to={`/tag/${identifier}`} activeClassName="active">
+            {name}
+          </Wrapper>
+        )
+      }
+    </Match>
   );
 };
 
-const Wrapper = styled.a`
+const Wrapper = styled(Link)`
   text-decoration: none !important;
-
-  background-color: ${(props) => props.theme.headerBgColor};
 
   line-height: 1;
 
+  ${(props) =>
+    props.isActive
+      ? css`
+          background-color: ${(props) => props.theme.textColor}!important;
+          color: ${(props) => props.theme.bgColor}!important;
+        `
+      : css`
+          background-color: ${(props) => props.theme.headerBgColor};
+          color: ${(props) => props.theme.headerTextColor};
+        `}
 
-  background-color: ${(props) => 
-    props.active && props.theme.textColor}!important;
-  color: ${(props) =>
-    props.active ? props.theme.bgColor : props.theme.headerTextColor}!important;
+  &.active {
+    background-color: ${(props) => props.theme.textColor}!important;
+    color: ${(props) => props.theme.bgColor};
+  }
 
   cursor: pointer;
 
