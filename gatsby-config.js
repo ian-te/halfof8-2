@@ -82,6 +82,13 @@ module.exports = {
         siteUrl: `https://halfof8.com/`,
         // you can pass any i18next options
         // pass following options to allow message content as a key
+        pages: [
+          {
+            matchPath: "/:lang?/three",
+            getLanguageFromPath: true,
+            excludeLanguages: ["ja"],
+          },
+        ],
         i18nextOptions: {
           interpolation: {
             escapeValue: false, // not needed for react as it escapes by default

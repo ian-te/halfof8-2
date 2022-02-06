@@ -1,6 +1,6 @@
 import { graphql } from "gatsby";
 import { getImage, getSrc } from "gatsby-plugin-image";
-import React, { Suspense, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Image, ScrollControls, Scroll, useScroll } from "@react-three/drei";
 import * as THREE from "three";
@@ -104,10 +104,15 @@ function Items({ w = 0.7, gap = 0.15 }) {
 }
 
 export default function ThreePage({ data }) {
-  state.urls = data.contentfulMainPage.items
-    .map((i) => getSrc(i.background))
-    .filter((i) => !!i);
-  console.log(">>>", state);
+  // return <h1>TEST BUILD</h1>;
+  const isBrowser = typeof window !== "undefined";
+  useEffect(() => {
+    state.urls = data.contentfulMainPage.items
+      .map((i) => getSrc(i.background))
+      .filter((i) => !!i);
+  });
+
+  if (!isBrowser) return <h1>Hello</h1>;
   return (
     <Suspense fallback={null}>
       <Canvas
@@ -117,12 +122,22 @@ export default function ThreePage({ data }) {
       >
         <Items />
       </Canvas>
+      )
     </Suspense>
   );
 }
 
 export const pageQuery = graphql`
   query MyQuery1 {
+    locales: allLocale {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     contentfulMainPage {
       items {
         ... on ContentfulPortfolioItem {
