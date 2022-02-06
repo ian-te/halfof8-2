@@ -29,7 +29,7 @@ const Main = styled.main`
     animation-delay: 2s;
   }
 
-  ${Array.from(Array(20).keys()).map(
+  /* ${Array.from(Array(20).keys()).map(
     (key) => `& > :nth-child(${key}) {animation-delay: ${(key + 1) / 4}s;}`
   )}
 
@@ -40,7 +40,7 @@ const Main = styled.main`
     100% {
       opacity: 1;
     }
-  }
+  } */
   grid-gap: ${(props) => (props.isBordersEnabled ? "3px" : "0px")};
 
   @media (min-width: 360px) {
