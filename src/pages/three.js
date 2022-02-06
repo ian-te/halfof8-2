@@ -122,7 +122,6 @@ export default function ThreePage({ data }) {
       >
         <Items />
       </Canvas>
-      )
     </Suspense>
   );
 }
