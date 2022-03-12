@@ -68,7 +68,7 @@ const Wrapper = styled.header`
   }
 
   @media (min-width: 320px) {
-    font-size: 7.5vw;
+    font-size: 6.5vw;
     line-height: 1;
     display: grid;
     grid-template-areas:
