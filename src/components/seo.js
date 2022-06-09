@@ -49,7 +49,7 @@ function SEO({ description, lang, meta, title: propsTitle }) {
   const node = allContentfulMeta.edges.find(
     (edge) => edge.node.node_locale === language
   ).node;
-  const title = propsTitle || node.title;
+  const title = propsTitle || node.title || site.siteMetadata.title;
 
   const metaDescription =
     description || node.description.childMarkdownRemark.excerpt;

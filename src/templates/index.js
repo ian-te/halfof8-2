@@ -25,7 +25,7 @@ const IndexPage = ({ data, pageContext }) => {
 
   return (
     <Fragment>
-      <Seo title={data.site.siteMetadata.title} />
+      <Seo />
       <Header menu={data.menus.nodes[0]} />
       <Layout isBordersEnabled={data.contentfulSettings.enableItemBorders}>
         <ItemsRender
