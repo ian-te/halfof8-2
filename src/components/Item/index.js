@@ -9,7 +9,7 @@ const getGridColumns = (item) => {
   switch (true) {
     case !!item.gridColumns:
       return item.gridColumns;
-    case !!item.embedUrl:
+    case !!item.embedUrl && item.embedUrl.includes("youtu"):
       return 2;
     default:
       return 1;
@@ -17,15 +17,17 @@ const getGridColumns = (item) => {
 };
 
 export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
+  console.log(">>>", item);
   if (!visible) return null;
   const isTextSnippet = item.__typename === "ContentfulTextSnippet";
 
-  if (!!item.embedUrl) {
+  if (!!item.embedUrl && item.embedUrl.includes("youtu")) {
     ratio = 6 / 4;
   }
   if (isTextSnippet) {
     ratio = 3 / 4;
   }
+  console.log(">>> item", item, ratio);
   return (
     <ContentActionStyled
       isDouble={!!item.embedUrl}

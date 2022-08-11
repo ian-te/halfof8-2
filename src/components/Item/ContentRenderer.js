@@ -53,14 +53,36 @@ export const ContentRenderer = ({ item }) => {
         </div>
       );
     case !!item.embedUrl:
-      return (
-        <IframeAsync
-          title={`Youtube Embed – ${item.name}`}
-          src={`${item.embedUrl}`}
-          width="100%"
-          height="100%"
-        />
-      );
+      switch (true) {
+        case item.embedUrl.includes("sketchfab.com"):
+          return (
+            <IframeAsync
+              title={`Sketchfab – ${item.name}`}
+              src={`${item.embedUrl}`}
+              width="100%"
+              height="100%"
+              allowfullscreen
+              mozallowfullscreen="true"
+              webkitallowfullscreen="true"
+              allow="autoplay; fullscreen; xr-spatial-tracking"
+              xr-spatial-tracking
+              execution-while-out-of-viewport
+              execution-while-not-rendered
+              web-share
+            />
+          );
+        case item.embedUrl.includes("youtube"):
+        default:
+          return (
+            <IframeAsync
+              title={`Youtube Embed – ${item.name}`}
+              src={`${item.embedUrl}`}
+              width="100%"
+              height="100%"
+            />
+          );
+      }
+
     default:
       return (
         <div>
