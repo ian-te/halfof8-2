@@ -23,7 +23,6 @@ const IndexPage = ({ data, pageContext }) => {
       embed: item.modalEmbedUrl,
       caption: <Caption item={item} />,
     }));
-  console.log(">>>", pageContext);
 
   return (
     <Fragment>
