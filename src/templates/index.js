@@ -23,7 +23,6 @@ const IndexPage = ({ data, pageContext }) => {
       embed: item.modalEmbedUrl,
       caption: !!item.lightboxText?.raw && <Caption item={item} />,
     }));
-  console.log(modalImages);
 
   return (
     <Fragment>

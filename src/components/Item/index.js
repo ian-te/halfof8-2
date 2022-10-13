@@ -26,7 +26,6 @@ export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
   if (isTextSnippet) {
     ratio = 3 / 4;
   }
-  console.log(">>> item", item.lightboxText);
   return (
     <ContentActionStyled
       isDouble={!!item.embedUrl}
