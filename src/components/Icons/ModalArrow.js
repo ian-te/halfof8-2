@@ -10,14 +10,26 @@ export default function ModalArrow({
     <svg
       width={width}
       height={height}
-      viewBox="0 0 66 66"
+      viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g transform={`rotate(${direction === "left" ? "180" : "0"}, 33, 33)`}>
-        <path d="M63.9995 33L-0.000488281 33" stroke={color} stroke-width="2" />
-        <path d="M32 65L64 33L32 1" stroke={color} stroke-width="2" />
-      </g>
+      <rect
+        x="100"
+        y="100"
+        width="100"
+        height="100"
+        rx="50"
+        fill={color}
+        fill-opacity="0.1"
+      />
+      <path
+        d="M37.7158 78L66.0001 49.7157L37.7158 21.4315"
+        stroke={color}
+        transform={`rotate(${direction === "left" ? "180" : "0"}, 50, 50)`}
+        stroke-width="2"
+        stroke-linecap="round"
+      />
     </svg>
   );
 }

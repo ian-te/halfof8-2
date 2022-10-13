@@ -4,6 +4,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import ModalArrow from "../../Icons/ModalArrow";
 import ModalClose from "../../Icons/ModalClose";
 import { useHotkeys } from "react-hotkeys-hook";
+import { IframeAsync } from "../../Item/IframeAsync";
 
 export default ({
   currentIndex,
@@ -37,41 +38,119 @@ export default ({
     },
     [currentIndex, isOpen]
   );
+  const Caption = () => images[currentIndex].caption;
 
   return (
     isOpen &&
     currentIndex > -1 && (
       <Wrapper>
-        <Image>
-          <GatsbyImage
-            image={image}
-            objectFit="contain"
-            objectPosition="50% 50%"
-            placeholder="none"
-            style={{ maxHeight: "100%", maxWidth: "100%" }}
-          />
-        </Image>
-        <Controls>
-          <button onClick={onPrev}>
-            <ModalArrow width="100%" height="100%" direction="left" />
-          </button>
-          <button onClick={onNext}>
-            <ModalArrow width="100%" height="100%" direction="right" />
-          </button>
-        </Controls>
-        <Controls2>
-          <button onClick={onClose}>
-            <ModalClose width="100%" height="100%" />
-          </button>
-        </Controls2>
-        <Text>{images[currentIndex].caption()}</Text>
+        <Main>
+          <Image>
+            {images[currentIndex].embed ? (
+              <IframeAsync
+                title={`Sketchfab – ${images[currentIndex].name}`}
+                src={`${images[currentIndex].embed}`}
+                width="100%"
+                height="100%"
+                allowfullscreen
+                mozallowfullscreen="true"
+                webkitallowfullscreen="true"
+                allow="autoplay; fullscreen; xr-spatial-tracking"
+                xr-spatial-tracking
+                execution-while-out-of-viewport
+                execution-while-not-rendered
+                web-share
+              />
+            ) : (
+              <GatsbyImage
+                image={image}
+                objectFit="contain"
+                objectPosition="50% 50%"
+                placeholder="none"
+                style={{ aspectRatio: "3/4" }}
+              />
+            )}
+          </Image>
+          <Text>
+            <Caption />
+          </Text>
+        </Main>
+
+        <LeftBtn onClick={onPrev}>
+          <ModalArrow width="100%" height="100%" direction="left" />
+        </LeftBtn>
+        <RightBtn onClick={onNext}>
+          <ModalArrow width="100%" height="100%" direction="right" />
+        </RightBtn>
+
+        <Close onClick={onClose}>
+          <ModalClose width="100%" height="100%" />
+        </Close>
       </Wrapper>
     )
   );
 };
 
+const Close = styled.button`
+  position: absolute;
+  appearance: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  z-index: 10;
+  right: 20px;
+  top: 20px;
+  width: 30px;
+  @media (min-width: 768px) {
+    right: 40px;
+    top: 60px;
+    width: 60px;
+  }
+`;
+
+const LeftBtn = styled.button`
+  position: absolute;
+  appearance: none;
+  border: none;
+  background: none;
+  left: 20px;
+  top: 50vw;
+  width: 50px;
+  @media (min-width: 640px) {
+    left: 40px;
+    top: 50%;
+    width: 60px;
+  }
+  cursor: pointer;
+  z-index: 10;
+`;
+
+const RightBtn = styled.button`
+  position: absolute;
+  appearance: none;
+  border: none;
+  background: none;
+  right: 20px;
+  top: 50vw;
+  width: 50px;
+  @media (min-width: 640px) {
+    right: 40px;
+    top: 50%;
+    width: 60px;
+  }
+  cursor: pointer;
+  z-index: 10;
+`;
+
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
+`;
+
 const Wrapper = styled.div`
-  display: grid;
   position: fixed;
   z-index: 10000;
   left: 0;
@@ -81,60 +160,54 @@ const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
   backdrop-filter: blur(10px);
   color: #fff;
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "controls"
-    "image"
-    "text";
-  ${'' /* grid-template-rows: 32px min-content 1fr; */}
   overflow-y: scroll;
   grid-gap: 16px;
 
   @media (min-width: 640px) {
-    grid-gap: 32px;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 32px 1fr;
-    grid-template-areas:
-      "controls controls2"
-      "image image"
-      "text text";
     overflow-y: visible;
   }
 
   @media (min-width: 1024px) {
-    grid-gap: 32px;
-    grid-template-columns: 216px 1fr 216px;
-    grid-template-rows: 64px 1fr;
-    grid-template-areas:
-      "controls image controls2"
-      "controls image text";
     overflow-y: visible;
   }
 `;
 
 const Image = styled.div`
-  grid-area: image;
-  max-height: 100%;
-  width: 100%;
   position: relative;
   overflow: hidden;
+  max-width: 100%;
+  max-height: 80vh;
+  flex-shrink: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 auto;
+  @media (min-width: 640px) {
+    max-width: 80vw;
+  }
+  @media (min-width: 1024px) {
+    height: 100vh;
+    max-height: 100vh;
+    width: 50vw;
+  }
 `;
 
 const Text = styled.div`
-  grid-area: text;
   color: #fff;
   max-width: 640px;
+  box-sizing: border-box;
   h3 {
     margin-top: 0;
   }
   a {
     color: #fff;
   }
-  margin: 8px 8px 0;
   font-size: 20px;
   line-height: 1.4;
+  flex-shrink: 1;
+  padding: 20px;
   @media (min-width: 1024px) {
     margin: 0;
+    width: 100%;
     font-size: 1.5vw;
     overflow-y: auto;
   }
@@ -144,15 +217,13 @@ const Text = styled.div`
 `;
 
 const Controls = styled.div`
-  grid-area: controls;
-  display: grid;
-  grid-template-columns: 32px 32px;
-  justify-items: left;
-  grid-gap: 12px;
-  margin: 8px 8px 0;
-
-
-
+  justify-items: space-between;
+  gap: 12px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50% - 50px);
+  height: 50%;
   button {
     background-color: transparent;
     border: none;
@@ -161,47 +232,15 @@ const Controls = styled.div`
     width: 32px;
     height: 32px;
     &:hover {
-    svg path {
-      stroke: red !important;
-      transition: 0.5s ease;
-    }
-  }
-  }
-  
-  @media (min-width: 1024px) {
-    grid-template-columns: 64px 64px;
-    margin-top: 12px;
-    margin-right: 12px;
-    button {
-      width: 64px;
-      height: 64px;
-    }
-  }
-`;
-
-const Controls2 = styled.div`
-  grid-area: controls2;
-  justify-items: right;
-  display: flex;
-  justify-content: flex-end;
-  margin: 8px 8px 0;
-
-  button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    width: 32px;
-    height: 32px;
-    &:hover {
-    svg path {
-      stroke: red !important;
-      transition: 0.5s ease;
-    }
+      svg path {
+        stroke: red !important;
+        transition: 0.5s ease;
+      }
     }
   }
 
   @media (min-width: 1024px) {
+    grid-template-columns: 64px 64px;
     margin-top: 12px;
     margin-right: 12px;
     button {

@@ -1,26 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ContentImage } from "./Image";
 import { Icon } from "./Icon";
 import { Text } from "./Text";
 import { Audio } from "./Audio";
 import { RichText } from "./RichText";
-
-const IframeAsync = ({ src, ...props }) => {
-  const [deferredSrc, setSrc] = useState(null);
-  useEffect(() => {
-    setSrc(src);
-  }, [src]);
-  return (
-    deferredSrc && (
-      <iframe
-        frameborder="0"
-        src={deferredSrc}
-        title={props.title}
-        {...props}
-      />
-    )
-  );
-};
+import { IframeAsync } from "./IframeAsync";
 
 export const ContentRenderer = ({ item }) => {
   switch (true) {
