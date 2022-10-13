@@ -193,7 +193,6 @@ const Image = styled.div`
 
 const Text = styled.div`
   color: #fff;
-  max-width: 640px;
   box-sizing: border-box;
   h3 {
     margin-top: 0;
@@ -203,13 +202,14 @@ const Text = styled.div`
   }
   font-size: 20px;
   line-height: 1.4;
-  flex-shrink: 1;
   padding: 20px;
+  flex-grow: 0;
   @media (min-width: 1024px) {
     margin: 0;
-    width: 100%;
     font-size: 1.5vw;
     overflow-y: auto;
+    width: 50vw;
+    padding: 60px;
   }
   @media (min-width: 1200px) {
     font-size: 1vw;
