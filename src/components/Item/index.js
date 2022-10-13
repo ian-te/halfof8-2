@@ -17,7 +17,6 @@ const getGridColumns = (item) => {
 };
 
 export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
-  console.log(">>>", item);
   if (!visible) return null;
   const isTextSnippet = item.__typename === "ContentfulTextSnippet";
 
@@ -27,7 +26,7 @@ export const Item = ({ visible, tag, ratio = "0.75", ...item }) => {
   if (isTextSnippet) {
     ratio = 3 / 4;
   }
-  console.log(">>> item", item, ratio);
+  console.log(">>> item", item.lightboxText);
   return (
     <ContentActionStyled
       isDouble={!!item.embedUrl}
