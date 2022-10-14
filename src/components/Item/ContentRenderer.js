@@ -1,26 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ContentImage } from "./Image";
 import { Icon } from "./Icon";
 import { Text } from "./Text";
 import { Audio } from "./Audio";
 import { RichText } from "./RichText";
-
-const IframeAsync = ({ src, ...props }) => {
-  const [deferredSrc, setSrc] = useState(null);
-  useEffect(() => {
-    setSrc(src);
-  }, [src]);
-  return (
-    deferredSrc && (
-      <iframe
-        frameborder="0"
-        src={deferredSrc}
-        title={props.title}
-        {...props}
-      />
-    )
-  );
-};
+import { IframeAsync } from "./IframeAsync";
 
 export const ContentRenderer = ({ item }) => {
   switch (true) {
@@ -53,14 +37,36 @@ export const ContentRenderer = ({ item }) => {
         </div>
       );
     case !!item.embedUrl:
-      return (
-        <IframeAsync
-          title={`Youtube Embed – ${item.name}`}
-          src={`${item.embedUrl}`}
-          width="100%"
-          height="100%"
-        />
-      );
+      switch (true) {
+        case item.embedUrl.includes("sketchfab.com"):
+          return (
+            <IframeAsync
+              title={`Sketchfab – ${item.name}`}
+              src={`${item.embedUrl}`}
+              width="100%"
+              height="100%"
+              allowfullscreen
+              mozallowfullscreen="true"
+              webkitallowfullscreen="true"
+              allow="autoplay; fullscreen; xr-spatial-tracking"
+              xr-spatial-tracking
+              execution-while-out-of-viewport
+              execution-while-not-rendered
+              web-share
+            />
+          );
+        case item.embedUrl.includes("youtube"):
+        default:
+          return (
+            <IframeAsync
+              title={`Youtube Embed – ${item.name}`}
+              src={`${item.embedUrl}`}
+              width="100%"
+              height="100%"
+            />
+          );
+      }
+
     default:
       return (
         <div>

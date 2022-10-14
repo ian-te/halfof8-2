@@ -8,20 +8,21 @@ import { ImageModal } from "../components/ImageModal";
 import { useReducerContext } from "../reducers/root";
 import { Header } from "../components/Header/index";
 import { Player } from "../components/Player";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { renderRichText } from "gatsby-source-contentful/rich-text";
+
+const Caption = ({ item }) => {
+  if (!item.lightboxText) return null;
+  return renderRichText(item.lightboxText);
+};
 
 const IndexPage = ({ data, pageContext }) => {
   const modalImages = data.contentfulMainPage.items
     .filter((item) => !!item.lightbox)
     .map((item) => ({
       gatsbyImageData: item.indexBackgroundImage.modalImage,
-      caption: () => {
-        if (!item.lightboxText) return null;
-        const textJson = JSON.parse(item.lightboxText.raw);
-        return documentToReactComponents(textJson);
-      },
+      embed: item.modalEmbedUrl,
+      caption: <Caption item={item} />,
     }));
-  console.log(">>>", pageContext);
 
   return (
     <Fragment>
@@ -96,6 +97,7 @@ export const query = graphql`
             name
             identifier
           }
+          modalEmbedUrl
           indexBackgroundImage {
             file {
               url

@@ -11,7 +11,6 @@ import { useHotkeys } from "react-hotkeys-hook";
 
 const setupMediaSession = (track, dispatch) => {
   if ("mediaSession" in navigator) {
-
     navigator.mediaSession.metadata = new window.MediaMetadata({
       title: track.name,
       artist: "Half of Eight",
@@ -125,7 +124,6 @@ export const Player = () => {
     });
 
     player.current?.addEventListener("ended", (e) => {
-      console.log(">>> ended", e);
       dispatch({ type: "NEXT_TRACK" });
     });
     return () => {
@@ -135,7 +133,6 @@ export const Player = () => {
 
   useEffect(() => {
     if (!!currentItem && isPlaying && currentTrack.file) {
-      console.log(">>>toggle play");
       if (!player.current?.paused) {
         player.current.pause();
       }
@@ -147,7 +144,6 @@ export const Player = () => {
   useEffect(() => {
     if (!currentItem) return null;
     if (!isPlaying) {
-      console.log(">>> pausing");
       player.current.pause();
     }
     if (
@@ -155,7 +151,6 @@ export const Player = () => {
       player.current?.paused &&
       source.current?.src.includes(currentTrack?.file)
     ) {
-      console.log(">>> playing");
       player.current.play();
     }
   }, [isPlaying]);
