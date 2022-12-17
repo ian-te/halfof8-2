@@ -81,6 +81,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     type ContentfulPortfolioItem implements Node {
       externalLinks: [String]
       externalUrl: String
+      modalEmbedUrl: String
     }
 
     type ContentfulTextSnippet implements Node {
