@@ -21,7 +21,7 @@ const IndexPage = ({ data, pageContext }) => {
     .map((item) => ({
       gatsbyImageData: item.indexBackgroundImage.modalImage,
       embed: item.modalEmbedUrl,
-      caption: <Caption item={item} />,
+      caption: item.lightboxText && <Caption item={item} />,
     }));
 
   return (
