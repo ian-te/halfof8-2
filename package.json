@@ -7,7 +7,7 @@
     "@contentful/rich-text-react-renderer": "^15.0.0",
     "@loadable/component": "^5.15.0",
     "babel-plugin-styled-components": "^1.13.2",
-    "gatsby": "^3.10.1",
+    "gatsby": "^5.3.2",
     "gatsby-image": "^3.10.0",
     "gatsby-plugin-manifest": "^3.10.0",
     "gatsby-plugin-netlify": "^3.14.0",
