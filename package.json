@@ -20,7 +20,7 @@
     "gatsby-plugin-yandex-metrika": "^2.5.0",
     "gatsby-source-contentful": "^5.10.0",
     "gatsby-source-filesystem": "^3.10.0",
-    "gatsby-transformer-remark": "^4.7.0",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^3.10.0",
     "i18next": "^19.9.2",
     "lodash": "^4.17.21",
