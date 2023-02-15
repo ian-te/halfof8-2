@@ -39,7 +39,6 @@ export default ({
     [currentIndex, isOpen]
   );
   const Caption = () => images[currentIndex].caption;
-  console.log(">>> images[currentIndex].caption", images[currentIndex].caption);
 
   return (
     isOpen &&
@@ -48,11 +47,12 @@ export default ({
         <Main>
           <Image>
             {images[currentIndex].embed ? (
-              <IframeStyled
+              <IframeAsync
                 title={`Sketchfab – ${images[currentIndex].name}`}
                 src={`${images[currentIndex].embed}`}
-                allowfullscreen
                 width="100%"
+                height="100%"
+                allowfullscreen
                 mozallowfullscreen="true"
                 webkitallowfullscreen="true"
                 allow="autoplay; fullscreen; xr-spatial-tracking"
@@ -99,7 +99,7 @@ const Close = styled.button`
   border: none;
   background: none;
   cursor: pointer;
-  z-index: 10;
+  z-index: 1000;
   right: 20px;
   top: 20px;
   width: 30px;
@@ -115,9 +115,8 @@ const LeftBtn = styled.button`
   appearance: none;
   border: none;
   background: none;
-  left: 10px;
+  left: 20px;
   top: 50vh;
-  margin-top: -25px;
   width: 50px;
   @media (min-width: 640px) {
     left: 40px;
@@ -133,9 +132,8 @@ const RightBtn = styled.button`
   appearance: none;
   border: none;
   background: none;
-  right: 10px;
+  right: 20px;
   top: 50vh;
-  margin-top: -25px;
   width: 50px;
   @media (min-width: 640px) {
     right: 40px;
@@ -147,11 +145,9 @@ const RightBtn = styled.button`
 `;
 
 const Main = styled.div`
-  display: flex;
   flex-direction: column;
-  margin: auto;
-
   @media (min-width: 1024px) {
+    display: flex;
     flex-direction: row;
   }
 `;
@@ -168,11 +164,11 @@ const Wrapper = styled.div`
   color: #fff;
   overflow-y: scroll;
   grid-gap: 16px;
-  display: flex;
-  align-items: center;
 
   @media (min-width: 640px) {
     overflow-y: visible;
+    display: flex;
+    align-items: center;
   }
 
   @media (min-width: 1024px) {
@@ -186,16 +182,19 @@ const Image = styled.div`
   position: relative;
   overflow: hidden;
   max-width: 100%;
-  max-height: 80vh;
-
-  aspect-ratio: 1/1.5;
+  height: 100vh;
+  height: 80vh;
+  width: 100%;
   flex-shrink: 1;
   display: flex;
   justify-content: flex-end;
   margin: 0 auto;
+  iframe {
+    min-height: 80vh;
+  }
   @media (min-width: 640px) {
     max-width: 80vw;
-    aspect-ratio: auto;
+    max-height: 80vh;
   }
   @media (min-width: 1024px) {
     height: 100vh;
