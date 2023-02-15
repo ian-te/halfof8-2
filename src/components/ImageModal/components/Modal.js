@@ -99,7 +99,7 @@ const Close = styled.button`
   border: none;
   background: none;
   cursor: pointer;
-  z-index: 10;
+  z-index: 1000;
   right: 20px;
   top: 20px;
   width: 30px;
@@ -116,7 +116,7 @@ const LeftBtn = styled.button`
   border: none;
   background: none;
   left: 20px;
-  top: 50vw;
+  top: 50vh;
   width: 50px;
   @media (min-width: 640px) {
     left: 40px;
@@ -133,7 +133,7 @@ const RightBtn = styled.button`
   border: none;
   background: none;
   right: 20px;
-  top: 50vw;
+  top: 50vh;
   width: 50px;
   @media (min-width: 640px) {
     right: 40px;
@@ -182,8 +182,9 @@ const Image = styled.div`
   position: relative;
   overflow: hidden;
   max-width: 100%;
-  max-height: 80vh;
-  min-height: 80vh;
+  height: 100vh;
+  height: 80vh;
+  width: 100%;
   flex-shrink: 1;
   display: flex;
   justify-content: flex-end;
@@ -193,6 +194,7 @@ const Image = styled.div`
   }
   @media (min-width: 640px) {
     max-width: 80vw;
+    max-height: 80vh;
   }
   @media (min-width: 1024px) {
     height: 100vh;
