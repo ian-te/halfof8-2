@@ -28,7 +28,10 @@ const IndexPage = ({ data, pageContext }) => {
     <Fragment>
       <Seo />
       <Header menu={data.menus.nodes[0]} />
-      <Layout isBordersEnabled={data.contentfulSettings.enableItemBorders}>
+      <Layout
+        isBordersEnabled={data.contentfulSettings.enableItemBorders}
+        activeTag={pageContext.tag}
+      >
         <ItemsRender
           items={data.contentfulMainPage.items}
           activeTag={pageContext.tag}
