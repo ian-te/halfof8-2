@@ -9,10 +9,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Layout = ({ children, isBordersEnabled }) => {
+const Layout = ({ children, isBordersEnabled, activeTag }) => {
   return (
     <div>
-      <Main isBordersEnabled={isBordersEnabled}>{children}</Main>
+      <Main isBordersEnabled={isBordersEnabled} activeTag={activeTag}>
+        {children}
+      </Main>
     </div>
   );
 };
@@ -51,14 +53,23 @@ const Main = styled.main`
     grid-template-columns: repeat(3, 1fr);
   }
   @media (min-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr);
+    ${(p) =>
+      p.activeTag === "sculptures"
+        ? `grid-template-columns: repeat(3, 1fr);`
+        : `grid-template-columns: repeat(4, 1fr);`}
   }
   @media (min-width: 1440px) {
-    grid-template-columns: repeat(5, 1fr);
+    ${(p) =>
+      p.activeTag === "sculptures"
+        ? `grid-template-columns: repeat(4, 1fr);`
+        : `grid-template-columns: repeat(5, 1fr);`}
     grid-gap: ${(props) => (props.isBordersEnabled ? "0.1vw" : "0px")};
   }
   @media (min-width: 1920px) {
-    grid-template-columns: repeat(6, 1fr);
+    ${(p) =>
+      p.activeTag === "sculptures"
+        ? `grid-template-columns: repeat(5, 1fr);`
+        : `grid-template-columns: repeat(6, 1fr);`}
   }
 `;
 
