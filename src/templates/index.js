@@ -19,7 +19,7 @@ const IndexPage = ({ data, pageContext }) => {
   const modalImages = data.contentfulMainPage.items
     .filter((item) => !!item.lightbox)
     .map((item) => ({
-      gatsbyImageData: item.indexBackgroundImage.modalImage,
+      gatsbyImageData: item.indexBackgroundImage ? item.indexBackgroundImage.modalImage : null,
       embed: item.modalEmbedUrl,
       caption: !!item.lightboxText?.raw && <Caption item={item} />,
     }));
